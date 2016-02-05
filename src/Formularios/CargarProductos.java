@@ -446,7 +446,7 @@ public class CargarProductos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        actulizartabla();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
@@ -474,7 +474,9 @@ public class CargarProductos extends javax.swing.JFrame {
              if (codigo == 1 )
              {            
                  activarTxt(true);
-                 txtNoDoc.setFocusable(true);
+                 actulizartabla();
+                 txtNoDoc.requestFocus();
+                 
                  
             } else 
              {
