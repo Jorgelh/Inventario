@@ -12,51 +12,63 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import static java.util.Collections.list;
+import java.text.SimpleDateFormat;
+import com.sun.corba.se.spi.orb.ParserData;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+
+
 
 /**
  *
  * @author jluis
  */
 public abstract class DBCargaPro {
+    
+    DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 
+        
     public static void insertarProductoNuevo(CargaP c) throws SQLException {
+        
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("insert into ingreso "
-                + "id_ingreso,codigo,P_N,fecha_ingreso,"
+        ps = cnn.prepareStatement("insert into ingreso" 
+                + "(id_ingreso,codigo,P_N,fecha_ingreso,"
                 + "PO,cantidad,fecha_ven,precio,"
                 + "lote,no_trabajo,no_invoice,no_documento,"
                 + "no_serie,ingresadopor,proveedor,notas,"
                 + "bodega,fechasistema,estado) "
-                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        ps.setInt(1,c.getId_ingreso());
-        ps.setInt(2,c.getCodigo());
-        ps.setString(3,c.getPN());
-        ps.setString(4,c.getFechaIngre());
-        ps.setString(5,c.getPO());
-        ps.setInt(6,c.getCantidad());
-        ps.setString(7, c.getFechaVencimiento());
-        ps.setDouble(8, c.getPrecio());
-        ps.setString(9, c.getLote());
-        ps.setString(10, c.getNTrabajo());
-        ps.setString(11, c.getInvoce());
-        ps.setString(12, c.getNoDocumento());
-        ps.setString(13, c.getNoserie());
-        ps.setInt(14,c.getIngresadoPor());
+                + "values (ingreso1.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'15/01/16','A')");
+       // ps.setInt(1,c.getId_ingreso());
+        ps.setInt(1,c.getCodigo());
+        ps.setString(2,c.getPN());
+        ps.setDate(3, new java.sql.Date(c.getFechaIngre().getTime()));
+        ps.setString(4,c.getPO());
+        ps.setInt(5,c.getCantidad());
+        ps.setDate(6, new java.sql.Date(c.getFechaVencimiento().getTime()));
+        ps.setDouble(7, c.getPrecio());
+        ps.setString(8, c.getLote());
+        ps.setString(9, c.getNTrabajo());
+        ps.setString(10, c.getInvoce());
+        ps.setString(11, c.getNoDocumento());
+        ps.setString(12, c.getNoserie());
+        ps.setInt(13,c.getIngresadoPor());
         ps.setString(14, c.getProveedor());
-        ps.setString(16, c.getNota());
-        ps.setInt(17, c.getBodeda());
-        ps.setString(18, c.getEstado());
+        ps.setString(15, c.getNota());
+        ps.setInt(16, c.getBodeda());
+        //ps.setString(18, c.getEstado());
         ps.executeUpdate();
         cnn.close();
         ps.close();
     }
+    
 
     public static ArrayList<CargaP> ListarProductoIngresado(int c) {
 
-        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad from ingreso where codigo=" + c);
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad from ingreso where codigo=" + c + "and cantidad > 0" );
 
     }
 
@@ -71,7 +83,7 @@ public abstract class DBCargaPro {
                 c = new CargaP();
                 c.setId_ingreso(rs.getInt("id_ingreso"));
                 c.setPN(rs.getString("P_N"));
-                c.setFechaIngre(rs.getString("fecha_ingreso"));
+                c.setReturnFecha(rs.getString("fecha_ingreso"));
                 c.setPO(rs.getString("PO"));
                 c.setCantidad(rs.getInt("cantidad"));
                 list.add(c);

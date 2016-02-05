@@ -10,12 +10,20 @@ import BD.BDProducto;
 import BD.DBCargaPro;
 import Class.CargaP;
 import Class.Producto;
+import com.sun.corba.se.spi.orb.ParserData;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.awt.Toolkit;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import org.eclipse.persistence.jpa.jpql.parser.ElseExpressionBNF;
 
 /**
  *
@@ -23,20 +31,22 @@ import javax.swing.JTextField;
  */
 public class CargarProductos extends javax.swing.JFrame {
 
-     int Enviacodigo;
+    int Enviacodigo;
+    int bodega;
+
     /**
      * Creates new form CargarProductos
      */
     public CargarProductos() {
-        
+
         initComponents();
         limpiartxt();
         activarTxt(false);
-        
+
     }
-    
-    public void  activarTxt(boolean b){
-                 
+
+    public void activarTxt(boolean b) {
+
         txtCantidad.setEnabled(b);
         txtEmpleado.setEnabled(b);
         txtfecha.setEnabled(b);
@@ -51,20 +61,32 @@ public class CargarProductos extends javax.swing.JFrame {
         txtSerie.setEnabled(b);
         TxtProveedor.setEnabled(b);
         TxtPrecio.setEnabled(b);
-        
-    } 
-    
-    public void limpiartxt(){
-        
-        txtCodigo.setText("");   }
+        ComboBoxBodega.setEnabled(b);
+        BagregarProdu.setEnabled(b);
+
+    }
+
+    public void limpiartxt() {
+
+        txtCodigo.setText("");
+        txtCantidad.setText("");
+        txtEmpleado.setText("");
+        txtInvoice.setText("");
+        txtJob.setText("");
+        txtLote.setText("");
+        txtNoDoc.setText("");
+        txtNota.setText("");
+        txtPO.setText("");
+        txtParte.setText("");
+        txtSerie.setText("");
+        TxtProveedor.setText("");
+        TxtPrecio.setText("");
+    }
 
     public void setTxtCodigo(JTextField txtCodigo) {
         this.txtCodigo = txtCodigo;
     }
-    
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,6 +124,8 @@ public class CargarProductos extends javax.swing.JFrame {
         txtPO = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtfechavenci = new com.toedter.calendar.JDateChooser();
+        ComboBoxBodega = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         txtEmpleado = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -111,7 +135,8 @@ public class CargarProductos extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtNota = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        BagregarProdu = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         txtCodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -251,6 +276,17 @@ public class CargarProductos extends javax.swing.JFrame {
 
         txtfechavenci.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        ComboBoxBodega.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
+        ComboBoxBodega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxBodegaActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setText("Bodega");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -262,15 +298,17 @@ public class CargarProductos extends javax.swing.JFrame {
                     .addComponent(txtLote, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtPO)
                     .addComponent(txtJob)
+                    .addComponent(txtfechavenci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ComboBoxBodega, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel8)
                             .addComponent(jLabel7)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(0, 129, Short.MAX_VALUE))
-                    .addComponent(txtfechavenci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel17))
+                        .addGap(0, 129, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -296,7 +334,11 @@ public class CargarProductos extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtfechavenci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ComboBoxBodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CANTIDAD", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
@@ -324,11 +366,18 @@ public class CargarProductos extends javax.swing.JFrame {
         txtNota.setRows(5);
         jScrollPane3.setViewportView(txtNota);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Agregar Producto");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BagregarProdu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        BagregarProdu.setText("Agregar Producto");
+        BagregarProdu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BagregarProduActionPerformed(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -348,17 +397,14 @@ public class CargarProductos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3)
+                            .addComponent(txtCantidad)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel15))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtCantidad))))
+                                .addComponent(BagregarProdu)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)))))
                 .addContainerGap())
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,7 +424,9 @@ public class CargarProductos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BagregarProdu, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -445,17 +493,54 @@ public class CargarProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BagregarProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BagregarProduActionPerformed
+        
         actulizartabla();
-    }//GEN-LAST:event_jButton1ActionPerformed
+       
+        
+        if (txtCodigo.getText().compareTo("") != 0 && txtCantidad.getText().compareTo("") != 0 && txtEmpleado.getText().compareTo("") != 0
+                && txtInvoice.getText().compareTo("") != 0 && txtJob.getText().compareTo("") != 0 && txtLote.getText().compareTo("") != 0
+                && txtNoDoc.getText().compareTo("") != 0 && txtNota.getText().compareTo("") != 0 && txtPO.getText().compareTo("") != 0
+                && txtParte.getText().compareTo("") != 0 && txtSerie.getText().compareTo("") != 0 && !ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...."))
+        {
+
+            try {
+                CargaP c = new CargaP();
+                c.setCodigo(Integer.parseInt(txtCodigo.getText()));
+                c.setBodeda(bodega);
+                c.setCantidad(Integer.parseInt(txtCantidad.getText()));
+                c.setFechaIngre(txtfecha.getDate());
+                c.setFechaVencimiento(txtfechavenci.getDate());
+                c.setIngresadoPor(Integer.parseInt(txtEmpleado.getText()));
+                c.setInvoce(txtInvoice.getText());
+                c.setLote(txtLote.getText());
+                c.setNTrabajo(txtJob.getText());
+                c.setNoDocumento(txtNoDoc.getText());
+                c.setNoserie(txtSerie.getText());
+                c.setNota(txtNota.getText());
+                c.setPO(txtPO.getText());
+                c.setPN(txtParte.getText());
+                c.setProveedor(TxtProveedor.getText());
+                c.setPrecio(Integer.parseInt(TxtPrecio.getText()));
+                DBCargaPro.insertarProductoNuevo(c);
+                JOptionPane.showMessageDialog(null, "Producto Cargado...");
+            } catch (Exception e) {
+                System.err.println("Error de Insetar Nuevo Producto..." + e);
+            }
+            actulizartabla();
+            limpiartxt();
+        }
+        else {JOptionPane.showMessageDialog(null,"Llene Todos Los Campos...");}
+    
+    }//GEN-LAST:event_BagregarProduActionPerformed
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void txtFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMouseClicked
-       
-     
+
+
     }//GEN-LAST:event_txtFechaMouseClicked
 
     private void txtNoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoDocActionPerformed
@@ -463,83 +548,76 @@ public class CargarProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNoDocActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-       
+
         Enviacodigo = Integer.parseInt(txtCodigo.getText());
+        actulizartabla();
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from producto where codigo="+txtCodigo.getText());
+            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from producto where codigo=" + txtCodigo.getText());
             rs.next();
             int codigo = rs.getInt("count(codigo)");
-             if (codigo == 1 )
-             {            
-                 activarTxt(true);
-                 txtNoDoc.setFocusable(true);
-                 
-            } else 
-             {
-               JOptionPane.showMessageDialog(null,"Producto "+txtCodigo.getText()+" No Exixte");
-               limpiartxt();
-             }
-               
+            if (codigo == 1) {
+                activarTxt(true);
+                txtNoDoc.setFocusable(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Producto " + txtCodigo.getText() + " No Exixte");
+                limpiartxt();
+            }
+
         } catch (Exception e) {
-            System.out.println("Editar Error"+e);
+            System.out.println("Editar Error" + e);
         }
     }//GEN-LAST:event_txtCodigoActionPerformed
 
-    
-    
-    private void actulizartabla(){
-        
-      ArrayList <CargaP> result = DBCargaPro.ListarProductoIngresado(Integer.parseInt(txtCodigo.getText()));
-      recargarTabla(result);   
-    
+    private void ComboBoxBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxBodegaActionPerformed
+
+        if (ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
+            int bodega = 1;
+        } else {
+            bodega = 2;
+        }
+    }//GEN-LAST:event_ComboBoxBodegaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        limpiartxt();
+        activarTxt(false);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void actulizartabla() {
+
+        ArrayList<CargaP> result = DBCargaPro.ListarProductoIngresado(Integer.parseInt(txtCodigo.getText()));
+        recargarTabla(result);
+
     }
-    
-    private void recargarTabla(ArrayList<CargaP>list) {
-         Object[][] dato = new Object[list.size()][5];
-         int f = 0;
-         for (CargaP a : list)
-             
-         {
+
+    private void recargarTabla(ArrayList<CargaP> list) {
+        Object[][] dato = new Object[list.size()][5];
+        int f = 0;
+        for (CargaP a : list) {
             dato[f][0] = a.getId_ingreso();
             dato[f][1] = a.getPN();
             dato[f][2] = a.getFechaIngre();
             dato[f][3] = a.getPO();
             dato[f][4] = a.getCantidad();
             f++;
-         }
-         tablaIngreso.setModel(new javax.swing.table.DefaultTableModel(
-         
-         dato,
-         new String[]{
-             
-             "No. Ingreso","P/N","Fecha Ingreso","P.O","Cantidad"
-             
-         }){ @Override
-             public boolean isCellEditable(int row, int column){ return false;}
-             
-         });
+        }
+        tablaIngreso.setModel(new javax.swing.table.DefaultTableModel(
+                dato,
+                new String[]{
+                    "No. Ingreso", "P/N", "Fecha Ingreso", "P.O", "Cantidad"
+
+                }) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+        });
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -576,9 +654,11 @@ public class CargarProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BagregarProdu;
+    private javax.swing.JComboBox<String> ComboBoxBodega;
     private javax.swing.JTextField TxtPrecio;
     private javax.swing.JTextField TxtProveedor;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -587,6 +667,7 @@ public class CargarProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -617,5 +698,4 @@ public class CargarProductos extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser txtfechavenci;
     // End of variables declaration//GEN-END:variables
 
-    
 }

@@ -630,12 +630,7 @@ public class MProducto extends javax.swing.JFrame {
 
     private void comboBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBodegaActionPerformed
   
-        if (comboBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
-            bodega = 1;
-
-        } else {
-            bodega = 2;
-        }
+        
         
        
     }//GEN-LAST:event_comboBodegaActionPerformed

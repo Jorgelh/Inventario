@@ -5,6 +5,10 @@
  */
 package Class;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author jluis
@@ -14,10 +18,10 @@ public class CargaP {
     private int id_ingreso;
     private int codigo;
     private String PN;
-    private String fechaIngre;
+    private Date fechaIngre;
     private String PO;
     private int cantidad;
-    private String fechaVencimiento;
+    private Date fechaVencimiento;
     private double precio;
     private String Lote;
     private String NTrabajo;
@@ -29,6 +33,7 @@ public class CargaP {
     private String nota;
     private int Bodeda;
     private String fechasistema;
+    private String returnFecha;
 
     public int getId_ingreso() {
         return id_ingreso;
@@ -55,13 +60,7 @@ public class CargaP {
     }
 
     
-    public String getFechaIngre() {
-        return fechaIngre;
-    }
-
-    public void setFechaIngre(String fechaIngre) {
-        this.fechaIngre = fechaIngre;
-    }
+   
 
     public String getPO() {
         return PO;
@@ -77,14 +76,6 @@ public class CargaP {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
-
-    public String getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(String fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
     }
 
     public double getPrecio() {
@@ -180,6 +171,14 @@ public class CargaP {
     }
     private String Estado;
 
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
     public String getFechasistema() {
         return fechasistema;
     }
@@ -187,17 +186,24 @@ public class CargaP {
     public void setFechasistema(String fechasistema) {
         this.fechasistema = fechasistema;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    public Date getFechaIngre() {
+        return fechaIngre;
+    }
+
+    public void setFechaIngre(Date fechaIngre) {
+        this.fechaIngre = fechaIngre;
+    }
+
+    public String getReturnFecha() {
+        return returnFecha;
+    }
+
+    public void setReturnFecha(String returnFecha) {
+        this.returnFecha = returnFecha;
+    }
+
+   
     
 }
 
