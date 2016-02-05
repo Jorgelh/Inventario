@@ -36,8 +36,8 @@ public class CargarProductos extends javax.swing.JFrame {
                  
         txtCantidad.setEnabled(!b);
         txtEmpleado.setEnabled(!b);
-        txtFecha.setEnabled(!b);
-        txtFechaVenci.setEnabled(!b);
+        txtfecha.setEnabled(!b);
+        txtfechavenci.setEnabled(!b);
         txtInvoice.setEnabled(!b);
         txtJob.setEnabled(!b);
         txtLote.setEnabled(!b);
@@ -73,7 +73,7 @@ public class CargarProductos extends javax.swing.JFrame {
         TxtProveedor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         TxtPrecio = new javax.swing.JTextField();
-        txtFecha = new com.toedter.calendar.JDateChooser();
+        txtfecha = new com.toedter.calendar.JDateChooser();
         txtCodigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -88,7 +88,7 @@ public class CargarProductos extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtPO = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtFechaVenci = new com.toedter.calendar.JDateChooser();
+        txtfechavenci = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         txtEmpleado = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -139,12 +139,7 @@ public class CargarProductos extends javax.swing.JFrame {
 
         TxtPrecio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        txtFecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtFecha.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtFechaMouseClicked(evt);
-            }
-        });
+        txtfecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -167,15 +162,15 @@ public class CargarProductos extends javax.swing.JFrame {
                             .addComponent(jLabel13)
                             .addComponent(jLabel6))
                         .addGap(0, 130, Short.MAX_VALUE))
-                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,6 +250,8 @@ public class CargarProductos extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Fecha Vencimiento");
 
+        txtfechavenci.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -274,7 +271,7 @@ public class CargarProductos extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
                         .addGap(0, 129, Short.MAX_VALUE))
-                    .addComponent(txtFechaVenci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtfechavenci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -299,7 +296,7 @@ public class CargarProductos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFechaVenci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtfechavenci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -610,8 +607,6 @@ public class CargarProductos extends javax.swing.JFrame {
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtEmpleado;
-    private com.toedter.calendar.JDateChooser txtFecha;
-    private com.toedter.calendar.JDateChooser txtFechaVenci;
     private javax.swing.JTextField txtInvoice;
     private javax.swing.JTextField txtJob;
     private javax.swing.JTextField txtLote;
@@ -620,6 +615,8 @@ public class CargarProductos extends javax.swing.JFrame {
     private javax.swing.JTextField txtPO;
     private javax.swing.JTextField txtParte;
     private javax.swing.JTextField txtSerie;
+    private com.toedter.calendar.JDateChooser txtfecha;
+    private com.toedter.calendar.JDateChooser txtfechavenci;
     // End of variables declaration//GEN-END:variables
 
     
