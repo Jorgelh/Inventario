@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -22,35 +23,48 @@ import javax.swing.JOptionPane;
  */
 public class CargarProductos extends javax.swing.JFrame {
 
-     int Enviacodigo = 0;
+     int Enviacodigo;
     /**
      * Creates new form CargarProductos
      */
     public CargarProductos() {
+        
         initComponents();
-        activarTxt(true);
-        txtCodigo.setText(String.valueOf(Enviacodigo));
+        limpiartxt();
+        activarTxt(false);
+        
     }
     
     public void  activarTxt(boolean b){
                  
-        txtCantidad.setEnabled(!b);
-        txtEmpleado.setEnabled(!b);
-        txtfecha.setEnabled(!b);
-        txtfechavenci.setEnabled(!b);
-        txtInvoice.setEnabled(!b);
-        txtJob.setEnabled(!b);
-        txtLote.setEnabled(!b);
-        txtNoDoc.setEditable(!b);
-        txtNota.setEnabled(!b);
-        txtPO.setEnabled(!b);
-        txtParte.setEnabled(!b);
-        txtSerie.setEnabled(!b);
+        txtCantidad.setEnabled(b);
+        txtEmpleado.setEnabled(b);
+        txtfecha.setEnabled(b);
+        txtfechavenci.setEnabled(b);
+        txtInvoice.setEnabled(b);
+        txtJob.setEnabled(b);
+        txtLote.setEnabled(b);
+        txtNoDoc.setEnabled(b);
+        txtNota.setEnabled(b);
+        txtPO.setEnabled(b);
+        txtParte.setEnabled(b);
+        txtSerie.setEnabled(b);
+        TxtProveedor.setEnabled(b);
+        TxtPrecio.setEnabled(b);
         
-        
-             
-    
     } 
+    
+    public void limpiartxt(){
+        
+        txtCodigo.setText("");   }
+
+    public void setTxtCodigo(JTextField txtCodigo) {
+        this.txtCodigo = txtCodigo;
+    }
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,14 +81,13 @@ public class CargarProductos extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtNoDoc = new javax.swing.JTextField();
         txtInvoice = new javax.swing.JTextField();
         txtSerie = new javax.swing.JTextField();
         TxtProveedor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         TxtPrecio = new javax.swing.JTextField();
         txtfecha = new com.toedter.calendar.JDateChooser();
-        txtCodigo = new javax.swing.JTextField();
+        txtNoDoc = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaIngreso = new javax.swing.JTable();
@@ -99,6 +112,7 @@ public class CargarProductos extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtNota = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        txtCodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,14 +135,7 @@ public class CargarProductos extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("Proveedor");
 
-        txtNoDoc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtNoDoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNoDocActionPerformed(evt);
-            }
-        });
-
-        txtInvoice.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtInvoice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtSerie.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -141,6 +148,13 @@ public class CargarProductos extends javax.swing.JFrame {
 
         txtfecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        txtNoDoc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNoDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNoDocActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -148,11 +162,11 @@ public class CargarProductos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNoDoc)
                     .addComponent(txtInvoice)
                     .addComponent(txtSerie)
                     .addComponent(TxtProveedor)
                     .addComponent(TxtPrecio)
+                    .addComponent(txtfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -162,7 +176,7 @@ public class CargarProductos extends javax.swing.JFrame {
                             .addComponent(jLabel13)
                             .addComponent(jLabel6))
                         .addGap(0, 130, Short.MAX_VALUE))
-                    .addComponent(txtfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtNoDoc))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -173,7 +187,7 @@ public class CargarProductos extends javax.swing.JFrame {
                 .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(7, 7, 7)
                 .addComponent(txtNoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
@@ -193,21 +207,6 @@ public class CargarProductos extends javax.swing.JFrame {
                 .addComponent(TxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        txtCodigo.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoActionPerformed(evt);
-            }
-        });
-        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCodigoKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCodigoKeyReleased(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Codigo");
@@ -383,6 +382,13 @@ public class CargarProductos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txtCodigo.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -393,7 +399,7 @@ public class CargarProductos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -412,7 +418,7 @@ public class CargarProductos extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -447,9 +453,19 @@ public class CargarProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadActionPerformed
 
+    private void txtFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMouseClicked
+       
+     
+    }//GEN-LAST:event_txtFechaMouseClicked
+
+    private void txtNoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoDocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNoDocActionPerformed
+
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-                    
-             try {
+       
+        Enviacodigo = Integer.parseInt(txtCodigo.getText());
+        try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select COUNT(codigo) from producto where codigo="+txtCodigo.getText());
@@ -457,37 +473,19 @@ public class CargarProductos extends javax.swing.JFrame {
             int codigo = rs.getInt("count(codigo)");
              if (codigo == 1 )
              {            
-                 activarTxt(false);
+                 activarTxt(true);
+                 txtNoDoc.setFocusable(true);
                  
             } else 
              {
-               JOptionPane.showMessageDialog(null,"Producto "+txtCodigo.getText()+" No Existe");
-               //limpiarTextos();
-               //txtCodigoBus.requestFocus();
+               JOptionPane.showMessageDialog(null,"Producto "+txtCodigo.getText()+" No Exixte");
+               limpiartxt();
              }
                
         } catch (Exception e) {
             System.out.println("Editar Error"+e);
         }
-
     }//GEN-LAST:event_txtCodigoActionPerformed
-
-    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
-       
-    }//GEN-LAST:event_txtCodigoKeyPressed
-
-    private void txtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyReleased
-     
-    }//GEN-LAST:event_txtCodigoKeyReleased
-
-    private void txtFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMouseClicked
-       
-     
-    }//GEN-LAST:event_txtFechaMouseClicked
-
-    private void txtNoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoDocActionPerformed
-   
-    }//GEN-LAST:event_txtNoDocActionPerformed
 
     
     
