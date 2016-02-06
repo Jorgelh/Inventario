@@ -493,6 +493,9 @@ public class CargarProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void BagregarProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BagregarProduActionPerformed
         
         actulizartabla();
@@ -557,15 +560,19 @@ public class CargarProductos extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery("select COUNT(codigo) from producto where codigo=" + txtCodigo.getText());
             rs.next();
             int codigo = rs.getInt("count(codigo)");
-            if (codigo == 1) {
-                activarTxt(true);
-                txtNoDoc.setFocusable(true);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Producto " + txtCodigo.getText() + " No Exixte");
-                limpiartxt();
-            }
-
+             if (codigo == 1 )
+             {            
+                 activarTxt(true);
+                 actulizartabla();
+                 txtNoDoc.requestFocus();
+                 
+                 
+            } else 
+             {
+               JOptionPane.showMessageDialog(null,"Producto "+txtCodigo.getText()+" No Exixte");
+               limpiartxt();
+             }
+               
         } catch (Exception e) {
             System.out.println("Editar Error" + e);
         }
