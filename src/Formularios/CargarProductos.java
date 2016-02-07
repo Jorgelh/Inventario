@@ -31,7 +31,7 @@ public class CargarProductos extends javax.swing.JFrame {
 
     int Enviacodigo;
     int bodega;
-
+    DefaultTableModel temp;
     /**
      * Creates new form CargarProductos
      */
@@ -63,7 +63,22 @@ public class CargarProductos extends javax.swing.JFrame {
         BagregarProdu.setEnabled(b);
 
     }
-
+    public void limpiartabla15()
+    {
+        
+         try{
+            temp = (DefaultTableModel) tablaIngreso.getModel();
+            int a = temp.getRowCount();
+            for(int i=0; i<a; i++){
+                temp.removeRow(i);
+                i--;}
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        
+        
+    }
     public void limpiartxt() {
 
         txtCodigo.setText("");
@@ -79,7 +94,15 @@ public class CargarProductos extends javax.swing.JFrame {
         txtSerie.setText("");
         TxtProveedor.setText("");
         TxtPrecio.setText("");
+        
+       
     }
+        
+        
+        
+        
+        
+  
 
     public void setTxtCodigo(JTextField txtCodigo) {
         this.txtCodigo = txtCodigo;
@@ -587,7 +610,9 @@ public class CargarProductos extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         limpiartxt();
+        limpiartabla15();
         activarTxt(false);
+        txtCodigo.requestFocus();
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
