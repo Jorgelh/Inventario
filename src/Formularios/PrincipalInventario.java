@@ -17,7 +17,10 @@ public class PrincipalInventario extends javax.swing.JFrame {
      * Creates new form PrincipalInventario
      */
     public PrincipalInventario() {
+
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
+
     }
 
     /**
@@ -53,7 +56,10 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISTEMA DE INVENTARIO DE BODEGA");
-        setLocation(new java.awt.Point(75, 50));
+        setLocation(new java.awt.Point(0, 0));
+        setMaximizedBounds(getMaximizedBounds());
+        setMaximumSize(new java.awt.Dimension(1500, 1000));
+        setPreferredSize(getMaximumSize());
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -117,6 +123,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu7.setForeground(new java.awt.Color(0, 51, 255));
         jMenu7.setText("PRODUCTOS");
         jMenu7.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenu7.setPreferredSize(new java.awt.Dimension(139, 35));
 
         jMenuItem1.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem1.setForeground(new java.awt.Color(0, 51, 255));
@@ -153,6 +160,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu6.setForeground(new java.awt.Color(0, 51, 255));
         jMenu6.setText("COMPONENTES DE PRODUCTO");
         jMenu6.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenu6.setPreferredSize(new java.awt.Dimension(271, 35));
 
         jMenuItem2.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem2.setForeground(new java.awt.Color(0, 51, 255));
@@ -196,6 +204,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem7.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem7.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem7.setText("Descarga de Producto");
+        jMenuItem7.setPreferredSize(new java.awt.Dimension(197, 35));
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -228,7 +237,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
 
         jMenuItem5.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem5.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem5.setText("SALIR");
+        jMenuItem5.setPreferredSize(new java.awt.Dimension(85, 35));
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -282,18 +293,18 @@ public class PrincipalInventario extends javax.swing.JFrame {
         frmMCat.setVisible(true);    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-       EditProducto frmMCat = new EditProducto();
-       frmMCat.setVisible(true);
+        EditProducto frmMCat = new EditProducto();
+        frmMCat.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         DescargaProducto frmMCat = new DescargaProducto();
-       frmMCat.setVisible(true);
+        frmMCat.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         CargarProductos frmMCat = new CargarProductos();
-       frmMCat.setVisible(true);
+        frmMCat.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
