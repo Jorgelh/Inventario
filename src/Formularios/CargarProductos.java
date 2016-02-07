@@ -61,6 +61,7 @@ public class CargarProductos extends javax.swing.JFrame {
         TxtPrecio.setEnabled(b);
         ComboBoxBodega.setEnabled(b);
         BagregarProdu.setEnabled(b);
+        Bcancelar.setEnabled(b);
 
     }
     public void limpiartabla15()
@@ -73,7 +74,7 @@ public class CargarProductos extends javax.swing.JFrame {
                 temp.removeRow(i);
                 i--;}
         }catch(Exception e){
-            System.out.println(e);
+            
         }
         
         
@@ -145,7 +146,7 @@ public class CargarProductos extends javax.swing.JFrame {
         txtPO = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtfechavenci = new com.toedter.calendar.JDateChooser();
-        ComboBoxBodega = new javax.swing.JComboBox<>();
+        ComboBoxBodega = new javax.swing.JComboBox<String>();
         jLabel17 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         txtEmpleado = new javax.swing.JTextField();
@@ -157,7 +158,7 @@ public class CargarProductos extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtNota = new javax.swing.JTextArea();
         BagregarProdu = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Bcancelar = new javax.swing.JButton();
         txtCodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -298,7 +299,7 @@ public class CargarProductos extends javax.swing.JFrame {
         txtfechavenci.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         ComboBoxBodega.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
+        ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
         ComboBoxBodega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboBoxBodegaActionPerformed(evt);
@@ -395,10 +396,10 @@ public class CargarProductos extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Bcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
+        Bcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BcancelarActionPerformed(evt);
             }
         });
 
@@ -424,7 +425,7 @@ public class CargarProductos extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(BagregarProdu)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2)))))
+                                .addComponent(Bcancelar)))))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -446,7 +447,7 @@ public class CargarProductos extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Bcancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BagregarProdu, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -608,13 +609,13 @@ public class CargarProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ComboBoxBodegaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BcancelarActionPerformed
         limpiartxt();
         limpiartabla15();
         activarTxt(false);
         txtCodigo.requestFocus();
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BcancelarActionPerformed
 
     private void actulizartabla() {
 
@@ -685,10 +686,10 @@ public class CargarProductos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BagregarProdu;
+    private javax.swing.JButton Bcancelar;
     private javax.swing.JComboBox<String> ComboBoxBodega;
     private javax.swing.JTextField TxtPrecio;
     private javax.swing.JTextField TxtProveedor;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
