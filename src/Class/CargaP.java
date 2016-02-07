@@ -32,8 +32,8 @@ public class CargaP {
     private String Proveedor;
     private String nota;
     private int Bodeda;
-    private String fechasistema;
-    private String returnFecha;
+    private Date fechasistema;
+    private String ReturnFecha;
 
     public int getId_ingreso() {
         return id_ingreso;
@@ -57,6 +57,14 @@ public class CargaP {
 
     public void setPN(String PN) {
         this.PN = PN;
+    }
+
+    public String getReturnFecha() {
+        return ReturnFecha;
+    }
+
+    public void setReturnFecha(String ReturnFecha) {
+        this.ReturnFecha = ReturnFecha;
     }
 
     
@@ -179,13 +187,15 @@ public class CargaP {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public String getFechasistema() {
+    public Date getFechasistema() {
         return fechasistema;
     }
 
-    public void setFechasistema(String fechasistema) {
+    public void setFechasistema(Date fechasistema) {
         this.fechasistema = fechasistema;
     }
+
+   
 
     public Date getFechaIngre() {
         return fechaIngre;
@@ -195,13 +205,7 @@ public class CargaP {
         this.fechaIngre = fechaIngre;
     }
 
-    public String getReturnFecha() {
-        return returnFecha;
-    }
-
-    public void setReturnFecha(String returnFecha) {
-        this.returnFecha = returnFecha;
-    }
+   
 
    
     
