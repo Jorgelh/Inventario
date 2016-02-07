@@ -10,7 +10,6 @@ import BD.BDProducto;
 import BD.DBCargaPro;
 import Class.CargaP;
 import Class.Producto;
-import com.sun.corba.se.spi.orb.ParserData;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -23,7 +22,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
-import org.eclipse.persistence.jpa.jpql.parser.ElseExpressionBNF;
 
 /**
  *
@@ -606,7 +604,7 @@ public class CargarProductos extends javax.swing.JFrame {
         for (CargaP a : list) {
             dato[f][0] = a.getId_ingreso();
             dato[f][1] = a.getPN();
-            dato[f][2] = a.getFechaIngre();
+            dato[f][2] = a.getReturnFecha();
             dato[f][3] = a.getPO();
             dato[f][4] = a.getCantidad();
             f++;
