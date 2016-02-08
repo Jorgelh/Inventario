@@ -10,6 +10,7 @@ import BD.BDProducto;
 import BD.DBCargaPro;
 import Class.CargaP;
 import Class.Producto;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -32,6 +33,7 @@ public class CargarProductos extends javax.swing.JFrame {
     int Enviacodigo;
     int bodega;
     DefaultTableModel temp;
+
     /**
      * Creates new form CargarProductos
      */
@@ -64,22 +66,22 @@ public class CargarProductos extends javax.swing.JFrame {
         Bcancelar.setEnabled(b);
 
     }
-    public void limpiartabla15()
-    {
-        
-         try{
+
+    public void limpiartabla15() {
+
+        try {
             temp = (DefaultTableModel) tablaIngreso.getModel();
             int a = temp.getRowCount();
-            for(int i=0; i<a; i++){
+            for (int i = 0; i < a; i++) {
                 temp.removeRow(i);
-                i--;}
-        }catch(Exception e){
-            
+                i--;
+            }
+        } catch (Exception e) {
+
         }
-        
-        
-        
+
     }
+
     public void limpiartxt() {
 
         txtCodigo.setText("");
@@ -95,15 +97,12 @@ public class CargarProductos extends javax.swing.JFrame {
         txtSerie.setText("");
         TxtProveedor.setText("");
         TxtPrecio.setText("");
-        
-       
+        Date date = null;
+        txtfecha.setDate(date);
+        txtfechavenci.setDate(date);
+        ComboBoxBodega.setSelectedItem("Seleccionar....");
+
     }
-        
-        
-        
-        
-        
-  
 
     public void setTxtCodigo(JTextField txtCodigo) {
         this.txtCodigo = txtCodigo;
@@ -146,7 +145,7 @@ public class CargarProductos extends javax.swing.JFrame {
         txtPO = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtfechavenci = new com.toedter.calendar.JDateChooser();
-        ComboBoxBodega = new javax.swing.JComboBox<String>();
+        ComboBoxBodega = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         txtEmpleado = new javax.swing.JTextField();
@@ -192,6 +191,16 @@ public class CargarProductos extends javax.swing.JFrame {
         jLabel6.setText("Precio");
 
         TxtPrecio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        TxtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtPrecioActionPerformed(evt);
+            }
+        });
+        TxtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtPrecioKeyTyped(evt);
+            }
+        });
 
         txtfecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -199,6 +208,11 @@ public class CargarProductos extends javax.swing.JFrame {
         txtNoDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNoDocActionPerformed(evt);
+            }
+        });
+        txtNoDoc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNoDocKeyTyped(evt);
             }
         });
 
@@ -299,7 +313,7 @@ public class CargarProductos extends javax.swing.JFrame {
         txtfechavenci.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         ComboBoxBodega.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
+        ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
         ComboBoxBodega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboBoxBodegaActionPerformed(evt);
@@ -375,6 +389,11 @@ public class CargarProductos extends javax.swing.JFrame {
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidadActionPerformed(evt);
+            }
+        });
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
             }
         });
 
@@ -458,6 +477,11 @@ public class CargarProductos extends javax.swing.JFrame {
                 txtCodigoActionPerformed(evt);
             }
         });
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -518,18 +542,16 @@ public class CargarProductos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
     private void BagregarProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BagregarProduActionPerformed
-        
+
         actulizartabla();
-       
-        
+
         if (txtCodigo.getText().compareTo("") != 0 && txtCantidad.getText().compareTo("") != 0 && txtEmpleado.getText().compareTo("") != 0
                 && txtInvoice.getText().compareTo("") != 0 && txtJob.getText().compareTo("") != 0 && txtLote.getText().compareTo("") != 0
                 && txtNoDoc.getText().compareTo("") != 0 && txtNota.getText().compareTo("") != 0 && txtPO.getText().compareTo("") != 0
-                && txtParte.getText().compareTo("") != 0 && txtSerie.getText().compareTo("") != 0 && !ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...."))
-        {
+                && txtParte.getText().compareTo("") != 0 && txtSerie.getText().compareTo("") != 0 && !ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Seleccionar....")) {
 
             try {
                 CargaP c = new CargaP();
@@ -548,7 +570,7 @@ public class CargarProductos extends javax.swing.JFrame {
                 c.setPO(txtPO.getText());
                 c.setPN(txtParte.getText());
                 c.setProveedor(TxtProveedor.getText());
-                c.setPrecio(Integer.parseInt(TxtPrecio.getText()));
+                c.setPrecio(Double.parseDouble(TxtPrecio.getText()));
                 DBCargaPro.insertarProductoNuevo(c);
                 JOptionPane.showMessageDialog(null, "Producto Cargado...");
             } catch (Exception e) {
@@ -556,9 +578,10 @@ public class CargarProductos extends javax.swing.JFrame {
             }
             actulizartabla();
             limpiartxt();
+        } else {
+            JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
         }
-        else {JOptionPane.showMessageDialog(null,"Llene Todos Los Campos...");}
-    
+
     }//GEN-LAST:event_BagregarProduActionPerformed
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
@@ -584,19 +607,16 @@ public class CargarProductos extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery("select COUNT(codigo) from producto where codigo=" + txtCodigo.getText());
             rs.next();
             int codigo = rs.getInt("count(codigo)");
-             if (codigo == 1 )
-             {            
-                 activarTxt(true);
-                 actulizartabla();
-                 txtNoDoc.requestFocus();
-                 
-                 
-            } else 
-             {
-               JOptionPane.showMessageDialog(null,"Producto "+txtCodigo.getText()+" No Exixte");
-               limpiartxt();
-             }
-               
+            if (codigo == 1) {
+                activarTxt(true);
+                actulizartabla();
+                txtNoDoc.requestFocus();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Producto " + txtCodigo.getText() + " No Exixte");
+                limpiartxt();
+            }
+
         } catch (Exception e) {
             System.out.println("Editar Error" + e);
         }
@@ -618,6 +638,40 @@ public class CargarProductos extends javax.swing.JFrame {
         txtCodigo.requestFocus();
 
     }//GEN-LAST:event_BcancelarActionPerformed
+
+    private void txtNoDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoDocKeyTyped
+
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '.' || c > '.')) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtNoDocKeyTyped
+
+    private void TxtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtPrecioActionPerformed
+
+    private void TxtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPrecioKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '.' || c > '.')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtPrecioKeyTyped
+
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodigoKeyTyped
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void actulizartabla() {
 

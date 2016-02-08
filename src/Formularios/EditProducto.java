@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Formularios;
+
 import BD.BD;
 import BD.BDProducto;
 import Class.Producto;
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author jluis
@@ -26,35 +28,34 @@ public class EditProducto extends javax.swing.JFrame {
         activarbotones(true);
     }
 
-    
-    public void limpiarTextos(){
-    
-       txtCodigoBus.setText("");
-       txtDescripcion.setText("");
-       txtNota.setText("");
-       txtUbicacion.setText("");
-       txtProveedor.setText("");
-       
+    public void limpiarTextos() {
+
+        txtCodigoBus.setText("");
+        txtDescripcion.setText("");
+        txtNota.setText("");
+        txtUbicacion.setText("");
+        txtProveedor.setText("");
+
     }
-    
-    public void activarcajastexto (boolean b){
-        
-            txtCodigoBus.setEnabled(b);
-            txtDescripcion.setEnabled(!b);
-            txtNota.setEnabled(!b);
-            txtProveedor.setEnabled(!b);
-            txtUbicacion.setEnabled(!b);
-    
+
+    public void activarcajastexto(boolean b) {
+
+        txtCodigoBus.setEnabled(b);
+        txtDescripcion.setEnabled(!b);
+        txtNota.setEnabled(!b);
+        txtProveedor.setEnabled(!b);
+        txtUbicacion.setEnabled(!b);
+
     }
-    
-    public void activarbotones (boolean b){
-        
+
+    public void activarbotones(boolean b) {
+
         BCancelarPro.setEnabled(b);
         BGuardarPro.setEnabled(!b);
         BmodificarPro.setEnabled(b);
-    
-    
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,6 +101,9 @@ public class EditProducto extends javax.swing.JFrame {
         txtCodigoBus.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCodigoBusKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoBusKeyTyped(evt);
             }
         });
 
@@ -253,34 +257,31 @@ public class EditProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCodigoBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoBusActionPerformed
-        
-        
+
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from producto where codigo="+txtCodigoBus.getText());
+            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from producto where codigo=" + txtCodigoBus.getText());
             rs.next();
             int codigo = rs.getInt("count(codigo)");
-             if (codigo == 1 )
-             {            
-                 Producto p = BDProducto.buscarProducto(Integer.parseInt(String.valueOf(txtCodigoBus.getText())));
-                 txtDescripcion.setText(p.getDescripcion());
-                 txtNota.setText(p.getNota());
-                 txtProveedor.setText(p.getProveedor());
-                 txtUbicacion.setText(p.getUbicacion());
-                 
-            } else 
-             {
-               JOptionPane.showMessageDialog(null,"Producto "+txtCodigoBus.getText()+" No Exixte");
-               limpiarTextos();
-               txtCodigoBus.requestFocus();
-             }
-               
+            if (codigo == 1) {
+                Producto p = BDProducto.buscarProducto(Integer.parseInt(String.valueOf(txtCodigoBus.getText())));
+                txtDescripcion.setText(p.getDescripcion());
+                txtNota.setText(p.getNota());
+                txtProveedor.setText(p.getProveedor());
+                txtUbicacion.setText(p.getUbicacion());
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Producto " + txtCodigoBus.getText() + " No Exixte");
+                limpiarTextos();
+                txtCodigoBus.requestFocus();
+            }
+
         } catch (Exception e) {
-            System.out.println("Editar Error"+e);
+            System.out.println("Editar Error" + e);
         }
-         BCancelarPro.requestFocus();
-        
+        BCancelarPro.requestFocus();
+
     }//GEN-LAST:event_txtCodigoBusActionPerformed
 
     private void txtCodigoBusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBusKeyPressed
@@ -288,14 +289,14 @@ public class EditProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoBusKeyPressed
 
     private void BmodificarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BmodificarProActionPerformed
-          activarcajastexto(false);
-          activarbotones(false);
+        activarcajastexto(false);
+        activarbotones(false);
     }//GEN-LAST:event_BmodificarProActionPerformed
 
     private void BCancelarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarProActionPerformed
-             limpiarTextos();
-             txtCodigoBus.requestFocus();
-         
+        limpiarTextos();
+        txtCodigoBus.requestFocus();
+
     }//GEN-LAST:event_BCancelarProActionPerformed
 
     private void BCancelarProKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BCancelarProKeyPressed
@@ -304,10 +305,10 @@ public class EditProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_BCancelarProKeyPressed
 
     private void BGuardarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarProActionPerformed
-       
+
         Producto p;
         try {
-            
+
             p = BDProducto.buscarProducto(Integer.parseInt(txtCodigoBus.getText()));
             p.setCodigo(Integer.parseInt(txtCodigoBus.getText()));
             p.setDescripcion(txtDescripcion.getText());
@@ -315,24 +316,25 @@ public class EditProducto extends javax.swing.JFrame {
             p.setNota(txtNota.getText());
             p.setUbicacion(txtUbicacion.getText());
             BDProducto.actualizarProducto(p);
-            JOptionPane.showMessageDialog(null,"Datos de Producto Acutalizados");
+            JOptionPane.showMessageDialog(null, "Datos de Producto Acutalizados");
             activarbotones(true);
             limpiarTextos();
             activarcajastexto(true);
             txtCodigoBus.requestFocus();
-          
+
         } catch (Exception e) {
-            System.out.println("Error UPdate"+e);
+            System.out.println("Error UPdate" + e);
         }
-        
-        
-        
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_BGuardarProActionPerformed
+
+    private void txtCodigoBusKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBusKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodigoBusKeyTyped
 
     /**
      * @param args the command line arguments
