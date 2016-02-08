@@ -43,6 +43,7 @@ public abstract class BDProducto {
         ps.setString(8, p.getNota());
         ps.setString(9, p.getUbicacion());
         ps.setInt(10, p.getBodega());
+        ps.setBinaryStream(11, p.getFoto(),p.getLongitudBytes());
         //ps.setBinaryStream(11, p.getLongitudBytes(), (InputStream) p.getFoto());
         ps.executeUpdate();
         cnn.close();

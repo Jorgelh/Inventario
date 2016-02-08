@@ -172,7 +172,7 @@ public class MProducto extends javax.swing.JFrame {
         TxtProveedor.setText(""); 
         TxtUbicacion.setText("");
         TxtNota.setText("");
-        LabelFoto.setText("");
+        LabelFoto.setIcon(null);
         
                
         
@@ -193,8 +193,8 @@ public class MProducto extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        Combofamilia = new javax.swing.JComboBox<String>();
-        ComboProce = new javax.swing.JComboBox<String>();
+        Combofamilia = new javax.swing.JComboBox<>();
+        ComboProce = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         TxtCodigo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -202,21 +202,22 @@ public class MProducto extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         TxtProveedor = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        ComboMedida = new javax.swing.JComboBox<String>();
+        ComboMedida = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        ComboPresentacion = new javax.swing.JComboBox<String>();
+        ComboPresentacion = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         TxtNota = new javax.swing.JTextArea();
         TxtUbicacion = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         LabelFoto = new javax.swing.JLabel();
-        comboBodega = new javax.swing.JComboBox<String>();
+        comboBodega = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         ButtonCargarFoto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtproducto = new javax.swing.JTable();
         ButtonGuardar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("INGRESO DE PRODUCTOS");
@@ -235,7 +236,7 @@ public class MProducto extends javax.swing.JFrame {
         jLabel3.setText("Familia");
 
         Combofamilia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Combofamilia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
+        Combofamilia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         Combofamilia.setNextFocusableComponent(ComboProce);
         Combofamilia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,7 +245,7 @@ public class MProducto extends javax.swing.JFrame {
         });
 
         ComboProce.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ComboProce.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
+        ComboProce.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         ComboProce.setNextFocusableComponent(TxtDescripcion);
         ComboProce.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,7 +302,7 @@ public class MProducto extends javax.swing.JFrame {
         jLabel7.setText("Unidad de Medida");
 
         ComboMedida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ComboMedida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
+        ComboMedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         ComboMedida.setNextFocusableComponent(ComboPresentacion);
         ComboMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,7 +314,7 @@ public class MProducto extends javax.swing.JFrame {
         jLabel8.setText("Presentacion");
 
         ComboPresentacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ComboPresentacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
+        ComboPresentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         ComboPresentacion.setNextFocusableComponent(comboBodega);
         ComboPresentacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -356,7 +357,7 @@ public class MProducto extends javax.swing.JFrame {
         LabelFoto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         comboBodega.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboBodega.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "Bodega", "Bodeguita" }));
+        comboBodega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Bodega", "Bodeguita" }));
         comboBodega.setNextFocusableComponent(TxtUbicacion);
         comboBodega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -489,11 +490,20 @@ public class MProducto extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jtproducto);
 
         ButtonGuardar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        ButtonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
+        ButtonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save2.png"))); // NOI18N
         ButtonGuardar.setText("   Guardar");
         ButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonGuardarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
+        jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -505,11 +515,12 @@ public class MProducto extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(ButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ButtonGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -520,8 +531,10 @@ public class MProducto extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -629,7 +642,7 @@ public class MProducto extends javax.swing.JFrame {
                      p.setId_Presentacion(cpresentacion);
                      p.setId_Proce(cproce);
                      p.setBodega(bodega);
-                     p.setFoto((Blob) foto);
+                     p.setFoto(foto);
                      p.setLongitudBytes(longitudBytes);                     
                      BDProducto.insertarProducto(p);
                      JOptionPane.showMessageDialog(null,"Producto Agregado");  
@@ -733,6 +746,10 @@ public class MProducto extends javax.swing.JFrame {
            }
     }//GEN-LAST:event_TxtNotaFocusLost
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         limpiarCajasProducto();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void actulizarBusquedaProducto(){
       
         ArrayList<Producto> result =BDProducto.ListarProductos(cfamilia);
@@ -828,6 +845,7 @@ public class MProducto extends javax.swing.JFrame {
     private javax.swing.JTextField TxtProveedor;
     private javax.swing.JTextField TxtUbicacion;
     private javax.swing.JComboBox<String> comboBodega;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

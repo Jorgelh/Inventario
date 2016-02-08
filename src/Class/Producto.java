@@ -104,20 +104,20 @@ public class Producto {
         this.Bodega = Bodega;
     }
 
-    public Blob getFoto() {
-        return foto;
-    }
-
-    public void setFoto(Blob foto) {
-        this.foto = foto;
-    }
-
     public int getLongitudBytes() {
         return longitudBytes;
     }
 
     public void setLongitudBytes(int longitudBytes) {
         this.longitudBytes = longitudBytes;
+    }
+
+    public FileInputStream getFoto() {
+        return foto;
+    }
+
+    public void setFoto(FileInputStream foto) {
+        this.foto = foto;
     }
 
   
@@ -131,7 +131,7 @@ public class Producto {
     private String Ubicacion;
     private int Cantidad;
     private int Bodega;
-    private Blob foto;
+    private FileInputStream foto;
     private int longitudBytes;
 
     
