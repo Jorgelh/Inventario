@@ -9,11 +9,21 @@ import BD.BD;
 import BD.BDProducto;
 import Class.Familia;
 import Class.Producto;
+import java.awt.HeadlessException;
+import java.awt.Image;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,6 +41,8 @@ public class MProducto extends javax.swing.JFrame {
     int codigo = 1;
     int codgoBD;
     int bodega = 0;
+    FileInputStream foto;
+    int longitudBytes;
     /**
      * Creates new form Producto
      */
@@ -181,8 +193,8 @@ public class MProducto extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        Combofamilia = new javax.swing.JComboBox<>();
-        ComboProce = new javax.swing.JComboBox<>();
+        Combofamilia = new javax.swing.JComboBox<String>();
+        ComboProce = new javax.swing.JComboBox<String>();
         jLabel4 = new javax.swing.JLabel();
         TxtCodigo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -190,18 +202,18 @@ public class MProducto extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         TxtProveedor = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        ComboMedida = new javax.swing.JComboBox<>();
+        ComboMedida = new javax.swing.JComboBox<String>();
         jLabel8 = new javax.swing.JLabel();
-        ComboPresentacion = new javax.swing.JComboBox<>();
+        ComboPresentacion = new javax.swing.JComboBox<String>();
         jScrollPane2 = new javax.swing.JScrollPane();
         TxtNota = new javax.swing.JTextArea();
         TxtUbicacion = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         LabelFoto = new javax.swing.JLabel();
-        ButtonCargarFoto = new javax.swing.JButton();
-        comboBodega = new javax.swing.JComboBox<>();
+        comboBodega = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
+        ButtonCargarFoto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtproducto = new javax.swing.JTable();
         ButtonGuardar = new javax.swing.JButton();
@@ -223,7 +235,7 @@ public class MProducto extends javax.swing.JFrame {
         jLabel3.setText("Familia");
 
         Combofamilia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Combofamilia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        Combofamilia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
         Combofamilia.setNextFocusableComponent(ComboProce);
         Combofamilia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +244,7 @@ public class MProducto extends javax.swing.JFrame {
         });
 
         ComboProce.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ComboProce.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        ComboProce.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
         ComboProce.setNextFocusableComponent(TxtDescripcion);
         ComboProce.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -289,7 +301,7 @@ public class MProducto extends javax.swing.JFrame {
         jLabel7.setText("Unidad de Medida");
 
         ComboMedida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ComboMedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        ComboMedida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
         ComboMedida.setNextFocusableComponent(ComboPresentacion);
         ComboMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,7 +313,7 @@ public class MProducto extends javax.swing.JFrame {
         jLabel8.setText("Presentacion");
 
         ComboPresentacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ComboPresentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        ComboPresentacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
         ComboPresentacion.setNextFocusableComponent(comboBodega);
         ComboPresentacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -343,16 +355,8 @@ public class MProducto extends javax.swing.JFrame {
         LabelFoto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         LabelFoto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        ButtonCargarFoto.setText("Cargar Foto");
-        ButtonCargarFoto.setNextFocusableComponent(ButtonGuardar);
-        ButtonCargarFoto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCargarFotoActionPerformed(evt);
-            }
-        });
-
         comboBodega.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboBodega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Bodega", "Bodeguita" }));
+        comboBodega.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "Bodega", "Bodeguita" }));
         comboBodega.setNextFocusableComponent(TxtUbicacion);
         comboBodega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,6 +366,14 @@ public class MProducto extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Bodega");
+
+        ButtonCargarFoto.setText("Cargar Foto");
+        ButtonCargarFoto.setNextFocusableComponent(ButtonGuardar);
+        ButtonCargarFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCargarFotoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -385,23 +397,26 @@ public class MProducto extends javax.swing.JFrame {
                         .addComponent(Combofamilia, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(TxtCodigo, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(jLabel8))
-                .addGap(67, 67, 67)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel9)
                         .addComponent(TxtUbicacion)
                         .addComponent(jLabel10)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                        .addComponent(ButtonCargarFoto)
                         .addComponent(LabelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
                     .addComponent(comboBodega, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(0, 33, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonCargarFoto)
+                .addGap(136, 136, 136))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel1))
@@ -444,12 +459,12 @@ public class MProducto extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(ComboPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ButtonCargarFoto)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(LabelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ButtonCargarFoto)
+                .addGap(6, 6, 6))
         );
 
         jtproducto.setModel(new javax.swing.table.DefaultTableModel(
@@ -489,25 +504,24 @@ public class MProducto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
+                        .addGap(109, 109, 109)
                         .addComponent(ButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(ButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30))
+                        .addComponent(ButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -565,12 +579,38 @@ public class MProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtUbicacionActionPerformed
 
     private void ButtonCargarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCargarFotoActionPerformed
+
        
+        LabelFoto.setIcon(null);
+        JFileChooser j=new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.FILES_ONLY);//solo archivos y no carpetas
+        int estado=j.showOpenDialog(null);
+        if(estado == JFileChooser.APPROVE_OPTION){
+            try{
+                foto=new FileInputStream(j.getSelectedFile());
+                //necesitamos saber la cantidad de bytes
+                this.longitudBytes=(int)j.getSelectedFile().length();
+                try {
+                    Image icono=ImageIO.read(j.getSelectedFile()).getScaledInstance
+                            (LabelFoto.getWidth(),LabelFoto.getHeight(),Image.SCALE_DEFAULT);
+                    LabelFoto.setIcon(new ImageIcon(icono));
+                    LabelFoto.updateUI();
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "imagen: "+ex);
+                }
+            }catch(FileNotFoundException ex){
+                ex.printStackTrace();
+            }
+        }      
+                                           
+    
     }//GEN-LAST:event_ButtonCargarFotoActionPerformed
 
     private void ButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonGuardarActionPerformed
         
              actulizarBusquedaProducto();
+             
         
         if (TxtCodigo.getText().compareTo("")!=0 && TxtDescripcion.getText().compareTo("")!=0 && TxtUbicacion.getText().compareTo("")!=0 
             && TxtProveedor.getText().compareTo("")!=0 && !Combofamilia.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")
@@ -589,6 +629,8 @@ public class MProducto extends javax.swing.JFrame {
                      p.setId_Presentacion(cpresentacion);
                      p.setId_Proce(cproce);
                      p.setBodega(bodega);
+                     p.setFoto((Blob) foto);
+                     p.setLongitudBytes(longitudBytes);                     
                      BDProducto.insertarProducto(p);
                      JOptionPane.showMessageDialog(null,"Producto Agregado");  
                    

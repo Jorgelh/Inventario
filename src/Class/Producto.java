@@ -5,6 +5,9 @@
  */
 package Class;
 
+import java.io.FileInputStream;
+import java.sql.Blob;
+
 /**
  *
  * @author jluis
@@ -100,6 +103,24 @@ public class Producto {
     public void setBodega(int Bodega) {
         this.Bodega = Bodega;
     }
+
+    public Blob getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Blob foto) {
+        this.foto = foto;
+    }
+
+    public int getLongitudBytes() {
+        return longitudBytes;
+    }
+
+    public void setLongitudBytes(int longitudBytes) {
+        this.longitudBytes = longitudBytes;
+    }
+
+  
     private int Fam_Id;
     private int Id_Presentacion;
     private int Id_Medida;
@@ -110,5 +131,11 @@ public class Producto {
     private String Ubicacion;
     private int Cantidad;
     private int Bodega;
+    private Blob foto;
+    private int longitudBytes;
+
+    
+
+    
 
 }

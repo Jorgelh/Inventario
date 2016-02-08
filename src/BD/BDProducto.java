@@ -8,6 +8,8 @@ package BD;
 import Class.Familia;
 import java.sql.SQLException;
 import Class.Producto;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,13 +20,19 @@ import java.util.ArrayList;
  *
  * @author jluis
  */
+
+
 public abstract class BDProducto {
+    
+    public void setFoto(FileInputStream foto, int longitudBytes) {
+            setFoto(foto, longitudBytes);
+    }
 
     public static void insertarProducto(Producto p) throws SQLException {
 
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("insert into Producto (codigo,fam_id,id_presentacion,id_medida,id_proce,Descripcion,proveedor,nota,ubicacion,bodega)values(?,?,?,?,?,?,?,?,?,?)");
+        ps = cnn.prepareStatement("insert into Producto (codigo,fam_id,id_presentacion,id_medida,id_proce,Descripcion,proveedor,nota,ubicacion,bodega,foto)values(?,?,?,?,?,?,?,?,?,?,?)");
         ps.setInt(1, p.getCodigo());
         ps.setInt(2, p.getFam_Id());
         ps.setInt(3, p.getId_Presentacion());
@@ -35,6 +43,7 @@ public abstract class BDProducto {
         ps.setString(8, p.getNota());
         ps.setString(9, p.getUbicacion());
         ps.setInt(10, p.getBodega());
+        //ps.setBinaryStream(11, p.getLongitudBytes(), (InputStream) p.getFoto());
         ps.executeUpdate();
         cnn.close();
         ps.close();
