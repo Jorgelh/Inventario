@@ -578,6 +578,7 @@ public class CargarProductos extends javax.swing.JFrame {
             }
             actulizartabla();
             limpiartxt();
+            activarTxt(false);
         } else {
             JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
         }

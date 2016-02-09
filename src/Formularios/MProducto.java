@@ -173,10 +173,7 @@ public class MProducto extends javax.swing.JFrame {
         TxtUbicacion.setText("");
         TxtNota.setText("");
         LabelFoto.setIcon(null);
-        
-               
-        
-        
+           
     }
         
 

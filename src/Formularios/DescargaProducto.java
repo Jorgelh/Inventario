@@ -5,6 +5,13 @@
  */
 package Formularios;
 
+import BD.BD;
+import java.nio.charset.CodingErrorAction;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author jluis
@@ -16,6 +23,23 @@ public class DescargaProducto extends javax.swing.JFrame {
      */
     public DescargaProducto() {
         initComponents();
+
+    }
+
+    public void llenarBalance() {
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + Codigo.getText());
+            while (rs.next()) {
+                this.txtcantBodega.setText(String.valueOf(rs.getInt("sum(cantidad)")));
+                // cmedida = rs.getInt(1);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException error) {
+            System.out.println("NO ERROR DE unidad medida" + error);
+        }
     }
 
     /**
@@ -408,11 +432,11 @@ public class DescargaProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CodigoActionPerformed
-        // TODO add your handling code here:
+        llenarBalance();
     }//GEN-LAST:event_CodigoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
