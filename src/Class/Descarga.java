@@ -5,6 +5,8 @@
  */
 package Class;
 
+import java.util.Date;
+
 /**
  *
  * @author jluis
@@ -12,20 +14,20 @@ package Class;
 public class Descarga {
     
     
-   private int in_descarga;
+   private int id_descarga;
    private int id_ingreso;
    private int codigo;
-   private String fecha;
+   private Date fecha;
    private int Cantidad;
    private int EntregadoA;
    private double nota;
 
-    public int getIn_descarga() {
-        return in_descarga;
+    public int getId_descarga() {
+        return id_descarga;
     }
 
-    public void setIn_descarga(int in_descarga) {
-        this.in_descarga = in_descarga;
+    public void setId_descarga(int id_descarga) {
+        this.id_descarga = id_descarga;
     }
 
     public int getId_ingreso() {
@@ -44,11 +46,11 @@ public class Descarga {
         this.codigo = codigo;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

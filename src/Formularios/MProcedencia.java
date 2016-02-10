@@ -273,7 +273,7 @@ public void obtenerUltimoIdpro() {
         try {
             Procedencia pro = BDprocedencia.buscarProcedencia(Integer.parseInt(String.valueOf(jtprocedencia.getModel().getValueAt(jtprocedencia.getSelectedRow(),0))));
 
-            txtIdpro.setText(String.valueOf(pro.getId_proce()));
+            txtIdpro.setText(String.valueOf(pro.getId_proce())); 
             txtDescripcionpro.setText(pro.getDescripcion());
 
         } catch (Exception e) {
