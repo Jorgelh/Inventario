@@ -34,6 +34,7 @@ public class CargaP {
     private int Bodeda;
     private Date fechasistema;
     private String ReturnFecha;
+    private String ReturnFechaIgre;
 
     public int getId_ingreso() {
         return id_ingreso;
@@ -66,6 +67,16 @@ public class CargaP {
     public void setReturnFecha(String ReturnFecha) {
         this.ReturnFecha = ReturnFecha;
     }
+
+    public String getReturnFechaIgre() {
+        return ReturnFechaIgre;
+    }
+
+    public void setReturnFechaIgre(String ReturnFechaIgre) {
+        this.ReturnFechaIgre = ReturnFechaIgre;
+    }
+    
+    
 
     
    

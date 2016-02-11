@@ -67,7 +67,7 @@ public abstract class DBCargaPro {
 
     public static ArrayList<CargaP> ListarProductoIngresado(int c) {
 
-        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad from ingreso where codigo=" + c + "and cantidad > 0" );
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote from ingreso where codigo=" + c + "and cantidad > 0" );
 
     }
 
@@ -85,6 +85,9 @@ public abstract class DBCargaPro {
                 c.setReturnFecha(rs.getString("fecha_ingreso"));
                 c.setPO(rs.getString("PO"));
                 c.setCantidad(rs.getInt("cantidad"));
+                c.setInvoce(rs.getString("no_invoice"));
+                c.setReturnFechaIgre(rs.getString("fecha_ven"));
+                c.setLote(rs.getString("lote"));
                 list.add(c);
             }
             cn.close();
