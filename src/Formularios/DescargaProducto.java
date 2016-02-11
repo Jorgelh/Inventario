@@ -6,6 +6,7 @@
 package Formularios;
 
 import BD.BD;
+import BD.BDDescargaProducto;
 import BD.DBCargaPro;
 import Class.CargaP;
 import java.nio.charset.CodingErrorAction;
@@ -318,6 +319,11 @@ public class DescargaProducto extends javax.swing.JFrame {
             }
         });
         Cosulta.setToolTipText("");
+        Cosulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CosultaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Cosulta);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Balance", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
@@ -443,6 +449,28 @@ public class DescargaProducto extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void CosultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CosultaMouseClicked
+
+        try {
+              
+             CargaP ca = BDDescargaProducto.buscarDescarga(Integer.parseInt(String.valueOf(Cosulta.getModel().getValueAt(Cosulta.getSelectedRow(),0))));
+              LaDescrip.setText(ca.getDescripcion());
+              LaFechaVen.setText(ca.getReturnFechaIgre());
+              LaLote.setText(ca.getLote());
+              LaPN.setText(ca.getPN());
+              LaPO.setText(ca.getPO());
+              laCantidad.setText(String.valueOf(ca.getCantidad()));
+            
+            
+        } catch (Exception e) {
+            
+            System.out.println("ERRO GAY "+e);
+        }
+        
+
+
+    }//GEN-LAST:event_CosultaMouseClicked
 
     private void actualizarTablaconsulta(){
     

@@ -5,6 +5,7 @@
  */
 package BD;
 
+import Class.CargaP;
 import java.util.ArrayList;
 import Class.Descarga;
 import java.sql.Connection;
@@ -37,26 +38,35 @@ public abstract class BDDescargaProducto {
         ps.close();            
     }
     
-    public static ArrayList<Descarga> ListarIngresos (int d){
-        
-        return consultaSQL("");
-        
+    public static CargaP buscarDescarga (int idc) throws SQLException{
     
-    
-    }
-
-    private static ArrayList<Descarga> consultaSQL(String string) {
-        return null;
-
+        return buscarDescarga(idc, null);
     }
     
+    public static CargaP buscarDescarga(int idc, CargaP c) throws SQLException{
+        
+        Connection cn = BD.getConnection();
+        PreparedStatement ps =null;
+        ps = cn.prepareStatement("select ingreso.fecha_ven,ingreso.P_N,ingreso.cantidad,ingreso.PO,ingreso.lote,producto.descripcion from ingreso inner join producto on producto.codigo = ingreso.codigo and ingreso.id_ingreso="+idc);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+             if (c == null){
+             c = new CargaP(){
+             };
+        
+        }
+        c.setReturnFecha(rs.getString("fecha_ven"));
+        c.setPN(rs.getString(rs.getString("P_N")));
+        c.setCantidad(rs.getInt("cantidad"));
+        c.setPO(rs.getString("PO"));
+        c.setLote(rs.getString("lote"));
+       // c.setDescripcion(rs.getString("descripcion"));
+        }
+        cn.close();
+        ps.close();
+        return c;
+        
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
+       
 }

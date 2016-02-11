@@ -35,6 +35,7 @@ public class CargaP {
     private Date fechasistema;
     private String ReturnFecha;
     private String ReturnFechaIgre;
+    private String descripcion;
 
     public int getId_ingreso() {
         return id_ingreso;
@@ -214,6 +215,14 @@ public class CargaP {
 
     public void setFechaIngre(Date fechaIngre) {
         this.fechaIngre = fechaIngre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
    
