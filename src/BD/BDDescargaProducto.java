@@ -55,12 +55,12 @@ public abstract class BDDescargaProducto {
              };
         
         }
-        c.setReturnFecha(rs.getString("fecha_ven"));
-        c.setPN(rs.getString(rs.getString("P_N")));
+        c.setReturnFechaIgre(rs.getString("fecha_ven"));
+        c.setPN(rs.getString("P_N"));
         c.setCantidad(rs.getInt("cantidad"));
         c.setPO(rs.getString("PO"));
         c.setLote(rs.getString("lote"));
-       // c.setDescripcion(rs.getString("descripcion"));
+        c.setDescripcion(rs.getString("descripcion"));
         }
         cn.close();
         ps.close();

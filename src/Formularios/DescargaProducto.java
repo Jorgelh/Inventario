@@ -34,16 +34,26 @@ public class DescargaProducto extends javax.swing.JFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + TxCodigo.getText());
+            ResultSet rs = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + TxCodigo.getText()+"and bodega = 1");
             while (rs.next()) {
                 this.txtcantBodega.setText(String.valueOf(rs.getInt("sum(cantidad)")));
-                // cmedida = rs.getInt(1);
             }
+            ResultSet r = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + TxCodigo.getText()+"and bodega = 2");
+             while (r.next()) {
+                this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(cantidad)")));
+            }
+            
             rs.close();
+            r.close();
             stmt.close();
         } catch (SQLException error) {
             System.out.println("NO ERROR DE unidad medida" + error);
         }
+                 
+        int bode = Integer.parseInt(txtcantBodega.getText());
+        int bodegui = Integer.parseInt(txttotalBodeguita.getText());
+        txtSumas.setText(String.valueOf(bode+bodegui));
+
     }
 
     /**
@@ -227,21 +237,27 @@ public class DescargaProducto extends javax.swing.JFrame {
         jLabel2.setText("Descripcion:");
 
         LaDescrip.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LaDescrip.setForeground(new java.awt.Color(0, 0, 255));
         LaDescrip.setPreferredSize(new java.awt.Dimension(230, 21));
 
         LaPN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LaPN.setForeground(new java.awt.Color(0, 0, 255));
         LaPN.setPreferredSize(new java.awt.Dimension(230, 21));
 
         LaPO.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LaPO.setForeground(new java.awt.Color(0, 0, 255));
         LaPO.setPreferredSize(new java.awt.Dimension(230, 21));
 
         LaLote.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LaLote.setForeground(new java.awt.Color(0, 0, 255));
         LaLote.setPreferredSize(new java.awt.Dimension(230, 21));
 
         LaFechaVen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LaFechaVen.setForeground(new java.awt.Color(0, 0, 255));
         LaFechaVen.setPreferredSize(new java.awt.Dimension(230, 21));
 
         laCantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        laCantidad.setForeground(new java.awt.Color(0, 0, 255));
         laCantidad.setPreferredSize(new java.awt.Dimension(230, 21));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -292,11 +308,11 @@ public class DescargaProducto extends javax.swing.JFrame {
                         .addComponent(laCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LaPO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LaLote, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(LaPO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LaLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Cosulta.setModel(new javax.swing.table.DefaultTableModel(
@@ -406,7 +422,7 @@ public class DescargaProducto extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,7 +450,9 @@ public class DescargaProducto extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
@@ -463,12 +481,11 @@ public class DescargaProducto extends javax.swing.JFrame {
               laCantidad.setText(String.valueOf(ca.getCantidad()));
             
             
-        } catch (Exception e) {
+        } catch (Exception e ) {
             
             System.out.println("ERRO GAY "+e);
         }
         
-
 
     }//GEN-LAST:event_CosultaMouseClicked
 

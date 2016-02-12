@@ -31,7 +31,7 @@ import javax.swing.table.DefaultTableModel;
 public class CargarProductos extends javax.swing.JFrame {
 
     int Enviacodigo;
-    int bodega;
+    int bodega = 2;
     DefaultTableModel temp;
 
     /**
@@ -627,8 +627,6 @@ public class CargarProductos extends javax.swing.JFrame {
 
         if (ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
             int bodega = 1;
-        } else {
-            bodega = 2;
         }
     }//GEN-LAST:event_ComboBoxBodegaActionPerformed
 
