@@ -25,14 +25,14 @@ public abstract class BDDescargaProducto {
     public static void insertarDescarga(Descarga ca)  throws SQLException{
         Connection cn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("inser into descarga(id_descarga,id_ingreso,codigo,cantidad,entregadoa,nota,fechades) values(descarga.nextval,?,?,?,?,?,?,?,?");
-        ps.setInt(1, ca.getId_descarga());
-        ps.setInt(2, ca.getId_ingreso());
-        ps.setInt(3, ca.getCodigo());
-        ps.setInt(4, ca.getCantidad());
-        ps.setInt(5, ca.getEntregadoA());
-        ps.setDouble(6, ca.getNota());
-        ps.setDate(7, new java.sql.Date(ca.getFecha().getTime()));
+        ps = cn.prepareStatement("insert into descarga(id_descarga,id_ingreso,codigo,cantidad,entregadoa,nota,fechades) values (descarga1.nextval,?,?,?,?,?,sysdate)");
+        //ps.setInt(1, ca.getId_descarga());
+        ps.setInt(1, ca.getId_ingreso());
+        ps.setInt(2, ca.getCodigo());
+        ps.setInt(3, ca.getCantidad());
+        ps.setInt(4, ca.getEntregadoA());
+        ps.setString(5, ca.getNota());
+        //ps.setDate(7, new java.sql.Date(ca.getFecha().getTime()));
         ps.executeUpdate();
         cn.close();
         ps.close();            
@@ -47,7 +47,7 @@ public abstract class BDDescargaProducto {
         
         Connection cn = BD.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select ingreso.fecha_ven,ingreso.P_N,ingreso.cantidad,ingreso.PO,ingreso.lote,producto.descripcion from ingreso inner join producto on producto.codigo = ingreso.codigo and ingreso.id_ingreso="+idc);
+        ps = cn.prepareStatement("select ingreso.id_ingreso,ingreso.fecha_ven,ingreso.P_N,ingreso.cantidad,ingreso.PO,ingreso.lote,producto.descripcion from ingreso inner join producto on producto.codigo = ingreso.codigo and ingreso.id_ingreso="+idc);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (c == null){
@@ -55,6 +55,7 @@ public abstract class BDDescargaProducto {
              };
         
         }
+        c.setId_ingreso(rs.getInt("id_ingreso"));
         c.setReturnFechaIgre(rs.getString("fecha_ven"));
         c.setPN(rs.getString("P_N"));
         c.setCantidad(rs.getInt("cantidad"));

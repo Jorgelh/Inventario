@@ -40,7 +40,7 @@ public abstract class DBCargaPro {
                 + "lote,no_trabajo,no_invoice,no_documento,"
                 + "no_serie,ingresadopor,proveedor,notas,"
                 + "bodega,fechasistema,estado) "
-                + "values (ingreso1.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'15/01/16','A')");
+                + "values (ingreso1.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,'A')");
        // ps.setInt(1,c.getId_ingreso());
         ps.setInt(1,c.getCodigo());
         ps.setString(2,c.getPN());

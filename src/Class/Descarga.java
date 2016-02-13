@@ -20,7 +20,7 @@ public class Descarga {
    private Date fecha;
    private int Cantidad;
    private int EntregadoA;
-   private double nota;
+   private String nota;
 
     public int getId_descarga() {
         return id_descarga;
@@ -70,13 +70,15 @@ public class Descarga {
         this.EntregadoA = EntregadoA;
     }
 
-    public double getNota() {
+    public String getNota() {
         return nota;
     }
 
-    public void setNota(double nota) {
+    public void setNota(String nota) {
         this.nota = nota;
     }
+
+   
    
    
    
