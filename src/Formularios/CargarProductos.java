@@ -42,6 +42,7 @@ public class CargarProductos extends javax.swing.JFrame {
         initComponents();
         limpiartxt();
         activarTxt(false);
+        
 
     }
 

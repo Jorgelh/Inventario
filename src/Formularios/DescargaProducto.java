@@ -17,12 +17,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author jluis
  */
 public class DescargaProducto extends javax.swing.JFrame {
+
+        DefaultTableModel temp;
 
     /**
      * Creates new form DescargaProducto
@@ -56,6 +59,40 @@ public class DescargaProducto extends javax.swing.JFrame {
         int bodegui = Integer.parseInt(txttotalBodeguita.getText());
         txtSumas.setText(String.valueOf(bode+bodegui));
 
+    }
+    
+    public void limpiartabla15() {
+
+        try {
+            temp = (DefaultTableModel) Cosulta.getModel();
+            int a = temp.getRowCount();
+            for (int i = 0; i < a; i++) {
+                temp.removeRow(i);
+                i--;
+            }
+        } catch (Exception e) {
+
+        }
+
+    }
+    
+    
+    public void limpiarlabel(){
+        
+    
+       LaDescrip.setText("");
+       LaFechaVen.setText("");
+       LaLote.setText("");
+       LaPN.setText("");
+       LaPO.setText("");
+       laCantidad.setText("");
+       TxCodigo.setText("");
+       txtcantBodega.setText("");
+       txtcantidad.setText("");
+       txttotalBodeguita.setText("");
+       TxCodigo.requestFocus();
+       txtNoingreso.setText("");
+    
     }
 
     /**
@@ -158,6 +195,11 @@ public class DescargaProducto extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -512,8 +554,13 @@ public class DescargaProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_CosultaMouseClicked
 
     private void txtNoingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoingresoActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtNoingresoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+                 limpiartabla15();
+                 limpiarlabel();
+                         
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void actualizarTablaconsulta(){
     
