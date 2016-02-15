@@ -50,6 +50,10 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -58,8 +62,6 @@ public class PrincipalInventario extends javax.swing.JFrame {
         setTitle("SISTEMA DE INVENTARIO DE BODEGA");
         setLocation(new java.awt.Point(0, 0));
         setMaximizedBounds(getMaximizedBounds());
-        setMaximumSize(new java.awt.Dimension(1500, 1000));
-        setPreferredSize(getMaximumSize());
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -218,6 +220,19 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu2.setText("  CONSULTAS");
         jMenu2.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu2.setPreferredSize(new java.awt.Dimension(110, 19));
+
+        jMenuItem9.setText("PRODUCTOS POR P/N");
+        jMenu2.add(jMenuItem9);
+
+        jMenuItem10.setText("UBICACION PRODUCTO");
+        jMenu2.add(jMenuItem10);
+
+        jMenuItem11.setText("PRODUCTOS A VENCER");
+        jMenu2.add(jMenuItem11);
+
+        jMenuItem12.setText("PRODUCTOS VENCIDOS");
+        jMenu2.add(jMenuItem12);
+
         jMenuBar1.add(jMenu2);
 
         jMenu4.setForeground(new java.awt.Color(0, 51, 255));
@@ -355,6 +370,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -362,6 +380,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private Formularios.MProcedencia mProcedencia1;
     private Formularios.MProcedencia mProcedencia2;
     // End of variables declaration//GEN-END:variables

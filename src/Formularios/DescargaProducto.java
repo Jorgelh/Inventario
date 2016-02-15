@@ -32,6 +32,9 @@ public class DescargaProducto extends javax.swing.JFrame {
      */
     public DescargaProducto() {
         initComponents();
+        limpiarlabel();
+        limpiartabla15();
+        activartxt(false);
 
     }
 
@@ -92,8 +95,18 @@ public class DescargaProducto extends javax.swing.JFrame {
        txttotalBodeguita.setText("");
        TxCodigo.requestFocus();
        txtNoingreso.setText("");
-    
+       txtSumas.setText("");
     }
+    
+     public void  activartxt (boolean b){
+       
+         txtentregado.setEnabled(b);
+         txtcantidad.setEnabled(b);
+         txtNota.setEnabled(b);
+         BoDescargar.setEnabled(b);
+         
+     
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,7 +130,7 @@ public class DescargaProducto extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtNota = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        BoDescargar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -154,6 +167,11 @@ public class DescargaProducto extends javax.swing.JFrame {
                 TxCodigoActionPerformed(evt);
             }
         });
+        TxCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxCodigoKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Codigo de Producto");
@@ -183,12 +201,12 @@ public class DescargaProducto extends javax.swing.JFrame {
         txtNota.setRows(5);
         jScrollPane2.setViewportView(txtNota);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Download.png"))); // NOI18N
-        jButton1.setText("  Descargar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BoDescargar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BoDescargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Download.png"))); // NOI18N
+        BoDescargar.setText("  Descargar");
+        BoDescargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BoDescargarActionPerformed(evt);
             }
         });
 
@@ -223,7 +241,7 @@ public class DescargaProducto extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BoDescargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -249,7 +267,7 @@ public class DescargaProducto extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BoDescargar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8)))))
@@ -393,10 +411,13 @@ public class DescargaProducto extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel14.setText("Total");
 
-        txtcantBodega.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtcantBodega.setEditable(false);
+        txtcantBodega.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        txttotalBodeguita.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txttotalBodeguita.setEditable(false);
+        txttotalBodeguita.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        txtSumas.setEditable(false);
         txtSumas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtSumas.setForeground(new java.awt.Color(255, 0, 51));
 
@@ -416,11 +437,11 @@ public class DescargaProducto extends javax.swing.JFrame {
                             .addComponent(jLabel13)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txttotalBodeguita)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
-                                .addComponent(txtcantBodega, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtcantBodega))
+                            .addComponent(txttotalBodeguita, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))))
                 .addGap(22, 22, 22))
         );
         jPanel4Layout.setVerticalGroup(
@@ -432,11 +453,10 @@ public class DescargaProducto extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(26, 26, 26)
                         .addComponent(jLabel13))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(txtcantBodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40))
-                        .addComponent(txttotalBodeguita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(txttotalBodeguita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcantBodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
@@ -499,12 +519,35 @@ public class DescargaProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TxCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxCodigoActionPerformed
-        llenarBalance();
-        actualizarTablaconsulta();
-        
+       
+         int  Enviacodigo = Integer.parseInt(TxCodigo.getText());
+         
+               
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from ingreso where codigo=" + TxCodigo.getText()+ "and cantidad > 0");
+            rs.next();
+            int codigo = rs.getInt("count(codigo)");
+            if (codigo > 0) {
+                activartxt(true);
+                actualizarTablaconsulta();
+                TxCodigo.requestFocus();
+                llenarBalance();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Producto " + TxCodigo.getText() + " No Contiene Existencias o Producto no Existe");
+                limpiarlabel();
+                limpiartabla15();
+            }
+
+        } catch (Exception e) {
+            System.out.println("Editar Error" + e);
+        }
+       
     }//GEN-LAST:event_TxCodigoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BoDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoDescargarActionPerformed
       
          if(txtcantidad.getText().compareTo("") !=0 && txtentregado.getText().compareTo("") !=0 )
          {
@@ -529,7 +572,7 @@ public class DescargaProducto extends javax.swing.JFrame {
         
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BoDescargarActionPerformed
 
     private void CosultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CosultaMouseClicked
 
@@ -559,8 +602,18 @@ public class DescargaProducto extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
                  limpiartabla15();
                  limpiarlabel();
+                 activartxt(false);
                          
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void TxCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxCodigoKeyTyped
+
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_TxCodigoKeyTyped
 
     private void actualizarTablaconsulta(){
     
@@ -629,6 +682,7 @@ public class DescargaProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BoDescargar;
     private javax.swing.JTable Cosulta;
     private javax.swing.JLabel Descripcion;
     private java.awt.Label LaDescrip;
@@ -637,7 +691,6 @@ public class DescargaProducto extends javax.swing.JFrame {
     private java.awt.Label LaPN;
     private java.awt.Label LaPO;
     private javax.swing.JTextField TxCodigo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

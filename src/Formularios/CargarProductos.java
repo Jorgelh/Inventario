@@ -602,7 +602,7 @@ public class CargarProductos extends javax.swing.JFrame {
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
 
         Enviacodigo = Integer.parseInt(txtCodigo.getText());
-        actulizartabla();
+        //actulizartabla();
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -615,7 +615,7 @@ public class CargarProductos extends javax.swing.JFrame {
                 txtNoDoc.requestFocus();
 
             } else {
-                JOptionPane.showMessageDialog(null, "Producto " + txtCodigo.getText() + " No Exixte");
+                JOptionPane.showMessageDialog(null, "Producto " + txtCodigo.getText() + " No Existe");
                 limpiartxt();
             }
 

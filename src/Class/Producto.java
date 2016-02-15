@@ -120,6 +120,14 @@ public class Producto {
         this.foto = foto;
     }
 
+    public int getCantidadminima() {
+        return cantidadminima;
+    }
+
+    public void setCantidadminima(int cantidadminima) {
+        this.cantidadminima = cantidadminima;
+    }
+
   
     private int Fam_Id;
     private int Id_Presentacion;
@@ -133,7 +141,7 @@ public class Producto {
     private int Bodega;
     private FileInputStream foto;
     private int longitudBytes;
-
+    private int cantidadminima;
     
 
     
