@@ -26,7 +26,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author jluis
  */
-public class MUnidad_Medida extends javax.swing.JFrame {
+public class MUnidad_Medida extends javax.swing.JInternalFrame {
     
      String accion = "";
      
@@ -43,7 +43,7 @@ public class MUnidad_Medida extends javax.swing.JFrame {
         initComponents();
         obtenerUltimoId();
         actualizarBusqueda();
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         activarBotones(true);
                
     }

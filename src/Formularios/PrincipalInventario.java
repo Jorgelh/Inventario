@@ -41,17 +41,18 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        NUEVOPRO = new javax.swing.JMenuItem();
+        CARGAPRO = new javax.swing.JMenuItem();
+        EDITARPRO = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        familias = new javax.swing.JMenuItem();
+        unidadmedida = new javax.swing.JMenuItem();
+        presentacion = new javax.swing.JMenuItem();
+        PROCEDENCIA = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        DESCARGAPRO = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        CONSULTAPN = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
@@ -129,35 +130,35 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu7.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu7.setPreferredSize(new java.awt.Dimension(139, 35));
 
-        jMenuItem1.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenuItem1.setForeground(new java.awt.Color(0, 51, 255));
-        jMenuItem1.setText("NUEVO PRODUCTOS");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        NUEVOPRO.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        NUEVOPRO.setForeground(new java.awt.Color(0, 51, 255));
+        NUEVOPRO.setText("NUEVO PRODUCTOS");
+        NUEVOPRO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                NUEVOPROActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem1);
+        jMenu7.add(NUEVOPRO);
 
-        jMenuItem8.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenuItem8.setForeground(new java.awt.Color(0, 51, 255));
-        jMenuItem8.setText("CARGAR PRODUCTOS");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        CARGAPRO.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        CARGAPRO.setForeground(new java.awt.Color(0, 51, 255));
+        CARGAPRO.setText("CARGAR PRODUCTOS");
+        CARGAPRO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                CARGAPROActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem8);
+        jMenu7.add(CARGAPRO);
 
-        jMenuItem6.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenuItem6.setForeground(new java.awt.Color(0, 51, 255));
-        jMenuItem6.setText("EDITAR PRODUCTO");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        EDITARPRO.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        EDITARPRO.setForeground(new java.awt.Color(0, 51, 255));
+        EDITARPRO.setText("EDITAR PRODUCTO");
+        EDITARPRO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                EDITARPROActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem6);
+        jMenu7.add(EDITARPRO);
 
         jMenu1.add(jMenu7);
 
@@ -166,33 +167,41 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu6.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu6.setPreferredSize(new java.awt.Dimension(271, 35));
 
-        jMenuItem2.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenuItem2.setForeground(new java.awt.Color(0, 51, 255));
-        jMenuItem2.setText("FAMILIAS");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        familias.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        familias.setForeground(new java.awt.Color(0, 51, 255));
+        familias.setText("FAMILIAS");
+        familias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                familiasActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem2);
+        jMenu6.add(familias);
 
-        jMenuItem13.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenuItem13.setForeground(new java.awt.Color(0, 51, 255));
-        jMenuItem13.setText("UNIDAD DE MEDIDA");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+        unidadmedida.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        unidadmedida.setForeground(new java.awt.Color(0, 51, 255));
+        unidadmedida.setText("UNIDAD DE MEDIDA");
+        unidadmedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                unidadmedidaActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem13);
+        jMenu6.add(unidadmedida);
 
-        jMenuItem3.setText("PRESENTACION");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        presentacion.setText("PRESENTACION");
+        presentacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                presentacionActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem3);
+        jMenu6.add(presentacion);
+
+        PROCEDENCIA.setText("PROCEDENCIA");
+        PROCEDENCIA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PROCEDENCIAActionPerformed(evt);
+            }
+        });
+        jMenu6.add(PROCEDENCIA);
 
         jMenu1.add(jMenu6);
 
@@ -203,16 +212,16 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu3.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu3.setPreferredSize(new java.awt.Dimension(110, 19));
 
-        jMenuItem7.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenuItem7.setForeground(new java.awt.Color(0, 51, 255));
-        jMenuItem7.setText("Descarga de Producto");
-        jMenuItem7.setPreferredSize(new java.awt.Dimension(197, 35));
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        DESCARGAPRO.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        DESCARGAPRO.setForeground(new java.awt.Color(0, 51, 255));
+        DESCARGAPRO.setText("Descarga de Producto");
+        DESCARGAPRO.setPreferredSize(new java.awt.Dimension(197, 35));
+        DESCARGAPRO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                DESCARGAPROActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        jMenu3.add(DESCARGAPRO);
 
         jMenuBar1.add(jMenu3);
 
@@ -221,13 +230,13 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu2.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu2.setPreferredSize(new java.awt.Dimension(110, 19));
 
-        jMenuItem9.setText("PRODUCTOS POR P/N");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        CONSULTAPN.setText("PRODUCTOS POR P/N");
+        CONSULTAPN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                CONSULTAPNActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem9);
+        jMenu2.add(CONSULTAPN);
 
         jMenuItem10.setText("UBICACION PRODUCTO");
         jMenu2.add(jMenuItem10);
@@ -285,7 +294,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void NUEVOPROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NUEVOPROActionPerformed
         MProducto pro = new MProducto();
         jDesktopPane1.add(pro); 
         Dimension desktopSize = jDesktopPane1.getSize();
@@ -293,7 +302,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         pro.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
         pro.show();
 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_NUEVOPROActionPerformed
 
     private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
         // TODO add your handling code here:
@@ -302,43 +311,48 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         salir();    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        MIngresoFamilia frmMCat = new MIngresoFamilia();
-        frmMCat.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void familiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familiasActionPerformed
+        
+         MIngresoFamilia f = new MIngresoFamilia();
+        jDesktopPane1.add(f); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = f.getSize();
+        f.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        f.show();
+        
+        
+        
+    }//GEN-LAST:event_familiasActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void EDITARPROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITARPROActionPerformed
         EditProducto frmMCat = new EditProducto();
         frmMCat.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_EDITARPROActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void DESCARGAPROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DESCARGAPROActionPerformed
         DescargaProducto frmMCat = new DescargaProducto();
         frmMCat.setVisible(true);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_DESCARGAPROActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void CARGAPROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CARGAPROActionPerformed
         CargarProductos frmMCat = new CargarProductos();
         frmMCat.setVisible(true);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_CARGAPROActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void CONSULTAPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CONSULTAPNActionPerformed
+    }//GEN-LAST:event_CONSULTAPNActionPerformed
 
-        MUnidad_Medida M = new MUnidad_Medida();
+    private void unidadmedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadmedidaActionPerformed
+                 
+         MUnidad_Medida M = new MUnidad_Medida();
         jDesktopPane1.add(M); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = M.getSize();
         M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
         M.show();
+    }//GEN-LAST:event_unidadmedidaActionPerformed
 
-
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void presentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presentacionActionPerformed
 
          MPresentacion P = new MPresentacion();
         jDesktopPane1.add(P); 
@@ -348,7 +362,20 @@ public class PrincipalInventario extends javax.swing.JFrame {
         P.show();
 
 
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_presentacionActionPerformed
+
+    private void PROCEDENCIAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PROCEDENCIAActionPerformed
+        
+         MProcedencia M = new MProcedencia();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+        
+        
+        
+    }//GEN-LAST:event_PROCEDENCIAActionPerformed
 
     
     public static void main(String args[]) {
@@ -384,6 +411,13 @@ public class PrincipalInventario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem CARGAPRO;
+    private javax.swing.JMenuItem CONSULTAPN;
+    private javax.swing.JMenuItem DESCARGAPRO;
+    private javax.swing.JMenuItem EDITARPRO;
+    private javax.swing.JMenuItem NUEVOPRO;
+    private javax.swing.JMenuItem PROCEDENCIA;
+    private javax.swing.JMenuItem familias;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
@@ -395,20 +429,14 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private Formularios.MProcedencia mProcedencia1;
     private Formularios.MProcedencia mProcedencia2;
+    private javax.swing.JMenuItem presentacion;
+    private javax.swing.JMenuItem unidadmedida;
     // End of variables declaration//GEN-END:variables
 
     private void salir() {
