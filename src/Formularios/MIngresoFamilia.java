@@ -24,7 +24,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author jluis
  */
-public class MIngresoFamilia extends javax.swing.JFrame {
+public class MIngresoFamilia extends javax.swing.JInternalFrame {
     
     String accion = "";
 
@@ -40,7 +40,7 @@ public class MIngresoFamilia extends javax.swing.JFrame {
         initComponents();
         obtenerUltimoIdfam();
         actualizarBusquedafam();
-        this.setLocationRelativeTo(null);
+       // this.setLocationRelativeTo(null);
         activarBotones(true);
     }
     

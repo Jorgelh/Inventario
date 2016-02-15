@@ -30,7 +30,7 @@ import javax.swing.JOptionPane;
  *
  * @author jluis
  */
-public class MProducto extends javax.swing.JFrame {
+public class MProducto extends javax.swing.JInternalFrame {
 
     int cfamilia = 0;
     int cproce = 0;
@@ -68,7 +68,7 @@ public class MProducto extends javax.swing.JFrame {
         } catch (SQLException error) {
             System.out.println(error);
         }
-        this.setLocationRelativeTo(null);
+       // this.setLocationRelativeTo(null);
 
         try {
             Connection con = BD.getConnection();
@@ -83,7 +83,7 @@ public class MProducto extends javax.swing.JFrame {
         } catch (SQLException error) {
             System.out.println(error);
         }
-        this.setLocationRelativeTo(null);
+      //  this.setLocationRelativeTo(null);
         
         try {
             Connection con = BD.getConnection();
@@ -98,7 +98,7 @@ public class MProducto extends javax.swing.JFrame {
         } catch (SQLException error) {
             System.out.println(error);
         }
-        this.setLocationRelativeTo(null);
+       // this.setLocationRelativeTo(null);
         
         try {
             Connection con = BD.getConnection();
@@ -113,7 +113,7 @@ public class MProducto extends javax.swing.JFrame {
         } catch (SQLException error) {
             System.out.println(error);
         }
-        this.setLocationRelativeTo(null);
+    //    this.setLocationRelativeTo(null);
         
         
         
@@ -134,7 +134,7 @@ public class MProducto extends javax.swing.JFrame {
         } catch (SQLException error) {
             System.out.print("que es " + error);
         }
-        this.setLocationRelativeTo(null);
+     //   this.setLocationRelativeTo(null);
 
         if (cfamilia < 10) {
             crea = Integer.parseInt(Integer.toString(cproce) + "00" + Integer.toString(cfamilia));
@@ -523,13 +523,14 @@ public class MProducto extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(ButtonGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(ButtonGuardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -787,7 +788,8 @@ public class MProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtNotaFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         limpiarCajasProducto();
+         //limpiarCajasProducto();
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtCantidadMinimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadMinimaActionPerformed

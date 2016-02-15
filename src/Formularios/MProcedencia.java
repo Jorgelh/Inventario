@@ -24,7 +24,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author Jorge Luis
  */
-public class MProcedencia extends javax.swing.JFrame {
+public class MProcedencia extends javax.swing.JInternalFrame {
 
      String accion = "";
     /**
@@ -38,7 +38,7 @@ public class MProcedencia extends javax.swing.JFrame {
         initComponents();
         obtenerUltimoIdpro();
         actualizarBusquedapro();
-        this.setLocationRelativeTo(null);
+       // this.setLocationRelativeTo(null);
         activarBotonespro(true);
     }
 

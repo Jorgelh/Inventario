@@ -5,6 +5,7 @@
  */
 package Formularios;
 
+import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
@@ -45,8 +46,8 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -62,6 +63,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         setTitle("SISTEMA DE INVENTARIO DE BODEGA");
         setLocation(new java.awt.Point(0, 0));
         setMaximizedBounds(getMaximizedBounds());
+        setResizable(false);
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -174,25 +176,23 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem2);
 
-        jMenuItem3.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenuItem3.setForeground(new java.awt.Color(0, 51, 255));
-        jMenuItem3.setText("UNIDAD DE MEDIDA");
+        jMenuItem13.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem13.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem13.setText("UNIDAD DE MEDIDA");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem13);
+
+        jMenuItem3.setText("PRESENTACION");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu6.add(jMenuItem3);
-
-        jMenuItem4.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenuItem4.setForeground(new java.awt.Color(0, 51, 255));
-        jMenuItem4.setText("PRESENTACION");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jMenuItem4);
 
         jMenu1.add(jMenu6);
 
@@ -222,6 +222,11 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu2.setPreferredSize(new java.awt.Dimension(110, 19));
 
         jMenuItem9.setText("PRODUCTOS POR P/N");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem9);
 
         jMenuItem10.setText("UBICACION PRODUCTO");
@@ -282,7 +287,11 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         MProducto pro = new MProducto();
-        pro.setVisible(true);
+        jDesktopPane1.add(pro); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = pro.getSize();
+        pro.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        pro.show();
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -297,15 +306,6 @@ public class PrincipalInventario extends javax.swing.JFrame {
         MIngresoFamilia frmMCat = new MIngresoFamilia();
         frmMCat.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        MUnidad_Medida frmMCat = new MUnidad_Medida();
-        frmMCat.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        MPresentacion frmMCat = new MPresentacion();
-        frmMCat.setVisible(true);    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         EditProducto frmMCat = new EditProducto();
@@ -322,9 +322,35 @@ public class PrincipalInventario extends javax.swing.JFrame {
         frmMCat.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+
+        MUnidad_Medida M = new MUnidad_Medida();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+
+
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+
+         MPresentacion P = new MPresentacion();
+        jDesktopPane1.add(P); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = P.getSize();
+        P.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        P.show();
+
+
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -373,9 +399,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

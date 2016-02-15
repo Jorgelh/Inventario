@@ -22,7 +22,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author jluis
  */
-public class MPresentacion extends javax.swing.JFrame {
+public class MPresentacion extends javax.swing.JInternalFrame {
 
     String accion = "";
 
@@ -38,7 +38,7 @@ public class MPresentacion extends javax.swing.JFrame {
         initComponents();
         obtenerUltimoIdpre();
         actualizarBusquedapre();
-        this.setLocationRelativeTo(null);
+      //  this.setLocationRelativeTo(null);
         activarBotonespre(true);
     }
 
