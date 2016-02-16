@@ -86,7 +86,7 @@ public abstract class BDProducto {
     public static Producto buscarProducto(int id, Producto p) throws SQLException {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("select descripcion,proveedor,id_medida,id_presentacion,ubicacion,nota,catidadminima from producto where codigo = ?");
+        ps = cnn.prepareStatement("select descripcion,proveedor,id_medida,id_presentacion,ubicacion,nota,catidadminima,foto from producto where codigo = ?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
@@ -99,6 +99,7 @@ public abstract class BDProducto {
             p.setUbicacion(rs.getString("ubicacion"));
             p.setNota(rs.getString("nota"));
             p.setCantidadminima(rs.getInt("cantidadminima"));
+            p.setFoto((FileInputStream) rs.getBinaryStream("foto"));
           //  p.setId_Medida(rs.getInt("id_medida"));
             //p.setId_Presentacion(rs.getInt("id_presentacion"));     
         }
