@@ -56,8 +56,8 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         DESCARGAPRO = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        CONSULTAPN = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        CONSULTAPN = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -70,7 +70,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         setMaximizedBounds(getMaximizedBounds());
         setResizable(false);
 
-        jDesktopPane1.setBackground(new java.awt.Color(229, 229, 229));
+        jDesktopPane1.setBackground(new java.awt.Color(153, 204, 255));
 
         jInternalFrame1.setVisible(false);
 
@@ -238,14 +238,8 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu2.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu2.setPreferredSize(new java.awt.Dimension(110, 19));
 
-        CONSULTAPN.setText("PRODUCTOS POR P/N");
-        CONSULTAPN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CONSULTAPNActionPerformed(evt);
-            }
-        });
-        jMenu2.add(CONSULTAPN);
-
+        jMenuItem10.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem10.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem10.setText("UBICACION PRODUCTO");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,6 +247,14 @@ public class PrincipalInventario extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem10);
+
+        CONSULTAPN.setText("PRODUCTOS POR P/N");
+        CONSULTAPN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CONSULTAPNActionPerformed(evt);
+            }
+        });
+        jMenu2.add(CONSULTAPN);
 
         jMenuItem11.setText("PRODUCTOS A VENCER");
         jMenu2.add(jMenuItem11);
@@ -338,8 +340,12 @@ public class PrincipalInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_familiasActionPerformed
 
     private void EDITARPROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITARPROActionPerformed
-        EditProducto frmMCat = new EditProducto();
-        frmMCat.setVisible(true);
+        EditProducto EP = new EditProducto();
+        jDesktopPane1.add(EP); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = EP.getSize();
+        EP.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        EP.show();
     }//GEN-LAST:event_EDITARPROActionPerformed
 
     private void DESCARGAPROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DESCARGAPROActionPerformed
@@ -352,8 +358,12 @@ public class PrincipalInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_DESCARGAPROActionPerformed
 
     private void CARGAPROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CARGAPROActionPerformed
-        CargarProductos frmMCat = new CargarProductos();
-        frmMCat.setVisible(true);
+       CargarProductos CP = new CargarProductos();
+        jDesktopPane1.add(CP); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = CP.getSize();
+        CP.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        CP.show();
     }//GEN-LAST:event_CARGAPROActionPerformed
 
     private void CONSULTAPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CONSULTAPNActionPerformed

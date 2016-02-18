@@ -104,7 +104,7 @@ public class MUnidad_Medida extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(0, 204, 255));
+        setBackground(new java.awt.Color(153, 204, 255));
         setClosable(true);
         setForeground(java.awt.Color.white);
         setTitle("UNIDAD DE MEDIDA");

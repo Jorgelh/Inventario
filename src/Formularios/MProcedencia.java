@@ -102,7 +102,7 @@ public void obtenerUltimoIdpro() {
         jLabel2 = new javax.swing.JLabel();
         txtIdpro = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(0, 204, 255));
+        setBackground(new java.awt.Color(153, 204, 255));
         setClosable(true);
         setTitle("Procedencia de Material");
         setAutoscrolls(true);

@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jluis
  */
-public class CargarProductos extends javax.swing.JFrame {
+public class CargarProductos extends javax.swing.JInternalFrame {
 
     int Enviacodigo;
     int bodega = 2;
@@ -146,7 +146,7 @@ public class CargarProductos extends javax.swing.JFrame {
         txtPO = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtfechavenci = new com.toedter.calendar.JDateChooser();
-        ComboBoxBodega = new javax.swing.JComboBox<>();
+        ComboBoxBodega = new javax.swing.JComboBox<String>();
         jLabel17 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         txtEmpleado = new javax.swing.JTextField();
@@ -161,9 +161,10 @@ public class CargarProductos extends javax.swing.JFrame {
         Bcancelar = new javax.swing.JButton();
         txtCodigo = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(120, 197, 252));
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS DE INGRESO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14)))); // NOI18N
 
@@ -314,7 +315,7 @@ public class CargarProductos extends javax.swing.JFrame {
         txtfechavenci.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         ComboBoxBodega.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
+        ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
         ComboBoxBodega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboBoxBodegaActionPerformed(evt);

@@ -157,7 +157,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
-        jPanel1.setBackground(new java.awt.Color(120, 197, 252));
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         TxCodigo.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N

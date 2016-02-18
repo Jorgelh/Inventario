@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author jluis
  */
-public class EditProducto extends javax.swing.JFrame {
+public class EditProducto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form EditProducto
@@ -87,7 +87,7 @@ public class EditProducto extends javax.swing.JFrame {
         setLocation(new java.awt.Point(350, 150));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(120, 197, 252));
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Codigo");

@@ -101,7 +101,7 @@ public class MPresentacion extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(0, 204, 255));
+        setBackground(new java.awt.Color(153, 204, 255));
         setClosable(true);
         setTitle("PRESENTACION DE PRODUCTO");
 

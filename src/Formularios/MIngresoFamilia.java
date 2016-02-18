@@ -99,7 +99,7 @@ public class MIngresoFamilia extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtFMedida = new javax.swing.JTable();
 
-        setBackground(new java.awt.Color(0, 204, 255));
+        setBackground(new java.awt.Color(153, 204, 255));
         setClosable(true);
         setTitle("INGRESO DE FAMILIAS");
 
