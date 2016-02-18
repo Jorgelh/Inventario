@@ -102,8 +102,10 @@ public void obtenerUltimoIdpro() {
         jLabel2 = new javax.swing.JLabel();
         txtIdpro = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 204, 255));
+        setClosable(true);
         setTitle("Procedencia de Material");
+        setAutoscrolls(true);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 

@@ -21,7 +21,7 @@ import javax.swing.JTextField;
  *
  * @author Jorge Luis
  */
-public class Cproducto extends javax.swing.JFrame {
+public class Cproducto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Cproducto
@@ -77,7 +77,7 @@ public class Cproducto extends javax.swing.JFrame {
         txtcodigo = new javax.swing.JTextField();
         BotoNuevo = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Producto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24))); // NOI18N
 

@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jluis
  */
-public class DescargaProducto extends javax.swing.JFrame {
+public class DescargaProducto extends javax.swing.JInternalFrame {
 
         DefaultTableModel temp;
 
@@ -155,8 +155,7 @@ public class DescargaProducto extends javax.swing.JFrame {
         txttotalBodeguita = new javax.swing.JTextField();
         txtSumas = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setLocation(new java.awt.Point(250, 75));
+        setClosable(true);
 
         jPanel1.setBackground(new java.awt.Color(120, 197, 252));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

@@ -7,6 +7,9 @@ package Formularios;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import Consultas.*;
+import com.sun.org.apache.bcel.internal.generic.CPInstruction;
+import java.awt.Color;
 
 /**
  *
@@ -18,9 +21,10 @@ public class PrincipalInventario extends javax.swing.JFrame {
      * Creates new form PrincipalInventario
      */
     public PrincipalInventario() {
-
+      Color b=new Color(0,150,255);
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+        menubar.setForeground(Color.GREEN);
 
     }
 
@@ -38,7 +42,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menubar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         NUEVOPRO = new javax.swing.JMenuItem();
@@ -66,7 +70,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         setMaximizedBounds(getMaximizedBounds());
         setResizable(false);
 
-        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jDesktopPane1.setBackground(new java.awt.Color(229, 229, 229));
 
         jInternalFrame1.setVisible(false);
 
@@ -111,13 +115,13 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenuBar1.setFont(new java.awt.Font("Eras Bold ITC", 0, 18)); // NOI18N
-        jMenuBar1.setPreferredSize(new java.awt.Dimension(109, 40));
-        jMenuBar1.setRequestFocusEnabled(false);
+        menubar.setBorder(null);
+        menubar.setBorderPainted(false);
+        menubar.setFont(new java.awt.Font("Eras Bold ITC", 0, 18)); // NOI18N
+        menubar.setPreferredSize(new java.awt.Dimension(109, 40));
+        menubar.setRequestFocusEnabled(false);
 
-        jMenu1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu1.setBorder(null);
         jMenu1.setForeground(new java.awt.Color(0, 51, 255));
         jMenu1.setText("INGRESOS");
         jMenu1.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
@@ -187,6 +191,8 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu6.add(unidadmedida);
 
+        presentacion.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        presentacion.setForeground(new java.awt.Color(0, 51, 255));
         presentacion.setText("PRESENTACION");
         presentacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,6 +201,8 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu6.add(presentacion);
 
+        PROCEDENCIA.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        PROCEDENCIA.setForeground(new java.awt.Color(0, 51, 255));
         PROCEDENCIA.setText("PROCEDENCIA");
         PROCEDENCIA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,7 +213,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
         jMenu1.add(jMenu6);
 
-        jMenuBar1.add(jMenu1);
+        menubar.add(jMenu1);
 
         jMenu3.setForeground(new java.awt.Color(0, 51, 255));
         jMenu3.setText("  DESCARGAS");
@@ -223,7 +231,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu3.add(DESCARGAPRO);
 
-        jMenuBar1.add(jMenu3);
+        menubar.add(jMenu3);
 
         jMenu2.setForeground(new java.awt.Color(0, 51, 255));
         jMenu2.setText("  CONSULTAS");
@@ -239,6 +247,11 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu2.add(CONSULTAPN);
 
         jMenuItem10.setText("UBICACION PRODUCTO");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem10);
 
         jMenuItem11.setText("PRODUCTOS A VENCER");
@@ -247,13 +260,13 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem12.setText("PRODUCTOS VENCIDOS");
         jMenu2.add(jMenuItem12);
 
-        jMenuBar1.add(jMenu2);
+        menubar.add(jMenu2);
 
         jMenu4.setForeground(new java.awt.Color(0, 51, 255));
         jMenu4.setText("   REPORTES");
         jMenu4.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(110, 19));
-        jMenuBar1.add(jMenu4);
+        menubar.add(jMenu4);
 
         jMenu5.setForeground(new java.awt.Color(0, 51, 255));
         jMenu5.setText("       SALIR");
@@ -276,15 +289,15 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu5);
+        menubar.add(jMenu5);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menubar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,8 +343,12 @@ public class PrincipalInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_EDITARPROActionPerformed
 
     private void DESCARGAPROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DESCARGAPROActionPerformed
-        DescargaProducto frmMCat = new DescargaProducto();
-        frmMCat.setVisible(true);
+        DescargaProducto DP = new DescargaProducto();
+        jDesktopPane1.add(DP); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = DP.getSize();
+        DP.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        DP.show();
     }//GEN-LAST:event_DESCARGAPROActionPerformed
 
     private void CARGAPROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CARGAPROActionPerformed
@@ -376,6 +393,18 @@ public class PrincipalInventario extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_PROCEDENCIAActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+                   
+             Cproducto CP = new Cproducto();
+        jDesktopPane1.add(CP); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = CP.getSize();
+        CP.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        CP.show();
+
+
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     
     public static void main(String args[]) {
@@ -428,13 +457,13 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem5;
     private Formularios.MProcedencia mProcedencia1;
     private Formularios.MProcedencia mProcedencia2;
+    private javax.swing.JMenuBar menubar;
     private javax.swing.JMenuItem presentacion;
     private javax.swing.JMenuItem unidadmedida;
     // End of variables declaration//GEN-END:variables
