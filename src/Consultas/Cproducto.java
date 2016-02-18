@@ -262,7 +262,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
             ResultSet rs =stmt.executeQuery("select foto,descripcion,proveedor,ubicacion,nota,cantidadminima from producto where codigo ="+cod);
             while (rs.next())
             {
-                is = rs.getBinaryStream(1);
+                is = rs.getBinaryStream("foto");
                 BufferedImage bi = ImageIO.read(is);
                 foto = new ImageIcon(bi);
                 Image img = foto.getImage();

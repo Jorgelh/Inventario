@@ -86,7 +86,7 @@ public abstract class BDProducto {
     public static Producto buscarProducto(int id, Producto p) throws SQLException {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("select descripcion,proveedor,id_medida,id_presentacion,ubicacion,nota,catidadminima,foto from producto where codigo = ?");
+        ps = cnn.prepareStatement("select descripcion,proveedor,id_medida,id_presentacion,ubicacion,nota,cantidadminima,foto from producto where codigo = ?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
@@ -111,12 +111,13 @@ public abstract class BDProducto {
     public static boolean actualizarProducto(Producto p) throws SQLException{
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("Update producto set descripcion=?,proveedor=?,ubicacion=?,nota=?,cantidadminima=? where codigo=" +p.getCodigo());
+        ps = cnn.prepareStatement("Update producto set descripcion=?,proveedor=?,ubicacion=?,nota=?,foto=?,cantidadminima=? where codigo=" +p.getCodigo());
         ps.setString(1, p.getDescripcion());
         ps.setString(2, p.getProveedor());
         ps.setString(3, p.getUbicacion());
         ps.setString(4, p.getNota());
         ps.setInt(5, p.getCantidadminima());
+        ps.setBinaryStream(6, p.getFoto(),p.getLongitudBytes());
         int rowsUpdated = ps.executeUpdate();
         cnn.close();
         ps.close();

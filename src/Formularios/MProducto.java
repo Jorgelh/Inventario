@@ -220,6 +220,7 @@ public class MProducto extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 204, 255));
+        setClosable(true);
         setTitle("INGRESO DE PRODUCTOS");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -783,8 +784,7 @@ public class MProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TxtNotaFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         //limpiarCajasProducto();
-        dispose();
+         limpiarCajasProducto();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtCantidadMinimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadMinimaActionPerformed

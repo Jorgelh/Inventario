@@ -70,7 +70,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         setMaximizedBounds(getMaximizedBounds());
         setResizable(false);
 
-        jDesktopPane1.setBackground(new java.awt.Color(153, 204, 255));
+        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         jInternalFrame1.setVisible(false);
 
