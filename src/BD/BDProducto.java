@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import Class.Producto;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -86,7 +87,7 @@ public abstract class BDProducto {
     public static Producto buscarProducto(int id, Producto p) throws SQLException {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("select descripcion,proveedor,id_medida,id_presentacion,ubicacion,nota,cantidadminima,foto from producto where codigo = ?");
+        ps = cnn.prepareStatement("select descripcion,proveedor,id_medida,id_presentacion,ubicacion,nota,cantidadminima from producto where codigo = ?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
@@ -99,7 +100,6 @@ public abstract class BDProducto {
             p.setUbicacion(rs.getString("ubicacion"));
             p.setNota(rs.getString("nota"));
             p.setCantidadminima(rs.getInt("cantidadminima"));
-            p.setFoto((FileInputStream) rs.getBinaryStream("foto"));
           //  p.setId_Medida(rs.getInt("id_medida"));
             //p.setId_Presentacion(rs.getInt("id_presentacion"));     
         }
@@ -116,8 +116,9 @@ public abstract class BDProducto {
         ps.setString(2, p.getProveedor());
         ps.setString(3, p.getUbicacion());
         ps.setString(4, p.getNota());
-        ps.setInt(5, p.getCantidadminima());
-        ps.setBinaryStream(6, p.getFoto(),p.getLongitudBytes());
+        ps.setBinaryStream(5, p.getFoto(),p.getLongitudBytes());
+        ps.setInt(6, p.getCantidadminima());
+
         int rowsUpdated = ps.executeUpdate();
         cnn.close();
         ps.close();

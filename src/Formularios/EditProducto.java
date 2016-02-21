@@ -15,12 +15,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import sun.print.PSPrinterJob;
 
 /**
  *
@@ -48,6 +50,10 @@ public class EditProducto extends javax.swing.JInternalFrame {
         txtNota.setText("");
         txtUbicacion.setText("");
         txtProveedor.setText("");
+        txtCanti.setText("");
+        LabelFoto.setIcon(null);
+
+        
 
     }
 
@@ -206,7 +212,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
                 .addComponent(BmodificarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
                 .addComponent(BGuardarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BCancelarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -279,12 +285,13 @@ public class EditProducto extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtCodigoBus, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                        .addComponent(txtCodigoBus, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 409, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,15 +334,22 @@ public class EditProducto extends javax.swing.JInternalFrame {
                 txtProveedor.setText(p.getProveedor());
                 txtUbicacion.setText(p.getUbicacion());
                 txtCanti.setText(String.valueOf(p.getCantidadminima()));
-                is = p.getFoto();
+                String sql="select foto from producto where codigo = "+txtCodigoBus.getText();
+                ImageIcon foto;
+                InputStream is;
+                Connection cnn = BD.getConnection();
+                PreparedStatement ps= null;
+                ps = cnn.prepareStatement(sql);
+                ResultSet r = ps.executeQuery();
+                while(r.next()){
+                is = r.getBinaryStream(1);
                 BufferedImage bi = ImageIO.read(is);
-                foto1 = new ImageIcon(bi);
-                Image img = foto1.getImage();
-                Image newimg = img.getScaledInstance (200,200,java.awt.Image.SCALE_SMOOTH);
-                ImageIcon newicon = new ImageIcon(newimg);
+                foto = new ImageIcon(bi);
+                Image img = foto.getImage();
+                Image newimg = img.getScaledInstance(353, 300, java.awt.Image.SCALE_SMOOTH);
+                ImageIcon newicon = new ImageIcon(newimg);   
                 LabelFoto.setIcon(newicon);
-                
-
+            }     
             } else {
                 JOptionPane.showMessageDialog(null, "Producto " + txtCodigoBus.getText() + " No Exixte");
                 limpiarTextos();
