@@ -96,6 +96,8 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
        TxCodigo.requestFocus();
        txtNoingreso.setText("");
        txtSumas.setText("");
+       txtentregado.setText("");
+       txtNota.setText("");
     }
     
      public void  activartxt (boolean b){
@@ -559,7 +561,9 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                      d.setCodigo(Integer.parseInt(TxCodigo.getText()));
                      BDDescargaProducto.insertarDescarga(d);
                      JOptionPane.showMessageDialog(null, "Descarga Realizada...");
-                  
+                      limpiartabla15();
+                      limpiarlabel();
+                      activartxt(false);                  
                   
              } catch (Exception e) {
                  

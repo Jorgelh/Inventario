@@ -5,7 +5,7 @@
  */
 package BD;
 
-import Class.CargaP;
+import Class.*;
 import BD.BD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.text.SimpleDateFormat;
 import com.sun.corba.se.spi.orb.ParserData;
+import java.util.Date;
 
 
 

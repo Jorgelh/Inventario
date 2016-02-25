@@ -256,10 +256,20 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu2.add(CONSULTAPN);
 
-        jMenuItem11.setText("PRODUCTOS A VENCER");
+        jMenuItem11.setText("PRODUCTOS FECHA INGRESO");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem11);
 
-        jMenuItem12.setText("PRODUCTOS VENCIDOS");
+        jMenuItem12.setText("PRODUCTOS FECHA DESCARGA");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem12);
 
         menubar.add(jMenu2);
@@ -367,6 +377,17 @@ public class PrincipalInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_CARGAPROActionPerformed
 
     private void CONSULTAPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CONSULTAPNActionPerformed
+
+        ConsultaPN M = new ConsultaPN();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+
+
+
+
     }//GEN-LAST:event_CONSULTAPNActionPerformed
 
     private void unidadmedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadmedidaActionPerformed
@@ -415,6 +436,27 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+       
+        CDesporFecha M = new CDesporFecha();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+        
+        
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        CIngresoFecha M = new CIngresoFecha();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     
     public static void main(String args[]) {
