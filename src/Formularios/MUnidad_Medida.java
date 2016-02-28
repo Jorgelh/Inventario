@@ -285,6 +285,7 @@ public class MUnidad_Medida extends javax.swing.JInternalFrame {
        if (txtId.getText().compareTo("")!=0 && txtDescripcion.getText().compareTo("")!=0){
            try {
                Medida m = new Medida();
+               m.setId_medidad(Integer.parseInt(txtId.getText()));
                m.setDescripcion(txtDescripcion.getText().toUpperCase());
                BDMedida.insertarMedida(m);
                JOptionPane.showMessageDialog(null,"Registro Guardado");

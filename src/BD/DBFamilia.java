@@ -22,8 +22,9 @@ public abstract class DBFamilia {
     public static void insertarFamilia (Familia fam) throws SQLException{
     Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-    ps= cnn.prepareStatement("insert into familia (fam_id,Descripcion) Values(familia1.nextval,?)");
-    ps.setString(1, fam.getDescripcion());
+    ps= cnn.prepareStatement("insert into familia (fam_id,Descripcion) Values(?,?)");
+    ps.setInt(1, fam.getFam_id());
+    ps.setString(2, fam.getDescripcion());
     ps.executeUpdate();
     cnn.close();
     ps.close();
@@ -55,7 +56,6 @@ public abstract class DBFamilia {
     public static Familia buscarFamilia(int id, Familia p) throws SQLException {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        //ps = cnn.prepareStatement("select cProNombre,nProvCodigo,nProCantidad,nProPrecioCompra,nProPrecioVenta,nProUtilidad,cProDescripcion,nCatCodigo,cProMarca,cProEstado from producto where nProCodigo=?");
         ps = cnn.prepareStatement("select descripcion from familia where fam_id=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();

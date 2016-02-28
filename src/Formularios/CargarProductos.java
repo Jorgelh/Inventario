@@ -31,7 +31,7 @@ import javax.swing.table.DefaultTableModel;
 public class CargarProductos extends javax.swing.JInternalFrame {
 
     int Enviacodigo;
-    int bodega = 2;
+    int bodega;
     DefaultTableModel temp;
 
     /**
@@ -276,10 +276,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
 
         tablaIngreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "No Ingreso", "P/N", "Fecha Ingreso", "P.O", "Cantidad"
@@ -430,23 +427,22 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEmpleado)
+                    .addComponent(txtEmpleado, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addComponent(txtCantidad)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3)
-                            .addComponent(txtCantidad)
+                            .addComponent(jLabel12)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(BagregarProdu)
                                 .addGap(18, 18, 18)
-                                .addComponent(Bcancelar)))))
+                                .addComponent(Bcancelar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -603,7 +599,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
 
         Enviacodigo = Integer.parseInt(txtCodigo.getText());
-        //actulizartabla();
+       
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -628,7 +624,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     private void ComboBoxBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxBodegaActionPerformed
 
         if (ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
-            int bodega = 1;
+             bodega = 1;
+        }else if (ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")){
+             bodega = 2;
         }
     }//GEN-LAST:event_ComboBoxBodegaActionPerformed
 

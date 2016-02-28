@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -45,12 +46,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
      
      
      }
-    
-   
-    
-    
-    
-    
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,22 +113,21 @@ public class Cproducto extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(desc, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nota, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(ubica, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(prove, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(canti, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(desc, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ubica, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nota, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(prove, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(canti, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -250,8 +245,55 @@ public class Cproducto extends javax.swing.JInternalFrame {
 
     private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
 
+       
+       
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from producto where codigo=" + txtcodigo.getText());
+            rs.next();
+            int codigo = rs.getInt("count(codigo)");
+            if (codigo > 0) {
+                
+                consulta();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "PRODUCTO NO EXITES...");
+                txtcodigo.setText("");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Editar Error" + e);
+        }
         
-        int cod =Integer.parseInt(txtcodigo.getText());
+
+
+
+    }//GEN-LAST:event_txtcodigoActionPerformed
+
+    private void BotoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotoNuevoActionPerformed
+             limpiartxt();
+    }//GEN-LAST:event_BotoNuevoActionPerformed
+
+    private void BotoNuevoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BotoNuevoKeyPressed
+              limpiartxt();
+    }//GEN-LAST:event_BotoNuevoKeyPressed
+
+    private void txtcodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyTyped
+           
+        
+           char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtcodigoKeyTyped
+
+    
+    public void consulta(){
+    
+    
+    int cod =Integer.parseInt(txtcodigo.getText());
         ImageIcon foto;
         InputStream is;
         
@@ -280,29 +322,10 @@ public class Cproducto extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println("Hola "+e);
         }
-
-
-
-    }//GEN-LAST:event_txtcodigoActionPerformed
-
-    private void BotoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotoNuevoActionPerformed
-             limpiartxt();
-    }//GEN-LAST:event_BotoNuevoActionPerformed
-
-    private void BotoNuevoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BotoNuevoKeyPressed
-              limpiartxt();
-    }//GEN-LAST:event_BotoNuevoKeyPressed
-
-    private void txtcodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyTyped
-           
-        
-           char c = evt.getKeyChar();
-        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
-            evt.consume();
-        }
-
-    }//GEN-LAST:event_txtcodigoKeyTyped
-
+    
+   
+    }
+    
     /**
      * @param args the command line arguments
      */
