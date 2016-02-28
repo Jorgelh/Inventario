@@ -8,9 +8,13 @@ package Consultas;
 import BD.*;
 import Class.*;
 import com.toedter.calendar.JDateChooser;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.bind.DatatypeConverter;
 import oracle.net.aso.f;
@@ -187,10 +191,32 @@ public class CDesporFecha extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_NbusquedaActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        
+        Date date = txtFecha.getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        String fecha1 = sdf.format(date);
+    
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select COUNT(id_descarga) from descarga where fechades='"+ fecha1 + "'");
+            rs.next();
+            int codigo = rs.getInt("count(id_descarga)");
+            if (codigo > 0) {
+                actualizarTablaFecha();
+                txtFecha.setEnabled(false);
+                Nbusqueda.requestFocus(); 
 
-         actualizarTablaFecha();
-        txtFecha.setEnabled(false);
-        Nbusqueda.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(null, "NO TIENE DESCARGAS DE FECHA SELECCIONADA...");
+                txtFecha.setDate(null);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Editar Error" + e);
+        }
+                 
+         
         
 
     }//GEN-LAST:event_buscarActionPerformed

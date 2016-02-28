@@ -283,6 +283,7 @@ public class MIngresoFamilia extends javax.swing.JInternalFrame {
                 try {
                     Familia m = new Familia();
                     m.setDescripcion(txtFDescripcion.getText().toUpperCase());
+                    m.setFam_id(Integer.parseInt(txtFId.getText()));
                     DBFamilia.insertarFamilia(m);
                     JOptionPane.showMessageDialog(null,"Registro Guardado");
 

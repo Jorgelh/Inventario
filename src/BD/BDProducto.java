@@ -33,7 +33,7 @@ public abstract class BDProducto {
 
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("insert into Producto (codigo,fam_id,id_presentacion,id_medida,id_proce,Descripcion,proveedor,nota,ubicacion,bodega,foto,cantidadminima)values(?,?,?,?,?,?,?,?,?,?,?,?)");
+        ps = cnn.prepareStatement("insert into Producto (codigo,fam_id,id_presentacion,id_medida,id_proce,Descripcion,proveedor,nota,ubicacion,foto,cantidadminima)values(?,?,?,?,?,?,?,?,?,?,?)");
         ps.setInt(1, p.getCodigo());
         ps.setInt(2, p.getFam_Id());
         ps.setInt(3, p.getId_Presentacion());
@@ -43,9 +43,8 @@ public abstract class BDProducto {
         ps.setString(7, p.getProveedor());
         ps.setString(8, p.getNota());
         ps.setString(9, p.getUbicacion());
-        ps.setInt(10, p.getBodega());
+        ps.setBinaryStream(10, p.getFoto(),p.getLongitudBytes());
         ps.setInt(11, p.getCantidadminima());
-        ps.setBinaryStream(11, p.getFoto(),p.getLongitudBytes());
         ps.executeUpdate();
         cnn.close();
         ps.close();

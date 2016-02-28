@@ -46,7 +46,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         NUEVOPRO = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         CARGAPRO = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         EDITARPRO = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         familias = new javax.swing.JMenuItem();
@@ -136,6 +138,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
         NUEVOPRO.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         NUEVOPRO.setForeground(new java.awt.Color(0, 51, 255));
+        NUEVOPRO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
         NUEVOPRO.setText("NUEVO PRODUCTOS");
         NUEVOPRO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,9 +146,11 @@ public class PrincipalInventario extends javax.swing.JFrame {
             }
         });
         jMenu7.add(NUEVOPRO);
+        jMenu7.add(jSeparator1);
 
         CARGAPRO.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         CARGAPRO.setForeground(new java.awt.Color(0, 51, 255));
+        CARGAPRO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Next.png"))); // NOI18N
         CARGAPRO.setText("CARGAR PRODUCTOS");
         CARGAPRO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,9 +158,11 @@ public class PrincipalInventario extends javax.swing.JFrame {
             }
         });
         jMenu7.add(CARGAPRO);
+        jMenu7.add(jSeparator2);
 
         EDITARPRO.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         EDITARPRO.setForeground(new java.awt.Color(0, 51, 255));
+        EDITARPRO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit2.png"))); // NOI18N
         EDITARPRO.setText("EDITAR PRODUCTO");
         EDITARPRO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,6 +229,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
         DESCARGAPRO.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         DESCARGAPRO.setForeground(new java.awt.Color(0, 51, 255));
+        DESCARGAPRO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Download.png"))); // NOI18N
         DESCARGAPRO.setText("Descarga de Producto");
         DESCARGAPRO.setPreferredSize(new java.awt.Dimension(197, 35));
         DESCARGAPRO.addActionListener(new java.awt.event.ActionListener() {
@@ -240,6 +248,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
         jMenuItem10.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem10.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
         jMenuItem10.setText("UBICACION PRODUCTO");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,6 +257,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem10);
 
+        CONSULTAPN.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        CONSULTAPN.setForeground(new java.awt.Color(0, 51, 255));
+        CONSULTAPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
         CONSULTAPN.setText("PRODUCTOS POR P/N");
         CONSULTAPN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,6 +268,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu2.add(CONSULTAPN);
 
+        jMenuItem11.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem11.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
         jMenuItem11.setText("PRODUCTOS FECHA INGRESO");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,6 +279,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem11);
 
+        jMenuItem12.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem12.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
         jMenuItem12.setText("PRODUCTOS FECHA DESCARGA");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,6 +310,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
         jMenuItem5.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem5.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jMenuItem5.setText("SALIR");
         jMenuItem5.setPreferredSize(new java.awt.Dimension(85, 35));
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -513,6 +532,8 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private Formularios.MProcedencia mProcedencia1;
     private Formularios.MProcedencia mProcedencia2;
     private javax.swing.JMenuBar menubar;

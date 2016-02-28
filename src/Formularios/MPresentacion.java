@@ -297,6 +297,7 @@ public class MPresentacion extends javax.swing.JInternalFrame {
                 try {
                     Presentacion p = new Presentacion();
                     p.setDescripcion(txtDescripcion.getText().toUpperCase());
+                    p.setId_presentacion(Integer.parseInt(txtId.getText()));
                     BDPresentacion.insertarPresentacion(p);
                     JOptionPane.showMessageDialog(null, "Registro Guardado");
 

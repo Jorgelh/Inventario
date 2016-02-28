@@ -8,9 +8,13 @@ package Consultas;
 import BD.*;
 import Class.*;
 import com.toedter.calendar.JDateChooser;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.bind.DatatypeConverter;
 import oracle.net.aso.f;
@@ -187,9 +191,30 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
 
-         actualizarTablaFecha();
-        txtFecha.setEnabled(false);
-        Nbusqueda.requestFocus();
+        Date date = txtFecha.getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        String fecha1 = sdf.format(date);
+    
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select COUNT(id_ingreso) from ingreso where fechasistema='"+ fecha1 + "'");
+            rs.next();
+            int codigo = rs.getInt("count(id_ingreso)");
+            if (codigo > 0) {
+                actualizarTablaFecha();
+                txtFecha.setEnabled(false);
+                Nbusqueda.requestFocus(); 
+
+            } else {
+                JOptionPane.showMessageDialog(null, "NO TIENE INGRESOS DE FECHA SELECCIONADA...");
+                txtFecha.setDate(null);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Editar Error" + e);
+        }
+               
         
 
     }//GEN-LAST:event_buscarActionPerformed

@@ -22,8 +22,9 @@ public abstract class BDMedida {
     public static void insertarMedida (Medida m) throws SQLException{
     Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-    ps= cnn.prepareStatement("insert into unidad_medida (Id_medida,Descripcion) Values(medida.nextval,?)");
-    ps.setString(1, m.getDescripcion());
+    ps= cnn.prepareStatement("insert into unidad_medida (Id_medida,Descripcion) Values(?,?)");
+    ps.setInt(1,m.getId_medidad());
+    ps.setString(2, m.getDescripcion());
     ps.executeUpdate();
     cnn.close();
     ps.close();

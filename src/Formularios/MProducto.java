@@ -25,6 +25,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -32,6 +33,7 @@ import javax.swing.JOptionPane;
  */
 public class MProducto extends javax.swing.JInternalFrame {
 
+    DefaultTableModel temp;
     int cfamilia = 0;
     int cproce = 0;
     int cpresentacion = 0;
@@ -49,7 +51,7 @@ public class MProducto extends javax.swing.JInternalFrame {
     public MProducto() {
         initComponents();
         limpiarCajasProducto();
-        ButtonGuardar.setEnabled(false);
+        //ButtonGuardar.setEnabled(false);
         
         
 
@@ -118,9 +120,7 @@ public class MProducto extends javax.swing.JInternalFrame {
         
         
     }
-    
-    
-    
+       
     public void obtenerUltimoId() {
         try {
             Connection con = BD.getConnection();
@@ -166,16 +166,30 @@ public class MProducto extends javax.swing.JInternalFrame {
         ComboProce.setSelectedItem("Seleccionar...");
         ComboMedida.setSelectedItem("Seleccionar...");
         ComboPresentacion.setSelectedItem("Seleccionar...");
-        comboBodega.setSelectedItem("Seleccionar...");
         TxtCodigo.setText("");
         TxtDescripcion.setText("");
         TxtProveedor.setText(""); 
         TxtUbicacion.setText("");
         TxtNota.setText("");
         LabelFoto.setIcon(null);
+        txtCantidadMinima.setText("");
            
     }
         
+        public void limpiartabla15() {
+
+        try {
+            temp = (DefaultTableModel) jtproducto.getModel();
+            int a = temp.getRowCount();
+            for (int i = 0; i < a; i++) {
+                temp.removeRow(i);
+                i--;
+            }
+        } catch (Exception e) {
+
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -205,8 +219,6 @@ public class MProducto extends javax.swing.JInternalFrame {
         TxtUbicacion = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         LabelFoto = new javax.swing.JLabel();
-        comboBodega = new javax.swing.JComboBox<String>();
-        jLabel1 = new javax.swing.JLabel();
         ButtonCargarFoto = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         txtCantidadMinima = new javax.swing.JTextField();
@@ -314,7 +326,6 @@ public class MProducto extends javax.swing.JInternalFrame {
 
         ComboPresentacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ComboPresentacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
-        ComboPresentacion.setNextFocusableComponent(comboBodega);
         ComboPresentacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboPresentacionActionPerformed(evt);
@@ -341,19 +352,9 @@ public class MProducto extends javax.swing.JInternalFrame {
         LabelFoto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         LabelFoto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        comboBodega.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboBodega.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "Bodega", "Bodeguita" }));
-        comboBodega.setNextFocusableComponent(TxtUbicacion);
-        comboBodega.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBodegaActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Bodega");
-
-        ButtonCargarFoto.setText("Cargar Foto");
+        ButtonCargarFoto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ButtonCargarFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/open-file-icon.png"))); // NOI18N
+        ButtonCargarFoto.setText(" Cargar Foto");
         ButtonCargarFoto.setNextFocusableComponent(ButtonGuardar);
         ButtonCargarFoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -393,49 +394,45 @@ public class MProducto extends javax.swing.JInternalFrame {
                         .addComponent(Combofamilia, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(TxtCodigo, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(jLabel8))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel9)
-                    .addComponent(TxtUbicacion)
-                    .addComponent(LabelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                    .addComponent(comboBodega, 0, 295, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel11)
-                    .addComponent(txtCantidadMinima))
-                .addGap(0, 33, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButtonCargarFoto)
-                .addGap(136, 136, 136))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel9)
+                            .addComponent(TxtUbicacion)
+                            .addComponent(LabelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                            .addComponent(jLabel11)
+                            .addComponent(txtCantidadMinima))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                        .addComponent(ButtonCargarFoto)
+                        .addGap(105, 105, 105))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Combofamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboProce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCantidadMinima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ComboProce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel11)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)
                         .addComponent(jLabel5)
@@ -448,26 +445,20 @@ public class MProducto extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(ComboMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel8)
-                        .addGap(12, 12, 12)
-                        .addComponent(ComboPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtCantidadMinima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(LabelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ButtonCargarFoto)
-                .addGap(6, 6, 6))
+                        .addComponent(ComboMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel8)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonCargarFoto))
+                .addGap(38, 38, 38))
         );
 
         jtproducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Descripcion", "Ubicacion", "Familia"
@@ -524,13 +515,12 @@ public class MProducto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(ButtonGuardar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel10)
+                        .addGap(0, 298, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(ButtonGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -664,8 +654,9 @@ public class MProducto extends javax.swing.JInternalFrame {
         if (TxtCodigo.getText().compareTo("")!=0 && TxtDescripcion.getText().compareTo("")!=0 && TxtUbicacion.getText().compareTo("")!=0 
             && TxtProveedor.getText().compareTo("")!=0 && !Combofamilia.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")
             && !ComboProce.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !ComboMedida.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")
-            && !ComboPresentacion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !comboBodega.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")
-            && txtCantidadMinima.getText().compareTo("") !=0)
+            && !ComboPresentacion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") 
+            && txtCantidadMinima.getText().compareTo("") !=0
+            /*&& LabelFoto.getText().compareTo("")!=0*/&& TxtNota.getText().compareTo("")!=0)
            {
                try {
                      Producto p = new Producto();
@@ -678,7 +669,6 @@ public class MProducto extends javax.swing.JInternalFrame {
                      p.setId_Medida(cmedida);
                      p.setId_Presentacion(cpresentacion);
                      p.setId_Proce(cproce);
-                     p.setBodega(bodega);
                      p.setFoto(foto);
                      p.setLongitudBytes(longitudBytes);                     
                      BDProducto.insertarProducto(p);
@@ -719,13 +709,6 @@ public class MProducto extends javax.swing.JInternalFrame {
     private void TxtCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtCodigoMouseClicked
 
     }//GEN-LAST:event_TxtCodigoMouseClicked
-
-    private void comboBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBodegaActionPerformed
-  
-        
-        
-       
-    }//GEN-LAST:event_comboBodegaActionPerformed
 
     private void ComboPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPresentacionActionPerformed
         try {
@@ -774,17 +757,18 @@ public class MProducto extends javax.swing.JInternalFrame {
 
     private void TxtNotaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TxtNotaFocusLost
       
-        if (TxtCodigo.getText().compareTo("")!=0 && TxtDescripcion.getText().compareTo("")!=0 && TxtUbicacion.getText().compareTo("")!=0 
+        /*if (TxtCodigo.getText().compareTo("")!=0 && TxtDescripcion.getText().compareTo("")!=0 && TxtUbicacion.getText().compareTo("")!=0 
             && TxtProveedor.getText().compareTo("")!=0 && !Combofamilia.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")
             && !ComboProce.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !ComboMedida.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")
             && !ComboPresentacion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !comboBodega.getSelectedItem().toString().equalsIgnoreCase("Seleccionar..."))
            {
                ButtonGuardar.setEnabled(true);
-           }
+           }*/
     }//GEN-LAST:event_TxtNotaFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          limpiarCajasProducto();
+         limpiartabla15();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtCantidadMinimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadMinimaActionPerformed
@@ -885,9 +869,7 @@ public class MProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea TxtNota;
     private javax.swing.JTextField TxtProveedor;
     private javax.swing.JTextField TxtUbicacion;
-    private javax.swing.JComboBox<String> comboBodega;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

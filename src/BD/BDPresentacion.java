@@ -22,8 +22,9 @@ public abstract class BDPresentacion {
     public static void insertarPresentacion (Presentacion med) throws SQLException{
     Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-    ps= cnn.prepareStatement("insert into presentacion (id_presentacion,Descripcion) Values(presentacion1.nextval,?)");
-    ps.setString(1, med.getDescripcion());
+    ps= cnn.prepareStatement("insert into presentacion (id_presentacion,Descripcion) Values(?,?)");
+    ps.setInt(1,med.getId_presentacion());
+    ps.setString(2, med.getDescripcion());
     ps.executeUpdate();
     cnn.close();
     ps.close();

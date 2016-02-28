@@ -25,14 +25,14 @@ public abstract class BDDescargaProducto {
     public static void insertarDescarga(Descarga ca)  throws SQLException{
         Connection cn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into descarga(id_descarga,id_ingreso,codigo,cantidad,entregadoa,nota,fechades) values (descarga1.nextval,?,?,?,?,?,sysdate)");
+        ps = cn.prepareStatement("insert into descarga(id_descarga,id_ingreso,codigo,cantidad,entregadoa,nota,fechades,fechasistema) values (descarga1.nextval,?,?,?,?,?,?,sysdate)");
         //ps.setInt(1, ca.getId_descarga());
         ps.setInt(1, ca.getId_ingreso());
         ps.setInt(2, ca.getCodigo());
         ps.setInt(3, ca.getCantidad());
         ps.setInt(4, ca.getEntregadoA());
         ps.setString(5, ca.getNota());
-        //ps.setDate(7, new java.sql.Date(ca.getFecha().getTime()));
+        ps.setDate(6, new java.sql.Date(ca.getFecha().getTime()));
         ps.executeUpdate();
         cn.close();
         ps.close();            

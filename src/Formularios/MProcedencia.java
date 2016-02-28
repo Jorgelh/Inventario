@@ -300,6 +300,7 @@ public void obtenerUltimoIdpro() {
                 try {
                     Procedencia m = new Procedencia();
                     m.setDescripcion(txtDescripcionpro.getText().toUpperCase());
+                    m.setId_proce(Integer.parseInt(txtIdpro.getText()));
                     BDprocedencia.insertarProcedencia(m);
                     JOptionPane.showMessageDialog(null,"Registro Guardado");
 
