@@ -41,11 +41,11 @@ public class Cproducto extends javax.swing.JInternalFrame {
       canti.setText("");
       ubica.setText("");
       lafoto.setIcon(null);
-      txtcodigo.requestFocus();
-      
-     
-     
+      lafoto.setText("");
+      txtcodigo.requestFocus(); 
+      txtcodigo.setEnabled(true);
      }
+     
      
     /**
      * This method is called from within the constructor to initialize the form.
@@ -245,6 +245,8 @@ public class Cproducto extends javax.swing.JInternalFrame {
 
     private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
 
+        
+        
        
        
         try {
@@ -256,6 +258,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
             if (codigo > 0) {
                 
                 consulta();
+                txtcodigo.setEnabled(false);
 
             } else {
                 JOptionPane.showMessageDialog(null, "PRODUCTO NO EXITES...");
@@ -273,6 +276,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
 
     private void BotoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotoNuevoActionPerformed
              limpiartxt();
+             
     }//GEN-LAST:event_BotoNuevoActionPerformed
 
     private void BotoNuevoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BotoNuevoKeyPressed
@@ -301,9 +305,15 @@ public class Cproducto extends javax.swing.JInternalFrame {
             
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery("select foto,descripcion,proveedor,ubicacion,nota,cantidadminima from producto where codigo ="+cod);
+            ResultSet rs =stmt.executeQuery("select descripcion,proveedor,ubicacion,nota,cantidadminima,foto from producto where codigo ="+cod);
+           
             while (rs.next())
             {
+                desc.setText(rs.getString("descripcion"));
+                prove.setText(rs.getString("proveedor"));
+                ubica.setText(rs.getString("ubicacion"));
+                nota.setText(rs.getString("nota"));
+                canti.setText(rs.getString("cantidadminima"));
                 is = rs.getBinaryStream("foto");
                 BufferedImage bi = ImageIO.read(is);
                 foto = new ImageIcon(bi);
@@ -311,16 +321,13 @@ public class Cproducto extends javax.swing.JInternalFrame {
                 Image newimg = img.getScaledInstance (400,300,java.awt.Image.SCALE_SMOOTH);
                 ImageIcon newicon = new ImageIcon(newimg);
                 lafoto.setIcon(newicon);
-                desc.setText(rs.getString("descripcion"));
-                prove.setText(rs.getString("proveedor"));
-                ubica.setText(rs.getString("ubicacion"));
-                nota.setText(rs.getString("nota"));
-                canti.setText(rs.getString("cantidadminima"));
+                
+                
             }
             con.close();  
             BotoNuevo.requestFocus();
         } catch (Exception e) {
-            System.out.println("Hola "+e);
+            lafoto.setText("NO FOTO");
         }
     
    
