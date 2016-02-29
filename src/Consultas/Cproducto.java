@@ -324,7 +324,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
         }
     
    
-    }
+    }  
     
     /**
      * @param args the command line arguments
