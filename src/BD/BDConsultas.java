@@ -124,5 +124,36 @@ public abstract class BDConsultas {
     
     
     
+    public static ArrayList<Producto> ListarNombre(String f) {
+
+        return consultanombreSQL("select codigo,descripcion,ubicacion,CANTIDAD,bodega from producto where descripcion like '"+f+"%'");
+
+    }
+
+    private static ArrayList<Producto> consultanombreSQL(String sql) {
+        ArrayList<Producto> list = new ArrayList<Producto>();
+        Connection cn = BD.getConnection();
+        try {
+            Producto c;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                c = new Producto();
+                c.setCodigo(rs.getInt("codigo"));
+                c.setDescripcion(rs.getString("descripcion")); 
+                c.setUbicacion(rs.getString("ubicacion"));
+                c.setCantidad(rs.getInt("cantidad"));
+                c.setBodega(rs.getInt("bodega"));
+                list.add(c);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error Consulta producto por nombre " + e);
+            return null;
+        }
+        return list;
+    }
+    
+    
     
 }
