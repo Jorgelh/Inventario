@@ -75,6 +75,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(153, 204, 255));
         setClosable(true);
+        setTitle("CONSULTA DE PRODUCTO");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Producto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24))); // NOI18N
 

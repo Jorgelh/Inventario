@@ -68,6 +68,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
         buscar = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("CONSULTA FECHA INGRESO");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -169,6 +170,8 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

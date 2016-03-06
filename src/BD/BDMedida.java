@@ -99,7 +99,7 @@ public abstract class BDMedida {
     */
     public static ArrayList<Medida> ListarUnidadMedida(){
         
-         return consultarSQL("select id_medida,descripcion from unidad_medida");   
+         return consultarSQL("select id_medida,descripcion from unidad_medida order by ID_MEDIDA");   
     }
    
     

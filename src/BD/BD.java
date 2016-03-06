@@ -18,9 +18,9 @@ public abstract class BD {
         Connection cn = null;
         try {
            Class.forName("oracle.jdbc.OracleDriver");
-            String url = "jdbc:oracle:thin:@localhost:1521:XE";
-            String user = "Inventario";
-            String password = "admin";
+            String url = "jdbc:oracle:thin:@192.168.0.2:1521:orcl";
+            String user = "server";
+            String password = "1234";
             cn= DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {
             cn=null;

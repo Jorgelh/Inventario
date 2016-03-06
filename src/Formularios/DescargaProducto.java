@@ -98,6 +98,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
        txtSumas.setText("");
        txtentregado.setText("");
        txtNota.setText("");
+       fechaEntrega.setDate(null);
     }
     
      public void  activartxt (boolean b){

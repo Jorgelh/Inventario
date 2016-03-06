@@ -69,6 +69,7 @@ public class CDesporFecha extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("CONSULTA FECHA DESCARGA");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
