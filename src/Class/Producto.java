@@ -128,6 +128,14 @@ public class Producto {
         this.cantidadminima = cantidadminima;
     }
 
+    public String getBode() {
+        return bode;
+    }
+
+    public void setBode(String bode) {
+        this.bode = bode;
+    }
+
   
     private int Fam_Id;
     private int Id_Presentacion;
@@ -142,6 +150,8 @@ public class Producto {
     private FileInputStream foto;
     private int longitudBytes;
     private int cantidadminima;
+    private String bode;
+    
     
 
     
