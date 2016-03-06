@@ -8,6 +8,7 @@ package BD;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,10 +25,10 @@ public abstract class BD {
             cn= DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {
             cn=null;
-            System.out.println("Error no se puede cargar el driver:" + e.getMessage());
+            JOptionPane.showMessageDialog(null,"ERROR DE CONEXION DE BASE DE DATOS CONTACTE AL ADMINISTRADOR DEL SISTEMA" +e);
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"ERROR DE CONEXION DE BASE DE DATOS CONTACTE AL ADMINISTRADOR DEL SISTEMA" +e);
             cn=null;
-            System.out.println("Error no se establecer la conexion:" + e.getMessage());
         }
         return cn;
     }
