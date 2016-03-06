@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Jorge Luis
  */
-public class CNombre extends javax.swing.JFrame {
+public class CNombre extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CNombre
@@ -73,7 +73,7 @@ public class CNombre extends javax.swing.JFrame {
         nombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
 
         jPanel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
