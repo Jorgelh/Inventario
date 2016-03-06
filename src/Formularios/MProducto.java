@@ -204,8 +204,8 @@ public class MProducto extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        Combofamilia = new javax.swing.JComboBox<String>();
-        ComboProce = new javax.swing.JComboBox<String>();
+        Combofamilia = new javax.swing.JComboBox<>();
+        ComboProce = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         TxtCodigo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -213,9 +213,9 @@ public class MProducto extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         TxtProveedor = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        ComboMedida = new javax.swing.JComboBox<String>();
+        ComboMedida = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        ComboPresentacion = new javax.swing.JComboBox<String>();
+        ComboPresentacion = new javax.swing.JComboBox<>();
         TxtUbicacion = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         LabelFoto = new javax.swing.JLabel();
@@ -247,7 +247,7 @@ public class MProducto extends javax.swing.JInternalFrame {
         jLabel3.setText("Familia");
 
         Combofamilia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Combofamilia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
+        Combofamilia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         Combofamilia.setNextFocusableComponent(ComboProce);
         Combofamilia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,7 +256,7 @@ public class MProducto extends javax.swing.JInternalFrame {
         });
 
         ComboProce.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ComboProce.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
+        ComboProce.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         ComboProce.setNextFocusableComponent(TxtDescripcion);
         ComboProce.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,7 +313,7 @@ public class MProducto extends javax.swing.JInternalFrame {
         jLabel7.setText("Unidad de Medida");
 
         ComboMedida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ComboMedida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
+        ComboMedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         ComboMedida.setNextFocusableComponent(ComboPresentacion);
         ComboMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,7 +325,7 @@ public class MProducto extends javax.swing.JInternalFrame {
         jLabel8.setText("Presentacion");
 
         ComboPresentacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ComboPresentacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
+        ComboPresentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         ComboPresentacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboPresentacionActionPerformed(evt);
@@ -369,6 +369,11 @@ public class MProducto extends javax.swing.JInternalFrame {
         txtCantidadMinima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidadMinimaActionPerformed(evt);
+            }
+        });
+        txtCantidadMinima.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadMinimaKeyTyped(evt);
             }
         });
 
@@ -774,6 +779,13 @@ public class MProducto extends javax.swing.JInternalFrame {
     private void txtCantidadMinimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadMinimaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadMinimaActionPerformed
+
+    private void txtCantidadMinimaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadMinimaKeyTyped
+         char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantidadMinimaKeyTyped
 
     private void actulizarBusquedaProducto(){
       

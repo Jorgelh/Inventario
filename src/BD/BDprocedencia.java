@@ -99,7 +99,7 @@ public abstract class BDprocedencia {
     */
     public static ArrayList<Procedencia> ListarProcedencia(){
         
-         return consultarSQL("select id_proce,descripcion from id_procedencia");   
+         return consultarSQL("select id_proce,descripcion from id_procedencia order by id_proce");   
     }
    
     

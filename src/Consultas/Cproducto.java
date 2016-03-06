@@ -264,6 +264,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "PRODUCTO NO EXITES...");
                 txtcodigo.setText("");
+                txtcodigo.requestFocus();
             }
 
         } catch (Exception e) {

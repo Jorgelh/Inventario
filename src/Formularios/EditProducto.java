@@ -202,6 +202,11 @@ public class EditProducto extends javax.swing.JInternalFrame {
         jLabel4.setText("Cantidad Minima");
 
         txtCanti.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCanti.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantiKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -444,6 +449,13 @@ public class EditProducto extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_CargarFotoActionPerformed
+
+    private void txtCantiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantiKeyTyped
+         char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantiKeyTyped
 
     /**
      * @param args the command line arguments

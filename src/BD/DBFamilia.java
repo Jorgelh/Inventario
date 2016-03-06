@@ -98,7 +98,7 @@ public abstract class DBFamilia {
     */
     public static ArrayList<Familia> ListarFamilias(){
         
-         return consultarSQL("select fam_id,descripcion from familia");   
+         return consultarSQL("select fam_id,descripcion from familia order by fam_id");   
     }
    
     
