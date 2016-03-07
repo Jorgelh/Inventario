@@ -41,21 +41,19 @@ public class CNombre extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<Producto> list) {
 
-        Object[][] dato = new Object[list.size()][5];
+        Object[][] dato = new Object[list.size()][4];
         int f = 0;
         for (Producto a : list) {
             dato[f][0] = a.getCodigo();
             dato[f][1] = a.getDescripcion();
             dato[f][2] = a.getUbicacion();
             dato[f][3] = a.getCantidad();
-            dato[f][4] = a.getBodega();
             f++;
         }
         tablanom.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Ubicacion", "Cantidad", "Bodega"
-
+                    "Codigo", "Descripcion", "Ubicacion", "Cantidad"
                 }) {
                     @Override
                     public boolean isCellEditable(int row, int column) {
@@ -82,7 +80,7 @@ public class CNombre extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Ubicacion", "Cantidad", "Bodega"
+                "Codigo", "Descripcion", "Ubicacion", "Cantidad"
             }
         ));
         jScrollPane1.setViewportView(tablanom);
