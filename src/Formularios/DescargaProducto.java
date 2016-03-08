@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DescargaProducto extends javax.swing.JInternalFrame {
 
-        DefaultTableModel temp;
+    DefaultTableModel temp;
 
     /**
      * Creates new form DescargaProducto
@@ -42,28 +42,28 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + TxCodigo.getText()+"and bodega = 1");
+            ResultSet rs = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 1");
             while (rs.next()) {
                 this.txtcantBodega.setText(String.valueOf(rs.getInt("sum(cantidad)")));
             }
-            ResultSet r = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + TxCodigo.getText()+"and bodega = 2");
-             while (r.next()) {
+            ResultSet r = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 2");
+            while (r.next()) {
                 this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(cantidad)")));
             }
-            
+
             rs.close();
             r.close();
             stmt.close();
         } catch (SQLException error) {
             System.out.println("NO ERROR DE unidad medida" + error);
         }
-                 
+
         int bode = Integer.parseInt(txtcantBodega.getText());
         int bodegui = Integer.parseInt(txttotalBodeguita.getText());
-        txtSumas.setText(String.valueOf(bode+bodegui));
+        txtSumas.setText(String.valueOf(bode + bodegui));
 
     }
-    
+
     public void limpiartabla15() {
 
         try {
@@ -78,38 +78,35 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    
-    public void limpiarlabel(){
-        
-    
-       LaDescrip.setText("");
-       LaFechaVen.setText("");
-       LaLote.setText("");
-       LaPN.setText("");
-       LaPO.setText("");
-       laCantidad.setText("");
-       TxCodigo.setText("");
-       txtcantBodega.setText("");
-       txtcantidad.setText("");
-       txttotalBodeguita.setText("");
-       TxCodigo.requestFocus();
-       txtNoingreso.setText("");
-       txtSumas.setText("");
-       txtentregado.setText("");
-       txtNota.setText("");
-       fechaEntrega.setDate(null);
+
+    public void limpiarlabel() {
+
+        LaDescrip.setText("");
+        LaFechaVen.setText("");
+        LaLote.setText("");
+        LaPN.setText("");
+        LaPO.setText("");
+        laCantidad.setText("");
+        TxCodigo.setText("");
+        txtcantBodega.setText("");
+        txtcantidad.setText("");
+        txttotalBodeguita.setText("");
+        TxCodigo.requestFocus();
+        txtNoingreso.setText("");
+        txtSumas.setText("");
+        txtentregado.setText("");
+        txtNota.setText("");
+        fechaEntrega.setDate(null);
     }
-    
-     public void  activartxt (boolean b){
-       
-         txtentregado.setEnabled(b);
-         txtcantidad.setEnabled(b);
-         txtNota.setEnabled(b);
-         BoDescargar.setEnabled(b);
-         
-     
-     }
+
+    public void activartxt(boolean b) {
+
+        txtentregado.setEnabled(b);
+        txtcantidad.setEnabled(b);
+        txtNota.setEnabled(b);
+        BoDescargar.setEnabled(b);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -542,14 +539,13 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TxCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxCodigoActionPerformed
-       
-         int  Enviacodigo = Integer.parseInt(TxCodigo.getText());
-         
-               
+
+        int Enviacodigo = Integer.parseInt(TxCodigo.getText());
+
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from ingreso where codigo=" + TxCodigo.getText()+ "and cantidad > 0");
+            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from ingreso where codigo=" + TxCodigo.getText() + "and cantidad > 0");
             rs.next();
             int codigo = rs.getInt("count(codigo)");
             if (codigo > 0) {
@@ -567,33 +563,40 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println("Editar Error" + e);
         }
-       
+
     }//GEN-LAST:event_TxCodigoActionPerformed
 
     private void BoDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoDescargarActionPerformed
-      
-         if(txtcantidad.getText().compareTo("") !=0 && txtentregado.getText().compareTo("") !=0 && txtNota.getText().compareTo("")!=0 )
-         {
-              try {
-                     Descarga d = new Descarga();
-                     d.setCantidad(Integer.parseInt(txtcantidad.getText()));
-                     d.setEntregadoA(Integer.parseInt(txtentregado.getText()));
-                     d.setId_ingreso(Integer.parseInt(txtNoingreso.getText()));
-                     d.setNota(txtNota.getText());
-                     d.setCodigo(Integer.parseInt(TxCodigo.getText()));
-                     d.setFecha(fechaEntrega.getDate());
-                     BDDescargaProducto.insertarDescarga(d);
-                     JOptionPane.showMessageDialog(null, "Descarga Realizada...");
-                      limpiartabla15();
-                      limpiarlabel();
-                      activartxt(false);                  
-                  
-             } catch (Exception e) {
-                 
-                 System.err.print("ERROR DE DESCARGA"+e.getMessage());
-             }
-         }
-        
+
+        if (txtcantidad.getText().compareTo("") != 0 && txtentregado.getText().compareTo("") != 0 && txtNota.getText().compareTo("") != 0) 
+        {
+
+            int A = Integer.parseInt(txtcantidad.getText());
+            int B = Integer.parseInt(laCantidad.getText());
+            if (B >= A) {
+                try {
+                    Descarga d = new Descarga();
+                    d.setCantidad(Integer.parseInt(txtcantidad.getText()));
+                    d.setEntregadoA(Integer.parseInt(txtentregado.getText()));
+                    d.setId_ingreso(Integer.parseInt(txtNoingreso.getText()));
+                    d.setNota(txtNota.getText());
+                    d.setCodigo(Integer.parseInt(TxCodigo.getText()));
+                    d.setFecha(fechaEntrega.getDate());
+                    BDDescargaProducto.insertarDescarga(d);
+                    JOptionPane.showMessageDialog(null, "Descarga Realizada...");
+                    limpiartabla15();
+                    limpiarlabel();
+                    activartxt(false);
+                } catch (Exception e) {
+
+                    System.err.print("ERROR DE DESCARGA" + e.getMessage());
+                }
+            }
+            else{ JOptionPane.showMessageDialog(null, "NO POSER LA CANTIDAD NECESARIA PARA REALIZAR LA DESCARGA");}
+            
+            
+        }
+        else {JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");}
         
         
         
@@ -603,22 +606,21 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     private void CosultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CosultaMouseClicked
 
         try {
-              
-             CargaP ca = BDDescargaProducto.buscarDescarga(Integer.parseInt(String.valueOf(Cosulta.getModel().getValueAt(Cosulta.getSelectedRow(),0))));
-              LaDescrip.setText(ca.getDescripcion());
-              LaFechaVen.setText(ca.getReturnFechaIgre());
-              LaLote.setText(ca.getLote());
-              LaPN.setText(ca.getPN());
-              LaPO.setText(ca.getPO());
-              laCantidad.setText(String.valueOf(ca.getCantidad()));
-              txtNoingreso.setText(String.valueOf(ca.getId_ingreso()));
-            
-            
-        } catch (Exception e ) {
-            
-            System.out.println("ERRO GAY "+e);
+
+            CargaP ca = BDDescargaProducto.buscarDescarga(Integer.parseInt(String.valueOf(Cosulta.getModel().getValueAt(Cosulta.getSelectedRow(), 0))));
+            LaDescrip.setText(ca.getDescripcion());
+            LaFechaVen.setText(ca.getReturnFechaIgre());
+            LaLote.setText(ca.getLote());
+            LaPN.setText(ca.getPN());
+            LaPO.setText(ca.getPO());
+            laCantidad.setText(String.valueOf(ca.getCantidad()));
+            txtNoingreso.setText(String.valueOf(ca.getId_ingreso()));
+
+        } catch (Exception e) {
+
+            System.out.println("ERRO GAY " + e);
         }
-        
+
 
     }//GEN-LAST:event_CosultaMouseClicked
 
@@ -626,10 +628,10 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNoingresoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-                 limpiartabla15();
-                 limpiarlabel();
-                 activartxt(false);
-                         
+        limpiartabla15();
+        limpiarlabel();
+        activartxt(false);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void TxCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxCodigoKeyTyped
@@ -641,14 +643,15 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_TxCodigoKeyTyped
 
-    private void actualizarTablaconsulta(){
-    
-           ArrayList<CargaP> result = DBCargaPro.ListarProductoIngresado(Integer.parseInt(TxCodigo.getText()));
-           recagarTabla(result);
+    private void actualizarTablaconsulta() {
+
+        ArrayList<CargaP> result = DBCargaPro.ListarProductoIngresado(Integer.parseInt(TxCodigo.getText()));
+        recagarTabla(result);
     }
+
     private void recagarTabla(ArrayList<CargaP> list) {
-        
-       Object[][] dato = new Object[list.size()][5];
+
+        Object[][] dato = new Object[list.size()][5];
         int f = 0;
         for (CargaP a : list) {
             dato[f][0] = a.getId_ingreso();
@@ -661,17 +664,17 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         Cosulta.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "No. Ingreso","P.O","Fecha Ingreso","No. Invoice","P/N"
+                    "No. Ingreso", "P.O", "Fecha Ingreso", "No. Invoice", "P/N"
 
                 }) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        return false;
+                    }
 
-        });
+                });
     }
-  
+
     /**
      * @param args the command line arguments
      */
