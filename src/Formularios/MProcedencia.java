@@ -56,7 +56,7 @@ public void obtenerUltimoIdpro() {
             stmt.close();
             con.close();
         } catch (SQLException error) {
-            System.out.println("Error" + error);
+            System.out.print(error);
         }
 }
     public void limpiarCajaTextopro() {

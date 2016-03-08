@@ -567,7 +567,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 c.setNota(txtNota.getText());
                 c.setPO(txtPO.getText());
                 c.setPN(txtParte.getText());
-                c.setProveedor(TxtProveedor.getText());
                 c.setPrecio(Double.parseDouble(TxtPrecio.getText()));
                 DBCargaPro.insertarProductoNuevo(c);
                 JOptionPane.showMessageDialog(null, "Producto Cargado...");

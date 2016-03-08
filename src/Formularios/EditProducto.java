@@ -49,7 +49,6 @@ public class EditProducto extends javax.swing.JInternalFrame {
         txtDescripcion.setText("");
         txtNota.setText("");
         txtUbicacion.setText("");
-        txtProveedor.setText("");
         txtCanti.setText("");
         LabelFoto.setIcon(null);
 
@@ -62,7 +61,6 @@ public class EditProducto extends javax.swing.JInternalFrame {
         txtCodigoBus.setEnabled(b);
         txtDescripcion.setEnabled(!b);
         txtNota.setEnabled(!b);
-        txtProveedor.setEnabled(!b);
         txtUbicacion.setEnabled(!b);
         txtCanti.setEditable(!b);
 
@@ -92,10 +90,8 @@ public class EditProducto extends javax.swing.JInternalFrame {
         txtCodigoBus = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
-        txtProveedor = new javax.swing.JTextField();
         txtUbicacion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -136,15 +132,10 @@ public class EditProducto extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Descripcion");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Proveedor");
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Ubicacion");
 
         txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        txtProveedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtUbicacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -217,15 +208,13 @@ public class EditProducto extends javax.swing.JInternalFrame {
                 .addComponent(BmodificarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
                 .addComponent(BGuardarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                 .addComponent(BCancelarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel11)
@@ -258,23 +247,19 @@ public class EditProducto extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(txtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(22, 22, 22)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCanti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCanti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 31, Short.MAX_VALUE)))
+                        .addGap(0, 35, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BmodificarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,7 +321,6 @@ public class EditProducto extends javax.swing.JInternalFrame {
                 Producto p = BDProducto.buscarProducto(Integer.parseInt(String.valueOf(txtCodigoBus.getText())));
                 txtDescripcion.setText(p.getDescripcion());
                 txtNota.setText(p.getNota());
-                txtProveedor.setText(p.getProveedor());
                 txtUbicacion.setText(p.getUbicacion());
                 txtCanti.setText(String.valueOf(p.getCantidadminima()));
                 String sql="select foto from producto where codigo = "+txtCodigoBus.getText();
@@ -372,50 +356,6 @@ public class EditProducto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoBusKeyPressed
 
-    private void BmodificarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BmodificarProActionPerformed
-        activarcajastexto(false);
-        activarbotones(false);
-    }//GEN-LAST:event_BmodificarProActionPerformed
-
-    private void BCancelarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarProActionPerformed
-        limpiarTextos();
-        txtCodigoBus.requestFocus();
-
-    }//GEN-LAST:event_BCancelarProActionPerformed
-
-    private void BCancelarProKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BCancelarProKeyPressed
-        limpiarTextos();
-        txtCodigoBus.requestFocus();
-    }//GEN-LAST:event_BCancelarProKeyPressed
-
-    private void BGuardarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarProActionPerformed
-
-        Producto p;
-        try {
-
-            p = BDProducto.buscarProducto(Integer.parseInt(txtCodigoBus.getText()));
-            p.setCodigo(Integer.parseInt(txtCodigoBus.getText()));
-            p.setDescripcion(txtDescripcion.getText());
-            p.setProveedor(txtProveedor.getText());
-            p.setNota(txtNota.getText());
-            p.setUbicacion(txtUbicacion.getText());
-            p.setCantidadminima(Integer.parseInt(txtCanti.getText()));
-            p.setFoto(foto);
-            p.setLongitudBytes(longitudBytes);
-            BDProducto.actualizarProducto(p);
-            JOptionPane.showMessageDialog(null, "Datos de Producto Acutalizados");
-            activarbotones(true);
-            limpiarTextos();
-            activarcajastexto(true);
-            txtCodigoBus.requestFocus();
-
-        } catch (Exception e) {
-            System.out.println("Error UPdate" + e);
-        }
-
-
-    }//GEN-LAST:event_BGuardarProActionPerformed
-
     private void txtCodigoBusKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBusKeyTyped
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
@@ -423,9 +363,16 @@ public class EditProducto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtCodigoBusKeyTyped
 
+    private void txtCantiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantiKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantiKeyTyped
+
     private void CargarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarFotoActionPerformed
 
-        LabelFoto.setIcon(null);
+      //  LabelFoto.setIcon(null);
         JFileChooser j=new JFileChooser();
         j.setFileSelectionMode(JFileChooser.FILES_ONLY);//solo archivos y no carpetas
         int estado=j.showOpenDialog(null);
@@ -447,15 +394,47 @@ public class EditProducto extends javax.swing.JInternalFrame {
                 ex.printStackTrace();
             }
         }
-
     }//GEN-LAST:event_CargarFotoActionPerformed
 
-    private void txtCantiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantiKeyTyped
-         char c = evt.getKeyChar();
-        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
-            evt.consume();
+    private void BCancelarProKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BCancelarProKeyPressed
+        limpiarTextos();
+        txtCodigoBus.requestFocus();
+    }//GEN-LAST:event_BCancelarProKeyPressed
+
+    private void BCancelarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarProActionPerformed
+        limpiarTextos();
+        txtCodigoBus.requestFocus();
+    }//GEN-LAST:event_BCancelarProActionPerformed
+
+    private void BGuardarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarProActionPerformed
+
+        Producto p;
+        try {
+
+            p = BDProducto.buscarProducto(Integer.parseInt(txtCodigoBus.getText()));
+            p.setCodigo(Integer.parseInt(txtCodigoBus.getText()));
+            p.setDescripcion(txtDescripcion.getText());
+            p.setNota(txtNota.getText());
+            p.setUbicacion(txtUbicacion.getText());
+            p.setCantidadminima(Integer.parseInt(txtCanti.getText()));
+            p.setFoto(foto);
+            p.setLongitudBytes(longitudBytes);
+            BDProducto.actualizarProducto(p);
+            JOptionPane.showMessageDialog(null, "Datos de Producto Acutalizados");
+            activarbotones(true);
+            limpiarTextos();
+            activarcajastexto(true);
+            txtCodigoBus.requestFocus();
+
+        } catch (Exception e) {
+            System.out.println("Error UPdate" + e);
         }
-    }//GEN-LAST:event_txtCantiKeyTyped
+    }//GEN-LAST:event_BGuardarProActionPerformed
+
+    private void BmodificarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BmodificarProActionPerformed
+        activarcajastexto(false);
+        activarbotones(false);
+    }//GEN-LAST:event_BmodificarProActionPerformed
 
     /**
      * @param args the command line arguments
@@ -501,7 +480,6 @@ public class EditProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -511,7 +489,6 @@ public class EditProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCodigoBus;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextArea txtNota;
-    private javax.swing.JTextField txtProveedor;
     private javax.swing.JTextField txtUbicacion;
     // End of variables declaration//GEN-END:variables
 }

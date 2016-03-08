@@ -33,18 +33,17 @@ public abstract class BDProducto {
 
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("insert into Producto (codigo,fam_id,id_presentacion,id_medida,id_proce,Descripcion,proveedor,nota,ubicacion,foto,cantidadminima)values(?,?,?,?,?,?,?,?,?,?,?)");
+        ps = cnn.prepareStatement("insert into Producto (codigo,fam_id,id_presentacion,id_medida,id_proce,Descripcion,nota,ubicacion,foto,cantidadminima)values(?,?,?,?,?,?,?,?,?,?)");
         ps.setInt(1, p.getCodigo());
         ps.setInt(2, p.getFam_Id());
         ps.setInt(3, p.getId_Presentacion());
         ps.setInt(4, p.getId_Medida());
         ps.setInt(5, p.getId_Proce());
         ps.setString(6, p.getDescripcion());
-        ps.setString(7, p.getProveedor());
-        ps.setString(8, p.getNota());
-        ps.setString(9, p.getUbicacion());
-        ps.setBinaryStream(10, p.getFoto(),p.getLongitudBytes());
-        ps.setInt(11, p.getCantidadminima());
+        ps.setString(7, p.getNota());
+        ps.setString(8, p.getUbicacion());
+        ps.setBinaryStream(9, p.getFoto(),p.getLongitudBytes());
+        ps.setInt(10, p.getCantidadminima());
         ps.executeUpdate();
         cnn.close();
         ps.close();
@@ -86,7 +85,7 @@ public abstract class BDProducto {
     public static Producto buscarProducto(int id, Producto p) throws SQLException {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("select descripcion,proveedor,id_medida,id_presentacion,ubicacion,nota,cantidadminima from producto where codigo = ?");
+        ps = cnn.prepareStatement("select descripcion,id_medida,id_presentacion,ubicacion,nota,cantidadminima from producto where codigo = ?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
@@ -95,7 +94,6 @@ public abstract class BDProducto {
                 };
             }
             p.setDescripcion(rs.getString("Descripcion"));
-            p.setProveedor(rs.getString("Proveedor"));
             p.setUbicacion(rs.getString("ubicacion"));
             p.setNota(rs.getString("nota"));
             p.setCantidadminima(rs.getInt("cantidadminima"));
@@ -110,13 +108,12 @@ public abstract class BDProducto {
     public static boolean actualizarProducto(Producto p) throws SQLException{
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("Update producto set descripcion=?,proveedor=?,ubicacion=?,nota=?,foto=?,cantidadminima=? where codigo=" +p.getCodigo());
+        ps = cnn.prepareStatement("Update producto set descripcion=?,ubicacion=?,nota=?,foto=?,cantidadminima=? where codigo=" +p.getCodigo());
         ps.setString(1, p.getDescripcion());
-        ps.setString(2, p.getProveedor());
-        ps.setString(3, p.getUbicacion());
-        ps.setString(4, p.getNota());
-        ps.setBinaryStream(5, p.getFoto(),p.getLongitudBytes());
-        ps.setInt(6, p.getCantidadminima());
+        ps.setString(2, p.getUbicacion());
+        ps.setString(3, p.getNota());
+        ps.setBinaryStream(4, p.getFoto(),p.getLongitudBytes());
+        ps.setInt(5, p.getCantidadminima());
 
         int rowsUpdated = ps.executeUpdate();
         cnn.close();

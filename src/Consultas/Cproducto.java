@@ -36,7 +36,6 @@ public class Cproducto extends javax.swing.JInternalFrame {
       desc.setText("");
       canti.setText("");
       nota.setText("");
-      prove.setText("");
       txtcodigo.setText("");
       canti.setText("");
       ubica.setText("");
@@ -307,12 +306,11 @@ public class Cproducto extends javax.swing.JInternalFrame {
             
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery("select descripcion,proveedor,ubicacion,nota,cantidadminima,foto from producto where codigo ="+cod);
+            ResultSet rs =stmt.executeQuery("select descripcion,ubicacion,nota,cantidadminima,foto from producto where codigo ="+cod);
            
             while (rs.next())
             {
                 desc.setText(rs.getString("descripcion"));
-                prove.setText(rs.getString("proveedor"));
                 ubica.setText(rs.getString("ubicacion"));
                 nota.setText(rs.getString("nota"));
                 canti.setText(rs.getString("cantidadminima"));
