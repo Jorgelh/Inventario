@@ -41,6 +41,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
       ubica.setText("");
       lafoto.setIcon(null);
       lafoto.setText("");
+      cantidad.setText("");
       txtcodigo.requestFocus(); 
       txtcodigo.setEnabled(true);
      }
@@ -62,7 +63,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         desc = new javax.swing.JLabel();
-        prove = new javax.swing.JLabel();
+        cantidad = new javax.swing.JLabel();
         ubica = new javax.swing.JLabel();
         nota = new javax.swing.JLabel();
         canti = new javax.swing.JLabel();
@@ -82,7 +83,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
         jLabel1.setText("Descripcion:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Proveedor:");
+        jLabel2.setText("Cantidad Existen en Bodega:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Ubicacion:");
@@ -91,13 +92,13 @@ public class Cproducto extends javax.swing.JInternalFrame {
         jLabel4.setText("Nota:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("cantidad Minima:");
+        jLabel5.setText("Cantidad Minima:");
 
         desc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         desc.setForeground(new java.awt.Color(255, 51, 51));
 
-        prove.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        prove.setForeground(new java.awt.Color(255, 51, 51));
+        cantidad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cantidad.setForeground(new java.awt.Color(255, 51, 51));
 
         ubica.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ubica.setForeground(new java.awt.Color(255, 51, 51));
@@ -126,7 +127,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
                             .addComponent(desc, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ubica, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nota, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(prove, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(canti, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -148,7 +149,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
                 .addGap(11, 11, 11)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(prove, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -306,13 +307,14 @@ public class Cproducto extends javax.swing.JInternalFrame {
             
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery("select descripcion,ubicacion,nota,cantidadminima,foto from producto where codigo ="+cod);
+            ResultSet rs =stmt.executeQuery("select descripcion,ubicacion,nota,cantidad,cantidadminima,foto from producto where codigo ="+cod);
            
             while (rs.next())
             {
                 desc.setText(rs.getString("descripcion"));
                 ubica.setText(rs.getString("ubicacion"));
                 nota.setText(rs.getString("nota"));
+                cantidad.setText(rs.getString("cantidad"));
                 canti.setText(rs.getString("cantidadminima"));
                 is = rs.getBinaryStream("foto");
                 BufferedImage bi = ImageIO.read(is);
@@ -371,6 +373,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotoNuevo;
     private javax.swing.JLabel canti;
+    private javax.swing.JLabel cantidad;
     private javax.swing.JLabel desc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -382,7 +385,6 @@ public class Cproducto extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lafoto;
     private javax.swing.JLabel nota;
-    private javax.swing.JLabel prove;
     private javax.swing.JTextField txtcodigo;
     private javax.swing.JLabel ubica;
     // End of variables declaration//GEN-END:variables

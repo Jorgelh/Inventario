@@ -85,7 +85,7 @@ public abstract class BDProducto {
     public static Producto buscarProducto(int id, Producto p) throws SQLException {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("select descripcion,id_medida,id_presentacion,ubicacion,nota,cantidadminima from producto where codigo = ?");
+        ps = cnn.prepareStatement("select descripcion,ubicacion,nota,cantidad,cantidadminima from producto where codigo = ?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
@@ -96,6 +96,7 @@ public abstract class BDProducto {
             p.setDescripcion(rs.getString("Descripcion"));
             p.setUbicacion(rs.getString("ubicacion"));
             p.setNota(rs.getString("nota"));
+            p.setCantidad(rs.getInt("cantidad"));
             p.setCantidadminima(rs.getInt("cantidadminima"));
           //  p.setId_Medida(rs.getInt("id_medida"));
             //p.setId_Presentacion(rs.getInt("id_presentacion"));     

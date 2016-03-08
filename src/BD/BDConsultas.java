@@ -122,6 +122,12 @@ public abstract class BDConsultas {
         return list;
     }
     
+    public static ArrayList<Producto> ListarCodigo(String c) {
+
+        return consultanombreSQL("select codigo,descripcion,ubicacion,cantidad from producto where codigo like '"+c+"%'");
+
+    }
+    
     
     
     public static ArrayList<Producto> ListarNombre(String f) {

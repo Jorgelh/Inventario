@@ -63,6 +63,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -93,6 +94,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setText("Anatek Electronics, S.A.");
 
+        jDesktopPane1.setLayer(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
@@ -115,8 +119,6 @@ public class PrincipalInventario extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25))
         );
-        jDesktopPane1.setLayer(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menubar.setBorder(null);
         menubar.setBorderPainted(false);
@@ -261,7 +263,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         CONSULTAPN.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         CONSULTAPN.setForeground(new java.awt.Color(0, 51, 255));
         CONSULTAPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
-        CONSULTAPN.setText("PRODUCTOS POR P/N");
+        CONSULTAPN.setText("DESCARGAS POR P/N");
         CONSULTAPN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CONSULTAPNActionPerformed(evt);
@@ -272,7 +274,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem11.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem11.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
-        jMenuItem11.setText("PRODUCTOS FECHA INGRESO");
+        jMenuItem11.setText("INGRESOS DE PRODUCTO POR FECHA ");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem11ActionPerformed(evt);
@@ -283,7 +285,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem12.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem12.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
-        jMenuItem12.setText("PRODUCTOS FECHA DESCARGA");
+        jMenuItem12.setText("DESCARGAS PRODUCTO POR FECHA ");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem12ActionPerformed(evt);
@@ -294,13 +296,24 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem1.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem1.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
-        jMenuItem1.setText("PRODUCTO POR NOMBRE");
+        jMenuItem1.setText("LISTAR PRODUCTOS POR NOMBRE");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem2.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
+        jMenuItem2.setText("LISTAR PRODUCTOS POR CODIGO");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
 
         menubar.add(jMenu2);
 
@@ -501,6 +514,19 @@ public class PrincipalInventario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        
+        
+         CCodigo M = new CCodigo();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+        
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -556,6 +582,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
