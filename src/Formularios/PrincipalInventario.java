@@ -95,6 +95,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setText("Anatek Electronics, S.A.");
 
+        jDesktopPane1.setLayer(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
@@ -117,8 +120,6 @@ public class PrincipalInventario extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25))
         );
-        jDesktopPane1.setLayer(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menubar.setBorder(null);
         menubar.setBorderPainted(false);
@@ -324,6 +325,11 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem3.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
         jMenuItem3.setText("CODIGO PRODUCTO");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         menubar.add(jMenu2);
@@ -482,7 +488,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
                    
-             Cproducto CP = new Cproducto();
+       Cproducto CP = new Cproducto();
         jDesktopPane1.add(CP); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = CP.getSize();
@@ -540,14 +546,21 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
        
+        
+        
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+          
         CodigoFoto M = new CodigoFoto();
         jDesktopPane1.add(M); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = M.getSize();
         M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
         M.show();
-        
-    }//GEN-LAST:event_jMenu2ActionPerformed
+
+
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     
     public static void main(String args[]) {
