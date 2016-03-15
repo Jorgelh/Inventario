@@ -402,6 +402,11 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
 
         txtcantBodega.setEditable(false);
         txtcantBodega.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtcantBodega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcantBodegaActionPerformed(evt);
+            }
+        });
 
         txttotalBodeguita.setEditable(false);
         txttotalBodeguita.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -642,6 +647,10 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_TxCodigoKeyTyped
+
+    private void txtcantBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcantBodegaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcantBodegaActionPerformed
 
     private void actualizarTablaconsulta() {
 

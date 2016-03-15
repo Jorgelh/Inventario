@@ -324,6 +324,11 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem3.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
         jMenuItem3.setText("CODIGO PRODUCTO");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         menubar.add(jMenu2);
@@ -548,6 +553,10 @@ public class PrincipalInventario extends javax.swing.JFrame {
         M.show();
         
     }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     
     public static void main(String args[]) {
