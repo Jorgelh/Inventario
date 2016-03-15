@@ -28,7 +28,7 @@ import java.util.Date;
  */
 public abstract class DBCargaPro {
     
-    DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+    //DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 
         
     public static void insertarProductoNuevo(CargaP c) throws SQLException {

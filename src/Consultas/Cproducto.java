@@ -83,7 +83,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
         jLabel1.setText("Descripcion:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Cantidad Existen en Bodega:");
+        jLabel2.setText("Cantidad en Bodega:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Ubicacion:");

@@ -64,6 +64,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -94,9 +95,6 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setText("Anatek Electronics, S.A.");
 
-        jDesktopPane1.setLayer(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
@@ -119,6 +117,8 @@ public class PrincipalInventario extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25))
         );
+        jDesktopPane1.setLayer(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menubar.setBorder(null);
         menubar.setBorderPainted(false);
@@ -248,6 +248,11 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu2.setText("  CONSULTAS");
         jMenu2.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu2.setPreferredSize(new java.awt.Dimension(110, 19));
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
 
         jMenuItem10.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem10.setForeground(new java.awt.Color(0, 51, 255));
@@ -314,6 +319,12 @@ public class PrincipalInventario extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem3.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
+        jMenuItem3.setText("CODIGO PRODUCTO");
+        jMenu2.add(jMenuItem3);
 
         menubar.add(jMenu2);
 
@@ -527,6 +538,17 @@ public class PrincipalInventario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+       
+        CodigoFoto M = new CodigoFoto();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+        
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -583,6 +605,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;

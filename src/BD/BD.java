@@ -24,7 +24,7 @@ public abstract class BD {
             String password = "1234";
             //String url = "jdbc:oracle:thin:@localhost:1521:xe";
             //String user = "inventario"; 
-           //String password = "admin";
+            //String password = "admin";
             cn= DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {
             cn=null;
