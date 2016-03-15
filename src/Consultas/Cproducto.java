@@ -72,6 +72,9 @@ public class Cproducto extends javax.swing.JInternalFrame {
       cantidad.setText("");
       txtcodigo.requestFocus(); 
       txtcodigo.setEnabled(true);
+      txtcantBodega.setText("");
+      txttotalBodeguita.setText("");
+      txtSumas.setText("");
      }
      
      
