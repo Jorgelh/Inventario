@@ -37,6 +37,8 @@ public class PrincipalInventario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mProcedencia1 = new Formularios.MProcedencia();
+        mProcedencia2 = new Formularios.MProcedencia();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
@@ -62,7 +64,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -318,16 +320,16 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
-        jMenuItem4.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenuItem4.setForeground(new java.awt.Color(0, 51, 255));
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
-        jMenuItem4.setText("PRODUCTO");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem3.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem3.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
+        jMenuItem3.setText("CODIGO PRODUCTO");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(jMenuItem3);
 
         menubar.add(jMenu2);
 
@@ -531,7 +533,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         
         
-        CCodigo M = new CCodigo();
+         CCodigo M = new CCodigo();
         jDesktopPane1.add(M); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = M.getSize();
@@ -557,17 +559,6 @@ public class PrincipalInventario extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-
-        CodigoFoto M = new CodigoFoto();
-        jDesktopPane1.add(M); 
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = M.getSize();
-        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
-        M.show();
-
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     
     public static void main(String args[]) {
@@ -625,10 +616,12 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private Formularios.MProcedencia mProcedencia1;
+    private Formularios.MProcedencia mProcedencia2;
     private javax.swing.JMenuBar menubar;
     private javax.swing.JMenuItem presentacion;
     private javax.swing.JMenuItem unidadmedida;
