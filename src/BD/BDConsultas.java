@@ -59,6 +59,13 @@ public abstract class BDConsultas {
         return list;
     }
     
+    public static ArrayList<ConsultaFecha> ListarRangoFecha(String f, String a) {
+
+        return consultaIngreSQLrango("select ingreso.codigo,producto.descripcion,ingreso.cantidad,ingreso.P_N,ingreso.notas,ingreso.fecha_ingreso from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo where ingreso.fechasistema between '" + f + "' and '"+ a +"'");
+
+
+    }
+    
     public static ArrayList<ConsultaFecha> ListarIngresoFecha(String f) {
 
         return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.cantidad,ingreso.P_N,ingreso.notas,ingreso.fecha_ingreso from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo where ingreso.fechasistema = '" + f + "'" );
@@ -121,6 +128,35 @@ public abstract class BDConsultas {
         }
         return list;
     }
+    
+    
+    private static ArrayList<ConsultaFecha> consultaIngreSQLrango(String sql) {
+        ArrayList<ConsultaFecha> list = new ArrayList<ConsultaFecha>();
+        Connection cn = BD.getConnection();
+        try {
+            ConsultaFecha c;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                c = new ConsultaFecha();
+                c.setCodigo(rs.getInt("codigo"));
+                c.setDescripcion(rs.getString("descripcion"));
+                c.setPN(rs.getString("P_N"));
+                c.setCantidad(rs.getInt("cantidad"));
+                c.setNota(rs.getString("notas"));
+                c.setFecha(rs.getString("fecha_ingreso"));
+                list.add(c);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error Consulta Fecha " + e);
+            return null;
+        }
+        return list;
+    }
+    
+    
+    
     
     public static ArrayList<Producto> ListarCodigo(String c) {
 
