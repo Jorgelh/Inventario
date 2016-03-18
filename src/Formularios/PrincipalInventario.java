@@ -97,6 +97,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setText("Anatek Electronics, S.A.");
 
+        jDesktopPane1.setLayer(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
@@ -119,8 +122,6 @@ public class PrincipalInventario extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25))
         );
-        jDesktopPane1.setLayer(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menubar.setBorder(null);
         menubar.setBorderPainted(false);
@@ -259,7 +260,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem10.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem10.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
-        jMenuItem10.setText("UBICACION PRODUCTO");
+        jMenuItem10.setText("BALANCE DE PRODUCTO");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);

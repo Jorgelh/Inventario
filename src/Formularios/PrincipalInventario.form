@@ -249,7 +249,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/Zoom.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="UBICACION PRODUCTO"/>
+                <Property name="text" type="java.lang.String" value="BALANCE DE PRODUCTO"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem10ActionPerformed"/>
