@@ -66,7 +66,6 @@ public class MPresentacion extends javax.swing.JInternalFrame {
 
     public void activarCajaTextopre(boolean b) {
         
-        txtId.setEnabled(!b);
         txtDescripcion.setEnabled(b);
     }
 
@@ -77,6 +76,61 @@ public class MPresentacion extends javax.swing.JInternalFrame {
         Pcancelar.setEnabled(!b);
     }
 
+    public void guardar(){
+    
+        if (accion.equalsIgnoreCase("Guardar")) {
+
+            if (txtId.getText().compareTo("") != 0 && txtDescripcion.getText().compareTo("") != 0) {
+                try {
+                    Presentacion p = new Presentacion();
+                    p.setDescripcion(txtDescripcion.getText().toUpperCase());
+                    p.setId_presentacion(Integer.parseInt(txtId.getText()));
+                    BDPresentacion.insertarPresentacion(p);
+                    JOptionPane.showMessageDialog(null, "Registro Guardado");
+                    cancelar();
+                    
+
+                } catch (Exception e) {
+                    System.out.println("Error BD:" + e.getMessage());
+                }
+                limpiarCajaTextopre();
+                obtenerUltimoIdpre();
+                actualizarBusquedapre();
+            } else {
+                JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
+            }
+        }
+        if (accion.equalsIgnoreCase("Actualizar")) {
+            Presentacion p;
+            try {
+                p = BDPresentacion.buscarPrecentacion(Integer.parseInt(txtId.getText()));
+                p.setDescripcion(txtDescripcion.getText());
+                BDPresentacion.actualizarPresentacion(p);
+                JOptionPane.showMessageDialog(null, " [ Datos Actualizados ]");
+                limpiarCajaTextopre();
+                obtenerUltimoIdpre();
+                activarBotonespre(true);
+                actualizarBusquedapre();
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error BD: " + e.getMessage());
+            }
+        }
+    
+    
+    
+    }
+    
+    public void cancelar()
+    {
+      
+        limpiarCajaTextopre();
+        obtenerUltimoIdpre();
+        activarBotonespre(true);
+    
+    }
+    
+    
 
 
 /**
@@ -169,6 +223,11 @@ public class MPresentacion extends javax.swing.JInternalFrame {
                 PguardarActionPerformed(evt);
             }
         });
+        Pguardar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PguardarKeyPressed(evt);
+            }
+        });
 
         Peditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit2.png"))); // NOI18N
         Peditar.setText("Editar");
@@ -187,6 +246,11 @@ public class MPresentacion extends javax.swing.JInternalFrame {
         });
 
         txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescripcionActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("No.");
@@ -195,6 +259,7 @@ public class MPresentacion extends javax.swing.JInternalFrame {
         jLabel2.setText("Descripcion");
 
         txtId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtId.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -286,47 +351,13 @@ public class MPresentacion extends javax.swing.JInternalFrame {
         activarCajaTextopre(true);
         activarBotonespre(false);
         obtenerUltimoIdpre();
+        txtDescripcion.requestFocus();
         accion = "Guardar";
     }//GEN-LAST:event_PnuevoActionPerformed
 
     private void PguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PguardarActionPerformed
 
-        if (accion.equalsIgnoreCase("Guardar")) {
-
-            if (txtId.getText().compareTo("") != 0 && txtDescripcion.getText().compareTo("") != 0) {
-                try {
-                    Presentacion p = new Presentacion();
-                    p.setDescripcion(txtDescripcion.getText().toUpperCase());
-                    p.setId_presentacion(Integer.parseInt(txtId.getText()));
-                    BDPresentacion.insertarPresentacion(p);
-                    JOptionPane.showMessageDialog(null, "Registro Guardado");
-
-                } catch (Exception e) {
-                    System.out.println("Error BD:" + e.getMessage());
-                }
-                limpiarCajaTextopre();
-                obtenerUltimoIdpre();
-                actualizarBusquedapre();
-            } else {
-                JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
-            }
-        }
-        if (accion.equalsIgnoreCase("Actualizar")) {
-            Presentacion p;
-            try {
-                p = BDPresentacion.buscarPrecentacion(Integer.parseInt(txtId.getText()));
-                p.setDescripcion(txtDescripcion.getText());
-                BDPresentacion.actualizarPresentacion(p);
-                JOptionPane.showMessageDialog(null, " [ Datos Actualizados ]");
-                limpiarCajaTextopre();
-                obtenerUltimoIdpre();
-                activarBotonespre(true);
-                actualizarBusquedapre();
-
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error BD: " + e.getMessage());
-            }
-        }
+        guardar();
 
     }//GEN-LAST:event_PguardarActionPerformed
 
@@ -340,11 +371,22 @@ public class MPresentacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_PeditarActionPerformed
 
     private void PcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PcancelarActionPerformed
-        // TODO add your handling code here:
-        limpiarCajaTextopre();
-        obtenerUltimoIdpre();
-        activarBotonespre(true);
+          
+        cancelar();
+        
     }//GEN-LAST:event_PcancelarActionPerformed
+
+    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
+
+           Pguardar.requestFocus();
+           
+    }//GEN-LAST:event_txtDescripcionActionPerformed
+
+    private void PguardarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PguardarKeyPressed
+       
+        guardar();
+        
+    }//GEN-LAST:event_PguardarKeyPressed
 
  private void actualizarBusquedapre() {
         ArrayList<Presentacion> result1 = BDPresentacion.ListarUnidadMedida();

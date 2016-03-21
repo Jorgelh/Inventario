@@ -144,6 +144,7 @@ public class Producto {
     private String Descripcion;
     private String Proveedor;
     private String Nota;
+    private long Nota1;
     private String Ubicacion;
     private int Cantidad;
     private int Bodega;

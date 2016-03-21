@@ -10,7 +10,6 @@ import BD.BDProducto;
 import BD.DBCargaPro;
 import Class.CargaP;
 import Class.Producto;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -98,7 +97,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         txtSerie.setText("");
         TxtProveedor.setText("");
         TxtPrecio.setText("");
-        Date date = null;
+        //SimpleDateFormat("dd-MM-yy");
+        //Date date = new Date();
+        Date date = null;   
         txtfecha.setDate(date);
         txtfechavenci.setDate(date);
         ComboBoxBodega.setSelectedItem("Seleccionar....");
@@ -146,7 +147,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         txtPO = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtfechavenci = new com.toedter.calendar.JDateChooser();
-        ComboBoxBodega = new javax.swing.JComboBox<String>();
+        ComboBoxBodega = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         txtEmpleado = new javax.swing.JTextField();
@@ -184,10 +185,40 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jLabel13.setText("Proveedor");
 
         txtInvoice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtInvoiceActionPerformed(evt);
+            }
+        });
+        txtInvoice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtInvoiceKeyPressed(evt);
+            }
+        });
 
         txtSerie.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtSerie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSerieActionPerformed(evt);
+            }
+        });
+        txtSerie.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSerieKeyPressed(evt);
+            }
+        });
 
         TxtProveedor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        TxtProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtProveedorActionPerformed(evt);
+            }
+        });
+        TxtProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtProveedorKeyPressed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Precio");
@@ -199,6 +230,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             }
         });
         TxtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtPrecioKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TxtPrecioKeyTyped(evt);
             }
@@ -213,6 +247,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             }
         });
         txtNoDoc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNoDocKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNoDocKeyTyped(evt);
             }
@@ -290,29 +327,79 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jLabel2.setText("P/N");
 
         txtParte.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtParte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtParteActionPerformed(evt);
+            }
+        });
+        txtParte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtParteKeyPressed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Job");
 
         txtJob.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtJob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtJobActionPerformed(evt);
+            }
+        });
+        txtJob.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtJobKeyPressed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Lote");
 
         txtLote.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtLote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLoteActionPerformed(evt);
+            }
+        });
+        txtLote.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLoteKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("P.O");
 
         txtPO.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtPO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPOActionPerformed(evt);
+            }
+        });
+        txtPO.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPOKeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Fecha Vencimiento");
 
         txtfechavenci.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtfechavenci.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtfechavenciMouseExited(evt);
+            }
+        });
 
         ComboBoxBodega.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
+        ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
+        ComboBoxBodega.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ComboBoxBodegaItemStateChanged(evt);
+            }
+        });
         ComboBoxBodega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboBoxBodegaActionPerformed(evt);
@@ -379,6 +466,11 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CANTIDAD", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         txtEmpleado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpleadoActionPerformed(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("Cantidad");
@@ -404,6 +496,11 @@ public class CargarProductos extends javax.swing.JInternalFrame {
 
         txtNota.setColumns(20);
         txtNota.setRows(5);
+        txtNota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtNotaMouseExited(evt);
+            }
+        });
         jScrollPane3.setViewportView(txtNota);
 
         BagregarProdu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -476,6 +573,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             }
         });
         txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoKeyTyped(evt);
             }
@@ -584,7 +684,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BagregarProduActionPerformed
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
-        // TODO add your handling code here:
+      
+        BagregarProdu.requestFocus();
+        
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void txtFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMouseClicked
@@ -593,7 +695,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtFechaMouseClicked
 
     private void txtNoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoDocActionPerformed
-        // TODO add your handling code here:
+       txtInvoice.requestFocus();
     }//GEN-LAST:event_txtNoDocActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
@@ -648,7 +750,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNoDocKeyTyped
 
     private void TxtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPrecioActionPerformed
-        // TODO add your handling code here:
+              txtParte.requestFocus();
     }//GEN-LAST:event_TxtPrecioActionPerformed
 
     private void TxtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPrecioKeyTyped
@@ -671,6 +773,118 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtCantidadKeyTyped
+
+    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
+       
+     
+        
+    }//GEN-LAST:event_txtCodigoKeyPressed
+
+    private void txtNoDocKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoDocKeyPressed
+        
+        
+    }//GEN-LAST:event_txtNoDocKeyPressed
+
+    private void txtInvoiceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInvoiceKeyPressed
+    
+        
+        
+    }//GEN-LAST:event_txtInvoiceKeyPressed
+
+    private void txtSerieKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSerieKeyPressed
+        
+        
+        
+    }//GEN-LAST:event_txtSerieKeyPressed
+
+    private void TxtProveedorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtProveedorKeyPressed
+      
+       
+        
+    }//GEN-LAST:event_TxtProveedorKeyPressed
+
+    private void TxtPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPrecioKeyPressed
+       
+       
+    }//GEN-LAST:event_TxtPrecioKeyPressed
+
+    private void txtParteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtParteKeyPressed
+
+     
+       
+    }//GEN-LAST:event_txtParteKeyPressed
+
+    private void txtJobKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJobKeyPressed
+        
+        
+        
+    }//GEN-LAST:event_txtJobKeyPressed
+
+    private void txtLoteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoteKeyPressed
+        
+        
+    }//GEN-LAST:event_txtLoteKeyPressed
+
+    private void txtPOKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPOKeyPressed
+        
+    }//GEN-LAST:event_txtPOKeyPressed
+
+    private void txtInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInvoiceActionPerformed
+        txtSerie.requestFocus();
+    }//GEN-LAST:event_txtInvoiceActionPerformed
+
+    private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
+       
+        TxtProveedor.requestFocus();
+        
+    }//GEN-LAST:event_txtSerieActionPerformed
+
+    private void TxtProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtProveedorActionPerformed
+        
+         TxtPrecio.requestFocus();
+        
+    }//GEN-LAST:event_TxtProveedorActionPerformed
+
+    private void txtParteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParteActionPerformed
+       
+          txtJob.requestFocus();
+        
+    }//GEN-LAST:event_txtParteActionPerformed
+
+    private void txtJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJobActionPerformed
+       
+        txtLote.requestFocus();
+        
+    }//GEN-LAST:event_txtJobActionPerformed
+
+    private void txtLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoteActionPerformed
+      
+          txtPO.requestFocus();
+    }//GEN-LAST:event_txtLoteActionPerformed
+
+    private void txtPOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPOActionPerformed
+       
+        txtfechavenci.requestFocus();
+        
+    }//GEN-LAST:event_txtPOActionPerformed
+
+    private void txtfechavenciMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtfechavenciMouseExited
+        ComboBoxBodega.requestFocus();
+    }//GEN-LAST:event_txtfechavenciMouseExited
+
+    private void ComboBoxBodegaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxBodegaItemStateChanged
+        txtEmpleado.requestFocus();
+    }//GEN-LAST:event_ComboBoxBodegaItemStateChanged
+
+    private void txtEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpleadoActionPerformed
+        
+        txtNota.requestFocus();
+        
+    }//GEN-LAST:event_txtEmpleadoActionPerformed
+
+    private void txtNotaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNotaMouseExited
+        txtCantidad.requestFocus();
+    }//GEN-LAST:event_txtNotaMouseExited
 
     private void actulizartabla() {
 
@@ -783,5 +997,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser txtfecha;
     private com.toedter.calendar.JDateChooser txtfechavenci;
     // End of variables declaration//GEN-END:variables
+
+    private void SimpleDateFormat(String ddMMyy) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
