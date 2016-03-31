@@ -156,10 +156,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtNota = new javax.swing.JTextArea();
         BagregarProdu = new javax.swing.JButton();
         Bcancelar = new javax.swing.JButton();
+        txtNota = new javax.swing.JTextField();
         txtCodigo = new javax.swing.JTextField();
 
         setClosable(true);
@@ -475,8 +474,8 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("Cantidad");
 
-        txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtCantidad.setForeground(new java.awt.Color(204, 0, 0));
+        txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtCantidad.setForeground(new java.awt.Color(255, 0, 0));
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidadActionPerformed(evt);
@@ -494,15 +493,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Nota");
 
-        txtNota.setColumns(20);
-        txtNota.setRows(5);
-        txtNota.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                txtNotaMouseExited(evt);
-            }
-        });
-        jScrollPane3.setViewportView(txtNota);
-
         BagregarProdu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BagregarProdu.setText("Agregar Producto");
         BagregarProdu.addActionListener(new java.awt.event.ActionListener() {
@@ -518,6 +508,8 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             }
         });
 
+        txtNota.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -528,19 +520,22 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEmpleado, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3)
-                    .addComponent(txtCantidad)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel12)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(BagregarProdu)
                                 .addGap(18, 18, 18)
-                                .addComponent(Bcancelar)))
+                                .addComponent(Bcancelar))
+                            .addComponent(txtNota))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,12 +547,12 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(65, 65, 65)
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -882,10 +877,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_txtEmpleadoActionPerformed
 
-    private void txtNotaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNotaMouseExited
-        txtCantidad.requestFocus();
-    }//GEN-LAST:event_txtNotaMouseExited
-
     private void actulizartabla() {
 
         ArrayList<CargaP> result = DBCargaPro.ListarProductoIngresado(Integer.parseInt(txtCodigo.getText()));
@@ -981,7 +972,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tablaIngreso;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigo;
@@ -990,7 +980,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtJob;
     private javax.swing.JTextField txtLote;
     private javax.swing.JTextField txtNoDoc;
-    private javax.swing.JTextArea txtNota;
+    private javax.swing.JTextField txtNota;
     private javax.swing.JTextField txtPO;
     private javax.swing.JTextField txtParte;
     private javax.swing.JTextField txtSerie;
