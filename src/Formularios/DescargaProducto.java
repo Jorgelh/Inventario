@@ -99,6 +99,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         txtentregado.setText("");
         txtNota.setText("");
         fechaEntrega.setDate(null);
+        txtbodega.setText("");
     }
 
     public void activartxt(boolean b) {
