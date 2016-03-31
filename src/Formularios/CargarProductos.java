@@ -20,6 +20,8 @@ import javax.swing.JTextField;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -96,7 +98,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         txtParte.setText("");
         txtSerie.setText("");
         TxtProveedor.setText("");
-        TxtPrecio.setText("");
+        TxtPrecio.setText("0.00");
         //SimpleDateFormat("dd-MM-yy");
         //Date date = new Date();
         Date date = null;   
@@ -105,6 +107,12 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         ComboBoxBodega.setSelectedItem("Seleccionar....");
 
     }
+    
+    public void FechasJdate() {
+      
+        Calendar c2 = new GregorianCalendar();
+        txtfecha.setCalendar(c2);
+}
 
     public void setTxtCodigo(JTextField txtCodigo) {
         this.txtCodigo = txtCodigo;
@@ -509,6 +517,11 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         });
 
         txtNota.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtNota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNotaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -641,10 +654,18 @@ public class CargarProductos extends javax.swing.JInternalFrame {
 
         actulizartabla();
 
-        if (txtCodigo.getText().compareTo("") != 0 && txtCantidad.getText().compareTo("") != 0 && txtEmpleado.getText().compareTo("") != 0
-                && txtInvoice.getText().compareTo("") != 0 && txtJob.getText().compareTo("") != 0 && txtLote.getText().compareTo("") != 0
-                && txtNoDoc.getText().compareTo("") != 0 && txtNota.getText().compareTo("") != 0 && txtPO.getText().compareTo("") != 0
-                && txtParte.getText().compareTo("") != 0 && txtSerie.getText().compareTo("") != 0 && !ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Seleccionar....")) {
+        if (txtCodigo.getText().compareTo("") != 0 
+                && txtCantidad.getText().compareTo("") != 0 
+                && txtEmpleado.getText().compareTo("") != 0
+                //&& txtInvoice.getText().compareTo("") != 0 
+                //&& txtJob.getText().compareTo("") != 0 
+                //&& txtLote.getText().compareTo("") != 0
+                //&& txtNoDoc.getText().compareTo("") != 0 
+                //&& txtNota.getText().compareTo("") != 0 
+                //&& txtPO.getText().compareTo("") != 0
+                //&& txtParte.getText().compareTo("") != 0 
+                //&& txtSerie.getText().compareTo("") != 0 
+                && !ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Seleccionar....")) {
 
             try {
                 CargaP c = new CargaP();
@@ -706,6 +727,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             if (codigo == 1) {
                 activarTxt(true);
                 actulizartabla();
+                FechasJdate();
                 txtNoDoc.requestFocus();
 
             } else {
@@ -876,6 +898,10 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         txtNota.requestFocus();
         
     }//GEN-LAST:event_txtEmpleadoActionPerformed
+
+    private void txtNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNotaActionPerformed
+       txtCantidad.requestFocus();
+    }//GEN-LAST:event_txtNotaActionPerformed
 
     private void actulizartabla() {
 
