@@ -346,7 +346,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Editar este maldito Error" + e);
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
         }
         BCancelarPro.requestFocus();
 
@@ -427,7 +427,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
             txtCodigoBus.requestFocus();
 
         } catch (Exception e) {
-            System.out.println("Error UPdate" + e);
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
         }
     }//GEN-LAST:event_BGuardarProActionPerformed
 

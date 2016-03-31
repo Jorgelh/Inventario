@@ -628,14 +628,14 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Editar Error" + e);
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
         }
 
     }//GEN-LAST:event_TxCodigoActionPerformed
 
     private void BoDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoDescargarActionPerformed
 
-        if (txtcantidad.getText().compareTo("") != 0 && txtentregado.getText().compareTo("") != 0 && txtNota.getText().compareTo("") != 0) 
+        if (txtcantidad.getText().compareTo("") != 0 && txtentregado.getText().compareTo("") != 0 ) 
         {
 
             int A = Integer.parseInt(txtcantidad.getText());
@@ -656,7 +656,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                     activartxt(false);
                 } catch (Exception e) {
 
-                    System.err.print("ERROR DE DESCARGA" + e.getMessage());
+                    JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
                 }
             }
             else{ JOptionPane.showMessageDialog(null, "NO POSER LA CANTIDAD NECESARIA PARA REALIZAR LA DESCARGA");}

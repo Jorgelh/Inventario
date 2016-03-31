@@ -688,7 +688,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 DBCargaPro.insertarProductoNuevo(c);
                 JOptionPane.showMessageDialog(null, "Producto Cargado...");
             } catch (Exception e) {
-                System.err.println("Error de Insetar Nuevo Producto..." + e);
+                JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
             }
             actulizartabla();
             limpiartxt();
@@ -736,7 +736,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Editar Error" + e);
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
         }
     }//GEN-LAST:event_txtCodigoActionPerformed
 
@@ -1014,8 +1014,5 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser txtfechavenci;
     // End of variables declaration//GEN-END:variables
 
-    private void SimpleDateFormat(String ddMMyy) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

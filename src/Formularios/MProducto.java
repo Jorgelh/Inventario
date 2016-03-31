@@ -26,6 +26,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import oracle.net.aso.e;
 
 /**
  *
@@ -131,8 +132,8 @@ public class MProducto extends javax.swing.JInternalFrame {
                 int lastID = rs.getInt(1);
                 correlativo = lastID + 1;
             }
-        } catch (SQLException error) {
-            System.out.print("que es " + error);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
         }
      //   this.setLocationRelativeTo(null);
 
@@ -579,8 +580,8 @@ public class MProducto extends javax.swing.JInternalFrame {
             }
             rs.close();
             stmt.close();
-        } catch (SQLException error) {
-            System.out.println("NO ERROR DE FAMILIAS"+error);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
         }
         obtenerUltimoId();
         actulizarBusquedaProducto();
@@ -637,7 +638,7 @@ public class MProducto extends javax.swing.JInternalFrame {
             && !ComboProce.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !ComboMedida.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")
             && !ComboPresentacion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") 
             && txtCantidadMinima.getText().compareTo("") !=0
-            /*&& LabelFoto.getText().compareTo("")!=0*/&& TxtNota.getText().compareTo("")!=0)
+            /*&& LabelFoto.getText().compareTo("")!=0&& TxtNota.getText().compareTo("")!=0*/)
            {
                try {
                      Producto p = new Producto();
@@ -788,18 +789,6 @@ public class MProducto extends javax.swing.JInternalFrame {
                         }
                     });
       }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /**
      * @param args the command line arguments
      */
