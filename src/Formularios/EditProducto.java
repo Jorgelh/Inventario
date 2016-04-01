@@ -41,6 +41,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
         initComponents();
         activarcajastexto(true);
         activarbotones(true);
+        BmodificarPro.setEnabled(false);
     }
 
     public void limpiarTextos() {
@@ -50,6 +51,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
         txtNota.setText("");
         txtUbicacion.setText("");
         txtCanti.setText("");
+        LabelFoto.setText("");
         LabelFoto.setIcon(null);
 
         
@@ -68,10 +70,11 @@ public class EditProducto extends javax.swing.JInternalFrame {
 
     public void activarbotones(boolean b) {
 
-        BCancelarPro.setEnabled(b);
+        
         BGuardarPro.setEnabled(!b);
-        BmodificarPro.setEnabled(b);
+        //BmodificarPro.setEnabled(!b);
         CargarFoto.setEnabled(!b);
+       
         
 
     }
@@ -318,6 +321,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
             rs.next();
             int codigo = rs.getInt("count(codigo)");
             if (codigo == 1) {
+                BmodificarPro.setEnabled(true);
                 Producto p = BDProducto.buscarProducto(Integer.parseInt(String.valueOf(txtCodigoBus.getText())));
                 txtDescripcion.setText(p.getDescripcion());
                 txtNota.setText(p.getNota());
@@ -346,7 +350,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+            LabelFoto.setText("No Foto");
         }
         BCancelarPro.requestFocus();
 
@@ -404,6 +408,10 @@ public class EditProducto extends javax.swing.JInternalFrame {
     private void BCancelarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarProActionPerformed
         limpiarTextos();
         txtCodigoBus.requestFocus();
+         activarbotones(true);
+         activarcajastexto(true);
+         BmodificarPro.setEnabled(false);
+
     }//GEN-LAST:event_BCancelarProActionPerformed
 
     private void BGuardarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarProActionPerformed
@@ -421,6 +429,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
             p.setLongitudBytes(longitudBytes);
             BDProducto.actualizarProducto(p);
             JOptionPane.showMessageDialog(null, "Datos de Producto Acutalizados");
+            BmodificarPro.setEnabled(false);
             activarbotones(true);
             limpiarTextos();
             activarcajastexto(true);
