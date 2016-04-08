@@ -75,6 +75,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
       txtcantBodega.setText("");
       txttotalBodeguita.setText("");
       txtSumas.setText("");
+      ubica1.setText("");
      }
      
      
@@ -92,12 +93,12 @@ public class Cproducto extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        desc = new javax.swing.JLabel();
-        cantidad = new javax.swing.JLabel();
-        ubica = new javax.swing.JLabel();
-        nota = new javax.swing.JLabel();
-        canti = new javax.swing.JLabel();
+        desc = new javax.swing.JTextField();
+        ubica = new javax.swing.JTextField();
+        cantidad = new javax.swing.JTextField();
+        nota = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        ubica1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lafoto = new javax.swing.JLabel();
         BotoNuevo = new javax.swing.JButton();
@@ -110,6 +111,8 @@ public class Cproducto extends javax.swing.JInternalFrame {
         txtcantBodega = new javax.swing.JTextField();
         txttotalBodeguita = new javax.swing.JTextField();
         txtSumas = new javax.swing.JTextField();
+        canti = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 204, 255));
         setClosable(true);
@@ -124,28 +127,28 @@ public class Cproducto extends javax.swing.JInternalFrame {
         jLabel2.setText("Cantidad en Bodega:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Ubicacion:");
+        jLabel3.setText("Ubicacion Bodega");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Nota:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Cantidad Minima:");
+        desc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        desc.setForeground(new java.awt.Color(0, 102, 255));
 
-        desc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        desc.setForeground(new java.awt.Color(0, 51, 255));
+        ubica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ubica.setForeground(new java.awt.Color(0, 102, 255));
 
-        cantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cantidad.setForeground(new java.awt.Color(0, 51, 255));
+        cantidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cantidad.setForeground(new java.awt.Color(0, 102, 255));
 
-        ubica.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ubica.setForeground(new java.awt.Color(0, 51, 255));
+        nota.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nota.setForeground(new java.awt.Color(0, 102, 255));
 
-        nota.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        nota.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText("Ubicacion Bodeguita");
 
-        canti.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        canti.setForeground(new java.awt.Color(0, 51, 255));
+        ubica1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ubica1.setForeground(new java.awt.Color(0, 102, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,52 +157,56 @@ public class Cproducto extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(79, 79, 79))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nota, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                                .addComponent(desc, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(nota, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(ubica, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(canti, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(ubica, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(ubica1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                .addGap(20, 20, 20))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(4, 4, 4)
-                .addComponent(desc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ubica, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(desc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ubica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ubica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(29, 29, 29)))
+                .addGap(14, 14, 14)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nota, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(canti, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(nota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(7, 7, 7)
+                .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Foto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24))); // NOI18N
@@ -278,6 +285,12 @@ public class Cproducto extends javax.swing.JInternalFrame {
         txtSumas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtSumas.setForeground(new java.awt.Color(255, 0, 51));
 
+        canti.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        canti.setForeground(new java.awt.Color(0, 102, 255));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("Cantidad Minima");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -295,24 +308,33 @@ public class Cproducto extends javax.swing.JInternalFrame {
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(txtcantBodega, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txttotalBodeguita))))
-                .addGap(221, 221, 221))
+                            .addComponent(txttotalBodeguita)
+                            .addComponent(txtcantBodega))))
+                .addGap(71, 71, 71)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(canti, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel13))
-                            .addComponent(txtcantBodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtcantBodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(canti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addComponent(txttotalBodeguita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -375,6 +397,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
                 
                 consulta();
                 llenarBalance();
+                BotoNuevo.requestFocus();
                 txtcodigo.setEnabled(false);
                 
 
@@ -428,7 +451,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
             
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery("select descripcion,ubicacion,nota,cantidad,cantidadminima,foto from producto where codigo ="+cod);
+            ResultSet rs =stmt.executeQuery("select descripcion,ubicacion,ubicacion2,nota,cantidad,cantidadminima,foto from producto where codigo ="+cod);
            
             while (rs.next())
             {
@@ -437,6 +460,8 @@ public class Cproducto extends javax.swing.JInternalFrame {
                 nota.setText(rs.getString("nota"));
                 cantidad.setText(rs.getString("cantidad"));
                 canti.setText(rs.getString("cantidadminima"));
+                ubica1.setText(rs.getString("ubicacion2"));
+                
                 is = rs.getBinaryStream("foto");
                 BufferedImage bi = ImageIO.read(is);
                 foto = new ImageIcon(bi);
@@ -448,7 +473,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
                 
             }
             con.close();  
-            BotoNuevo.requestFocus();
+           
         } catch (Exception e) {
             lafoto.setText("NO FOTO");
         }
@@ -493,9 +518,9 @@ public class Cproducto extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotoNuevo;
-    private javax.swing.JLabel canti;
-    private javax.swing.JLabel cantidad;
-    private javax.swing.JLabel desc;
+    private javax.swing.JTextField canti;
+    private javax.swing.JTextField cantidad;
+    private javax.swing.JTextField desc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -505,15 +530,17 @@ public class Cproducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lafoto;
-    private javax.swing.JLabel nota;
+    private javax.swing.JTextField nota;
     private javax.swing.JTextField txtSumas;
     private javax.swing.JTextField txtcantBodega;
     private javax.swing.JTextField txtcodigo;
     private javax.swing.JTextField txttotalBodeguita;
-    private javax.swing.JLabel ubica;
+    private javax.swing.JTextField ubica;
+    private javax.swing.JTextField ubica1;
     // End of variables declaration//GEN-END:variables
 }
