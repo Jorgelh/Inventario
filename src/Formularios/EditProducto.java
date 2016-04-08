@@ -50,6 +50,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
         txtDescripcion.setText("");
         txtNota.setText("");
         txtUbicacion.setText("");
+        txtUbicacion2.setText("");
         txtCanti.setText("");
         LabelFoto.setText("");
         LabelFoto.setIcon(null);
@@ -64,7 +65,9 @@ public class EditProducto extends javax.swing.JInternalFrame {
         txtDescripcion.setEnabled(!b);
         txtNota.setEnabled(!b);
         txtUbicacion.setEnabled(!b);
-        txtCanti.setEditable(!b);
+        txtUbicacion2.setEnabled(!b);
+        txtCanti.setEnabled(!b);
+        
 
     }
 
@@ -106,6 +109,8 @@ public class EditProducto extends javax.swing.JInternalFrame {
         CargarFoto = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtCanti = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtUbicacion2 = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("EDITAR PRODUCTO");
@@ -136,7 +141,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
         jLabel2.setText("Descripcion");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("Ubicacion");
+        jLabel6.setText("Ubicacion Bodega");
 
         txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -202,6 +207,11 @@ public class EditProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Ubicacion Bodeguita");
+
+        txtUbicacion2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -211,7 +221,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
                 .addComponent(BmodificarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
                 .addComponent(BGuardarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                 .addComponent(BCancelarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -222,19 +232,19 @@ public class EditProducto extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel11)
                     .addComponent(jLabel4)
+                    .addComponent(jLabel7)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtUbicacion2, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtCanti, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                         .addComponent(txtUbicacion, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(LabelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(46, 46, 46))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CargarFoto)
-                        .addGap(152, 152, 152))))
+                .addGap(54, 54, 54)
+                .addComponent(LabelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(46, 46, 46))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CargarFoto)
+                .addGap(197, 197, 197))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,27 +253,31 @@ public class EditProducto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(LabelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CargarFoto))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CargarFoto)
+                        .addGap(13, 13, 13))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCanti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addGap(8, 8, 8)
+                        .addComponent(txtUbicacion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCanti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11)
+                        .addGap(4, 4, 4)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 35, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BmodificarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BGuardarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,7 +297,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txtCodigoBus, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 409, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -327,6 +341,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
                 txtNota.setText(p.getNota());
                 txtUbicacion.setText(p.getUbicacion());
                 txtCanti.setText(String.valueOf(p.getCantidadminima()));
+                txtUbicacion2.setText(p.getUbicacion2());
                 String sql="select foto from producto where codigo = "+txtCodigoBus.getText();
                 ImageIcon foto;
                 InputStream is;
@@ -406,8 +421,8 @@ public class EditProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BCancelarProKeyPressed
 
     private void BCancelarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarProActionPerformed
-        limpiarTextos();
-        txtCodigoBus.requestFocus();
+         limpiarTextos();
+         txtCodigoBus.requestFocus();
          activarbotones(true);
          activarcajastexto(true);
          BmodificarPro.setEnabled(false);
@@ -425,6 +440,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
             p.setNota(txtNota.getText());
             p.setUbicacion(txtUbicacion.getText());
             p.setCantidadminima(Integer.parseInt(txtCanti.getText()));
+            p.setUbicacion2(txtUbicacion2.getText());
             p.setFoto(foto);
             p.setLongitudBytes(longitudBytes);
             BDProducto.actualizarProducto(p);
@@ -491,6 +507,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -499,5 +516,6 @@ public class EditProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextArea txtNota;
     private javax.swing.JTextField txtUbicacion;
+    private javax.swing.JTextField txtUbicacion2;
     // End of variables declaration//GEN-END:variables
 }

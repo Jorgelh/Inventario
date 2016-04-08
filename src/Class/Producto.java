@@ -136,6 +136,15 @@ public class Producto {
         this.bode = bode;
     }
 
+    public String getUbicacion2() {
+        return Ubicacion2;
+    }
+
+    public void setUbicacion2(String Ubicacion2) {
+        this.Ubicacion2 = Ubicacion2;
+    }
+
+    
   
     private int Fam_Id;
     private int Id_Presentacion;
@@ -152,6 +161,7 @@ public class Producto {
     private int longitudBytes;
     private int cantidadminima;
     private String bode;
+    private String Ubicacion2;
     
     
 
