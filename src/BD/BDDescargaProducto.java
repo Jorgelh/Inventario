@@ -43,6 +43,7 @@ public abstract class BDDescargaProducto {
     public static CargaP buscarDescarga (int idc) throws SQLException{
     
         return buscarDescarga(idc, null);
+        
     }
     
     public static CargaP buscarDescarga(int idc, CargaP c) throws SQLException{
