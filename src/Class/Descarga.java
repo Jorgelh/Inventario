@@ -21,6 +21,24 @@ public class Descarga {
    private int Cantidad;
    private int EntregadoA;
    private String nota;
+   private int documento;
+   private String serie;
+
+    public int getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(int documento) {
+        this.documento = documento;
+    }
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
+    }
 
     public int getId_descarga() {
         return id_descarga;
@@ -77,13 +95,5 @@ public class Descarga {
     public void setNota(String nota) {
         this.nota = nota;
     }
-
-   
-   
-   
-   
-    
-            
-    
     
 }
