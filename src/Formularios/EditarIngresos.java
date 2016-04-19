@@ -61,14 +61,13 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     public void limpiarlabel() {
 
         LaDescrip.setText("");
-        LaFechaVen.setText("");
+        txtpo.setText("");
         txtInvoice.setText("");
-        LaPN.setText("");
         txtDoc.setText("");
         laCantidad.setText("");
         TxCodigo.setText("");
         TxCodigo.requestFocus();
-        txtbodega.setText("");
+        txtPN.setText("");
         txtnotas.setText("");
     }
 
@@ -124,13 +123,13 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        txtbodega = new javax.swing.JTextField();
+        txtPN = new javax.swing.JTextField();
         laCantidad = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        LaFechaVen = new javax.swing.JTextField();
+        txtpo = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        LaFechaVen2 = new javax.swing.JTextField();
-        LaFechaVen4 = new javax.swing.JTextField();
+        txtlote = new javax.swing.JTextField();
+        txtjob = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         Descripcion = new javax.swing.JLabel();
@@ -151,11 +150,11 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        LaFechaVen1 = new javax.swing.JTextField();
-        txtbodega2 = new javax.swing.JTextField();
+        txtingresadopor = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtfechaven = new com.toedter.calendar.JDateChooser();
+        ComboBoxBode = new javax.swing.JComboBox<String>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -256,8 +255,8 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("P/N");
 
-        txtbodega.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtbodega.setForeground(new java.awt.Color(0, 102, 255));
+        txtPN.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtPN.setForeground(new java.awt.Color(0, 102, 255));
 
         laCantidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         laCantidad.setForeground(new java.awt.Color(0, 102, 255));
@@ -265,17 +264,17 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Job");
 
-        LaFechaVen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        LaFechaVen.setForeground(new java.awt.Color(0, 102, 255));
+        txtpo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtpo.setForeground(new java.awt.Color(0, 102, 255));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("Lote:");
 
-        LaFechaVen2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        LaFechaVen2.setForeground(new java.awt.Color(0, 102, 255));
+        txtlote.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtlote.setForeground(new java.awt.Color(0, 102, 255));
 
-        LaFechaVen4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        LaFechaVen4.setForeground(new java.awt.Color(0, 102, 255));
+        txtjob.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtjob.setForeground(new java.awt.Color(0, 102, 255));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("P.O.");
@@ -287,20 +286,20 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LaFechaVen, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(LaFechaVen2)
+                    .addComponent(txtpo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtlote)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel15)
                                 .addComponent(jLabel7)
-                                .addComponent(txtbodega, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                                .addComponent(txtPN, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                                 .addComponent(laCantidad))
                             .addComponent(jLabel6)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(LaFechaVen4))
+                    .addComponent(txtjob))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -313,19 +312,19 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtbodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LaFechaVen4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtjob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LaFechaVen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtlote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LaFechaVen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtpo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -450,16 +449,16 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Ingresado por");
 
-        LaFechaVen1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        LaFechaVen1.setForeground(new java.awt.Color(0, 102, 255));
+        txtingresadopor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtingresadopor.setForeground(new java.awt.Color(0, 102, 255));
 
-        txtbodega2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        txtbodega2.setForeground(new java.awt.Color(255, 0, 0));
+        txtCantidad.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        txtCantidad.setForeground(new java.awt.Color(255, 0, 0));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel19.setText("Cantidad");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxBode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -468,16 +467,16 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LaFechaVen1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtingresadopor, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel17)
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
                             .addComponent(jLabel19)
-                            .addComponent(txtbodega2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                            .addComponent(txtfechaven, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ComboBoxBode, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -487,26 +486,32 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addGap(4, 4, 4)
-                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtfechaven, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel17)
                 .addGap(2, 2, 2)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ComboBoxBode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LaFechaVen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtingresadopor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtbodega2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit2.png"))); // NOI18N
         jButton1.setText("Editar");
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save2.png"))); // NOI18N
         jButton2.setText("Guardar");
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jButton3.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -517,25 +522,28 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 87, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(53, 53, 53)
+                        .addGap(39, 39, 39)
                         .addComponent(jButton2)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 87, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton3)
+                        .addGap(275, 275, 275))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(176, 176, 176)
                 .addComponent(jLabel1)
@@ -572,10 +580,10 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -630,17 +638,17 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
         try {
             CargaP ca = BDDescargaProducto.buscarDescarga(Integer.parseInt(String.valueOf(Cosulta.getModel().getValueAt(Cosulta.getSelectedRow(), 0))));
-            LaFechaVen.setText(ca.getReturnFechaIgre());
+            txtpo.setText(ca.getReturnFechaIgre());
             txtInvoice.setText(ca.getLote());
-            LaPN.setText(ca.getPN());
+            txtPN.setText(ca.getPN());
             txtDoc.setText(ca.getPO());
             laCantidad.setText(String.valueOf(ca.getCantidad()));
             txtnotas.setText(ca.getNota());
 
             if (ca.getBodeda() == 1) {
-                txtbodega.setText("Bodega");
+                txtPN.setText("Bodega");
             } else {
-                txtbodega.setText("Bodeguita");
+                txtPN.setText("Bodeguita");
             }
 
         } catch (Exception e) {
@@ -744,20 +752,15 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboBoxBode;
     private javax.swing.JTable Cosulta;
     private javax.swing.JLabel Descripcion;
     private java.awt.Label LaDescrip;
-    private javax.swing.JTextField LaFechaVen;
-    private javax.swing.JTextField LaFechaVen1;
-    private javax.swing.JTextField LaFechaVen2;
-    private javax.swing.JTextField LaFechaVen4;
     private javax.swing.JButton NuevaC;
     private javax.swing.JTextField TxCodigo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -783,13 +786,18 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField laCantidad;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDoc;
     private javax.swing.JTextField txtInvoice;
+    private javax.swing.JTextField txtPN;
     private javax.swing.JTextField txtSerie;
-    private javax.swing.JTextField txtbodega;
-    private javax.swing.JTextField txtbodega2;
     private com.toedter.calendar.JDateChooser txtfechaingreso;
+    private com.toedter.calendar.JDateChooser txtfechaven;
+    private javax.swing.JTextField txtingresadopor;
+    private javax.swing.JTextField txtjob;
+    private javax.swing.JTextField txtlote;
     private javax.swing.JTextField txtnotas;
+    private javax.swing.JTextField txtpo;
     private javax.swing.JTextField txtproveedor;
     // End of variables declaration//GEN-END:variables
 
