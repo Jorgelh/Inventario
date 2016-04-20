@@ -6,6 +6,7 @@
 package BD;
 
 import Class.CargaP;
+import Class.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,6 +55,7 @@ public abstract class BDconsultaVarias {
              };
         
         }
+        c.setId_ingreso(rs.getInt("id_ingreso"));
         c.setReturnFecha(rs.getString("fecha_ven"));
         c.setReturnFechaIgre(rs.getString("fecha_ingreso"));
         c.setPrecio(rs.getInt("precio"));
@@ -110,5 +112,48 @@ public abstract class BDconsultaVarias {
         }
         return list;
     }
+    
+    public static boolean actualizarIngreso(CargaP c) throws SQLException{
+        Connection cnn = BD.getConnection();
+        PreparedStatement ps = null;
+        ps = cnn.prepareStatement("Update ingreso set "
+                + "p_n=?,"
+                + "po=?,"
+                + "cantidad=?,"
+                + "fecha_ven=?, "
+                + "precio=?,"
+                + "lote=?,"
+                + "no_trabajo=?,"
+                + "no_invoice=?,"
+                + "no_documento=?,"
+                + "no_serie=?,"
+                + "ingresadopor=?,"
+                + "proveedor=?,"
+                + "notas=?,"
+                + "bodega=?"
+                + " where id_ingreso=" +c.getId_ingreso());
+        ps.setString(1, c.getPN());
+        ps.setString(2, c.getPO());
+        ps.setInt(3, c.getCantidad());
+        ps.setDate(4, new java.sql.Date(c.getFechaVencimiento().getTime()));
+        ps.setDouble(5, c.getPrecio());
+        ps.setString(6, c.getLote());
+        ps.setString(7, c.getNTrabajo());
+        ps.setString(8, c.getInvoce());
+        ps.setString(9, c.getNoDocumento());
+        ps.setString(10, c.getNoserie());
+        ps.setInt(11, c.getIngresadoPor());
+        ps.setString(12, c.getProveedor());
+        ps.setString(13, c.getNota());
+        ps.setInt(14, c.getBodeda());
+        int rowsUpdated = ps.executeUpdate();
+        cnn.close();
+        ps.close();
+        if (rowsUpdated > 0){ return true;}
+        else {return false;}
+        
+    }
+    
+    
     
 }

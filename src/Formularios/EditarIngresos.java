@@ -12,6 +12,7 @@ import Class.CargaP;
 import Class.Descarga;
 import java.nio.charset.CodingErrorAction;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +35,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
     DefaultTableModel temp;
     int bodega;
+    int id;
 
     /**
      * Creates new form DescargaProducto
@@ -82,6 +86,8 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         ComboBoxBode.setSelectedItem(" ");
         txtingresadopor.setText("");
         txtCantidad.setText("");
+        txtfechaingreso.setDate(null);
+        txtfechaven.setDate(null);
 
     }
 
@@ -121,6 +127,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtpo.setEditable(b);
         txtproveedor.setEditable(b);
         ComboBoxBode.setEnabled(b);
+        txtfechaven.setEnabled(b);
 
     }
 
@@ -399,6 +406,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
         txtfechaingreso.setForeground(new java.awt.Color(0, 102, 255));
         txtfechaingreso.setDateFormatString("d/MM/yy");
+        txtfechaingreso.setEnabled(false);
         txtfechaingreso.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -730,7 +738,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
         try {
             CargaP ca = BDconsultaVarias.buscarIngreso(Integer.parseInt(String.valueOf(Cosulta.getModel().getValueAt(Cosulta.getSelectedRow(), 0))));
-
+            id = ca.getId_ingreso();
             txtjob.setText(ca.getNTrabajo());
             txtDoc.setText(ca.getNoDocumento());
             txtInvoice.setText(ca.getInvoce());
@@ -835,9 +843,18 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     private void BeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeliminarActionPerformed
 
         if (JOptionPane.showConfirmDialog(null, new Object[]{"Seguro que desea Eliminar el registro?"}, "VENTANA", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
-        
-        System.out.println("Yes");
-           
+
+            Connection cnn = BD.getConnection();
+            PreparedStatement ps = null;
+            try {
+                ps = cnn.prepareStatement("Update ingreso set estado=B where id_ingreso=" + id);
+                ps.executeUpdate();
+                cnn.close();
+                ps.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(EditarIngresos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         EditarTXT(false);
         Beliminar.setEnabled(false);
         Bguardar.setEnabled(false);
@@ -845,29 +862,31 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         NuevaC.setEnabled(true);
         Bcancelar.setEnabled(false);
         limpiar();
-        
-        
-        }
-        else{ 
-        System.out.println("No");
-        }
+        actualizarTablaconsulta();
+
+    }
+
+    
+        else {
+            System.out.println("No");
+    }
 
     }//GEN-LAST:event_BeliminarActionPerformed
 
     private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
-        
-        
-        if (TxCodigo.getText().compareTo("") != 0 
-                && txtCantidad.getText().compareTo("") != 0 
+
+        if (TxCodigo.getText().compareTo("") != 0
+                && txtCantidad.getText().compareTo("") != 0
                 && txtingresadopor.getText().compareTo("") != 0
                 && !ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("")) {
 
             try {
                 CargaP c = new CargaP();
-                c.setCodigo(Integer.parseInt(TxCodigo.getText()));
+
+                c.setId_ingreso(id);
                 c.setBodeda(bodega);
                 c.setCantidad(Integer.parseInt(txtCantidad.getText()));
-                c.setFechaVencimiento(txtfechaingreso.getDate());
+                c.setFechaVencimiento(txtfechaven.getDate());
                 c.setIngresadoPor(Integer.parseInt(txtingresadopor.getText()));
                 c.setInvoce(txtInvoice.getText());
                 c.setLote(txtlote.getText());
@@ -879,26 +898,33 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 c.setPN(txtPN.getText());
                 c.setProveedor(txtproveedor.getText());
                 c.setPrecio(Double.parseDouble(txtPrecio.getText()));
-                DBCargaPro.insertarProductoNuevo(c);
+                BDconsultaVarias.actualizarIngreso(c);
                 JOptionPane.showMessageDialog(null, "Ingreso Actualizado...");
+                EditarTXT(false);
+                Beliminar.setEnabled(false);
+                Bguardar.setEnabled(false);
+                Cosulta.setEnabled(true);
+                NuevaC.setEnabled(true);
+                Bcancelar.setEnabled(false);
+                limpiar();
+                actualizarTablaconsulta();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+                JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
         }
 
-    
-        
+
     }//GEN-LAST:event_BguardarActionPerformed
 
     private void ComboBoxBodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxBodeActionPerformed
-      
+
         if (ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
-             bodega = 1;
-        }else if (ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")){
-             bodega = 2;
+            bodega = 1;
+        } else if (ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
+            bodega = 2;
         }
     }//GEN-LAST:event_ComboBoxBodeActionPerformed
 
@@ -926,7 +952,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
                 }) {
             @Override
-            public boolean isCellEditable(int row, int column) {
+        public boolean isCellEditable(int row, int column) {
                 return false;
             }
 
@@ -947,16 +973,28 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditarIngresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditarIngresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditarIngresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditarIngresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarIngresos.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(EditarIngresos.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(EditarIngresos.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(EditarIngresos.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
