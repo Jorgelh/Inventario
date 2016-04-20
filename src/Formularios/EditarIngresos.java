@@ -748,12 +748,18 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             txtPN.setText(ca.getPN());
             txtpo.setText(ca.getPO());
             txtPrecio.setText(String.valueOf(ca.getPrecio()));
-            //txtnotas.setText(ca.getNota());
+            txtnotas.setText(ca.getNota());
             txtingresadopor.setText(String.valueOf(ca.getIngresadoPor()));
             txtCantidad.setText(String.valueOf(ca.getCantidad()));
+
+            if (ca.getReturnFecha()== null) {
+                txtfechaven.setDate(null);
+            } else {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+                Date date = sdf.parse(ca.getReturnFecha());
+                txtfechaven.setDate(date);
+            }
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-            Date date = sdf.parse(ca.getReturnFecha());
-            txtfechaven.setDate(date);
             Date dateingre = sdf.parse(ca.getReturnFechaIgre());
             txtfechaingreso.setDate(dateingre);
 
@@ -855,21 +861,18 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 Logger.getLogger(EditarIngresos.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        EditarTXT(false);
-        Beliminar.setEnabled(false);
-        Bguardar.setEnabled(false);
-        Cosulta.setEnabled(true);
-        NuevaC.setEnabled(true);
-        Bcancelar.setEnabled(false);
-        limpiar();
-        actualizarTablaconsulta();
+            EditarTXT(false);
+            Beliminar.setEnabled(false);
+            Bguardar.setEnabled(false);
+            Cosulta.setEnabled(true);
+            NuevaC.setEnabled(true);
+            Bcancelar.setEnabled(false);
+            limpiar();
+            actualizarTablaconsulta();
 
-    }
-
-    
-        else {
+        } else {
             System.out.println("No");
-    }
+        }
 
     }//GEN-LAST:event_BeliminarActionPerformed
 
@@ -952,7 +955,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
                 }) {
             @Override
-        public boolean isCellEditable(int row, int column) {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
 
@@ -973,28 +976,24 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(EditarIngresos.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(EditarIngresos.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(EditarIngresos.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EditarIngresos.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

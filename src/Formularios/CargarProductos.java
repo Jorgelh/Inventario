@@ -34,6 +34,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     int Enviacodigo;
     int bodega;
     DefaultTableModel temp;
+    
 
     /**
      * Creates new form CargarProductos
@@ -55,7 +56,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             ResultSet rs = stmt.executeQuery("select descripcion from producto where codigo=" + txtCodigo.getText());
             rs.next();
             descripcion.setText(rs.getString("descripcion"));
-            
+            txtfechavenci.setDate(null);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
         }

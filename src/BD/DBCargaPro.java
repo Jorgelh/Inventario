@@ -48,7 +48,7 @@ public abstract class DBCargaPro {
         ps.setDate(3, new java.sql.Date(c.getFechaIngre().getTime()));
         ps.setString(4,c.getPO());
         ps.setInt(5,c.getCantidad());
-        if (c.getFechaVencimiento()== null){ps.setString(6, " ");} else {ps.setDate(6, new java.sql.Date(c.getFechaVencimiento().getTime()));}
+        if (c.getFechaVencimiento()== null){ps.setString(6, null);} else {ps.setDate(6, new java.sql.Date(c.getFechaVencimiento().getTime()));}
         ps.setDouble(7, c.getPrecio());
         ps.setString(8, c.getLote());
         ps.setString(9, c.getNTrabajo());
