@@ -36,7 +36,16 @@ public class CargaP {
     private String ReturnFecha;
     private String ReturnFechaIgre;
     private String descripcion;
+    private String presentacion;
 
+    public String getPresentacion() {
+        return presentacion;
+    }
+
+    public void setPresentacion(String presentacion) {
+        this.presentacion = presentacion;
+    }
+    
     public int getId_ingreso() {
         return id_ingreso;
     }
