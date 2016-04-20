@@ -21,14 +21,14 @@ public class Descarga {
    private int Cantidad;
    private int EntregadoA;
    private String nota;
-   private int documento;
+   private String documento;
    private String serie;
 
-    public int getDocumento() {
+    public String getDocumento() {
         return documento;
     }
 
-    public void setDocumento(int documento) {
+    public void setDocumento(String documento) {
         this.documento = documento;
     }
 

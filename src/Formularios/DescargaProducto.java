@@ -712,7 +712,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                     d.setNota(txtNota.getText());
                     d.setCodigo(Integer.parseInt(TxCodigo.getText()));
                     d.setFecha(fechaEntrega.getDate());
-                    d.setDocumento (Integer.parseInt(documento.getText()));
+                    d.setDocumento(documento.getText());
                     d.setSerie(serie.getText());
                     BDDescargaProducto.insertarDescarga(d);
                     JOptionPane.showMessageDialog(null, "Descarga Realizada...");
@@ -721,7 +721,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                     activartxt(false);
                 } catch (Exception e) {
 
-                    JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+                    JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMAaa"+e);
                 }
             }
             else{ JOptionPane.showMessageDialog(null, "NO POSER LA CANTIDAD NECESARIA PARA REALIZAR LA DESCARGA");}

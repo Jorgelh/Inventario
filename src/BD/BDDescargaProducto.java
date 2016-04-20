@@ -33,7 +33,7 @@ public abstract class BDDescargaProducto {
         ps.setInt(4, ca.getEntregadoA());
         ps.setString(5, ca.getNota());
         ps.setDate(6, new java.sql.Date(ca.getFecha().getTime()));
-        ps.setInt(7, ca.getDocumento());
+        ps.setString(7, ca.getDocumento());
         ps.setString(8, ca.getSerie());
         ps.executeUpdate();
         cn.close();

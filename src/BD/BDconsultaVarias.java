@@ -47,7 +47,7 @@ public abstract class BDconsultaVarias {
                 + "                      bodega,"
                 + "                      notas "
                 + "                      from "
-                + "                      ingreso  where id_ingreso="+idc);
+                + "                      ingreso  where id_ingreso="+idc+"and estado = 'A'");
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (c == null){
@@ -82,7 +82,7 @@ public abstract class BDconsultaVarias {
     
     public static ArrayList<CargaP> ListarProductoIngresadoEdit(int c) {
 
-        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote from ingreso where codigo=" + c  );
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote from ingreso where codigo=" + c + "and estado = 'A'" );
 
     }
 

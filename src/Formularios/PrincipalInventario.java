@@ -396,7 +396,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu4.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(110, 19));
 
-        jMenuItem7.setText("Editar Ingresos");
+        jMenuItem7.setText("EDIT INGRESOS");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -652,7 +652,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         
-         EditarIngresos M = new EditarIngresos();
+        EditarIngresos M = new EditarIngresos();
         jDesktopPane1.add(M); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = M.getSize();

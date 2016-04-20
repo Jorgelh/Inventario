@@ -847,7 +847,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             Connection cnn = BD.getConnection();
             PreparedStatement ps = null;
             try {
-                ps = cnn.prepareStatement("Update ingreso set estado=B where id_ingreso=" + id);
+                ps = cnn.prepareStatement("Update ingreso set estado='B' where id_ingreso=" + id);
                 ps.executeUpdate();
                 cnn.close();
                 ps.close();
