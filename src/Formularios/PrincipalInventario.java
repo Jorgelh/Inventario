@@ -397,6 +397,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu4.setPreferredSize(new java.awt.Dimension(110, 19));
 
         jMenuItem7.setText("EDIT INGRESOS");
+        jMenuItem7.setEnabled(false);
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);

@@ -120,20 +120,19 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
+                        .addGap(205, 205, 205)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(205, 205, 205)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(347, 347, 347)
-                                .addComponent(Bnueva)))
-                        .addGap(0, 343, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(409, 409, 409)
+                .addComponent(Bnueva)
+                .addContainerGap(451, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,9 +142,10 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
                     .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Bnueva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Bnueva, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,9 +156,7 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -171,14 +169,14 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select count(*) from ingreso inner join descarga on ingreso.id_ingreso = descarga.id_ingreso where ingreso.p_n =" + txtPN.getText());
+            ResultSet rs = stmt.executeQuery("select count(*) from ingreso inner join descarga on ingreso.id_ingreso = descarga.id_ingreso where upper(ingreso.p_n) = upper('" + txtPN.getText()+"')");
             rs.next();
             int codigo = rs.getInt("count(*)");
             if (codigo > 0) {
                 actualizarTablaPN();
                 Bnueva.requestFocus();
             } else {
-                JOptionPane.showMessageDialog(null, "El P/N " + txtPN.getText() + " No Contiene Descargas o Producto no Existe");
+                JOptionPane.showMessageDialog(null, "El P/N " + txtPN.getText() + " No Contiene Descargas");
                 txtPN.setText("");
 
             }
@@ -192,11 +190,9 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPNActionPerformed
 
     private void txtPNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPNKeyTyped
-        char c = evt.getKeyChar();
-        if ((c < '0' || c > '9') && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
-            evt.consume();
+        
             
-        }
+        
             }//GEN-LAST:event_txtPNKeyTyped
 
     private void BnuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BnuevaActionPerformed
@@ -229,18 +225,20 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
-            dato[f][1] = a.getNo_trabajo();
-            dato[f][2] = a.getLote();
-            dato[f][3] = a.getDescripcion();
-            dato[f][4] = a.getFechades();
-            dato[f][5] = a.getCantidad();
-            dato[f][6] = a.getEntregadoa();
+            dato[f][1] = a.getDescripcion();
+            dato[f][2] = a.getFechades();
+            dato[f][3] = a.getPN();
+            dato[f][4] = a.getNo_trabajo();
+            dato[f][5] = a.getLote();
+            dato[f][6] = a.getCantidad();
+            dato[f][7] = a.getEntregadoa();
+
             f++;
         }
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Job", "No. Lote", "Descripcion", "Fecha de Entrega", "Cantidad Entregada", "Entregado a"
+                    "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote", "Cantidad","Entregado a"
 
                 }) {
                     @Override

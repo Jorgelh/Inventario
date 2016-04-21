@@ -22,14 +22,20 @@ public abstract class BDConsultas {
     
     public static ArrayList<consultanp> ListarPN(String c) {
 
-        return consultarSQL("select ingreso.codigo," +
-"       ingreso.no_trabajo," +
-"       ingreso.lote," +
-"       producto.descripcion," +
-"       descarga.fechades," +
-"       descarga.cantidad," +
-"       descarga.entregadoa" +
-"       from ingreso inner join producto on ingreso.codigo = producto.codigo join DESCARGA on ingreso.id_ingreso = descarga.id_ingreso  where ingreso.P_N ="+c );
+        return consultarSQL("select ingreso.P_N,"
+                                 + "ingreso.PO,"
+                                 + "ingreso.no_trabajo,"
+                                 + "ingreso.lote,"
+                                 + "descarga.cantidad,"
+                                 + "descarga.entregadoa,"
+                                 + "descarga.nota,"
+                                 + "descarga.fechades,"
+                                 + "descarga.documento,"
+                                 + "descarga.serie,"
+                                 + "descarga.codigo,"
+                                 + "producto.descripcion "
+                                 + "from ingreso inner join descarga on ingreso.ID_INGRESO = descarga.ID_INGRESO "
+                                 + "join producto on DESCARGA.CODIGO = producto.codigo where upper(ingreso.P_N) = upper('"+c+"');");
 
     }
 
@@ -49,6 +55,11 @@ public abstract class BDConsultas {
                 c.setFechades(rs.getString("fechades"));
                 c.setCantidad(rs.getInt("cantidad"));
                 c.setEntregadoa(rs.getString("entregadoa"));
+                c.setPO(rs.getString("PO"));
+                c.setPN(rs.getString("P_N"));
+                c.setNota(rs.getString("nota"));
+                c.setDocumento(rs.getString("documento"));
+                c.setSerie(rs.getString("serie"));
                 list.add(c);
             }
             cn.close();
@@ -168,7 +179,7 @@ public abstract class BDConsultas {
     
     public static ArrayList<Producto> ListarNombre(String f) {
 
-        return consultanombreSQL("select codigo,descripcion,ubicacion,cantidad from producto where descripcion like '"+f+"%'");
+        return consultanombreSQL("select codigo,descripcion,ubicacion,cantidad from producto where upper(descripcion) like upper('"+f+"%')");
 
     }
 

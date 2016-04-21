@@ -18,6 +18,51 @@ public class consultanp {
     private String fechades;
     private int    cantidad;
     private String entregadoa;
+    private String PO;
+    private String PN;
+    private String Documento;
+    private String Serie;
+    private String Nota;
+
+    public String getPO() {
+        return PO;
+    }
+
+    public void setPO(String PO) {
+        this.PO = PO;
+    }
+
+    public String getPN() {
+        return PN;
+    }
+
+    public void setPN(String PN) {
+        this.PN = PN;
+    }
+
+    public String getDocumento() {
+        return Documento;
+    }
+
+    public void setDocumento(String Documento) {
+        this.Documento = Documento;
+    }
+
+    public String getSerie() {
+        return Serie;
+    }
+
+    public void setSerie(String Serie) {
+        this.Serie = Serie;
+    }
+
+    public String getNota() {
+        return Nota;
+    }
+
+    public void setNota(String Nota) {
+        this.Nota = Nota;
+    }
 
     public int getCodigo() {
         return codigo;
