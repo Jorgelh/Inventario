@@ -492,8 +492,8 @@ public class EditProducto extends javax.swing.JInternalFrame {
                 txtUbicacion.setText(p.getUbicacion());
                 txtCanti.setText(String.valueOf(p.getCantidadminima()));
                 txtUbicacion2.setText(p.getUbicacion2());
-                //String pre.p.setPresentacion();
-                txtpresentacion.setSelectedItem(1);
+                //String pre.p.setPresentacion();    
+                //txtpresentacion.getSelectedItem(p.getPresentacion());
                 String sql="select foto from producto where codigo = "+txtCodigoBus.getText();
                 ImageIcon foto;
                 InputStream is;
