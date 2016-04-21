@@ -21,12 +21,10 @@ import java.util.ArrayList;
  *
  * @author jluis
  */
-
-
 public abstract class BDProducto {
-    
+
     public void setFoto(FileInputStream foto, int longitudBytes) {
-            setFoto(foto, longitudBytes);
+        setFoto(foto, longitudBytes);
     }
 
     public static void insertarProducto(Producto p) throws SQLException {
@@ -42,7 +40,7 @@ public abstract class BDProducto {
         ps.setString(6, p.getDescripcion());
         ps.setString(7, p.getNota());
         ps.setString(8, p.getUbicacion());
-        ps.setBinaryStream(9, p.getFoto(),p.getLongitudBytes());
+        ps.setBinaryStream(9, p.getFoto(), p.getLongitudBytes());
         ps.setInt(10, p.getCantidadminima());
         ps.setString(11, p.getUbicacion2());
         ps.executeUpdate();
@@ -50,11 +48,9 @@ public abstract class BDProducto {
         ps.close();
 
     }
-    
-    
 
     public static ArrayList<Producto> ListarProductos(int p) {
-        return consultarSQL("select codigo,descripcion,ubicacion,ubicacion2 from producto where fam_id="+p);
+        return consultarSQL("select codigo,descripcion,ubicacion,ubicacion2 from producto where fam_id=" + p);
     }
 
     private static ArrayList<Producto> consultarSQL(String sql) {
@@ -86,53 +82,61 @@ public abstract class BDProducto {
 
     public static Producto buscarProducto(int id, Producto p) throws SQLException {
         Connection cnn = BD.getConnection();
-        PreparedStatement ps = null;
-        ps = cnn.prepareStatement("select codigo,descripcion,ubicacion,nota,cantidad,cantidadminima,ubicacion2 from producto where codigo = ?");
-        ps.setInt(1, id);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            if (p == null) {
-                p = new Producto() {
-                };
-            }
-            p.setCodigo(rs.getInt("codigo"));
-            p.setDescripcion(rs.getString("Descripcion"));
-            p.setUbicacion(rs.getString("ubicacion"));
-            p.setNota(rs.getString("nota"));
-            p.setCantidad(rs.getInt("cantidad"));
-            p.setCantidadminima(rs.getInt("cantidadminima"));
-            p.setUbicacion2(rs.getString("ubicacion2"));
+        
+        try {
+            PreparedStatement ps = null;
+
+            ps = cnn.prepareStatement("select producto.codigo,producto.descripcion,producto.cantidad,producto.ubicacion,producto.nota,producto.cantidadminima,producto.ubicacion2,presentacion.descripcion as \"desc\" from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion where codigo = ?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                if (p == null) {
+                    p = new Producto() {
+                    };
+                }
+                p.setCodigo(rs.getInt("codigo"));
+                p.setDescripcion(rs.getString("Descripcion"));
+                p.setUbicacion(rs.getString("ubicacion"));
+                p.setNota(rs.getString("nota"));
+                p.setCantidad(rs.getInt("cantidad"));
+                p.setCantidadminima(rs.getInt("cantidadminima"));
+                p.setUbicacion2(rs.getString("ubicacion2"));
+                p.setPresentacion(rs.getString("desc"));
+                cnn.close();
+                ps.close();
+                return p;
           //  p.setId_Medida(rs.getInt("id_medida"));
-            //p.setId_Presentacion(rs.getInt("id_presentacion"));     
+                //p.setId_Presentacion(rs.getInt("id_presentacion"));     
+            }
+
+        } catch (Exception e) {
+               System.err.println("errroooooorrr"+e);    
         }
-        cnn.close();
-        ps.close();
-        return p;
+        
+        return null;
+
     }
-    
-    public static boolean actualizarProducto(Producto p) throws SQLException{
+
+    public static boolean actualizarProducto(Producto p) throws SQLException {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("Update producto set descripcion=?,ubicacion=?,nota=?,foto=?,cantidadminima=?, ubicacion2=? where codigo=" +p.getCodigo());
+        ps = cnn.prepareStatement("Update producto set descripcion=?,ubicacion=?,nota=?,foto=?,cantidadminima=?, ubicacion2=? where codigo=" + p.getCodigo());
         ps.setString(1, p.getDescripcion());
         ps.setString(2, p.getUbicacion());
         ps.setString(3, p.getNota());
-        ps.setBinaryStream(4, p.getFoto(),p.getLongitudBytes());
+        ps.setBinaryStream(4, p.getFoto(), p.getLongitudBytes());
         ps.setInt(5, p.getCantidadminima());
         ps.setString(6, p.getUbicacion2());
 
         int rowsUpdated = ps.executeUpdate();
         cnn.close();
         ps.close();
-        if (rowsUpdated > 0){ return true;}
-        else {return false;}
-        
+        if (rowsUpdated > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
-            
-    
-
 }
-
-
-

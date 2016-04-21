@@ -144,6 +144,14 @@ public class Producto {
         this.Ubicacion2 = Ubicacion2;
     }
 
+    public String getPresentacion() {
+        return presentacion;
+    }
+
+    public void setPresentacion(String presentacion) {
+        this.presentacion = presentacion;
+    }
+
     
   
     private int Fam_Id;
@@ -162,6 +170,7 @@ public class Producto {
     private int cantidadminima;
     private String bode;
     private String Ubicacion2;
+    private String presentacion;
     
     
 
