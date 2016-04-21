@@ -86,7 +86,7 @@ public abstract class BDProducto {
         try {
             PreparedStatement ps = null;
 
-            ps = cnn.prepareStatement("select producto.codigo,producto.descripcion,producto.cantidad,producto.ubicacion,producto.nota,producto.cantidadminima,producto.ubicacion2,presentacion.descripcion as \"desc\" from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion where codigo = ?");
+            ps = cnn.prepareStatement("select producto.codigo,producto.descripcion,producto.cantidad,producto.ubicacion,producto.nota,producto.cantidadminima,producto.ubicacion2,presentacion.descripcion as \"desc\",unidad_medida.descripcion as \"unidad\" from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join UNIDAD_MEDIDA on producto.ID_MEDIDA = UNIDAD_MEDIDA.ID_MEDIDA where codigo =?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -102,6 +102,7 @@ public abstract class BDProducto {
                 p.setCantidadminima(rs.getInt("cantidadminima"));
                 p.setUbicacion2(rs.getString("ubicacion2"));
                 p.setPresentacion(rs.getString("desc"));
+                p.setUmedida(rs.getString("unidad"));
                 cnn.close();
                 ps.close();
                 return p;
@@ -120,13 +121,15 @@ public abstract class BDProducto {
     public static boolean actualizarProducto(Producto p) throws SQLException {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("Update producto set descripcion=?,ubicacion=?,nota=?,foto=?,cantidadminima=?, ubicacion2=? where codigo=" + p.getCodigo());
+        ps = cnn.prepareStatement("Update producto set descripcion=?,ubicacion=?,nota=?,foto=?,cantidadminima=?, ubicacion2=? ,id_medida=?, id_presentacion=? where codigo=" + p.getCodigo());
         ps.setString(1, p.getDescripcion());
         ps.setString(2, p.getUbicacion());
         ps.setString(3, p.getNota());
         ps.setBinaryStream(4, p.getFoto(), p.getLongitudBytes());
         ps.setInt(5, p.getCantidadminima());
         ps.setString(6, p.getUbicacion2());
+        ps.setInt(7, p.getId_Medida());
+        ps.setInt(8, p.getId_Presentacion());
 
         int rowsUpdated = ps.executeUpdate();
         cnn.close();

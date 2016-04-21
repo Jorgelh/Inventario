@@ -50,7 +50,7 @@ public abstract class BDDescargaProducto {
         
         Connection cn = BD.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select ingreso.id_ingreso,ingreso.fecha_ven,ingreso.P_N,ingreso.cantidad,ingreso.PO,ingreso.lote,ingreso.bodega,ingreso.notas,producto.descripcion,presentacion.descripcion as \"desc\" from ingreso inner join producto on producto.codigo = ingreso.codigo join presentacion on producto.id_presentacion = presentacion.id_presentacion and ingreso.id_ingreso="+idc);
+        ps = cn.prepareStatement("select ingreso.id_ingreso,ingreso.fecha_ven,ingreso.P_N,ingreso.cantidad,ingreso.PO,ingreso.lote,ingreso.bodega,ingreso.notas,producto.descripcion,unidad_medida.descripcion as \"desc\" from ingreso inner join producto on producto.codigo = ingreso.codigo join unidad_medida on producto.id_medida = unidad_medida.id_medida and ingreso.id_ingreso="+idc);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (c == null){

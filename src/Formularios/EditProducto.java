@@ -30,11 +30,15 @@ import sun.print.PSPrinterJob;
  * @author jluis
  */
 public class EditProducto extends javax.swing.JInternalFrame {
-     
-     FileInputStream foto;
-     int longitudBytes;
-     ImageIcon foto1;
-     InputStream is;
+
+    FileInputStream foto;
+    int longitudBytes;
+    ImageIcon foto1;
+    InputStream is;
+    int idmedida;
+    int idpresentacion;
+
+
     /**
      * Creates new form EditProducto
      */
@@ -55,9 +59,8 @@ public class EditProducto extends javax.swing.JInternalFrame {
         txtCanti.setText("");
         LabelFoto.setText("");
         LabelFoto.setIcon(null);
-        txtpresentacion.getSelectedItem();
-
-        
+        txtpresentacion.setSelectedItem("null");
+        txtmedida.setSelectedItem("null");
 
     }
 
@@ -71,21 +74,19 @@ public class EditProducto extends javax.swing.JInternalFrame {
         txtCanti.setEnabled(!b);
         txtpresentacion.setEnabled(!b);
         txtmedida.setEnabled(!b);
-        
 
     }
 
     public void activarbotones(boolean b) {
 
-        
         BGuardarPro.setEnabled(!b);
         //BmodificarPro.setEnabled(!b);
         CargarFoto.setEnabled(!b);
-       
+
     }
-    
-     public void presentacion() {
-    try {
+
+    public void presentacion() {
+        try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select descripcion from presentacion");
@@ -98,7 +99,57 @@ public class EditProducto extends javax.swing.JInternalFrame {
         } catch (SQLException error) {
             System.out.println(error);
         }
-}
+    }
+
+    public void Umedida() {
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select descripcion from unidad_medida");
+            while (rs.next()) {
+                txtmedida.addItem((String) rs.getObject(1));
+            }
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException error) {
+            System.out.println(error);
+        }
+    }
+
+  public  void obteneridmedida() {
+      
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select id_medida from unidad_medida where descripcion='" + txtmedida.getSelectedItem()+"'");
+            rs.next();
+            idmedida = rs.getInt("id_medida");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+        }
+                 
+        
+        
+        
+    }
+  
+   public  void obteneridpresent() {
+      
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select id_presentacion from presentacion where descripcion='" + txtpresentacion.getSelectedItem()+"'");
+            rs.next();
+            idpresentacion = rs.getInt("id_presentacion");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+        }
+                 
+        
+        
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -223,25 +274,14 @@ public class EditProducto extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtUbicacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtCanti, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel6)
+                    .addComponent(txtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtUbicacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtCanti, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -338,8 +378,8 @@ public class EditProducto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,17 +401,21 @@ public class EditProducto extends javax.swing.JInternalFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Presentacio");
+        jLabel5.setText("Presentacion");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Unidad de Medida");
 
         txtpresentacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtpresentacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        txtpresentacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "null" }));
         txtpresentacion.setToolTipText("");
+        txtpresentacion.setName(""); // NOI18N
 
         txtmedida.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtmedida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "null" }));
         txtmedida.setToolTipText(",");
+        txtmedida.setName(""); // NOI18N
+        txtmedida.setOpaque(false);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -405,25 +449,6 @@ public class EditProducto extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(126, 126, 126)
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtCodigoBus, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BmodificarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -433,6 +458,24 @@ public class EditProducto extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(BGuardarPro1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCodigoBus, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,7 +501,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
                     .addComponent(BGuardarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BCancelarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BGuardarPro1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -486,30 +529,31 @@ public class EditProducto extends javax.swing.JInternalFrame {
             if (codigo == 1) {
                 BmodificarPro.setEnabled(true);
                 presentacion();
+                Umedida();
                 Producto p = BDProducto.buscarProducto(Integer.parseInt(String.valueOf(txtCodigoBus.getText())));
                 txtDescripcion.setText(p.getDescripcion());
                 txtNota.setText(p.getNota());
                 txtUbicacion.setText(p.getUbicacion());
                 txtCanti.setText(String.valueOf(p.getCantidadminima()));
                 txtUbicacion2.setText(p.getUbicacion2());
-                //String pre.p.setPresentacion();    
-                //txtpresentacion.getSelectedItem(p.getPresentacion());
-                String sql="select foto from producto where codigo = "+txtCodigoBus.getText();
+                txtpresentacion.setSelectedItem(p.getPresentacion());
+                txtmedida.setSelectedItem(p.getUmedida());
+                String sql = "select foto from producto where codigo = " + txtCodigoBus.getText();
                 ImageIcon foto;
                 InputStream is;
                 Connection cnn = BD.getConnection();
-                PreparedStatement ps= null;
+                PreparedStatement ps = null;
                 ps = cnn.prepareStatement(sql);
                 ResultSet r = ps.executeQuery();
-                while(r.next()){
-                is = r.getBinaryStream(1);
-                BufferedImage bi = ImageIO.read(is);
-                foto = new ImageIcon(bi);
-                Image img = foto.getImage();
-                Image newimg = img.getScaledInstance(365, 265, java.awt.Image.SCALE_SMOOTH);
-                ImageIcon newicon = new ImageIcon(newimg);   
-                LabelFoto.setIcon(newicon);
-            }     
+                while (r.next()) {
+                    is = r.getBinaryStream(1);
+                    BufferedImage bi = ImageIO.read(is);
+                    foto = new ImageIcon(bi);
+                    Image img = foto.getImage();
+                    Image newimg = img.getScaledInstance(365, 265, java.awt.Image.SCALE_SMOOTH);
+                    ImageIcon newicon = new ImageIcon(newimg);
+                    LabelFoto.setIcon(newicon);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Producto " + txtCodigoBus.getText() + " No Exixte");
                 limpiarTextos();
@@ -518,7 +562,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
 
         } catch (Exception e) {
             LabelFoto.setText("No Foto");
-            
+
         }
         BCancelarPro.requestFocus();
 
@@ -544,25 +588,24 @@ public class EditProducto extends javax.swing.JInternalFrame {
 
     private void CargarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarFotoActionPerformed
 
-      //  LabelFoto.setIcon(null);
-        JFileChooser j=new JFileChooser();
+        //  LabelFoto.setIcon(null);
+        JFileChooser j = new JFileChooser();
         j.setFileSelectionMode(JFileChooser.FILES_ONLY);//solo archivos y no carpetas
-        int estado=j.showOpenDialog(null);
-        if(estado == JFileChooser.APPROVE_OPTION){
-            try{
-                foto=new FileInputStream(j.getSelectedFile());
+        int estado = j.showOpenDialog(null);
+        if (estado == JFileChooser.APPROVE_OPTION) {
+            try {
+                foto = new FileInputStream(j.getSelectedFile());
                 //necesitamos saber la cantidad de bytes
-                this.longitudBytes=(int)j.getSelectedFile().length();
+                this.longitudBytes = (int) j.getSelectedFile().length();
                 try {
-                    Image icono=ImageIO.read(j.getSelectedFile()).getScaledInstance
-                    (LabelFoto.getWidth(),LabelFoto.getHeight(),Image.SCALE_DEFAULT);
+                    Image icono = ImageIO.read(j.getSelectedFile()).getScaledInstance(LabelFoto.getWidth(), LabelFoto.getHeight(), Image.SCALE_DEFAULT);
                     LabelFoto.setIcon(new ImageIcon(icono));
                     LabelFoto.updateUI();
 
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(rootPane, "imagen: "+ex);
+                    JOptionPane.showMessageDialog(rootPane, "imagen: " + ex);
                 }
-            }catch(FileNotFoundException ex){
+            } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
         }
@@ -574,11 +617,11 @@ public class EditProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BCancelarProKeyPressed
 
     private void BCancelarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarProActionPerformed
-         limpiarTextos();
-         txtCodigoBus.requestFocus();
-         activarbotones(true);
-         activarcajastexto(true);
-         BmodificarPro.setEnabled(false);
+        limpiarTextos();
+        txtCodigoBus.requestFocus();
+        activarbotones(true);
+        activarcajastexto(true);
+        BmodificarPro.setEnabled(false);
 
     }//GEN-LAST:event_BCancelarProActionPerformed
 
@@ -586,7 +629,8 @@ public class EditProducto extends javax.swing.JInternalFrame {
 
         Producto p;
         try {
-
+            obteneridmedida();
+            obteneridpresent();
             p = BDProducto.buscarProducto(Integer.parseInt(txtCodigoBus.getText()));
             p.setCodigo(Integer.parseInt(txtCodigoBus.getText()));
             p.setDescripcion(txtDescripcion.getText());
@@ -594,6 +638,8 @@ public class EditProducto extends javax.swing.JInternalFrame {
             p.setUbicacion(txtUbicacion.getText());
             p.setCantidadminima(Integer.parseInt(txtCanti.getText()));
             p.setUbicacion2(txtUbicacion2.getText());
+            p.setId_Medida(idmedida);
+            p.setId_Presentacion(idpresentacion);
             p.setFoto(foto);
             p.setLongitudBytes(longitudBytes);
             BDProducto.actualizarProducto(p);
@@ -605,7 +651,7 @@ public class EditProducto extends javax.swing.JInternalFrame {
             txtCodigoBus.requestFocus();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
         }
     }//GEN-LAST:event_BGuardarProActionPerformed
 

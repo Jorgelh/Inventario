@@ -152,8 +152,14 @@ public class Producto {
         this.presentacion = presentacion;
     }
 
-    
-  
+    public String getUmedida() {
+        return Umedida;
+    }
+
+    public void setUmedida(String Umedida) {
+        this.Umedida = Umedida;
+    }
+
     private int Fam_Id;
     private int Id_Presentacion;
     private int Id_Medida;
@@ -171,6 +177,7 @@ public class Producto {
     private String bode;
     private String Ubicacion2;
     private String presentacion;
+    private String Umedida;
     
     
 

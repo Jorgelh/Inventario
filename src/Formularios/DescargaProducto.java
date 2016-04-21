@@ -118,6 +118,23 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         fechaEntrega.setCalendar(c2);
 }
 
+    public  void obtenerdescripcion() {
+        
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select producto.descripcion,UNIDAD_MEDIDA.DESCRIPCION as \"descmedida\" from producto inner join UNIDAD_MEDIDA on producto.id_medida = UNIDAD_MEDIDA.ID_MEDIDA where codigo=" + TxCodigo.getText());
+            rs.next();
+            LaDescrip.setText(rs.getString("descripcion"));
+            unidadMedida.setText(rs.getString("descmedida"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+        }
+              
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -680,6 +697,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             if (codigo > 0) {
                 activartxt(true);
                 actualizarTablaconsulta();
+                obtenerdescripcion();
                 txtcantidad.requestFocus();
                 llenarBalance();
                 FechasJdate();
@@ -740,8 +758,8 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         try {
             documento.requestFocus();
             CargaP ca = BDDescargaProducto.buscarDescarga(Integer.parseInt(String.valueOf(Cosulta.getModel().getValueAt(Cosulta.getSelectedRow(), 0))));
-            LaDescrip.setText(ca.getDescripcion());
-            unidadMedida.setText(ca.getPresentacion());
+            //LaDescrip.setText(ca.getDescripcion());
+            //unidadMedida.setText(ca.getPresentacion());
             LaFechaVen.setText(ca.getReturnFechaIgre());
             LaLote.setText(ca.getLote());
             LaPN.setText(ca.getPN());
