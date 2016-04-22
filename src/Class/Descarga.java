@@ -23,6 +23,35 @@ public class Descarga {
    private String nota;
    private String documento;
    private String serie;
+   private String pn;
+   private String lote;
+   private String trabajo;
+
+    public String getPn() {
+        return pn;
+    }
+
+    public void setPn(String pn) {
+        this.pn = pn;
+    }
+
+    public String getLote() {
+        return lote;
+    }
+
+    public void setLote(String lote) {
+        this.lote = lote;
+    }
+
+    public String getTrabajo() {
+        return trabajo;
+    }
+
+    public void setTrabajo(String trabajo) {
+        this.trabajo = trabajo;
+    }
+   
+   
 
     public String getDocumento() {
         return documento;
