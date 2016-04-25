@@ -66,6 +66,8 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
         tablaFecha = new javax.swing.JTable();
         Nbusqueda = new javax.swing.JButton();
         buscar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        bodegaselect = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setTitle("CONSULTA FECHA INGRESO");
@@ -79,14 +81,57 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
         txtFecha.setMinSelectableDate(new java.util.Date(-62135744339000L));
         txtFecha.setMinimumSize(new java.awt.Dimension(35, 45));
         txtFecha.setPreferredSize(new java.awt.Dimension(90, 20));
+        txtFecha.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                txtFechaComponentAdded(evt);
+            }
+        });
+        txtFecha.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtFechaAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        txtFecha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFechaFocusLost(evt);
+            }
+        });
+        txtFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtFechaMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtFechaMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txtFechaMouseReleased(evt);
+            }
+        });
+        txtFecha.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtFechaInputMethodTextChanged(evt);
+            }
+        });
         txtFecha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFechaKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFechaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFechaKeyTyped(evt);
+            }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Fecha:");
+        jLabel1.setText("Bodega");
 
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,45 +164,55 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("Fecha:");
+
+        bodegaselect.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bodegaselect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Bodega", "Bodeguita" }));
+        bodegaselect.setName(""); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
+                .addGap(94, 94, 94)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(bodegaselect, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
                 .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(37, 37, 37)
                 .addComponent(buscar)
-                .addGap(226, 226, 226))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGap(90, 90, 90))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(369, 369, 369)
                 .addComponent(Nbusqueda)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(25, 25, 25))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bodegaselect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
                 .addComponent(Nbusqueda)
-                .addGap(0, 42, Short.MAX_VALUE))
+                .addGap(0, 45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,7 +233,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
 
     private void txtFechaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaKeyPressed
 
-   
+     buscar.setEnabled(true);
 
 
     }//GEN-LAST:event_txtFechaKeyPressed
@@ -188,12 +243,15 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
         limpiartabla();
         txtFecha.setDate(null);
         txtFecha.setEnabled(true);
+        bodegaselect.setSelectedItem("Todos");
         
 
     }//GEN-LAST:event_NbusquedaActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
 
+        if(txtFecha.getDate () != null){
+        
         Date date = txtFecha.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         String fecha1 = sdf.format(date);
@@ -217,6 +275,9 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println("Editar Error" + e);
         }
+        }
+        else{JOptionPane.showMessageDialog(null,"FECHA NO VALIDAD...");
+                }
                
         
 
@@ -230,13 +291,56 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_NbusquedaKeyPressed
 
+    private void txtFechaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtFechaInputMethodTextChanged
+               
+                
+    }//GEN-LAST:event_txtFechaInputMethodTextChanged
+
+    private void txtFechaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaKeyReleased
+    }//GEN-LAST:event_txtFechaKeyReleased
+
+    private void txtFechaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtFechaAncestorAdded
+       
+    }//GEN-LAST:event_txtFechaAncestorAdded
+
+    private void txtFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechaFocusLost
+
+           
+    }//GEN-LAST:event_txtFechaFocusLost
+
+    private void txtFechaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMousePressed
+    }//GEN-LAST:event_txtFechaMousePressed
+
+    private void txtFechaComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_txtFechaComponentAdded
+        
+    }//GEN-LAST:event_txtFechaComponentAdded
+
+    private void txtFechaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaKeyTyped
+         
+    }//GEN-LAST:event_txtFechaKeyTyped
+
+    private void txtFechaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMouseReleased
+         
+    }//GEN-LAST:event_txtFechaMouseReleased
+
+    private void txtFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMouseClicked
+       buscar.setEnabled(true);
+    }//GEN-LAST:event_txtFechaMouseClicked
+
     private void actualizarTablaFecha() {
 
         Date date = txtFecha.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         String fecha = sdf.format(date);
+        
+        int b1;
+        int b2;
+              
+        if (bodegaselect.getSelectedItem() == "Bodega"){ b1 = 1; b2 = 0; }
+        else if(bodegaselect.getSelectedItem() == "Bodeguita"){b1 = 0; b2 = 2;}
+        else{b1=1;b2=2;}
 
-        ArrayList<ConsultaFecha> result = BDConsultas.ListarIngresoFecha(fecha);
+        ArrayList<ConsultaFecha> result = BDConsultas.ListarIngresoFecha(fecha,b1,b2);
         recargarIngreFecha(result);
     }
 
@@ -305,8 +409,10 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Nbusqueda;
+    private javax.swing.JComboBox<String> bodegaselect;
     private javax.swing.JButton buscar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaFecha;

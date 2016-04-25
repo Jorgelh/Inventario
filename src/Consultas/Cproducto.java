@@ -132,21 +132,26 @@ public class Cproducto extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Nota:");
 
+        desc.setEditable(false);
         desc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         desc.setForeground(new java.awt.Color(0, 102, 255));
 
+        ubica.setEditable(false);
         ubica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ubica.setForeground(new java.awt.Color(0, 102, 255));
 
+        cantidad.setEditable(false);
         cantidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cantidad.setForeground(new java.awt.Color(0, 102, 255));
 
+        nota.setEditable(false);
         nota.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         nota.setForeground(new java.awt.Color(0, 102, 255));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Ubicacion Bodeguita");
 
+        ubica1.setEditable(false);
         ubica1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ubica1.setForeground(new java.awt.Color(0, 102, 255));
 

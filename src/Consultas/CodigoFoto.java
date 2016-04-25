@@ -95,6 +95,7 @@ public class CodigoFoto extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Productos");
+        setToolTipText("");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 

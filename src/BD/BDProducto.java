@@ -21,6 +21,7 @@ import java.util.ArrayList;
  *
  * @author jluis
  */
+
 public abstract class BDProducto {
 
     public void setFoto(FileInputStream foto, int longitudBytes) {

@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.bind.DatatypeConverter;
 //import oracle.net.aso.f;
@@ -23,7 +24,7 @@ import javax.xml.bind.DatatypeConverter;
  *
  * @author Jorge Luis
  */
-public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
+public class CDescargaFecha extends javax.swing.JInternalFrame {
                
     DefaultTableModel temp;
  
@@ -31,7 +32,7 @@ public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
     /**
      * Creates new form CDescargaporFecha
      */
-    public CRangoIngresoFecha() {
+    public CDescargaFecha() {
         initComponents();
     }
     
@@ -60,45 +61,34 @@ public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtFecha = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaFecha = new javax.swing.JTable();
         Nbusqueda = new javax.swing.JButton();
         buscar = new javax.swing.JButton();
+        txtFecha = new com.toedter.calendar.JDateChooser();
+        bodegaselect = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        txtfecha1 = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
-        setTitle("CONSULTA FECHA INGRESO");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("CONSULTA DESCARGA POR FECHA");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
-        txtFecha.setDateFormatString("d/MM/yy");
-        txtFecha.setDoubleBuffered(false);
-        txtFecha.setFocusable(false);
-        txtFecha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtFecha.setMaxSelectableDate(new java.util.Date(253370790061000L));
-        txtFecha.setMinSelectableDate(new java.util.Date(-62135744339000L));
-        txtFecha.setMinimumSize(new java.awt.Dimension(35, 45));
-        txtFecha.setPreferredSize(new java.awt.Dimension(90, 20));
-        txtFecha.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtFechaKeyPressed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("Fecha:");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Desde");
-
+        tablaFecha.setAutoCreateRowSorter(true);
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Cantidad Ingresada", "P/N", "Notas", "Fecha de Ingreso"
+
             }
         ));
+        tablaFecha.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(tablaFecha);
 
         Nbusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
@@ -122,58 +112,64 @@ public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("hasta");
+        txtFecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        txtfecha1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bodegaselect.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bodegaselect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Bodega", "Bodeguita" }));
+        bodegaselect.setName(""); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("Bodega");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(buscar)
-                .addGap(141, 141, 141))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(369, 369, 369)
-                .addComponent(Nbusqueda)
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 210, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(bodegaselect, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buscar)
+                                .addGap(178, 178, 178))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(Nbusqueda)
+                                .addGap(382, 382, 382))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bodegaselect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(10, 10, 10))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(Nbusqueda)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,8 +182,6 @@ public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -204,48 +198,43 @@ public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
         limpiartabla();
         txtFecha.setDate(null);
         txtFecha.setEnabled(true);
-        txtfecha1.setDate(null);
-        txtfecha1.setEnabled(true);
-        
+        bodegaselect.setSelectedItem("Todos");
 
     }//GEN-LAST:event_NbusquedaActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-
         
-        actualizarTablaFecha();
         
-        Nbusqueda.requestFocus(); 
-        
-        /*
+        if(txtFecha.getDate() != null){
         Date date = txtFecha.getDate();
-        Date date1 = txtfecha1.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
-        String fecha2 = sd.format(date);
         String fecha1 = sdf.format(date);
     
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select COUNT(id_ingreso) from ingreso where fechasistema='"+ fecha1 + "'" );
+            ResultSet rs = stmt.executeQuery("select COUNT(id_descarga) from descarga where fechades='"+ fecha1 + "'");
             rs.next();
-            int codigo = rs.getInt("count(id_ingreso)");
+            int codigo = rs.getInt("count(id_descarga)");
             if (codigo > 0) {
                 actualizarTablaFecha();
                 txtFecha.setEnabled(false);
                 Nbusqueda.requestFocus(); 
+               
 
             } else {
-                JOptionPane.showMessageDialog(null, "NO TIENE INGRESOS DE FECHA SELECCIONADA...");
+                JOptionPane.showMessageDialog(null, "NO TIENE DESCARGAS DE FECHA SELECCIONADA...");
                 txtFecha.setDate(null);
             }
 
         } catch (Exception e) {
             System.out.println("Editar Error" + e);
         }
-               
-        */
+                 
+        }
+        else {JOptionPane.showMessageDialog(null, "FECHA NO VALIDAD...");}
+       
+        
 
     }//GEN-LAST:event_buscarActionPerformed
 
@@ -263,32 +252,34 @@ public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         String fecha = sdf.format(date);
         
-        Date date2 = txtfecha1.getDate();
-        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
-        String fecha1 = sd.format(date2);
+        int b1;
+        int b2;
+              
+        if (bodegaselect.getSelectedItem() == "Bodega"){ b1 = 1; b2 = 0; }
+        else if(bodegaselect.getSelectedItem() == "Bodeguita"){b1 = 0; b2 = 2;}
+        else{b1=1;b2=2;}
 
-        ArrayList<ConsultaFecha> result = BDConsultas.ListarRangoFecha(fecha , fecha1);
-        recargarIngreFecha(result);
+        ArrayList<ConsultaFecha> result = BDConsultas.ListarFecha(fecha,b1,b2);
+        recargarFecha(result);
     }
 
-    private void recargarIngreFecha(ArrayList<ConsultaFecha> list) {
+    private void recargarFecha(ArrayList<ConsultaFecha> list) {
 
         Object[][] dato = new Object[list.size()][6];
-        if (list.size() > 0){
         int f = 0;
         for (ConsultaFecha a : list) {
             dato[f][0] = a.getCodigo();
             dato[f][1] = a.getDescripcion();
             dato[f][2] = a.getCantidad();
-            dato[f][3] = a.getPN();
+            dato[f][3] = a.getEntregadoA();
             dato[f][4] = a.getNota();
-            dato[f][5] = a.getFecha();
+            dato[f][5] = a.getFechades();
             f++;
         }
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Cantidad Ingresada", "P/N", "Notas", "Fecha de Ingreso"
+                    "Codigo", "Descripcion", "Cantidad Entregada", "Entregado A", "Notas", "Fecha de Descarga"
 
                 }) {
                     @Override
@@ -297,20 +288,8 @@ public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
                     }
 
                 });
-        txtFecha.setEnabled(false);
-        txtfecha1.setEnabled(false);
     }
-    
-    else
-    {
-       JOptionPane.showMessageDialog(null,"NO TIENE INGRESOS DEL RANGO DE FECHA SELECCIONADO..."); 
-        limpiartabla();
-        txtFecha.setDate(null);
-        txtFecha.setEnabled(true);
-        txtfecha1.setDate(null);
-        txtfecha1.setEnabled(true);
-    }
-    }
+
     /**
      * @param args the command line arguments
      */
@@ -328,14 +307,18 @@ public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CRangoIngresoFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CDescargaFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CRangoIngresoFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CDescargaFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CRangoIngresoFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CDescargaFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CRangoIngresoFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CDescargaFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -344,13 +327,14 @@ public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CRangoIngresoFecha().setVisible(true);
+                new CDescargaFecha().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Nbusqueda;
+    private javax.swing.JComboBox<String> bodegaselect;
     private javax.swing.JButton buscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -358,6 +342,5 @@ public class CRangoIngresoFecha extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaFecha;
     private com.toedter.calendar.JDateChooser txtFecha;
-    private com.toedter.calendar.JDateChooser txtfecha1;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,6 +15,7 @@ public class consultanp {
     private String no_trabajo;
     private String lote;
     private String descripcion;
+    private String fechaingre;
     private String fechades;
     private int    cantidad;
     private String entregadoa;
@@ -23,6 +24,34 @@ public class consultanp {
     private String Documento;
     private String Serie;
     private String Nota;
+    private String ingrepor;
+    private int cantInicial;
+
+    public int getCantInicial() {
+        return cantInicial;
+    }
+
+    public void setCantInicial(int cantInicial) {
+        this.cantInicial = cantInicial;
+    }
+    
+    public String getIngrepor() {
+        return ingrepor;
+    }
+
+    public void setIngrepor(String ingrepor) {
+        this.ingrepor = ingrepor;
+    }
+    
+    
+
+    public String getFechaingre() {
+        return fechaingre;
+    }
+
+    public void setFechaingre(String fechaingre) {
+        this.fechaingre = fechaingre;
+    }
 
     public String getPO() {
         return PO;

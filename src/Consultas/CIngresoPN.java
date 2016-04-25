@@ -22,13 +22,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jorge Luis
  */
-public class ConsultaPN extends javax.swing.JInternalFrame {
+public class CIngresoPN extends javax.swing.JInternalFrame {
            DefaultTableModel temp;
 
     /**
      * Creates new form ConsultaPN
      */
-    public ConsultaPN() {
+    public CIngresoPN() {
         initComponents();
     }
     
@@ -66,6 +66,8 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCon = new javax.swing.JTable();
         Bnueva = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        bodegaselect2 = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -94,7 +96,7 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Job", "No. Lote ", "Descripcion", "Fecha de Entrega", "Cantidad Entregada", "Entregado A"
+                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "Cantidad Bodega", "Cantidad Ingresada", "Ingresado Por"
             }
         ));
         jScrollPane1.setViewportView(tablaCon);
@@ -113,34 +115,47 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("Bodega");
+
+        bodegaselect2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bodegaselect2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Bodega", "Bodeguita" }));
+        bodegaselect2.setName(""); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                .addContainerGap()
+                .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(409, 409, 409)
                 .addComponent(Bnueva)
-                .addContainerGap(451, Short.MAX_VALUE))
+                .addContainerGap(528, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(bodegaselect2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(204, 204, 204))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bodegaselect2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -156,7 +171,7 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -169,14 +184,14 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select count(*) from ingreso inner join descarga on ingreso.id_ingreso = descarga.id_ingreso where upper(ingreso.p_n) = upper('" + txtPN.getText()+"')");
+            ResultSet rs = stmt.executeQuery("select count(*) from ingreso  where upper(p_n) = upper('" + txtPN.getText()+"')");
             rs.next();
             int codigo = rs.getInt("count(*)");
             if (codigo > 0) {
                 actualizarTablaPN();
                 Bnueva.requestFocus();
             } else {
-                JOptionPane.showMessageDialog(null, "El P/N " + txtPN.getText() + " No Contiene Descargas");
+                JOptionPane.showMessageDialog(null, "El P/N " + txtPN.getText() + " No Contiene Ingresos");
                 txtPN.setText("");
 
             }
@@ -215,30 +230,32 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
 
     private void actualizarTablaPN() {
 
-        ArrayList<consultanp> result = BDConsultas.ListarPN(txtPN.getText());
+        ArrayList<consultanp> result = BDConsultas.ListaringrePN(txtPN.getText());
         recagarTabla(result);
     }
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][7];
+        Object[][] dato = new Object[list.size()][9];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
             dato[f][1] = a.getDescripcion();
-            dato[f][2] = a.getFechades();
+            dato[f][2] = a.getFechaingre();
             dato[f][3] = a.getPN();
             dato[f][4] = a.getNo_trabajo();
             dato[f][5] = a.getLote();
             dato[f][6] = a.getCantidad();
-            dato[f][7] = a.getEntregadoa();
+            dato[f][8] = a.getCantInicial();
+            dato[f][7] = a.getIngrepor();
+            
 
             f++;
         }
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote", "Cantidad","Entregado a"
+                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "Cantidad Bodega","Cantidad Ingresada","Ingresado por"
 
                 }) {
                     @Override
@@ -266,28 +283,33 @@ public class ConsultaPN extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CIngresoPN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CIngresoPN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CIngresoPN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CIngresoPN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultaPN().setVisible(true);
+                new CIngresoPN().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bnueva;
+    private javax.swing.JComboBox<String> bodegaselect2;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaCon;

@@ -65,6 +65,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         CONSULTAPN = new javax.swing.JMenuItem();
@@ -329,6 +330,17 @@ public class PrincipalInventario extends javax.swing.JFrame {
         });
         jMenu8.add(jMenuItem4);
 
+        jMenuItem8.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem8.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
+        jMenuItem8.setText("P/N");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem8);
+
         jMenu2.add(jMenu8);
 
         jMenu9.setForeground(new java.awt.Color(0, 51, 255));
@@ -397,7 +409,6 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu4.setPreferredSize(new java.awt.Dimension(110, 19));
 
         jMenuItem7.setText("EDIT INGRESOS");
-        jMenuItem7.setEnabled(false);
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -506,7 +517,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
     private void CONSULTAPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CONSULTAPNActionPerformed
 
-        ConsultaPN M = new ConsultaPN();
+        CDescargaPN M = new CDescargaPN();
         jDesktopPane1.add(M); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = M.getSize();
@@ -567,7 +578,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
        
-        CDesporFecha M = new CDesporFecha();
+        CDescargaFecha M = new CDescargaFecha();
         jDesktopPane1.add(M); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = M.getSize();
@@ -588,7 +599,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        
-        CNombre M = new CNombre();
+        CListaNombre M = new CListaNombre();
         jDesktopPane1.add(M); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = M.getSize();
@@ -601,7 +612,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         
         
-         CCodigo M = new CCodigo();
+         CListaCodigo M = new CListaCodigo();
         jDesktopPane1.add(M); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = M.getSize();
@@ -630,7 +641,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
        
-        CRangoIngresoFecha M = new CRangoIngresoFecha();
+        CIngresoRangoFecha M = new CIngresoRangoFecha();
         jDesktopPane1.add(M); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = M.getSize();
@@ -642,7 +653,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
       
-        IngresosCodigo M = new IngresosCodigo();
+        CIngresoCodigo M = new CIngresoCodigo();
         jDesktopPane1.add(M); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = M.getSize();
@@ -662,6 +673,18 @@ public class PrincipalInventario extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        
+        CIngresoPN M = new CIngresoPN();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+        
+        
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     
     public static void main(String args[]) {
@@ -728,6 +751,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private Formularios.MProcedencia mProcedencia1;
