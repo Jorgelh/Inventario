@@ -65,6 +65,12 @@ public abstract class DBCargaPro {
         ps.close();
     }
     
+    public static ArrayList<CargaP> ListarProductoIngresadoporBodega(int c , int b1, int b2) {
+
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote from ingreso where (ingreso.bodega = "+b1+" or ingreso.bodega = "+b2+" ) and codigo=" + c + "and cantidad > 0 and estado = 'A'" );
+
+    }
+    
 
     public static ArrayList<CargaP> ListarProductoIngresado(int c) {
 
@@ -98,5 +104,6 @@ public abstract class DBCargaPro {
         }
         return list;
     }
+   
 
 }
