@@ -31,7 +31,7 @@ public class CargaP {
     private int ingresadoPor;
     private String Proveedor;
     private String nota;
-    private int Bodeda;
+    private int Bodega;
     private Date fechasistema;
     private String ReturnFecha;
     private String ReturnFechaIgre;
@@ -86,11 +86,6 @@ public class CargaP {
         this.ReturnFechaIgre = ReturnFechaIgre;
     }
     
-    
-
-    
-   
-
     public String getPO() {
         return PO;
     }
@@ -122,9 +117,7 @@ public class CargaP {
     public void setNota(String nota) {
         this.nota = nota;
     }
-
     
-
     public String getLote() {
         return Lote;
     }
@@ -181,14 +174,12 @@ public class CargaP {
         this.Proveedor = Proveedor;
     }
 
-    
-
     public int getBodeda() {
-        return Bodeda;
+        return Bodega;
     }
 
     public void setBodeda(int Bodeda) {
-        this.Bodeda = Bodeda;
+        this.Bodega = Bodeda;
     }
 
     public String getEstado() {
@@ -215,9 +206,7 @@ public class CargaP {
     public void setFechasistema(Date fechasistema) {
         this.fechasistema = fechasistema;
     }
-
-   
-
+    
     public Date getFechaIngre() {
         return fechaIngre;
     }

@@ -135,7 +135,8 @@ public abstract class BDconsultaVarias {
         ps.setString(1, c.getPN());
         ps.setString(2, c.getPO());
         ps.setInt(3, c.getCantidad());
-        ps.setDate(4, new java.sql.Date(c.getFechaVencimiento().getTime()));
+        if (c.getFechaVencimiento()== null){ps.setString(4, null);} else {ps.setDate(4, new java.sql.Date(c.getFechaVencimiento().getTime()));}
+        //ps.setDate(4, new java.sql.Date(c.getFechaVencimiento().getTime()));
         ps.setDouble(5, c.getPrecio());
         ps.setString(6, c.getLote());
         ps.setString(7, c.getNTrabajo());

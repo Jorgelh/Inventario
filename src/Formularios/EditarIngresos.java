@@ -533,7 +533,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
         ComboBoxBode.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ComboBoxBode.setForeground(new java.awt.Color(0, 102, 255));
-        ComboBoxBode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Bodega", "Bodeguita" }));
+        ComboBoxBode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bodega", "Bodeguita" }));
         ComboBoxBode.setName(""); // NOI18N
         ComboBoxBode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -642,7 +642,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 .addComponent(Beliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 14, Short.MAX_VALUE)
+                .addGap(0, 33, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -677,7 +677,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 263, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -695,8 +695,8 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -752,7 +752,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             txtingresadopor.setText(String.valueOf(ca.getIngresadoPor()));
             txtCantidad.setText(String.valueOf(ca.getCantidad()));
 
-            if (ca.getReturnFecha()== null) {
+            if (ca.getReturnFecha() == null) {
                 txtfechaven.setDate(null);
             } else {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
@@ -883,9 +883,14 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 && txtingresadopor.getText().compareTo("") != 0
                 && !ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("")) {
 
+            if (ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
+                bodega = 1;
+            } else if (ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
+                bodega = 2;
+            }
+
             try {
                 CargaP c = new CargaP();
-
                 c.setId_ingreso(id);
                 c.setBodeda(bodega);
                 c.setCantidad(Integer.parseInt(txtCantidad.getText()));
@@ -911,8 +916,8 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 Bcancelar.setEnabled(false);
                 limpiar();
                 actualizarTablaconsulta();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+            } catch (SQLException a) {
+                JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + a);
             }
 
         } else {

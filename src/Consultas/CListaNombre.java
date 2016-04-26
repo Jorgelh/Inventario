@@ -72,6 +72,7 @@ public class CListaNombre extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
+        setTitle("Lista Producto Por Nombre");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N

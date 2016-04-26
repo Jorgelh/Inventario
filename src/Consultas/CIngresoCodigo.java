@@ -106,6 +106,7 @@ public class CIngresoCodigo extends javax.swing.JInternalFrame {
         txtbodega.setText("");
         txtnotas.setText("");
         bodegaselect.setSelectedItem("Todos");
+        unidamedida.setText("");
     }
 
     public void obtenerdescripcion() {
@@ -336,7 +337,8 @@ public class CIngresoCodigo extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(unidamedida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(unidamedida, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -651,7 +653,9 @@ public class CIngresoCodigo extends javax.swing.JInternalFrame {
 
         limpiarlabel();
         limpiartabla15();
+        TxCodigo.setEnabled(true);
         TxCodigo.requestFocus();
+        
         
 
 
