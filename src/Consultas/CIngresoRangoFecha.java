@@ -125,6 +125,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("hasta");
 
+        txtfecha1.setDateFormatString("d/MM/yy");
         txtfecha1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
