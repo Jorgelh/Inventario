@@ -246,8 +246,8 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
             dato[f][4] = a.getNo_trabajo();
             dato[f][5] = a.getLote();
             dato[f][6] = a.getCantidad();
-            dato[f][8] = a.getCantInicial();
-            dato[f][7] = a.getIngrepor();
+            dato[f][7] = a.getCantInicial();
+            dato[f][8] = a.getIngrepor();
             
 
             f++;

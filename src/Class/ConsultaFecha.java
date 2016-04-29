@@ -21,6 +21,52 @@ public class ConsultaFecha {
     public String Nota;
     public String fechades;
     public String fecha;
+    public String fechaIngre;
+    public String trabajo;
+    public String lote;
+    public int cantidadIngre;
+    public String ingrepor;
+
+    public String getTrabajo() {
+        return trabajo;
+    }
+
+    public void setTrabajo(String trabajo) {
+        this.trabajo = trabajo;
+    }
+
+    public String getLote() {
+        return lote;
+    }
+
+    public void setLote(String lote) {
+        this.lote = lote;
+    }
+
+    public int getCantidadIngre() {
+        return cantidadIngre;
+    }
+
+    public void setCantidadIngre(int cantidadIngre) {
+        this.cantidadIngre = cantidadIngre;
+    }
+
+    public String getIngrepor() {
+        return ingrepor;
+    }
+
+    public void setIngrepor(String ingrepor) {
+        this.ingrepor = ingrepor;
+    }
+ 
+    
+    public String getFechaIngre() {
+        return fechaIngre;
+    }
+
+    public void setFechaIngre(String fechaIngre) {
+        this.fechaIngre = fechaIngre;
+    }
 
     public String getPN() {
         return PN;

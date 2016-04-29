@@ -68,18 +68,9 @@ public abstract class BDConsultas {
         return list;
     }
     
-    public static ArrayList<ConsultaFecha> ListarRangoFecha(String f, String a) {
-
-        return consultaIngreSQLrango("select ingreso.codigo,producto.descripcion,ingreso.cantidad,ingreso.P_N,ingreso.notas,ingreso.fecha_ingreso from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo where ingreso.fechasistema between '" + f + "' and '"+ a +"' order by fechasistema");
-
-
-    }
     
-    public static ArrayList<ConsultaFecha> ListarIngresoFecha(String f, int b1, int b2 ) {
-
-        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.cantidad,ingreso.P_N,ingreso.notas,ingreso.fecha_ingreso from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo where ingreso.fechasistema = '" + f + "' and bodega ="+b1+" or bodega = "+b2+" order by ingreso.codigo" );
-
-    }
+    
+    
     
 
     public static ArrayList<ConsultaFecha> ListarFecha(String t, int b1 , int b2) {
@@ -113,6 +104,12 @@ public abstract class BDConsultas {
         return list;
     }
     
+    public static ArrayList<ConsultaFecha> ListarIngresoFecha(String f, int b1, int b2 ) {
+
+        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema = '" + f + "' and bodega ="+b1+" or bodega = "+b2+" order by ingreso.codigo" );
+
+    }
+    
     private static ArrayList<ConsultaFecha> consultaIngreSQL(String sql) {
         ArrayList<ConsultaFecha> list = new ArrayList<ConsultaFecha>();
         Connection cn = BD.getConnection();
@@ -124,10 +121,13 @@ public abstract class BDConsultas {
                 c = new ConsultaFecha();
                 c.setCodigo(rs.getInt("codigo"));
                 c.setDescripcion(rs.getString("descripcion"));
-                c.setPN(rs.getString("P_N"));
-                c.setCantidad(rs.getInt("cantidad"));
-                c.setNota(rs.getString("notas"));
                 c.setFecha(rs.getString("fecha_ingreso"));
+                c.setPN(rs.getString("P_N"));
+                c.setTrabajo(rs.getString("no_trabajo"));
+                c.setLote(rs.getString("lote"));
+                c.setCantidadIngre(rs.getInt("cantiingre"));
+                c.setCantidad(rs.getInt("cantidad"));
+                c.setIngrepor(rs.getString("ingresadopor"));
                 list.add(c);
             }
             cn.close();
@@ -138,6 +138,19 @@ public abstract class BDConsultas {
         return list;
     }
     
+    
+    public static ArrayList<ConsultaFecha> ListarRangoFecha(String f, String a) {
+
+        return consultaIngreSQLrango("select ingreso.codigo,"
+                                    + "producto.descripcion,"
+                                    + "ingreso.fecha_ingreso, "
+                                    + "ingreso.P_N,"
+                                    + "ingreso.no_trabajo,"
+                                    + "ingreso.lote,"
+                                    + "bitacoraingreso.cantidad as \"cantiingreso\","
+                                    + "ingreso.cantidad,"
+                                    + "ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema between '" + f + "' and '"+ a +"' order by fechasistema");
+    }
     
     private static ArrayList<ConsultaFecha> consultaIngreSQLrango(String sql) {
         ArrayList<ConsultaFecha> list = new ArrayList<ConsultaFecha>();
@@ -150,10 +163,13 @@ public abstract class BDConsultas {
                 c = new ConsultaFecha();
                 c.setCodigo(rs.getInt("codigo"));
                 c.setDescripcion(rs.getString("descripcion"));
+                c.setFechaIngre(rs.getString("fecha_ingreso"));
                 c.setPN(rs.getString("P_N"));
+                c.setTrabajo(rs.getString("no_trabajo"));
+                c.setLote(rs.getString("lote"));
+                c.setCantidadIngre(rs.getInt("cantiingreso"));
                 c.setCantidad(rs.getInt("cantidad"));
-                c.setNota(rs.getString("notas"));
-                c.setFecha(rs.getString("fecha_ingreso"));
+                c.setIngrepor(rs.getString("ingresadopor"));
                 list.add(c);
             }
             cn.close();
@@ -169,7 +185,7 @@ public abstract class BDConsultas {
     
     public static ArrayList<Producto> ListarCodigo(String c) {
 
-        return consultanombreSQL("select codigo,descripcion,ubicacion,cantidad from producto where codigo like '"+c+"%'");
+        return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,sum(ingreso.cantidad)as \"cantidad\"  from producto inner join ingreso on producto.codigo = ingreso.codigo where producto.codigo like '"+c+"%' GROUP BY producto.codigo,producto.descripcion,producto.ubicacion");
 
     }
     

@@ -96,7 +96,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Cantidad Ingresada", "P/N", "Notas", "Fecha de Ingreso"
+                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "Cantidad Ingresada", "Cantidad Bodega", "Ingresado por"
             }
         ));
         jScrollPane1.setViewportView(tablaFecha);
@@ -123,7 +123,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("hasta");
+        jLabel2.setText("Hasta");
 
         txtfecha1.setDateFormatString("d/MM/yy");
         txtfecha1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -132,26 +132,29 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(buscar)
-                .addGap(141, 141, 141))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(369, 369, 369)
-                .addComponent(Nbusqueda)
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 209, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(Nbusqueda)
+                                .addGap(451, 451, 451))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(buscar)
+                                .addGap(287, 287, 287))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,10 +174,10 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
                         .addGap(24, 24, 24)
                         .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Nbusqueda)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -274,22 +277,25 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
     private void recargarIngreFecha(ArrayList<ConsultaFecha> list) {
 
-        Object[][] dato = new Object[list.size()][6];
+        Object[][] dato = new Object[list.size()][9];
         if (list.size() > 0){
         int f = 0;
         for (ConsultaFecha a : list) {
             dato[f][0] = a.getCodigo();
             dato[f][1] = a.getDescripcion();
-            dato[f][2] = a.getCantidad();
+            dato[f][2] = a.getFechaIngre();
             dato[f][3] = a.getPN();
-            dato[f][4] = a.getNota();
-            dato[f][5] = a.getFecha();
+            dato[f][4] = a.getTrabajo();
+            dato[f][5] = a.getLote();
+            dato[f][6] = a.getCantidadIngre();
+            dato[f][7] = a.getCantidad();
+            dato[f][8] = a.getIngrepor();
             f++;
         }
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Cantidad Ingresada", "P/N", "Notas", "Fecha de Ingreso"
+                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","Cantidad Ingresada",  "Cantidad Bodega", "Ingresado Por"
 
                 }) {
                     @Override

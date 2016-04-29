@@ -32,7 +32,7 @@ public abstract class BDProducto {
 
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("insert into Producto (codigo,fam_id,id_presentacion,id_medida,id_proce,Descripcion,nota,ubicacion,foto,cantidadminima,ubicacion2)values(?,?,?,?,?,?,?,?,?,?,?)");
+        ps = cnn.prepareStatement("insert into Producto (codigo,fam_id,id_presentacion,id_medida,id_proce,Descripcion,nota,ubicacion,cantidadminima,ubicacion2)values(?,?,?,?,?,?,?,?,?,?)");
         ps.setInt(1, p.getCodigo());
         ps.setInt(2, p.getFam_Id());
         ps.setInt(3, p.getId_Presentacion());
@@ -41,9 +41,8 @@ public abstract class BDProducto {
         ps.setString(6, p.getDescripcion());
         ps.setString(7, p.getNota());
         ps.setString(8, p.getUbicacion());
-        ps.setBinaryStream(9, p.getFoto(), p.getLongitudBytes());
-        ps.setInt(10, p.getCantidadminima());
-        ps.setString(11, p.getUbicacion2());
+        ps.setInt(9, p.getCantidadminima());
+        ps.setString(10, p.getUbicacion2());
         ps.executeUpdate();
         cnn.close();
         ps.close();
@@ -122,15 +121,14 @@ public abstract class BDProducto {
     public static boolean actualizarProducto(Producto p) throws SQLException {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("Update producto set descripcion=?,ubicacion=?,nota=?,foto=?,cantidadminima=?, ubicacion2=? ,id_medida=?, id_presentacion=? where codigo=" + p.getCodigo());
+        ps = cnn.prepareStatement("Update producto set descripcion=?,ubicacion=?,nota=?,cantidadminima=?, ubicacion2=? ,id_medida=?, id_presentacion=? where codigo=" + p.getCodigo());
         ps.setString(1, p.getDescripcion());
         ps.setString(2, p.getUbicacion());
         ps.setString(3, p.getNota());
-        ps.setBinaryStream(4, p.getFoto(), p.getLongitudBytes());
-        ps.setInt(5, p.getCantidadminima());
-        ps.setString(6, p.getUbicacion2());
-        ps.setInt(7, p.getId_Medida());
-        ps.setInt(8, p.getId_Presentacion());
+        ps.setInt(4, p.getCantidadminima());
+        ps.setString(5, p.getUbicacion2());
+        ps.setInt(6, p.getId_Medida());
+        ps.setInt(7, p.getId_Presentacion());
 
         int rowsUpdated = ps.executeUpdate();
         cnn.close();

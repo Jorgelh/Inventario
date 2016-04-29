@@ -81,7 +81,6 @@ public class PrincipalInventario extends javax.swing.JFrame {
         setTitle("SISTEMA DE INVENTARIO DE BODEGA");
         setLocation(new java.awt.Point(0, 0));
         setMaximizedBounds(getMaximizedBounds());
-        setResizable(false);
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 

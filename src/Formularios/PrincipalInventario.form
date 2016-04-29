@@ -549,7 +549,6 @@
     <Property name="maximizedBounds" type="java.awt.Rectangle" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <Connection component="Form" name="getMaximizedBounds" type="method"/>
     </Property>
-    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="menubar"/>
