@@ -41,19 +41,22 @@ public class CListaNombre extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<Producto> list) {
 
-        Object[][] dato = new Object[list.size()][4];
+        Object[][] dato = new Object[list.size()][6];
         int f = 0;
         for (Producto a : list) {
             dato[f][0] = a.getCodigo();
             dato[f][1] = a.getDescripcion();
             dato[f][2] = a.getUbicacion();
-            dato[f][3] = a.getCantidad();
+            dato[f][3] = a.getUbicacion2();
+            dato[f][4] = a.getPresentacion();
+            dato[f][5] = a.getUmedida();
+
             f++;
         }
         tablanom.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Ubicacion", "Cantidad"
+                    "Codigo", "Descripcion", "Ubicacion Bodega", "Ubicacion Bodeguita","Prentacion","Unidad de Medida"
                 }) {
                     @Override
                     public boolean isCellEditable(int row, int column) {
@@ -82,7 +85,7 @@ public class CListaNombre extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Ubicacion", "Cantidad"
+
             }
         ));
         jScrollPane1.setViewportView(tablanom);
@@ -115,7 +118,7 @@ public class CListaNombre extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(327, Short.MAX_VALUE))
+                .addContainerGap(412, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,9 +127,9 @@ public class CListaNombre extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -137,9 +140,7 @@ public class CListaNombre extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
