@@ -58,7 +58,7 @@ public abstract class BDconsultaVarias {
         c.setId_ingreso(rs.getInt("id_ingreso"));
         c.setReturnFecha(rs.getString("fecha_ven"));
         c.setReturnFechaIgre(rs.getString("fecha_ingreso"));
-        c.setPrecio(rs.getInt("precio"));
+        c.setPrecio(rs.getDouble("precio"));
         c.setNTrabajo(rs.getString("no_trabajo"));
         c.setInvoce(rs.getString("no_invoice"));
         c.setNoDocumento(rs.getString("no_documento"));
@@ -71,6 +71,7 @@ public abstract class BDconsultaVarias {
         c.setLote(rs.getString("lote"));
         c.setBodeda(rs.getInt("bodega"));
         c.setNota(rs.getString("notas")); 
+        c.setPreciotxt(rs.getString("precio"));
         }
         cn.close();
         ps.close();

@@ -74,7 +74,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtpo.setText("");
         txtInvoice.setText("");
         txtDoc.setText("");
-        txtPrecio.setText("");
+        Precio.setText("");
         TxCodigo.setText("");
         TxCodigo.requestFocus();
         txtPN.setText("");
@@ -83,7 +83,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtproveedor.setText("");
         txtjob.setText("");
         txtlote.setText("");
-        ComboBoxBode.setSelectedItem(" ");
+        ComboBode.setSelectedItem("");
         txtingresadopor.setText("");
         txtCantidad.setText("");
         txtfechaingreso.setDate(null);
@@ -96,19 +96,20 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtpo.setText("");
         txtInvoice.setText("");
         txtDoc.setText("");
-        txtPrecio.setText("");
+        Precio.setText("");
         txtPN.setText("");
         txtnotas.setText("");
         txtSerie.setText("");
         txtproveedor.setText("");
         txtjob.setText("");
         txtlote.setText("");
-        ComboBoxBode.setSelectedItem("");
+        ComboBode.setSelectedItem("");
         txtingresadopor.setText("");
         txtCantidad.setText("");
         Cosulta.requestFocus();
         txtfechaingreso.setDate(null);
         txtfechaven.setDate(null);
+        ComboBode.setSelectedItem("");
 
     }
 
@@ -118,7 +119,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtDoc.setEditable(b);
         txtInvoice.setEditable(b);
         txtPN.setEditable(b);
-        txtPrecio.setEditable(b);
+        Precio.setEditable(b);
         txtSerie.setEditable(b);
         txtingresadopor.setEditable(b);
         txtjob.setEditable(b);
@@ -126,7 +127,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtnotas.setEditable(b);
         txtpo.setEditable(b);
         txtproveedor.setEditable(b);
-        ComboBoxBode.setEnabled(b);
+        ComboBode.setEnabled(b);
         txtfechaven.setEnabled(b);
 
     }
@@ -174,7 +175,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         txtPN = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
+        Precio = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtpo = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -204,7 +205,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtCantidad = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         txtfechaven = new com.toedter.calendar.JDateChooser();
-        ComboBoxBode = new javax.swing.JComboBox<>();
+        ComboBode = new javax.swing.JComboBox<>();
         Beditar = new javax.swing.JButton();
         Bguardar = new javax.swing.JButton();
         Bcancelar = new javax.swing.JButton();
@@ -305,8 +306,8 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtPN.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtPN.setForeground(new java.awt.Color(0, 102, 255));
 
-        txtPrecio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtPrecio.setForeground(new java.awt.Color(0, 102, 255));
+        Precio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Precio.setForeground(new java.awt.Color(0, 102, 255));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Job");
@@ -341,7 +342,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel15)
                                 .addComponent(jLabel7)
                                 .addComponent(txtPN, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                                .addComponent(txtPrecio))
+                                .addComponent(Precio))
                             .addComponent(jLabel6)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14))
@@ -355,7 +356,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addGap(1, 1, 1)
-                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -531,13 +532,13 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtfechaven.setDateFormatString("d/MM/yy");
         txtfechaven.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        ComboBoxBode.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        ComboBoxBode.setForeground(new java.awt.Color(0, 102, 255));
-        ComboBoxBode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bodega", "Bodeguita" }));
-        ComboBoxBode.setName(""); // NOI18N
-        ComboBoxBode.addActionListener(new java.awt.event.ActionListener() {
+        ComboBode.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ComboBode.setForeground(new java.awt.Color(0, 102, 255));
+        ComboBode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Bodega", "Bodeguita" }));
+        ComboBode.setName(""); // NOI18N
+        ComboBode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBoxBodeActionPerformed(evt);
+                ComboBodeActionPerformed(evt);
             }
         });
 
@@ -557,7 +558,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                             .addComponent(jLabel19)
                             .addComponent(txtCantidad)
                             .addComponent(txtfechaven, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ComboBoxBode, 0, 206, Short.MAX_VALUE))
+                            .addComponent(ComboBode, 0, 206, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -571,7 +572,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel17)
                 .addGap(2, 2, 2)
-                .addComponent(ComboBoxBode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ComboBode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -747,11 +748,10 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             txtlote.setText(ca.getLote());
             txtPN.setText(ca.getPN());
             txtpo.setText(ca.getPO());
-            txtPrecio.setText(String.valueOf(ca.getPrecio()));
+            Precio.setText(String.valueOf(ca.getPrecio()));
             txtnotas.setText(ca.getNota());
             txtingresadopor.setText(String.valueOf(ca.getIngresadoPor()));
             txtCantidad.setText(String.valueOf(ca.getCantidad()));
-
             if (ca.getReturnFecha() == null) {
                 txtfechaven.setDate(null);
             } else {
@@ -764,9 +764,9 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             txtfechaingreso.setDate(dateingre);
 
             if (ca.getBodeda() == 1) {
-                ComboBoxBode.setSelectedItem("Bodega");
+                ComboBode.setSelectedItem("Bodega");
             } else {
-                ComboBoxBode.setSelectedItem("Bodeguita");
+                ComboBode.setSelectedItem("Bodeguita");
             }
 
         } catch (Exception e) {
@@ -880,12 +880,13 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
         if (TxCodigo.getText().compareTo("") != 0
                 && txtCantidad.getText().compareTo("") != 0
+                && Precio.getText().compareTo("") != 0
                 && txtingresadopor.getText().compareTo("") != 0
-                && !ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("")) {
+                && !ComboBode.getSelectedItem().toString().equalsIgnoreCase("")) {
 
-            if (ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
+            if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
                 bodega = 1;
-            } else if (ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
+            } else if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
                 bodega = 2;
             }
 
@@ -905,7 +906,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 c.setPO(txtpo.getText());
                 c.setPN(txtPN.getText());
                 c.setProveedor(txtproveedor.getText());
-                c.setPrecio(Double.parseDouble(txtPrecio.getText()));
+                c.setPrecio(Double.parseDouble(Precio.getText()));
                 BDconsultaVarias.actualizarIngreso(c);
                 JOptionPane.showMessageDialog(null, "Ingreso Actualizado...");
                 EditarTXT(false);
@@ -927,14 +928,14 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_BguardarActionPerformed
 
-    private void ComboBoxBodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxBodeActionPerformed
+    private void ComboBodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBodeActionPerformed
 
-        if (ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
+        if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
             bodega = 1;
-        } else if (ComboBoxBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
+        } else if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
             bodega = 2;
         }
-    }//GEN-LAST:event_ComboBoxBodeActionPerformed
+    }//GEN-LAST:event_ComboBodeActionPerformed
 
     private void actualizarTablaconsulta() {
 
@@ -1018,11 +1019,12 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     private javax.swing.JButton Beditar;
     private javax.swing.JButton Beliminar;
     private javax.swing.JButton Bguardar;
-    private javax.swing.JComboBox<String> ComboBoxBode;
+    private javax.swing.JComboBox<String> ComboBode;
     private javax.swing.JTable Cosulta;
     private javax.swing.JLabel Descripcion;
     private java.awt.Label LaDescrip;
     private javax.swing.JButton NuevaC;
+    private javax.swing.JTextField Precio;
     private javax.swing.JTextField TxCodigo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1052,7 +1054,6 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDoc;
     private javax.swing.JTextField txtInvoice;
     private javax.swing.JTextField txtPN;
-    private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtSerie;
     private com.toedter.calendar.JDateChooser txtfechaingreso;
     private com.toedter.calendar.JDateChooser txtfechaven;
@@ -1063,5 +1064,9 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtpo;
     private javax.swing.JTextField txtproveedor;
     // End of variables declaration//GEN-END:variables
+
+    private String toString(double precio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

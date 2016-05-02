@@ -106,7 +106,7 @@ public abstract class BDConsultas {
     
     public static ArrayList<ConsultaFecha> ListarIngresoFecha(String f, int b1, int b2 ) {
 
-        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema = '" + f + "' and bodega ="+b1+" or bodega = "+b2+" order by ingreso.codigo" );
+        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+b1+" or ingreso.bodega = "+b2+") and ingreso.fechasistema = '"+f+"' order by ingreso.codigo" );
 
     }
     
@@ -139,7 +139,7 @@ public abstract class BDConsultas {
     }
     
     
-    public static ArrayList<ConsultaFecha> ListarRangoFecha(String f, String a) {
+    public static ArrayList<ConsultaFecha> ListarRangoFecha(String f, String a , int b1, int b2) {
 
         return consultaIngreSQLrango("select ingreso.codigo,"
                                     + "producto.descripcion,"
@@ -149,7 +149,7 @@ public abstract class BDConsultas {
                                     + "ingreso.lote,"
                                     + "bitacoraingreso.cantidad as \"cantiingreso\","
                                     + "ingreso.cantidad,"
-                                    + "ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema between '" + f + "' and '"+ a +"' order by fechasistema");
+                                    + "ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+b1+" or ingreso.bodega = "+b2+") and ingreso.fechasistema between '" + f + "' and '"+ a +"' order by fechasistema");
     }
     
     private static ArrayList<ConsultaFecha> consultaIngreSQLrango(String sql) {
@@ -225,7 +225,7 @@ public abstract class BDConsultas {
     }
     
     
-    public static ArrayList<consultanp> ListaringrePN(String d) {
+    public static ArrayList<consultanp> ListaringrePN(String d , int b1 , int b2) {
 
         return consultarinSQL("select ingreso.P_N,"
                                  + "ingreso.no_trabajo,"
@@ -240,7 +240,7 @@ public abstract class BDConsultas {
                                  + "producto.descripcion,"
                                  + "bitacoraingreso.cantidad as \"Cin\" "
                                  + "from ingreso inner join producto on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso "
-                                 + "where upper(ingreso.P_N) = upper('"+d+"') order by fechasistema");
+                                 + "where (ingreso.bodega ="+b1+" or ingreso.bodega = "+b2+") and upper(ingreso.P_N) = upper('"+d+"') order by fechasistema");
 
     }
    

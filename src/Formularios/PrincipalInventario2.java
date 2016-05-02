@@ -15,12 +15,12 @@ import java.awt.Color;
  *
  * @author Jorge Luis
  */
-public class PrincipalInventario extends javax.swing.JFrame {
+public class PrincipalInventario2 extends javax.swing.JFrame {
 
     /**
      * Creates new form PrincipalInventario
      */
-    public PrincipalInventario() {
+    public PrincipalInventario2() {
       Color b=new Color(0,150,255);
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -49,7 +49,9 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         CARGAPRO = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenu13 = new javax.swing.JMenu();
         EDITARPRO = new javax.swing.JMenuItem();
+        INGRESO = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         familias = new javax.swing.JMenuItem();
         unidadmedida = new javax.swing.JMenuItem();
@@ -171,16 +173,34 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu7.add(CARGAPRO);
         jMenu7.add(jSeparator2);
 
+        jMenu13.setForeground(new java.awt.Color(0, 51, 255));
+        jMenu13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit2.png"))); // NOI18N
+        jMenu13.setText("EDITAR");
+        jMenu13.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+
         EDITARPRO.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         EDITARPRO.setForeground(new java.awt.Color(0, 51, 255));
         EDITARPRO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit2.png"))); // NOI18N
-        EDITARPRO.setText("EDITAR PRODUCTO");
+        EDITARPRO.setText("PRODUCTO");
         EDITARPRO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EDITARPROActionPerformed(evt);
             }
         });
-        jMenu7.add(EDITARPRO);
+        jMenu13.add(EDITARPRO);
+
+        INGRESO.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        INGRESO.setForeground(new java.awt.Color(0, 51, 255));
+        INGRESO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit2.png"))); // NOI18N
+        INGRESO.setText("INGRESO");
+        INGRESO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INGRESOActionPerformed(evt);
+            }
+        });
+        jMenu13.add(INGRESO);
+
+        jMenu7.add(jMenu13);
 
         jMenu1.add(jMenu7);
 
@@ -685,6 +705,18 @@ public class PrincipalInventario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void INGRESOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INGRESOActionPerformed
+       
+        EditarIngresos M = new EditarIngresos();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+        
+        
+    }//GEN-LAST:event_INGRESOActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -700,20 +732,21 @@ public class PrincipalInventario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalInventario2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalInventario2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalInventario2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalInventario2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrincipalInventario().setVisible(true);
+                new PrincipalInventario2().setVisible(true);
             }
         });
     }
@@ -723,6 +756,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem CONSULTAPN;
     private javax.swing.JMenuItem DESCARGAPRO;
     private javax.swing.JMenuItem EDITARPRO;
+    private javax.swing.JMenuItem INGRESO;
     private javax.swing.JMenuItem NUEVOPRO;
     private javax.swing.JMenuItem PROCEDENCIA;
     private javax.swing.JMenuItem familias;
@@ -732,6 +766,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;

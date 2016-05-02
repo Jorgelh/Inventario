@@ -37,7 +37,27 @@ public class CargaP {
     private String ReturnFechaIgre;
     private String descripcion;
     private String presentacion;
+    private String preciotxt;
 
+    public int getBodega() {
+        return Bodega;
+    }
+
+    public void setBodega(int Bodega) {
+        this.Bodega = Bodega;
+    }
+
+    public String getPreciotxt() {
+        return preciotxt;
+    }
+
+    public void setPreciotxt(String preciotxt) {
+        this.preciotxt = preciotxt;
+    }
+    
+    
+    
+    
     public String getPresentacion() {
         return presentacion;
     }

@@ -68,16 +68,19 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         buscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtfecha1 = new com.toedter.calendar.JDateChooser();
+        bodegaselect2 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("CONSULTA FECHA INGRESO");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
-        txtFecha.setDateFormatString("d/MM/yy");
+        txtFecha.setDateFormatString("dd/MM/yy");
         txtFecha.setDoubleBuffered(false);
+        txtFecha.setFocusCycleRoot(true);
         txtFecha.setFocusable(false);
-        txtFecha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtFecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtFecha.setMaxSelectableDate(new java.util.Date(253370790061000L));
         txtFecha.setMinSelectableDate(new java.util.Date(-62135744339000L));
         txtFecha.setMinimumSize(new java.awt.Dimension(35, 45));
@@ -125,8 +128,15 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Hasta");
 
-        txtfecha1.setDateFormatString("d/MM/yy");
-        txtfecha1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtfecha1.setDateFormatString("dd/MM/yy");
+        txtfecha1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        bodegaselect2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bodegaselect2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Bodega", "Bodeguita" }));
+        bodegaselect2.setName(""); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel3.setText("Bodega");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -139,43 +149,50 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 209, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(Nbusqueda)
-                                .addGap(451, 451, 451))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(buscar)
-                                .addGap(287, 287, 287))))))
+                        .addGap(0, 51, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bodegaselect2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(buscar)
+                        .addGap(287, 287, 287))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(470, 470, 470)
+                .addComponent(Nbusqueda)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bodegaselect2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(10, 10, 10))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(10, 10, 10))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGap(26, 26, 26)
                         .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Nbusqueda)
                 .addGap(0, 11, Short.MAX_VALUE))
         );
@@ -210,7 +227,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         txtFecha.setEnabled(true);
         txtfecha1.setDate(null);
         txtfecha1.setEnabled(true);
-        
+        bodegaselect2.setSelectedItem("Todos");
 
     }//GEN-LAST:event_NbusquedaActionPerformed
 
@@ -269,9 +286,17 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         
         Date date2 = txtfecha1.getDate();
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
+        
+        int b1;
+        int b2;
+              
+        if (bodegaselect2.getSelectedItem() == "Bodega"){ b1 = 1; b2 = 0; }
+        else if(bodegaselect2.getSelectedItem() == "Bodeguita"){b1 = 0; b2 = 2;}
+        else{b1=1;b2=2;}
+        
         String fecha1 = sd.format(date2);
 
-        ArrayList<ConsultaFecha> result = BDConsultas.ListarRangoFecha(fecha , fecha1);
+        ArrayList<ConsultaFecha> result = BDConsultas.ListarRangoFecha(fecha ,fecha1,b1,b2);
         recargarIngreFecha(result);
     }
 
@@ -362,9 +387,11 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Nbusqueda;
+    private javax.swing.JComboBox<String> bodegaselect2;
     private javax.swing.JButton buscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaFecha;

@@ -74,7 +74,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
-        txtFecha.setDateFormatString("d/MM/yy");
+        txtFecha.setDateFormatString("dd/MM/yy");
         txtFecha.setDoubleBuffered(false);
         txtFecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtFecha.setMaxSelectableDate(new java.util.Date(253370790061000L));
@@ -258,7 +258,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select COUNT(id_ingreso) from ingreso where fechasistema='"+ fecha1 + "'");
+            ResultSet rs = stmt.executeQuery("select COUNT(id_ingreso) from ingreso where fechasistema='"+fecha1+"'");
             rs.next();
             int codigo = rs.getInt("count(id_ingreso)");
             if (codigo > 0) {
@@ -329,7 +329,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
     private void actualizarTablaFecha() {
 
         Date date = txtFecha.getDate();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yy");
         String fecha = sdf.format(date);
         
         int b1;

@@ -122,6 +122,43 @@ public class CIngresoCodigo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
         }
     }
+    
+    public void consulta(){
+    
+        if(TxCodigo.getText() != ""){
+        int Enviacodigo = Integer.parseInt(TxCodigo.getText());
+         
+
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from ingreso where codigo=" + TxCodigo.getText());
+            rs.next();
+            int codigo = rs.getInt("count(codigo)");
+            if (codigo > 0) {
+                actualizarTablaconsulta();
+                obtenerdescripcion();
+                //Cosulta.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                llenarBalance();
+                NuevaC.requestFocus();
+                TxCodigo.setEnabled(false);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Producto " + TxCodigo.getText() + " No Contiene Existencias o Producto no Existe");
+                limpiarlabel();
+                limpiartabla15();
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+        }
+        else{JOptionPane.showMessageDialog(null,"Ingrese un codigo...");}
+    
+    
+    
+    
+    }
 
     /*
     public void activartxt(boolean b) {
@@ -603,6 +640,7 @@ public class CIngresoCodigo extends javax.swing.JInternalFrame {
        BotonBus.requestFocus();
        BotonBus.setEnabled(true);
        bodegaselect.setEnabled(true);
+       consulta();
 
     }//GEN-LAST:event_TxCodigoActionPerformed
 
@@ -662,40 +700,7 @@ public class CIngresoCodigo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_NuevaCActionPerformed
 
     private void BotonBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBusActionPerformed
-      
-        
-         
-        if(TxCodigo.getText() != ""){
-        int Enviacodigo = Integer.parseInt(TxCodigo.getText());
-         
-
-        try {
-            Connection con = BD.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from ingreso where codigo=" + TxCodigo.getText());
-            rs.next();
-            int codigo = rs.getInt("count(codigo)");
-            if (codigo > 0) {
-                actualizarTablaconsulta();
-                obtenerdescripcion();
-                //Cosulta.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                llenarBalance();
-                NuevaC.requestFocus();
-                TxCodigo.setEnabled(false);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Producto " + TxCodigo.getText() + " No Contiene Existencias o Producto no Existe");
-                limpiarlabel();
-                limpiartabla15();
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
-        }
-        }
-        else{JOptionPane.showMessageDialog(null,"Ingrese un codigo...");}
-        
-        
+        consulta();
     }//GEN-LAST:event_BotonBusActionPerformed
 
     private void actualizarTablaconsulta() {
