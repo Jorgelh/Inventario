@@ -106,7 +106,7 @@ public abstract class BDConsultas {
     
     public static ArrayList<ConsultaFecha> ListarIngresoFecha(String f, int b1, int b2 ) {
 
-        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+b1+" or ingreso.bodega = "+b2+") and ingreso.fechasistema = '"+f+"' order by ingreso.codigo" );
+        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") and ingreso.fechasistema = '" + f +"'" );
 
     }
     

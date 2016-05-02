@@ -233,9 +233,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
 
-        
-        actualizarTablaFecha();
-        
+        actualizarTablaFecha();   
         Nbusqueda.requestFocus(); 
         
         /*

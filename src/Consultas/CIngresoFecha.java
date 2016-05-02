@@ -329,7 +329,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
     private void actualizarTablaFecha() {
 
         Date date = txtFecha.getDate();
-        SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         String fecha = sdf.format(date);
         
         int b1;
