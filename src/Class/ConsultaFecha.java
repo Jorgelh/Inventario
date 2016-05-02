@@ -26,7 +26,18 @@ public class ConsultaFecha {
     public String lote;
     public int cantidadIngre;
     public String ingrepor;
+    public String bodega;
 
+    public String getBodega() {
+        return bodega;
+    }
+
+    public void setBodega(String bodega) {
+        this.bodega = bodega;
+    }
+
+    
+    
     public String getTrabajo() {
         return trabajo;
     }

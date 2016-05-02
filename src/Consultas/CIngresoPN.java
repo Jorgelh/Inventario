@@ -201,7 +201,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select count(*) from ingreso  where upper(p_n) = upper('" + txtPN.getText()+"')");
+            ResultSet rs = stmt.executeQuery("select count(*) from ingreso  where  like upper('" + txtPN.getText()+"'%");
             rs.next();
             int codigo = rs.getInt("count(*)");
             if (codigo > 0) {

@@ -68,8 +68,6 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         buscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtfecha1 = new com.toedter.calendar.JDateChooser();
-        bodegaselect2 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("CONSULTA FECHA INGRESO");
@@ -99,7 +97,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "Cantidad Ingresada", "Cantidad Bodega", "Ingresado por"
+                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "Cantidad Ingresada", "Cantidad Bodega", "Bodega", "Ingresado por"
             }
         ));
         jScrollPane1.setViewportView(tablaFecha);
@@ -131,70 +129,53 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         txtfecha1.setDateFormatString("dd/MM/yy");
         txtfecha1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        bodegaselect2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        bodegaselect2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Bodega", "Bodeguita" }));
-        bodegaselect2.setName(""); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel3.setText("Bodega");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 51, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bodegaselect2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(buscar)
-                        .addGap(287, 287, 287))))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(470, 470, 470)
                 .addComponent(Nbusqueda)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(buscar)
+                .addContainerGap(303, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(bodegaselect2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(10, 10, 10))))
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
+                .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Nbusqueda)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,7 +208,6 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         txtFecha.setEnabled(true);
         txtfecha1.setDate(null);
         txtfecha1.setEnabled(true);
-        bodegaselect2.setSelectedItem("Todos");
 
     }//GEN-LAST:event_NbusquedaActionPerformed
 
@@ -269,9 +249,6 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buscarActionPerformed
 
     private void NbusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NbusquedaKeyPressed
-            
-        
-
 
 
     }//GEN-LAST:event_NbusquedaKeyPressed
@@ -285,22 +262,16 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         Date date2 = txtfecha1.getDate();
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
         
-        int b1;
-        int b2;
-              
-        if (bodegaselect2.getSelectedItem() == "Bodega"){ b1 = 1; b2 = 0; }
-        else if(bodegaselect2.getSelectedItem() == "Bodeguita"){b1 = 0; b2 = 2;}
-        else{b1=1;b2=2;}
         
         String fecha1 = sd.format(date2);
 
-        ArrayList<ConsultaFecha> result = BDConsultas.ListarRangoFecha(fecha ,fecha1,b1,b2);
+        ArrayList<ConsultaFecha> result = BDConsultas.ListarRangoFecha(fecha,fecha1);
         recargarIngreFecha(result);
     }
 
     private void recargarIngreFecha(ArrayList<ConsultaFecha> list) {
 
-        Object[][] dato = new Object[list.size()][9];
+        Object[][] dato = new Object[list.size()][10];
         if (list.size() > 0){
         int f = 0;
         for (ConsultaFecha a : list) {
@@ -312,13 +283,14 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
             dato[f][5] = a.getLote();
             dato[f][6] = a.getCantidadIngre();
             dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getIngrepor();
+            dato[f][8] = a.getBodega();
+            dato[f][9] = a.getIngrepor();
             f++;
         }
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","Cantidad Ingresada",  "Cantidad Bodega", "Ingresado Por"
+                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","Cantidad Ingresada",  "Cantidad Bodega", "Bodega", "Ingresado Por"
 
                 }) {
                     @Override
@@ -385,11 +357,9 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Nbusqueda;
-    private javax.swing.JComboBox<String> bodegaselect2;
     private javax.swing.JButton buscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaFecha;
