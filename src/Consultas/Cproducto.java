@@ -9,11 +9,14 @@ import Class.Producto;
 import BD.BD;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -28,11 +31,92 @@ public class Cproducto extends javax.swing.JInternalFrame {
     /**
      * Creates new form Cproducto
      */
+    Image foto;
+    Vector imagenes;
+    int index = 0;
+    String folder = "";
+
     public Cproducto() {
         initComponents();
+        this.imagenes = new Vector();
+        this.imagenes = new Vector();
+
     }
+
     
-     public void llenarBalance() {
+
+    void cargarAlbum() {
+
+        FilenameFilter filter = new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String name) {
+                if (name.endsWith(".jpg")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        };
+
+        imagenes.clear();
+        index = 0;
+
+        String album = ("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\" + txtcodigo.getText());
+        System.out.println(album);
+        File albumCarpeta = new File(album);
+
+        folder = albumCarpeta.getName();
+        //System.out.println(albumCarpeta.getName());
+
+        File[] fotos = albumCarpeta.listFiles(filter);
+
+        if (fotos.length != 0) {
+
+            adelante.requestFocus();
+            for (int i = 0;
+                    i < fotos.length;
+                    i++) {
+                if (fotos[i].isFile()) {
+                    imagenes.add(fotos[i].getName());
+                    //System.out.println(fotos[i].getName()); 
+                }
+            }
+            //jLabel1.setIcon(new ImageIcon("x:\\FOTOS DE PIEZAS\\" + folder + "\\" + (String) imagenes.elementAt(0)));
+            lafoto.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\" + folder + "\\" + (String) imagenes.elementAt(0)).getImage()).getScaledInstance(413, 324, java.awt.Image.SCALE_SMOOTH))));
+        } else {
+            lafoto.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\imagen.jpg").getImage()).getScaledInstance(500, 400, java.awt.Image.SCALE_SMOOTH))));
+            return;
+        }
+
+    }
+
+    void fotoAdelante() {
+        System.out.println("Adelante ..");
+        if ((index + 1) < imagenes.size()) {
+            index++;
+            ImageIcon imagen = (new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\" + folder + "\\" + (String) imagenes.elementAt(index)).getImage()).getScaledInstance(413, 324, java.awt.Image.SCALE_SMOOTH))));
+            lafoto.setIcon(imagen);
+            //System.out.println(index + " : " + folder + "\\" + (String) imagenes.elementAt(index));
+        } else {
+            atras.requestFocus();
+            JOptionPane.showMessageDialog(null, "Fin de las Fotos del Album", "Atencion", JOptionPane.OK_OPTION);
+        }
+    }
+
+    void fotoAtras() {
+        System.out.println("Atras ..");
+        if ((index - 1) > -1) {
+            index--;
+            ImageIcon imagen = (new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\" + folder + "\\" + (String) imagenes.elementAt(index)).getImage()).getScaledInstance(413, 324, java.awt.Image.SCALE_SMOOTH))));
+            lafoto.setIcon(imagen);
+            //*System.out.println(index + " : " + folder + "\\" + (String) imagenes.elementAt(index));
+        } else {
+            adelante.requestFocus();
+            JOptionPane.showMessageDialog(null, "Fin de las Fotos del Album", "Atencion", JOptionPane.OK_OPTION);
+        }
+    }
+
+    public void llenarBalance() {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -58,27 +142,25 @@ public class Cproducto extends javax.swing.JInternalFrame {
 
     }
 
-    
-     public void limpiartxt(){
-     
-      desc.setText("");
-      canti.setText("");
-      nota.setText("");
-      txtcodigo.setText("");
-      canti.setText("");
-      ubica.setText("");
-      lafoto.setIcon(null);
-      lafoto.setText("");
-      cantidad.setText("");
-      txtcodigo.requestFocus(); 
-      txtcodigo.setEnabled(true);
-      txtcantBodega.setText("");
-      txttotalBodeguita.setText("");
-      txtSumas.setText("");
-      ubica1.setText("");
-     }
-     
-     
+    public void limpiartxt() {
+
+        desc.setText("");
+        canti.setText("");
+        nota.setText("");
+        txtcodigo.setText("");
+        canti.setText("");
+        ubica.setText("");
+        lafoto.setIcon(null);
+        lafoto.setText("");
+        cantidad.setText("");
+        txtcodigo.requestFocus();
+        txtcodigo.setEnabled(true);
+        txtcantBodega.setText("");
+        txttotalBodeguita.setText("");
+        txtSumas.setText("");
+        ubica1.setText("");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,6 +184,8 @@ public class Cproducto extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         lafoto = new javax.swing.JLabel();
         BotoNuevo = new javax.swing.JButton();
+        adelante = new javax.swing.JButton();
+        atras = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtcodigo = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
@@ -228,22 +312,56 @@ public class Cproducto extends javax.swing.JInternalFrame {
             }
         });
 
+        adelante.setText(">>");
+        adelante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adelanteActionPerformed(evt);
+            }
+        });
+        adelante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                adelanteKeyPressed(evt);
+            }
+        });
+
+        atras.setText("<<");
+        atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasActionPerformed(evt);
+            }
+        });
+        atras.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                atrasKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lafoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(116, Short.MAX_VALUE)
                 .addComponent(BotoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(96, 96, 96))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(atras)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(adelante)
+                .addContainerGap())
+            .addComponent(lafoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(lafoto, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lafoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(adelante)
+                    .addComponent(atras))
+                .addGap(18, 18, 18)
                 .addComponent(BotoNuevo)
                 .addContainerGap())
         );
@@ -347,7 +465,7 @@ public class Cproducto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(txtSumas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -399,12 +517,12 @@ public class Cproducto extends javax.swing.JInternalFrame {
             rs.next();
             int codigo = rs.getInt("count(codigo)");
             if (codigo > 0) {
-                
+
                 consulta();
                 llenarBalance();
+                cargarAlbum();
                 BotoNuevo.requestFocus();
                 txtcodigo.setEnabled(false);
-                
 
             } else {
                 JOptionPane.showMessageDialog(null, "PRODUCTO NO EXITES...");
@@ -415,25 +533,22 @@ public class Cproducto extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println("Editar Error" + e);
         }
-        
-
 
 
     }//GEN-LAST:event_txtcodigoActionPerformed
 
     private void BotoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotoNuevoActionPerformed
-             limpiartxt();
-             
+        limpiartxt();
+
     }//GEN-LAST:event_BotoNuevoActionPerformed
 
     private void BotoNuevoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BotoNuevoKeyPressed
-              limpiartxt();
+        limpiartxt();
     }//GEN-LAST:event_BotoNuevoKeyPressed
 
     private void txtcodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyTyped
-           
-        
-           char c = evt.getKeyChar();
+
+        char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
             evt.consume();
         }
@@ -444,48 +559,51 @@ public class Cproducto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcantBodegaActionPerformed
 
-    
-    public void consulta(){
-    
-    
-    int cod =Integer.parseInt(txtcodigo.getText());
+    private void adelanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adelanteActionPerformed
+        fotoAdelante();
+    }//GEN-LAST:event_adelanteActionPerformed
+
+    private void adelanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adelanteKeyPressed
+        fotoAdelante();
+    }//GEN-LAST:event_adelanteKeyPressed
+
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+        fotoAtras();
+    }//GEN-LAST:event_atrasActionPerformed
+
+    private void atrasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_atrasKeyPressed
+        fotoAtras();
+    }//GEN-LAST:event_atrasKeyPressed
+
+    public void consulta() {
+
+        int cod = Integer.parseInt(txtcodigo.getText());
         ImageIcon foto;
         InputStream is;
-        
+
         try {
-            
+
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery("select descripcion,ubicacion,ubicacion2,nota,cantidad,cantidadminima,foto from producto where codigo ="+cod);
-           
-            while (rs.next())
-            {
+            ResultSet rs = stmt.executeQuery("select descripcion,ubicacion,ubicacion2,nota,cantidad,cantidadminima,foto from producto where codigo =" + cod);
+
+            while (rs.next()) {
                 desc.setText(rs.getString("descripcion"));
                 ubica.setText(rs.getString("ubicacion"));
                 nota.setText(rs.getString("nota"));
                 cantidad.setText(rs.getString("cantidad"));
                 canti.setText(rs.getString("cantidadminima"));
                 ubica1.setText(rs.getString("ubicacion2"));
-                
-                is = rs.getBinaryStream("foto");
-                BufferedImage bi = ImageIO.read(is);
-                foto = new ImageIcon(bi);
-                Image img = foto.getImage();
-                Image newimg = img.getScaledInstance (400,300,java.awt.Image.SCALE_SMOOTH);
-                ImageIcon newicon = new ImageIcon(newimg);
-                lafoto.setIcon(newicon);
-                
-                
+                con.close();
             }
-            con.close();  
            
+
         } catch (Exception e) {
-            lafoto.setText("NO FOTO");
+           
         }
-    
-   
-    }  
-    
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -523,6 +641,8 @@ public class Cproducto extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotoNuevo;
+    private javax.swing.JButton adelante;
+    private javax.swing.JButton atras;
     private javax.swing.JTextField canti;
     private javax.swing.JTextField cantidad;
     private javax.swing.JTextField desc;
