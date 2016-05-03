@@ -110,21 +110,21 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(683, 683, 683)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(309, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(683, 683, 683)
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(309, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 473, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 462, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25))
         );
@@ -315,6 +315,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jMenu8.setText("INGRESOS");
         jMenu8.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, 0));
         jMenuItem6.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem6.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
@@ -326,6 +327,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         });
         jMenu8.add(jMenuItem6);
 
+        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, 0));
         jMenuItem11.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem11.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
@@ -337,6 +339,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         });
         jMenu8.add(jMenuItem11);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, 0));
         jMenuItem4.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem4.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
@@ -348,6 +351,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         });
         jMenu8.add(jMenuItem4);
 
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, 0));
         jMenuItem8.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem8.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
@@ -461,7 +465,9 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jDesktopPane1)
+                .addContainerGap())
         );
 
         pack();
