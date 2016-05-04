@@ -67,9 +67,8 @@ public class Cproducto extends javax.swing.JInternalFrame {
 
         folder = albumCarpeta.getName();
         //System.out.println(albumCarpeta.getName());
-
         File[] fotos = albumCarpeta.listFiles(filter);
-
+        if(fotos != null){
         if (fotos.length != 0) {
 
             adelante.requestFocus();
@@ -78,20 +77,22 @@ public class Cproducto extends javax.swing.JInternalFrame {
                     i++) {
                 if (fotos[i].isFile()) {
                     imagenes.add(fotos[i].getName());
-                    //System.out.println(fotos[i].getName()); 
                 }
             }
-            //jLabel1.setIcon(new ImageIcon("x:\\FOTOS DE PIEZAS\\" + folder + "\\" + (String) imagenes.elementAt(0)));
             lafoto.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\" + folder + "\\" + (String) imagenes.elementAt(0)).getImage()).getScaledInstance(413, 324, java.awt.Image.SCALE_SMOOTH))));
         } else {
-            lafoto.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\imagen.jpg").getImage()).getScaledInstance(500, 400, java.awt.Image.SCALE_SMOOTH))));
-            return;
+            lafoto.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\imagen.jpg").getImage()).getScaledInstance(413, 324, java.awt.Image.SCALE_SMOOTH))));
         }
+         }
+    
+        else {
+            lafoto.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\imagen.jpg").getImage()).getScaledInstance(413, 324, java.awt.Image.SCALE_SMOOTH))));
+        }
+        
 
     }
 
     void fotoAdelante() {
-        System.out.println("Adelante ..");
         if ((index + 1) < imagenes.size()) {
             index++;
             ImageIcon imagen = (new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\" + folder + "\\" + (String) imagenes.elementAt(index)).getImage()).getScaledInstance(413, 324, java.awt.Image.SCALE_SMOOTH))));
@@ -104,7 +105,6 @@ public class Cproducto extends javax.swing.JInternalFrame {
     }
 
     void fotoAtras() {
-        System.out.println("Atras ..");
         if ((index - 1) > -1) {
             index--;
             ImageIcon imagen = (new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Fotos de Bodega\\" + folder + "\\" + (String) imagenes.elementAt(index)).getImage()).getScaledInstance(413, 324, java.awt.Image.SCALE_SMOOTH))));
