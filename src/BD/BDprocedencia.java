@@ -20,13 +20,13 @@ import java.util.ArrayList;
 public abstract class BDprocedencia {
     
     public static void insertarProcedencia (Procedencia med) throws SQLException{
-    Connection cnn = BD.getConnection();
+    Connection cn = BD.getConnection();
         PreparedStatement ps = null;
-    ps= cnn.prepareStatement("insert into id_procedencia (id_proce,Descripcion) Values(?,?)");
+    ps= cn.prepareStatement("insert into id_procedencia (id_proce,Descripcion) Values(?,?)");
     ps.setInt(1,med.getId_proce());
     ps.setString(2, med.getDescripcion());
     ps.executeUpdate();
-    cnn.close();
+    cn.close();
     ps.close();
     
     }

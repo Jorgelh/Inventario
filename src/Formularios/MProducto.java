@@ -57,7 +57,7 @@ public class MProducto extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select descripcion from familia");
+            ResultSet rs = stmt.executeQuery("select descripcion from familia order by descripcion");
             while (rs.next()) {
 
                 Combofamilia.addItem((String) rs.getObject(1));
@@ -74,7 +74,7 @@ public class MProducto extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select descripcion from id_procedencia");
+            ResultSet rs = stmt.executeQuery("select descripcion from id_procedencia order by descripcion");
             while (rs.next()) {
                 ComboProce.addItem((String) rs.getObject(1));
             }
@@ -89,7 +89,7 @@ public class MProducto extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select descripcion from unidad_medida");
+            ResultSet rs = stmt.executeQuery("select descripcion from unidad_medida order by descripcion");
             while (rs.next()) {
                 ComboMedida.addItem((String) rs.getObject(1));
             }
@@ -104,7 +104,7 @@ public class MProducto extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select descripcion from presentacion");
+            ResultSet rs = stmt.executeQuery("select descripcion from presentacion order by descripcion");
             while (rs.next()) {
                 ComboPresentacion.addItem((String) rs.getObject(1));
             }
