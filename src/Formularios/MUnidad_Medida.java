@@ -36,8 +36,8 @@ public class MUnidad_Medida extends javax.swing.JInternalFrame {
     public MUnidad_Medida() {
          
         try {
-             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-             
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
         }
         initComponents();
