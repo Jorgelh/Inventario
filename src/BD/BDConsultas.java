@@ -195,8 +195,8 @@ public abstract class BDConsultas {
     
     public static ArrayList<Producto> ListarNombre(String f) {
 
-        return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,presentacion.descripcion as \"presentacion\",unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
-
+        //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,presentacion.descripcion as \"presentacion\",unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
+         return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,producto.cantidad,unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
     }
 
     private static ArrayList<Producto> consultanombreSQL(String sql) {
@@ -212,7 +212,7 @@ public abstract class BDConsultas {
                 c.setDescripcion(rs.getString("descripcion")); 
                 c.setUbicacion(rs.getString("ubicacion"));
                 c.setUbicacion2(rs.getString("ubicacion2"));
-                c.setPresentacion(rs.getString("presentacion"));
+                c.setCantidad(rs.getInt("CANTIDAD"));
                 c.setUmedida(rs.getString("umedida"));
                 
                 list.add(c);
