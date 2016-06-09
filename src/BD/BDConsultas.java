@@ -187,7 +187,7 @@ public abstract class BDConsultas {
     public static ArrayList<Producto> ListarCodigo(String c) {
         
         //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,sum(ingreso.cantidad)as \"cantidad\"  from producto inner join ingreso on producto.codigo = ingreso.codigo where producto.codigo like '"+c+"%' GROUP BY producto.codigo,producto.descripcion,producto.ubicacion");
-        return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,presentacion.descripcion as \"presentacion\",unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where producto.codigo like '"+c+"%'");
+        return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,producto.cantidad,unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where producto.codigo like '"+c+"%'");
 
     }
     
@@ -223,6 +223,25 @@ public abstract class BDConsultas {
             return null;
         }
         return list;
+    }
+    
+    public static ArrayList<consultanp> ListaringreInvoice(String d , int b1 , int b2) {
+
+        return consultarinSQL("select ingreso.P_N,"
+                                 + "ingreso.no_trabajo,"
+                                 + "ingreso.lote,"
+                                 + "ingreso.cantidad,"
+                                 + "ingreso.ingresadopor,"
+                                 + "ingreso.notas,"
+                                 + "ingreso.fecha_ingreso,"
+                                 + "ingreso.no_documento,"
+                                 + "ingreso.no_serie,"
+                                 + "ingreso.codigo,"
+                                 + "producto.descripcion,"
+                                 + "bitacoraingreso.cantidad as \"Cin\" "
+                                 + "from ingreso inner join producto on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso "
+                                 + "where (ingreso.bodega ="+b1+" or ingreso.bodega = "+b2+") and NO_INVOICE like upper ('"+d+"%') order by fecha_ingreso");
+
     }
     
     

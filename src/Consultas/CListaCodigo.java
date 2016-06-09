@@ -46,7 +46,7 @@ public class CListaCodigo extends javax.swing.JInternalFrame {
             dato[f][1] = a.getDescripcion();
             dato[f][2] = a.getUbicacion();
             dato[f][3] = a.getUbicacion2();
-            dato[f][4] = a.getPresentacion();
+            dato[f][4] = a.getCantidad();
             dato[f][5] = a.getUmedida();
 
             f++;
@@ -54,7 +54,7 @@ public class CListaCodigo extends javax.swing.JInternalFrame {
         tablanom.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Ubicacion Bodega", "Ubicacion Bodeguita","Prentacion","Unidad de Medida"
+                    "Codigo", "Descripcion", "Ubicacion Bodega", "Ubicacion Bodeguita","Cantidad","Unidad de Medida"
                 }) {
                     @Override
                     public boolean isCellEditable(int row, int column) {

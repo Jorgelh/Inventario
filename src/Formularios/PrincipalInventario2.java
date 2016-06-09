@@ -68,6 +68,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         CONSULTAPN = new javax.swing.JMenuItem();
@@ -362,6 +363,17 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
             }
         });
         jMenu8.add(jMenuItem8);
+
+        jMenuItem7.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem7.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
+        jMenuItem7.setText("#INVOICE");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem7);
 
         jMenu2.add(jMenu8);
 
@@ -701,6 +713,18 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_INGRESOActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+      
+        CIngresoInvoice M = new CIngresoInvoice();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+        
+        
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -768,6 +792,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
