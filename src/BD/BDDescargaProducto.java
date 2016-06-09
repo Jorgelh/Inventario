@@ -78,5 +78,38 @@ public abstract class BDDescargaProducto {
         
     }
     
+    public static ArrayList<Descarga> ListarProductoDescargado(int c , int b1, int b2) {
+
+        return consultarSQL("select descarga.documento,descarga.pn,descarga.lote,descarga.no_trabajo,descarga.fechades,descarga.cantidad,descarga.entregadoa,ingreso.bodega from descarga inner join ingreso on descarga.id_ingreso = ingreso.id_ingreso where (ingreso.bodega = "+b1+" or ingreso.bodega = "+b2+" ) and descarga.codigo=" + c + "");
+
+    }
+    
+    private static ArrayList<Descarga> consultarSQL(String sql) {
+        ArrayList<Descarga> list = new ArrayList<Descarga>();
+        Connection cn = BD.getConnection();
+        try {
+            Descarga c;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                c = new Descarga();
+                c.setDocumento(rs.getString("documento"));
+                c.setPn(rs.getString("pn"));
+                c.setLote(rs.getString("lote"));
+                c.setTrabajo(rs.getString("no_trabajo"));
+                c.setFechades(rs.getString("fechades"));
+                c.setCantidad(rs.getInt("cantidad"));
+                c.setEntregadoA(rs.getInt("entregadoa"));
+                c.setBodega(rs.getInt("bodega"));
+                list.add(c);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error Consulta Ingreso Productos " + e);
+            return null;
+        }
+        return list;
+    }
+    
        
 }

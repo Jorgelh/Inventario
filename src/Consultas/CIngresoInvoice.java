@@ -30,6 +30,8 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
      */
     public CIngresoInvoice() {
         initComponents();
+         txtInvoice.requestFocus();
+       
     }
     
     public void limpiartabla() {
@@ -47,14 +49,6 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
     }
     
-    
-    
-    
-    
-    
-    
-    
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -68,7 +62,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
         Bnueva = new javax.swing.JButton();
         bodegaselect2 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        bBuscar = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -119,15 +113,20 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
         bodegaselect2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bodegaselect2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Bodega", "Bodeguita" }));
         bodegaselect2.setName(""); // NOI18N
+        bodegaselect2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bodegaselect2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setText("Bodega");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Search.png"))); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Search.png"))); // NOI18N
+        bBuscar.setText("Buscar");
+        bBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bBuscarActionPerformed(evt);
             }
         });
 
@@ -155,7 +154,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
+                                .addComponent(bBuscar)))
                         .addGap(0, 165, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -172,7 +171,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jButton1)))
+                        .addComponent(bBuscar)))
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -197,7 +196,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
     private void txtInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInvoiceActionPerformed
 
         //int Enviacodigo = Integer.parseInt(txtPN.getText());
-
+               bBuscar.requestFocus();
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -207,7 +206,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
             if (codigo > 0) {
                 actualizarTablaInvoice();
                 txtInvoice.setEnabled(false);
-                Bnueva.requestFocus();
+               
             } else {
                 JOptionPane.showMessageDialog(null, "El #invoice" + txtInvoice.getText() + " No Existe");
                 txtInvoice.setText("");
@@ -247,9 +246,14 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_BnuevaKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
        actualizarTablaInvoice();
-    }//GEN-LAST:event_jButton1ActionPerformed
+       Bnueva.requestFocus();
+    }//GEN-LAST:event_bBuscarActionPerformed
+
+    private void bodegaselect2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bodegaselect2ActionPerformed
+        txtInvoice.requestFocus();
+    }//GEN-LAST:event_bodegaselect2ActionPerformed
 
     private void actualizarTablaInvoice() {
         
@@ -341,9 +345,9 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bnueva;
+    private javax.swing.JButton bBuscar;
     private javax.swing.JComboBox<String> bodegaselect2;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

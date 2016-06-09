@@ -26,7 +26,27 @@ public class Descarga {
    private String pn;
    private String lote;
    private String trabajo;
+   private String fechades;
+   private int Bodega;
 
+    public int getBodega() {
+        return Bodega;
+    }
+
+    public void setBodega(int Bodega) {
+        this.Bodega = Bodega;
+    }
+   
+
+    public String getFechades() {
+        return fechades;
+    }
+
+    public void setFechades(String fechades) {
+        this.fechades = fechades;
+    }
+   
+   
     public String getPn() {
         return pn;
     }
