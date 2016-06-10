@@ -28,7 +28,16 @@ public class Descarga {
    private String trabajo;
    private String fechades;
    private int Bodega;
+   private String descripcion;
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+  
     public int getBodega() {
         return Bodega;
     }

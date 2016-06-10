@@ -111,5 +111,45 @@ public abstract class BDDescargaProducto {
         return list;
     }
     
+    
+    public static ArrayList<Descarga> ListarRangoFecha(String f, String a ) {
+
+        return consultaDescSQLrango("select descarga.codigo,descarga.documento,descarga.serie,descarga.no_trabajo,descarga.lote,descarga.pn,descarga.fechades,descarga.entregadoa,descarga.cantidad,producto.descripcion from descarga inner join producto on descarga.codigo = producto.codigo where descarga.fechades between to_date('"+f+"','dd/mm/yy') and to_date('"+a+"','dd/mm/yy') order by fechades");
+    }
+    
+    private static ArrayList<Descarga> consultaDescSQLrango(String sql) {
+        ArrayList<Descarga> list = new ArrayList<Descarga>();
+        Connection cn = BD.getConnection();
+        try {
+            Descarga c;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                c = new Descarga();
+                c.setCodigo(rs.getInt("codigo"));
+                c.setDescripcion(rs.getString("descripcion"));
+                c.setCantidad(rs.getInt("cantidad"));
+                c.setFechades(rs.getString("fechades"));
+                c.setTrabajo(rs.getString("no_trabajo"));
+                c.setLote(rs.getString("lote"));
+                c.setPn(rs.getString("pn"));
+                c.setCantidad(rs.getInt("cantidad"));
+                c.setSerie(rs.getString("serie"));
+                c.setDocumento(rs.getString("documento"));
+                c.setEntregadoA(rs.getInt("entregadoa"));
+                list.add(c);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error Consulta Fecha " + e);
+            return null;
+        }
+        return list;
+    }
+    
+    
+    
+    
+    
        
 }

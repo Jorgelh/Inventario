@@ -78,7 +78,7 @@ public class CDescargasRangoFecha extends javax.swing.JInternalFrame {
         txtFecha.setDoubleBuffered(false);
         txtFecha.setFocusCycleRoot(true);
         txtFecha.setFocusable(false);
-        txtFecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtFecha.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtFecha.setMaxSelectableDate(new java.util.Date(253370790061000L));
         txtFecha.setMinSelectableDate(new java.util.Date(-62135744339000L));
         txtFecha.setMinimumSize(new java.awt.Dimension(35, 45));
@@ -97,7 +97,7 @@ public class CDescargasRangoFecha extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "Cantidad Ingresada", "Cantidad Bodega", "Bodega", "Ingresado por"
+                "Codigo", "Descripcion", "Cantidad", "Fecha Descarga", "P/N", "Trabajo", "Documento", "Serie", "Lote", "Entregado A"
             }
         ));
         jScrollPane1.setViewportView(tablaFecha);
@@ -127,7 +127,7 @@ public class CDescargasRangoFecha extends javax.swing.JInternalFrame {
         jLabel2.setText("Hasta");
 
         txtfecha1.setDateFormatString("dd/MM/yy");
-        txtfecha1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtfecha1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -265,32 +265,33 @@ public class CDescargasRangoFecha extends javax.swing.JInternalFrame {
         
         String fecha1 = sd.format(date2);
 
-        ArrayList<ConsultaFecha> result = BDConsultas.ListarRangoFecha(fecha,fecha1);
+        ArrayList<Descarga> result = BDDescargaProducto.ListarRangoFecha(fecha,fecha1);
         recargarIngreFecha(result);
     }
 
-    private void recargarIngreFecha(ArrayList<ConsultaFecha> list) {
+    private void recargarIngreFecha(ArrayList<Descarga> list) {
 
         Object[][] dato = new Object[list.size()][10];
         if (list.size() > 0){
         int f = 0;
-        for (ConsultaFecha a : list) {
+        for (Descarga a : list) {
             dato[f][0] = a.getCodigo();
             dato[f][1] = a.getDescripcion();
-            dato[f][2] = a.getFechaIngre();
-            dato[f][3] = a.getPN();
-            dato[f][4] = a.getTrabajo();
-            dato[f][5] = a.getLote();
-            dato[f][6] = a.getCantidadIngre();
-            dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getBodega();
-            dato[f][9] = a.getIngrepor();
+            dato[f][2] = a.getCantidad();
+            dato[f][3] = a.getFechades();
+            dato[f][4] = a.getPn();
+            dato[f][5] = a.getTrabajo();
+            dato[f][6] = a.getDocumento();
+            dato[f][7] = a.getSerie();
+            dato[f][8] = a.getLote();
+            dato[f][9] = a.getEntregadoA();
+            
             f++;
         }
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","Cantidad Ingresada",  "Cantidad Bodega", "Bodega", "Ingresado Por"
+                    "Codigo", "Descripcion","Cantidad","Fecha Descarga","P/N","Trabajo","Documento","Serie", "Lote", "Entregado A"
 
                 }) {
                     @Override

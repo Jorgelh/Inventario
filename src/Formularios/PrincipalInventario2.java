@@ -421,6 +421,11 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jMenuItem13.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
         jMenuItem13.setText("RANGO DE FECHA");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem13);
 
         jMenu2.add(jMenu9);
@@ -754,6 +759,15 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         M.show();
         
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        CDescargasRangoFecha M = new CDescargasRangoFecha();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     
     public static void main(String args[]) {
