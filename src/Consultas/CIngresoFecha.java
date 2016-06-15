@@ -87,12 +87,12 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
             }
         });
         txtFecha.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 txtFechaAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         txtFecha.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -138,7 +138,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "Cantidad Ingresada", "Cantidad Bodega", "Ingresado Por"
+                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "Cantidad Bodega", "Ingresado Por"
             }
         ));
         jScrollPane1.setViewportView(tablaFecha);
@@ -184,9 +184,9 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(56, 56, 56)
                 .addComponent(buscar)
-                .addGap(150, 150, 150))
+                .addGap(139, 139, 139))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -211,7 +211,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(Nbusqueda)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -345,7 +345,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
 
     private void recargarIngreFecha(ArrayList<ConsultaFecha> list) {
 
-        Object[][] dato = new Object[list.size()][9];
+        Object[][] dato = new Object[list.size()][8];
         int f = 0;
         for (ConsultaFecha a : list) {
             dato[f][0] = a.getCodigo();
@@ -354,16 +354,15 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
             dato[f][3] = a.getPN();
             dato[f][4] = a.getTrabajo();
             dato[f][5] = a.getLote();
-            dato[f][6] = a.getCantidadIngre();
-            dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getIngrepor();
+            dato[f][6] = a.getCantidad();
+            dato[f][7] = a.getIngrepor();
            
             f++;
         }
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","Cantidad Ingresada","Cantidad Bodega", "Ingresado Por"
+                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","Cantidad Bodega", "Ingresado Por"
 
                 }) {
                     @Override

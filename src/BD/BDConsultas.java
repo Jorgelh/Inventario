@@ -139,7 +139,7 @@ public abstract class BDConsultas {
     }
     
     
-    public static ArrayList<ConsultaFecha> ListarRangoFecha(String f, String a ) {
+    public static ArrayList<ConsultaFecha> ListarRangoFecha(String f, String a , int b1, int b2) {
 
         return consultaIngreSQLrango("select ingreso.codigo,"
                                     + "producto.descripcion,"
@@ -150,7 +150,7 @@ public abstract class BDConsultas {
                                     + "ingreso.po,"
                                     + "bitacoraingreso.cantidad as \"cantiingreso\","
                                     + "ingreso.cantidad,"                
-                                    + "DECODE(ingreso.bodega, 1, 'Bodega 1', 2, 'Bodega 2')as \"bodega\",ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema between to_date('" + f + "','dd/mm/yy') and to_date('"+ a +"','dd/mm/yy') order by fechasistema");
+                                    + "DECODE(ingreso.bodega, 1, 'Bodega 1', 2, 'Bodega 2')as \"bodega\",ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema between to_date('" + f + "','dd/mm/yy') and to_date('"+ a +"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by fechasistema");
     }
     
     private static ArrayList<ConsultaFecha> consultaIngreSQLrango(String sql) {

@@ -113,9 +113,9 @@ public abstract class BDDescargaProducto {
     }
     
     
-    public static ArrayList<Descarga> ListarRangoFecha(String f, String a ) {
+    public static ArrayList<Descarga> ListarRangoFecha(String f, String a ,int b1,int b2) {
 
-        return consultaDescSQLrango("select ingreso.po,descarga.codigo,descarga.documento,descarga.serie,descarga.no_trabajo,descarga.lote,descarga.pn,descarga.fechades,descarga.entregadoa,descarga.cantidad,producto.descripcion from descarga inner join producto on descarga.codigo = producto.codigo join ingreso on ingreso.id_ingreso = descarga.id_ingreso where descarga.fechades between to_date('"+f+"','dd/mm/yy') and to_date('"+a+"','dd/mm/yy') order by fechades");
+        return consultaDescSQLrango("select ingreso.po,descarga.codigo,descarga.documento,descarga.serie,descarga.no_trabajo,descarga.lote,descarga.pn,descarga.fechades,descarga.entregadoa,descarga.cantidad,producto.descripcion from descarga inner join producto on descarga.codigo = producto.codigo join ingreso on ingreso.id_ingreso = descarga.id_ingreso where descarga.fechades between to_date('"+f+"','dd/mm/yy') and to_date('"+a+"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by fechades");
     }
     
     private static ArrayList<Descarga> consultaDescSQLrango(String sql) {
