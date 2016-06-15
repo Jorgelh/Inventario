@@ -140,13 +140,14 @@
             <Component class="javax.swing.JTable" name="tablaCon">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="9" rowCount="0">
+                  <Table columnCount="10" rowCount="0">
                     <Column editable="true" title="Codigo" type="java.lang.Object"/>
                     <Column editable="true" title="Descripcion" type="java.lang.Object"/>
                     <Column editable="true" title="Fecha de Entrega" type="java.lang.Object"/>
                     <Column editable="true" title="P/N" type="java.lang.Object"/>
                     <Column editable="true" title="Trabajo" type="java.lang.Object"/>
                     <Column editable="true" title="Lote " type="java.lang.Object"/>
+                    <Column editable="true" title="P.O" type="java.lang.Object"/>
                     <Column editable="true" title="Cantidad Bodega" type="java.lang.Object"/>
                     <Column editable="true" title="Cantidad Ingresada" type="java.lang.Object"/>
                     <Column editable="true" title="Ingresado Por" type="java.lang.Object"/>
@@ -154,6 +155,11 @@
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -236,7 +242,11 @@
               </StringArray>
             </Property>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bodegaselect2ActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

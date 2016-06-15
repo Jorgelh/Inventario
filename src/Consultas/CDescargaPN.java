@@ -94,7 +94,7 @@ public class CDescargaPN extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "Cantidad", "Entregado A"
+                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad", "Entregado A"
             }
         ));
         jScrollPane1.setViewportView(tablaCon);
@@ -221,7 +221,7 @@ public class CDescargaPN extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][8];
+        Object[][] dato = new Object[list.size()][9];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -230,15 +230,16 @@ public class CDescargaPN extends javax.swing.JInternalFrame {
             dato[f][3] = a.getPN();
             dato[f][4] = a.getNo_trabajo();
             dato[f][5] = a.getLote();
-            dato[f][6] = a.getCantidad();
-            dato[f][7] = a.getEntregadoa();
+            dato[f][6] = a.getPO();
+            dato[f][7] = a.getCantidad();
+            dato[f][8] = a.getEntregadoa();
 
             f++;
         }
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote", "Cantidad","Entregado a"
+                    "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote","P.O","Cantidad","Entregado a"
 
                 }) {
                     @Override

@@ -29,6 +29,15 @@ public class Descarga {
    private String fechades;
    private int Bodega;
    private String descripcion;
+   private String PO;
+
+    public String getPO() {
+        return PO;
+    }
+
+    public void setPO(String PO) {
+        this.PO = PO;
+    }
 
     public String getDescripcion() {
         return descripcion;

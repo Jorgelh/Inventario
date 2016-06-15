@@ -32,9 +32,8 @@ public abstract class BDConsultas {
                                  + "descarga.documento,"
                                  + "descarga.serie,"
                                  + "descarga.codigo,"
-                                 + "producto.descripcion "
-                                 + "from descarga inner join producto on descarga.codigo = producto.codigo "
-                                 + "where upper(descarga.PN) = upper('"+d+"') order by fechasistema");
+                                 + "ingreso.PO,"
+                                 + "producto.descripcion from descarga inner join producto on descarga.codigo = producto.codigo join ingreso on ingreso.id_ingreso = descarga.id_ingreso where upper(descarga.PN) = upper('"+d+"') order by descarga.fechasistema");
 
     }
 
@@ -58,6 +57,7 @@ public abstract class BDConsultas {
                 c.setNota(rs.getString("nota"));
                 c.setDocumento(rs.getString("documento"));
                 c.setSerie(rs.getString("serie"));
+                c.setPO(rs.getString("PO"));
                 list.add(c);
             }
             cn.close();
@@ -147,6 +147,7 @@ public abstract class BDConsultas {
                                     + "ingreso.P_N,"
                                     + "ingreso.no_trabajo,"
                                     + "ingreso.lote,"
+                                    + "ingreso.po,"
                                     + "bitacoraingreso.cantidad as \"cantiingreso\","
                                     + "ingreso.cantidad,"                
                                     + "DECODE(ingreso.bodega, 1, 'Bodega 1', 2, 'Bodega 2')as \"bodega\",ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema between to_date('" + f + "','dd/mm/yy') and to_date('"+ a +"','dd/mm/yy') order by fechasistema");
@@ -171,6 +172,7 @@ public abstract class BDConsultas {
                 c.setCantidad(rs.getInt("cantidad"));
                 c.setIngrepor(rs.getString("ingresadopor"));
                 c.setBodega(rs.getString("bodega"));
+                c.setPo(rs.getString("po"));
                 list.add(c);
             }
             cn.close();
@@ -237,12 +239,14 @@ public abstract class BDConsultas {
                                  + "ingreso.no_documento,"
                                  + "ingreso.no_serie,"
                                  + "ingreso.codigo,"
+                                 + "ingreso.PO,"
                                  + "producto.descripcion,"
                                  + "bitacoraingreso.cantidad as \"Cin\" "
                                  + "from ingreso inner join producto on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso "
                                  + "where (ingreso.bodega ="+b1+" or ingreso.bodega = "+b2+") and NO_INVOICE like upper ('"+d+"%') order by fecha_ingreso");
 
     }
+    
     
     
     public static ArrayList<consultanp> ListaringrePN(String d , int b1 , int b2) {
@@ -257,6 +261,7 @@ public abstract class BDConsultas {
                                  + "ingreso.no_documento,"
                                  + "ingreso.no_serie,"
                                  + "ingreso.codigo,"
+                                 + "ingreso.PO,"
                                  + "producto.descripcion,"
                                  + "bitacoraingreso.cantidad as \"Cin\" "
                                  + "from ingreso inner join producto on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso "
@@ -286,6 +291,7 @@ public abstract class BDConsultas {
                 c.setDocumento(rs.getString("no_documento"));
                 c.setSerie(rs.getString("no_serie"));
                 c.setCantInicial(rs.getInt("Cin"));
+                c.setPO(rs.getString("PO"));
                 list.add(c);
             }
             cn.close();

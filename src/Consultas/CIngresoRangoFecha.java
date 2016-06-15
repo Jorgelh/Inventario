@@ -97,7 +97,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "Cantidad Ingresada", "Cantidad Bodega", "Bodega", "Ingresado por"
+                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "P.O", "Cantidad Ingresada", "Cantidad Bodega", "Bodega", "Ingresado por"
             }
         ));
         jScrollPane1.setViewportView(tablaFecha);
@@ -271,7 +271,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
     private void recargarIngreFecha(ArrayList<ConsultaFecha> list) {
 
-        Object[][] dato = new Object[list.size()][10];
+        Object[][] dato = new Object[list.size()][11];
         if (list.size() > 0){
         int f = 0;
         for (ConsultaFecha a : list) {
@@ -281,16 +281,17 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
             dato[f][3] = a.getPN();
             dato[f][4] = a.getTrabajo();
             dato[f][5] = a.getLote();
-            dato[f][6] = a.getCantidadIngre();
-            dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getBodega();
-            dato[f][9] = a.getIngrepor();
+            dato[f][6] = a.getPo();
+            dato[f][7] = a.getCantidadIngre();
+            dato[f][8] = a.getCantidad();
+            dato[f][9] = a.getBodega();
+            dato[f][10] = a.getIngrepor();
             f++;
         }
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","Cantidad Ingresada",  "Cantidad Bodega", "Bodega", "Ingresado Por"
+                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","P.O","Cantidad Ingresada",  "Cantidad Bodega", "Bodega", "Ingresado Por"
 
                 }) {
                     @Override

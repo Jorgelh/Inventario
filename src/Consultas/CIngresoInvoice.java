@@ -91,7 +91,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "Cantidad Bodega", "Cantidad Ingresada", "Ingresado Por"
+                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad Bodega", "Cantidad Ingresada", "Ingresado Por"
             }
         ));
         jScrollPane1.setViewportView(tablaCon);
@@ -271,7 +271,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][9];
+        Object[][] dato = new Object[list.size()][10];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -280,9 +280,10 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
             dato[f][3] = a.getPN();
             dato[f][4] = a.getNo_trabajo();
             dato[f][5] = a.getLote();
-            dato[f][6] = a.getCantidad();
-            dato[f][7] = a.getCantInicial();
-            dato[f][8] = a.getIngrepor();
+            dato[f][6] = a.getPO();
+            dato[f][7] = a.getCantidad();
+            dato[f][8] = a.getCantInicial();
+            dato[f][9] = a.getIngrepor();
             
 
             f++;
@@ -290,7 +291,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "Cantidad Bodega","Cantidad Ingresada","Ingresado por"
+                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O","Cantidad Bodega","Cantidad Ingresada","Ingresado por"
 
                 }) {
                     @Override

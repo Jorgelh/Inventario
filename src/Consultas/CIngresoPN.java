@@ -30,6 +30,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
      */
     public CIngresoPN() {
         initComponents();
+        txtPN.requestFocus();
     }
     
     public void limpiartabla() {
@@ -48,12 +49,30 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
     }
     
     
+    public void validar(){
     
+    try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select count(*) from ingreso  where upper(P_N) like upper('" + txtPN.getText()+"%')");
+            rs.next();
+            int codigo = rs.getInt("count(*)");
+            if (codigo > 0) {
+                actualizarTablaPN();
+                txtPN.setEnabled(false);
+                Bnueva.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(null, "El P/N " + txtPN.getText() + " No Contiene Ingresos");
+                txtPN.setText("");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("Editar Error" + e);
+
+        }
     
-    
-    
-    
-    
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -97,7 +116,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "Cantidad Bodega", "Cantidad Ingresada", "Ingresado Por"
+                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad Bodega", "Cantidad Ingresada", "Ingresado Por"
             }
         ));
         jScrollPane1.setViewportView(tablaCon);
@@ -119,6 +138,12 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
         bodegaselect2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bodegaselect2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Bodega", "Bodeguita" }));
         bodegaselect2.setName(""); // NOI18N
+        bodegaselect2.setRequestFocusEnabled(false);
+        bodegaselect2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bodegaselect2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setText("Bodega");
@@ -195,30 +220,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPNActionPerformed
-
-        //int Enviacodigo = Integer.parseInt(txtPN.getText());
-
-        try {
-            Connection con = BD.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select count(*) from ingreso  where  like upper('" + txtPN.getText()+"'%");
-            rs.next();
-            int codigo = rs.getInt("count(*)");
-            if (codigo > 0) {
-                actualizarTablaPN();
-                txtPN.setEnabled(false);
-                Bnueva.requestFocus();
-            } else {
-                JOptionPane.showMessageDialog(null, "El P/N " + txtPN.getText() + " No Contiene Ingresos");
-                txtPN.setText("");
-
-            }
-
-        } catch (Exception e) {
-            System.out.println("Editar Error" + e);
-
-        }
-
+       validar();  
     }//GEN-LAST:event_txtPNActionPerformed
 
     private void txtPNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPNKeyTyped
@@ -231,9 +233,9 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
                 
         limpiartabla();
         txtPN.setText("");
-        txtPN.requestFocus();
         txtPN.setEnabled(true);
         bodegaselect2.setSelectedItem("Todos");
+        txtPN.requestFocus();
 
 
     }//GEN-LAST:event_BnuevaActionPerformed
@@ -248,8 +250,12 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BnuevaKeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       actualizarTablaPN();
+       validar();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void bodegaselect2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bodegaselect2ActionPerformed
+      txtPN.requestFocus();
+    }//GEN-LAST:event_bodegaselect2ActionPerformed
 
     private void actualizarTablaPN() {
         
@@ -267,7 +273,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][9];
+        Object[][] dato = new Object[list.size()][10];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -276,9 +282,10 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
             dato[f][3] = a.getPN();
             dato[f][4] = a.getNo_trabajo();
             dato[f][5] = a.getLote();
-            dato[f][6] = a.getCantidad();
-            dato[f][7] = a.getCantInicial();
-            dato[f][8] = a.getIngrepor();
+            dato[f][6] = a.getPO();
+            dato[f][7] = a.getCantidad();
+            dato[f][8] = a.getCantInicial();
+            dato[f][9] = a.getIngrepor();
             
 
             f++;
@@ -286,7 +293,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "Cantidad Bodega","Cantidad Ingresada","Ingresado por"
+                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O", "Cantidad Bodega","Cantidad Ingresada","Ingresado por"
 
                 }) {
                     @Override

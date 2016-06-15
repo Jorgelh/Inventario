@@ -60,7 +60,7 @@ public abstract class DBCargaPro {
         ps.setString(15, c.getNota());
         ps.setInt(16, c.getBodeda());
         //ps.setString(18, c.getEstado());
-        ps.executeUpdate();
+        ps.execute();
         cnn.close();
         ps.close();
     }

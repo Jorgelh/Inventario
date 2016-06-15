@@ -27,6 +27,15 @@ public class ConsultaFecha {
     public int cantidadIngre;
     public String ingrepor;
     public String bodega;
+    public String po;
+
+    public String getPo() {
+        return po;
+    }
+
+    public void setPo(String po) {
+        this.po = po;
+    }
 
     public String getBodega() {
         return bodega;

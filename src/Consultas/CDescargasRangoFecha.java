@@ -271,7 +271,7 @@ public class CDescargasRangoFecha extends javax.swing.JInternalFrame {
 
     private void recargarIngreFecha(ArrayList<Descarga> list) {
 
-        Object[][] dato = new Object[list.size()][10];
+        Object[][] dato = new Object[list.size()][11];
         if (list.size() > 0){
         int f = 0;
         for (Descarga a : list) {
@@ -284,14 +284,15 @@ public class CDescargasRangoFecha extends javax.swing.JInternalFrame {
             dato[f][6] = a.getDocumento();
             dato[f][7] = a.getSerie();
             dato[f][8] = a.getLote();
-            dato[f][9] = a.getEntregadoA();
+            dato[f][9] = a.getPO();
+            dato[f][10] = a.getEntregadoA();
             
             f++;
         }
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion","Cantidad","Fecha Descarga","P/N","Trabajo","Documento","Serie", "Lote", "Entregado A"
+                    "Codigo", "Descripcion","Cantidad","Fecha Descarga","P/N","Trabajo","Documento","Serie", "Lote","P.O","Entregado A"
 
                 }) {
                     @Override

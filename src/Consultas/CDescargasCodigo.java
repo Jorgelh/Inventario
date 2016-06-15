@@ -396,17 +396,18 @@ public class CDescargasCodigo extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<Descarga> list) {
 
-        Object[][] dato = new Object[list.size()][8];
+        Object[][] dato = new Object[list.size()][9];
         int f = 0;
         for (Descarga a : list) {
             dato[f][0] = a.getDocumento();
             dato[f][1] = a.getPn();
             dato[f][2] = a.getLote();
-            dato[f][3] = a.getTrabajo();
-            dato[f][4] = a.getFechades();
-            dato[f][5] = a.getCantidad();
-            dato[f][6] = a.getEntregadoA();
-            dato[f][7] = a.getBodega();
+            dato[f][3] = a.getPO();
+            dato[f][4] = a.getTrabajo();
+            dato[f][5] = a.getFechades();
+            dato[f][6] = a.getCantidad();
+            dato[f][7] = a.getEntregadoA();
+            dato[f][8] = a.getBodega();
             
 
             f++;
@@ -414,7 +415,7 @@ public class CDescargasCodigo extends javax.swing.JInternalFrame {
         Cosulta.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                  "No Documento","P/N", "Lote", "No. Trabajo","Fecha descarga","Cantidad entregada","Entregado a","Bodega"
+                  "No Documento","P/N", "Lote","P.O", "No. Trabajo","Fecha descarga","Cantidad entregada","Entregado a","Bodega"
 
                 }) {
             @Override
