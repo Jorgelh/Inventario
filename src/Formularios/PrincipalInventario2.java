@@ -5,11 +5,16 @@
  */
 package Formularios;
 
+import BD.BD;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import Consultas.*;
 import com.sun.org.apache.bcel.internal.generic.CPInstruction;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,11 +30,10 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         menubar.setForeground(Color.GREEN);
+        avencer();
            
     }
-    
-    
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,7 +85,6 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
 
@@ -469,15 +472,6 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jMenu4.setText("   REPORTES");
         jMenu4.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(110, 19));
-
-        jMenuItem14.setText("jMenuItem14");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem14);
-
         menubar.add(jMenu4);
 
         jMenu5.setForeground(new java.awt.Color(0, 51, 255));
@@ -522,6 +516,31 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void avencer(){
+       
+        
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select count(fecha_ven) from Ingreso where ingreso.fecha_ven between to_date(sysdate,'dd/mm/yy') and to_date(sysdate+30,'dd/mm/yy') and estado = 'A'");
+            rs.next();
+            int codigo = rs.getInt("count(fecha_ven)");
+            if (codigo > 0) {
+
+                Vencimieto M = new Vencimieto();
+                jDesktopPane1.add(M);
+                Dimension desktopSize = jDesktopPane1.getSize();
+                Dimension FrameSize = M.getSize();
+                M.setLocation((850), (20));
+                M.show();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
+    
     private void NUEVOPROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NUEVOPROActionPerformed
         MProducto pro = new MProducto();
         jDesktopPane1.add(pro); 
@@ -782,15 +801,6 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         M.show();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-      Vencimieto M = new Vencimieto();
-        jDesktopPane1.add(M); 
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = M.getSize();
-        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
-        M.show();
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
-
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -854,7 +864,6 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
