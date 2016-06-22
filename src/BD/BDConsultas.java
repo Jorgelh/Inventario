@@ -304,4 +304,39 @@ public abstract class BDConsultas {
     
     
     
+    
+    
+    public static ArrayList<Vencimientos> ListarVencimientos() {
+
+        return consultaVencimientos("select ingreso.codigo,"
+                                    + "producto.descripcion,"
+                                    + "ingreso.fecha_ven,"
+                                    + "ingreso.cantidad from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo where ingreso.fecha_ven between to_date(sysdate,'dd/mm/yy') and to_date(sysdate+30,'dd/mm/yy')");
+    }
+    
+    private static ArrayList<Vencimientos> consultaVencimientos(String sql2) {
+        ArrayList<Vencimientos> list = new ArrayList<Vencimientos>();
+        Connection cn = BD.getConnection();
+        try {
+            Vencimientos c;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql2);
+            while (rs.next()) {
+                c = new Vencimientos();
+                c.setCodigo(rs.getInt("codigo"));
+                c.setDescripcion(rs.getString("descripcion"));
+                c.setFechaVen(rs.getString("fecha_ven"));
+                c.setCantidad(rs.getInt("cantidad"));
+                list.add(c);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error Consulta Fecha " + e);
+            return null;
+        }
+        return list;
+    }
+    
+    
+    
 }
