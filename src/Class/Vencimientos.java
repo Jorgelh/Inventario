@@ -14,8 +14,20 @@ public class Vencimientos {
 private int Codigo;
 private String Descripcion;
 private String fechaVen;
+private String fechaIngreso;
+private String notas;
 private int Cantidad;
+private String po;
 
+    public String getPo() {
+        return po;
+    }
+
+    public void setPo(String po) {
+        this.po = po;
+    }
+
+    
     public int getCodigo() {
         return Codigo;
     }
@@ -47,6 +59,23 @@ private int Cantidad;
     public void setCantidad(int Cantidad) {
         this.Cantidad = Cantidad;
     }
+
+    public String getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public void setFechaIngreso(String fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
   
+    
     
 }
