@@ -76,6 +76,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         CONSULTAPN = new javax.swing.JMenuItem();
@@ -386,6 +387,11 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
             }
         });
         jMenu8.add(jMenuItem7);
+
+        jMenuItem16.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem16.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem16.setText("HISTORIAL INGRESO AGOTADO");
+        jMenu8.add(jMenuItem16);
 
         jMenu2.add(jMenu8);
 
@@ -918,6 +924,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
