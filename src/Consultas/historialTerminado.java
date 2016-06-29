@@ -5,17 +5,22 @@
  */
 package Consultas;
 
+import BD.BDHistorialIn;
+import Class.Historial;
+import java.util.ArrayList;
+
 /**
  *
  * @author jluis
  */
-public class historialTerminado extends javax.swing.JFrame {
+public class historialTerminado extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form historialTerminado
      */
     public historialTerminado() {
         initComponents();
+        actualizarHistorialPA();
     }
 
     /**
@@ -29,22 +34,23 @@ public class historialTerminado extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        HPA = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        HPA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Cantidad ", "Fecha Ingreso", "P.O. ", "Fecha Vencimiento", "#Invoice", "Proveedor"
+                "Codigo", "Descripcion", "Cantidad ", "Fecha Ingreso", "P.O. ", "Fecha Vencimiento", "#Invoice", "Proveedor", "Nota Ingreso", "EntregadoA", "Nota Descarga"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(HPA);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Historial Producto Agotado");
@@ -58,9 +64,9 @@ public class historialTerminado extends javax.swing.JFrame {
                 .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(349, 349, 349)
+                .addGap(377, 377, 377)
                 .addComponent(jLabel1)
-                .addContainerGap(438, Short.MAX_VALUE))
+                .addContainerGap(503, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,6 +96,54 @@ public class historialTerminado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void actualizarHistorialPA() {
+
+        
+
+        ArrayList<Historial> result = BDHistorialIn.ListarHistorialIn();
+        actualizar(result);
+    }
+
+    private void actualizar(ArrayList<Historial> list) {
+
+        Object[][] dato = new Object[list.size()][11];
+        int f = 0;
+        for (Historial a : list) {
+            dato[f][0] = a.getCodigo();
+            dato[f][1] = a.getDescripcion();
+            dato[f][2] = a.getCantidad();
+            dato[f][3] = a.getFechaingre();
+            dato[f][4] = a.getPo();
+            dato[f][5] = a.getFechaVen();
+            dato[f][6] = a.getInvoice();
+            dato[f][7] = a.getProveedor();
+            dato[f][8] = a.getNotain();
+            dato[f][9] = a.getEntregadoa();
+            dato[f][10] = a.getNotaDesc();
+            f++;
+        }
+        HPA.setModel(new javax.swing.table.DefaultTableModel(
+                dato,
+                new String[]{
+                    "Codigo", "Descripcion","Cantidad","Fecha Ingreso","P.O","Fecha Vencimiento","No Invoice","Proveedor","Nota Ingreso","EntregadoA","Nota Desc" 
+
+                }) {
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        return false;
+                    }
+
+                });
+ 
+    }
+
+    
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -126,9 +180,9 @@ public class historialTerminado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable HPA;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
