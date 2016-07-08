@@ -311,7 +311,7 @@ public abstract class BDConsultas {
         return consultaVencimientos("select ingreso.codigo,"
                                     + "producto.descripcion,"
                                     + "ingreso.fecha_ven,"
-                                    + "ingreso.cantidad from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo where ingreso.fecha_ven between to_date(sysdate,'dd/mm/yy') and to_date(sysdate+30,'dd/mm/yy') and estado = 'A'");
+                                    + "ingreso.cantidad from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo where ingreso.fecha_ven between to_date(sysdate,'dd/mm/yy') and to_date(sysdate+30,'dd/mm/yy') and ingreso.cantidad >0");
     }
     
     private static ArrayList<Vencimientos> consultaVencimientos(String sql2) {

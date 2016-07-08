@@ -50,6 +50,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
     
     
     public void validar(){
+        if (txtPN.getText().compareTo("") != 0){
     
     try {
             Connection con = BD.getConnection();
@@ -71,6 +72,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
             System.out.println("Editar Error" + e);
 
         }
+        }else{JOptionPane.showMessageDialog(null,"INGRESER P/N...");}
     
     }
 

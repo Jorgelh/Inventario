@@ -62,7 +62,6 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
         Bnueva = new javax.swing.JButton();
         bodegaselect2 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        bBuscar = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -122,14 +121,6 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setText("Bodega");
 
-        bBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Search.png"))); // NOI18N
-        bBuscar.setText("Buscar");
-        bBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bBuscarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -152,31 +143,24 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
                                 .addGap(145, 145, 145)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bBuscar)))
-                        .addGap(0, 165, Short.MAX_VALUE)))
+                                .addComponent(txtInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 268, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bodegaselect2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(bBuscar)))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bodegaselect2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Bnueva, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,13 +178,17 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInvoiceActionPerformed
-
+          
         //int Enviacodigo = Integer.parseInt(txtPN.getText());
-               bBuscar.requestFocus();
+        txtInvoice.requestFocus();
+        if(txtInvoice.getText().compareTo("") !=0)
+        {
+            
+             
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select count(*) from ingreso  where  NO_INVOICE like upper('" + txtInvoice.getText()+"%')");
+            ResultSet rs = stmt.executeQuery("select count(*) from ingreso  where  NO_INVOICE = '"+txtInvoice.getText()+"'");
             rs.next();
             int codigo = rs.getInt("count(*)");
             if (codigo > 0) {
@@ -217,7 +205,11 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
             System.out.println("Editar Error" + e);
 
         }
-
+       
+        }else {
+                JOptionPane.showMessageDialog(null, "Ingreso #Invoice");
+                txtInvoice.setText("");
+        }
     }//GEN-LAST:event_txtInvoiceActionPerformed
 
     private void txtInvoiceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInvoiceKeyTyped
@@ -246,11 +238,6 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_BnuevaKeyPressed
 
-    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
-       actualizarTablaInvoice();
-       Bnueva.requestFocus();
-    }//GEN-LAST:event_bBuscarActionPerformed
-
     private void bodegaselect2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bodegaselect2ActionPerformed
         txtInvoice.requestFocus();
     }//GEN-LAST:event_bodegaselect2ActionPerformed
@@ -271,7 +258,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][9];
+        Object[][] dato = new Object[list.size()][10];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -281,8 +268,9 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
             dato[f][4] = a.getNo_trabajo();
             dato[f][5] = a.getLote();
             dato[f][6] = a.getPO();
-            dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getIngrepor();
+            dato[f][7] = a.getCantInicial();
+            dato[f][8] = a.getCantidad();
+            dato[f][9] = a.getIngrepor();
             
 
             f++;
@@ -290,7 +278,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O","Cantidad Bodega","Ingresado por"
+                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O","Cantidad Ingresada","Cantidad Bodega","Ingresado por"
 
                 }) {
                     @Override
@@ -345,7 +333,6 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bnueva;
-    private javax.swing.JButton bBuscar;
     private javax.swing.JComboBox<String> bodegaselect2;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;

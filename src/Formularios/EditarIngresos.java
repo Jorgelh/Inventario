@@ -115,7 +115,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
     public void EditarTXT(boolean b) {
 
-        txtCantidad.setEditable(b);
+        //txtCantidad.setEditable(b);
         txtDoc.setEditable(b);
         txtInvoice.setEditable(b);
         txtPN.setEditable(b);
@@ -505,6 +505,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtingresadopor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtingresadopor.setForeground(new java.awt.Color(0, 102, 255));
 
+        txtCantidad.setEditable(false);
         txtCantidad.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtCantidad.setForeground(new java.awt.Color(255, 0, 0));
         txtCantidad.addContainerListener(new java.awt.event.ContainerAdapter() {

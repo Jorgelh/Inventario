@@ -510,6 +510,8 @@ public class Cproducto extends javax.swing.JInternalFrame {
 
     private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
 
+         if(txtcodigo.getText().compareTo("") !=0)
+         {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -533,7 +535,8 @@ public class Cproducto extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println("Editar Error" + e);
         }
-
+         }
+         else{JOptionPane.showMessageDialog(null, "Ingrese Codigo..."); }
 
     }//GEN-LAST:event_txtcodigoActionPerformed
 

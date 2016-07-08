@@ -636,12 +636,15 @@ public class CIngresoCodigo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TxCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxCodigoActionPerformed
-
+        
+        
+        if(TxCodigo.getText().compareTo("") != 0)
+        {
        BotonBus.requestFocus();
        BotonBus.setEnabled(true);
        bodegaselect.setEnabled(true);
        consulta();
-
+        }else {JOptionPane.showMessageDialog(null, "Ingrese Codigo");}
     }//GEN-LAST:event_TxCodigoActionPerformed
 
     private void CosultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CosultaMouseClicked
@@ -700,7 +703,10 @@ public class CIngresoCodigo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_NuevaCActionPerformed
 
     private void BotonBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBusActionPerformed
+
+        if(TxCodigo.getText().compareTo("")!=0){
         consulta();
+        }else{JOptionPane.showMessageDialog(null, "Ingrese Codigo");}
     }//GEN-LAST:event_BotonBusActionPerformed
 
     private void actualizarTablaconsulta() {

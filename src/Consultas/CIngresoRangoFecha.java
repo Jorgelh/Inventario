@@ -11,9 +11,13 @@ import com.toedter.calendar.JDateChooser;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.bind.DatatypeConverter;
@@ -226,29 +230,43 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_NbusquedaActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-
-        actualizarTablaFecha();   
-        Nbusqueda.requestFocus(); 
         
-        /*
-        Date date = txtFecha.getDate();
-        Date date1 = txtfecha1.getDate();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
-        String fecha2 = sd.format(date);
-        String fecha1 = sdf.format(date);
-    
-        try {
+        if (txtFecha.getDate() != null && txtfecha1.getDate() != null) {
+
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+            Date fec1 = txtFecha.getDate();
+            Date fec2 = txtfecha1.getDate();
+            String fe1 = formato.format(fec1);
+            String fe2 = formato.format(fec2);
+            try {
+                Date f1 = formato.parse(fe1);
+                Date f2 = formato.parse(fe2);
+
+                if (f1.before(f2)) {
+                    actualizarTablaFecha();
+                    txtFecha.setEnabled(false);
+                    Nbusqueda.requestFocus();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "LA PRIMERA FECHA NO PUEDE SER MAYOR A LA SEGUNDA FECHA");
+                }
+
+            } catch (ParseException ex) {
+                Logger.getLogger(CIngresoRangoFecha.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "INGRESE LAS FECHAS...");
+        
+            
+            /*try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select COUNT(id_ingreso) from ingreso where fechasistema='"+ fecha1 + "'" );
             rs.next();
             int codigo = rs.getInt("count(id_ingreso)");
-            if (codigo > 0) {
-                actualizarTablaFecha();
-                txtFecha.setEnabled(false);
-                Nbusqueda.requestFocus(); 
-
+            if (codigo > 0) {*/
+               
+            /*
             } else {
                 JOptionPane.showMessageDialog(null, "NO TIENE INGRESOS DE FECHA SELECCIONADA...");
                 txtFecha.setDate(null);
@@ -256,9 +274,9 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
         } catch (Exception e) {
             System.out.println("Editar Error" + e);
-        }
-               
-        */
+        }*/
+       
+}
 
     }//GEN-LAST:event_buscarActionPerformed
 
