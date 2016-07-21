@@ -30,7 +30,24 @@ public class Descarga {
    private int Bodega;
    private String descripcion;
    private String PO;
+   private int cantidadin;
+   private int cantidadbode;
 
+    public int getCantidadin() {
+        return cantidadin;
+    }
+
+    public void setCantidadin(int cantidadin) {
+        this.cantidadin = cantidadin;
+    }
+
+    public int getCantidadbode() {
+        return cantidadbode;
+    }
+
+    public void setCantidadbode(int cantidadbode) {
+        this.cantidadbode = cantidadbode;
+    }
     public String getPO() {
         return PO;
     }

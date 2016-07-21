@@ -118,7 +118,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad Bodega", "Cantidad Ingresada", "Ingresado Por"
+                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad Bodega", "Cantidad Ingresada", "Notas", "Ingresado Por"
             }
         ));
         jScrollPane1.setViewportView(tablaCon);
@@ -168,23 +168,22 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(409, 409, 409)
-                                .addComponent(Bnueva))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(112, 112, 112)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bodegaselect2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(137, 137, 137)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))
-                        .addGap(0, 226, Short.MAX_VALUE)))
+                        .addGap(112, 112, 112)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bodegaselect2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(0, 339, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Bnueva)
+                .addGap(485, 485, 485))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,7 +274,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][9];
+        Object[][] dato = new Object[list.size()][11];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -286,15 +285,15 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
             dato[f][5] = a.getLote();
             dato[f][6] = a.getPO();
             dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getIngrepor();
-            
-
+            dato[f][8] = a.getCantInicial();
+            dato[f][9] = a.getNota();
+            dato[f][10] = a.getIngrepor();
             f++;
         }
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O", "Cantidad Bodega","Ingresado por"
+                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O", "Cantidad Bodega","Cantidad de Ingreso","Notas","Ingresado por"
 
                 }) {
                     @Override

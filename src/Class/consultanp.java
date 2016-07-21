@@ -26,7 +26,16 @@ public class consultanp {
     private String Nota;
     private String ingrepor;
     private int cantInicial;
+    private int cantidadbodega;
 
+    public int getCantidadbodega() {
+        return cantidadbodega;
+    }
+
+    public void setCantidadbodega(int cantidadbodega) {
+        this.cantidadbodega = cantidadbodega;
+    }
+    
     public int getCantInicial() {
         return cantInicial;
     }

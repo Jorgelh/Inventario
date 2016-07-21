@@ -162,7 +162,7 @@ public class CDescargasCodigo extends javax.swing.JInternalFrame {
         BotonBus = new javax.swing.JButton();
 
         setClosable(true);
-        setTitle("INGRESOS POR CODIGO");
+        setTitle("DESCARGAS POR CODIGO");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -276,24 +276,27 @@ public class CDescargasCodigo extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bodegaselect, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TxCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(BotonBus))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bodegaselect, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TxCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(BotonBus)))
+                        .addGap(0, 157, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(373, 373, 373)
                 .addComponent(NuevaC)
-                .addGap(383, 383, 383))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +314,7 @@ public class CDescargasCodigo extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(NuevaC, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -396,7 +399,7 @@ public class CDescargasCodigo extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<Descarga> list) {
 
-        Object[][] dato = new Object[list.size()][9];
+        Object[][] dato = new Object[list.size()][11];
         int f = 0;
         for (Descarga a : list) {
             dato[f][0] = a.getDocumento();
@@ -406,8 +409,10 @@ public class CDescargasCodigo extends javax.swing.JInternalFrame {
             dato[f][4] = a.getTrabajo();
             dato[f][5] = a.getFechades();
             dato[f][6] = a.getCantidad();
-            dato[f][7] = a.getEntregadoA();
-            dato[f][8] = a.getBodega();
+            dato[f][7] = a.getCantidadbode();
+            dato[f][8] = a.getCantidadin();
+            dato[f][9] = a.getNota();
+            dato[f][10] = a.getEntregadoA();
             
 
             f++;
@@ -415,7 +420,7 @@ public class CDescargasCodigo extends javax.swing.JInternalFrame {
         Cosulta.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                  "No Documento","P/N", "Lote","P.O", "No. Trabajo","Fecha descarga","Cantidad entregada","Entregado a","Bodega"
+                  "No Documento","P/N", "Lote","P.O","No. Trabajo","Fecha descarga","Cantidad entregada","Cantidad Bodega","Cantidad Ingreso","Notas","Entregado a"
 
                 }) {
             @Override

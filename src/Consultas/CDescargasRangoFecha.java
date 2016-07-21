@@ -72,7 +72,7 @@ public class CDescargasRangoFecha extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
-        setTitle("CONSULTA FECHA INGRESO");
+        setTitle("CONSULTA DESCARGAS POR RANGO FECHAS");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -99,7 +99,7 @@ public class CDescargasRangoFecha extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Cantidad", "Fecha Descarga", "P/N", "Trabajo", "Documento", "Serie", "Lote", "Entregado A"
+                "Codigo", "Descripcion", "Fecha Descarga", "P/N", "Trabajo", "Lote", "PO", "Cantidad descarga", "Cantidad Bodega", "Cantidad Ingreso", "Notas", "Entregado A"
             }
         ));
         jScrollPane1.setViewportView(tablaFecha);
@@ -155,7 +155,7 @@ public class CDescargasRangoFecha extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(bodegaselect, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,28 +293,29 @@ public class CDescargasRangoFecha extends javax.swing.JInternalFrame {
 
     private void recargarIngreFecha(ArrayList<Descarga> list) {
 
-        Object[][] dato = new Object[list.size()][11];
+        Object[][] dato = new Object[list.size()][12];
         if (list.size() > 0){
         int f = 0;
         for (Descarga a : list) {
             dato[f][0] = a.getCodigo();
             dato[f][1] = a.getDescripcion();
-            dato[f][2] = a.getCantidad();
-            dato[f][3] = a.getFechades();
-            dato[f][4] = a.getPn();
-            dato[f][5] = a.getTrabajo();
-            dato[f][6] = a.getDocumento();
-            dato[f][7] = a.getSerie();
-            dato[f][8] = a.getLote();
-            dato[f][9] = a.getPO();
-            dato[f][10] = a.getEntregadoA();
+            dato[f][2] = a.getFechades();
+            dato[f][3] = a.getPn();
+            dato[f][4] = a.getTrabajo();
+            dato[f][5] = a.getLote();
+            dato[f][6] = a.getPO();
+            dato[f][7] = a.getCantidad();
+            dato[f][8] = a.getCantidadbode();
+            dato[f][9] = a.getCantidadin();
+            dato[f][10] = a.getNota();
+            dato[f][11] = a.getEntregadoA();
             
             f++;
         }
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion","Cantidad","Fecha Descarga","P/N","Trabajo","Documento","Serie", "Lote","P.O","Entregado A"
+                    "Codigo", "Descripcion","Fecha Descarga","P/N","Trabajo","Lote","P.O","Cantidad Descarga","Cantidad Bodega","Cantida Ingreso","Notas","Entregado A"
 
                 }) {
                     @Override

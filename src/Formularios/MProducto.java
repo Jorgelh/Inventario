@@ -115,9 +115,7 @@ public class MProducto extends javax.swing.JInternalFrame {
             System.out.println(error);
         }
     //    this.setLocationRelativeTo(null);
-        
-        
-        
+
     }
        
     public void obtenerUltimoId() {

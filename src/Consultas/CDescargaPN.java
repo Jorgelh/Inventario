@@ -94,7 +94,7 @@ public class CDescargaPN extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad", "Entregado A"
+                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad Entregada", "Cantidad Bodega", "Cantidad Ingreso", "Notas", "Entregado A"
             }
         ));
         jScrollPane1.setViewportView(tablaCon);
@@ -132,7 +132,7 @@ public class CDescargaPN extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(409, 409, 409)
                 .addComponent(Bnueva)
-                .addContainerGap(451, Short.MAX_VALUE))
+                .addContainerGap(639, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +221,7 @@ public class CDescargaPN extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][9];
+        Object[][] dato = new Object[list.size()][12];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -232,14 +232,17 @@ public class CDescargaPN extends javax.swing.JInternalFrame {
             dato[f][5] = a.getLote();
             dato[f][6] = a.getPO();
             dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getEntregadoa();
+            dato[f][8] = a.getCantidadbodega();
+            dato[f][9] = a.getCantInicial();
+            dato[f][10] = a.getNota();
+            dato[f][11] = a.getEntregadoa();
 
             f++;
         }
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote","P.O","Cantidad","Entregado a"
+                    "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote","P.O","Cantidad Descarga","Cantidad Bodega","Cantidad Ingreso","Notas","Entregado a"
 
                 }) {
                     @Override

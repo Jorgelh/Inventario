@@ -103,7 +103,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "P.O", "Cantidad Bodega", "Bodega", "Ingresado por"
+                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "P.O", "Cantidad Bodega", "Cantidad Ingreso", "Bodega", "Ingresado por", "Notas"
             }
         ));
         jScrollPane1.setViewportView(tablaFecha);
@@ -155,7 +155,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(bodegaselect, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,7 +310,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
     private void recargarIngreFecha(ArrayList<ConsultaFecha> list) {
 
-        Object[][] dato = new Object[list.size()][10];
+        Object[][] dato = new Object[list.size()][12];
         if (list.size() > 0){
         int f = 0;
         for (ConsultaFecha a : list) {
@@ -322,14 +322,16 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
             dato[f][5] = a.getLote();
             dato[f][6] = a.getPo();
             dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getBodega();
-            dato[f][9] = a.getIngrepor();
+            dato[f][8] = a.getCantidadIngre();
+            dato[f][9] = a.getNota();
+            dato[f][10] = a.getBodega();
+            dato[f][11] = a.getIngrepor();
             f++;
         }
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","P.O", "Cantidad Bodega", "Bodega", "Ingresado Por"
+                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","P.O", "Cantidad Bodega","Cantidad Ingreso","Notas","Bodega","Ingresado Por"
 
                 }) {
                     @Override

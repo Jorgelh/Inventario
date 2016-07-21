@@ -142,9 +142,6 @@ public class EditProducto extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
         }
-                 
-        
-        
         
     }
 

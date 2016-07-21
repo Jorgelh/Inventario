@@ -989,7 +989,6 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                     public boolean isCellEditable(int row, int column) {
                         return false;
                     }
-
                 });
     }
 

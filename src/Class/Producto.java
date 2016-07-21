@@ -178,6 +178,16 @@ public class Producto {
     private String Ubicacion2;
     private String presentacion;
     private String Umedida;
+    private int cantidadingre;
+
+    public int getCantidadingre() {
+        return cantidadingre;
+    }
+
+    public void setCantidadingre(int cantidadingre) {
+        this.cantidadingre = cantidadingre;
+    }
+    
     
     
 

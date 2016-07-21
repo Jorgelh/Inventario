@@ -33,7 +33,9 @@ public abstract class BDConsultas {
                                  + "descarga.serie,"
                                  + "descarga.codigo,"
                                  + "ingreso.PO,"
-                                 + "producto.descripcion from descarga inner join producto on descarga.codigo = producto.codigo join ingreso on ingreso.id_ingreso = descarga.id_ingreso where upper(descarga.PN) = upper('"+d+"') order by descarga.fechasistema");
+                                 + "bitacoraingreso.cantidad as \"cantidadbode\","
+                                 + "ingreso.cantidad as \"cantidadin\","
+                                 + "producto.descripcion from descarga inner join producto on descarga.codigo = producto.codigo join ingreso on ingreso.id_ingreso = descarga.id_ingreso join bitacoraingreso on descarga.id_ingreso = bitacoraingreso.id_ingreso where upper(descarga.PN) = upper('"+d+"') order by descarga.id_ingreso");
 
     }
 
@@ -58,6 +60,8 @@ public abstract class BDConsultas {
                 c.setDocumento(rs.getString("documento"));
                 c.setSerie(rs.getString("serie"));
                 c.setPO(rs.getString("PO"));
+                c.setCantInicial(rs.getInt("cantidadbode"));
+                c.setCantidadbodega(rs.getInt("cantidadin"));
                 list.add(c);
             }
             cn.close();
@@ -148,6 +152,7 @@ public abstract class BDConsultas {
                                     + "ingreso.no_trabajo,"
                                     + "ingreso.lote,"
                                     + "ingreso.po,"
+                                    + "ingreso.notas,"
                                     + "bitacoraingreso.cantidad as \"cantiingreso\","
                                     + "ingreso.cantidad,"                
                                     + "DECODE(ingreso.bodega, 1, 'Bodega 1', 2, 'Bodega 2')as \"bodega\",ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema between to_date('" + f + "','dd/mm/yy') and to_date('"+ a +"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by fechasistema");
@@ -173,6 +178,7 @@ public abstract class BDConsultas {
                 c.setIngrepor(rs.getString("ingresadopor"));
                 c.setBodega(rs.getString("bodega"));
                 c.setPo(rs.getString("po"));
+                c.setNota(rs.getString("notas"));
                 list.add(c);
             }
             cn.close();
@@ -189,7 +195,7 @@ public abstract class BDConsultas {
     public static ArrayList<Producto> ListarCodigo(String c) {
         
         //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,sum(ingreso.cantidad)as \"cantidad\"  from producto inner join ingreso on producto.codigo = ingreso.codigo where producto.codigo like '"+c+"%' GROUP BY producto.codigo,producto.descripcion,producto.ubicacion");
-        return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,producto.cantidad,unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where producto.codigo like '"+c+"%'");
+        return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,unidad_medida.descripcion as umedida, sum(ingreso.cantidad) as \"cantidad\", sum(bitacoraingreso.cantidad) as \"cantidadingre\" from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida join INGRESO on producto.codigo = ingreso.codigo join BITACORAINGRESO on ingreso.id_ingreso = bitacoraingreso.id_ingreso where upper(ingreso.codigo) like upper('"+c+"%') group by INGRESO.CODIGO,producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,unidad_medida.descripcion,bitacoraingreso.cantidad");
 
     }
     
@@ -198,7 +204,8 @@ public abstract class BDConsultas {
     public static ArrayList<Producto> ListarNombre(String f) {
 
         //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,presentacion.descripcion as \"presentacion\",unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
-         return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,producto.cantidad,unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
+         //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,producto.cantidad,unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
+         return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,unidad_medida.descripcion as umedida, sum(ingreso.cantidad) as \"cantidad\", sum(bitacoraingreso.cantidad) as \"cantidadingre\" from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida join INGRESO on producto.codigo = ingreso.codigo join BITACORAINGRESO on ingreso.id_ingreso = bitacoraingreso.id_ingreso where upper(producto.descripcion) like upper('"+f+"%') group by INGRESO.CODIGO,producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,unidad_medida.descripcion,bitacoraingreso.cantidad");
     }
 
     private static ArrayList<Producto> consultanombreSQL(String sql) {
@@ -216,6 +223,7 @@ public abstract class BDConsultas {
                 c.setUbicacion2(rs.getString("ubicacion2"));
                 c.setCantidad(rs.getInt("CANTIDAD"));
                 c.setUmedida(rs.getString("umedida"));
+                c.setCantidadingre(rs.getInt("cantidadingre"));
                 
                 list.add(c);
             }
@@ -240,6 +248,7 @@ public abstract class BDConsultas {
                                  + "ingreso.no_serie,"
                                  + "ingreso.codigo,"
                                  + "ingreso.PO,"
+                                 + "ingreso.notas,"
                                  + "producto.descripcion,"
                                  + "bitacoraingreso.cantidad as \"Cin\" "
                                  + "from ingreso inner join producto on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso "
@@ -263,6 +272,7 @@ public abstract class BDConsultas {
                                  + "ingreso.codigo,"
                                  + "ingreso.PO,"
                                  + "producto.descripcion,"
+                                 + "ingreso.notas,"
                                  + "bitacoraingreso.cantidad as \"Cin\" "
                                  + "from ingreso inner join producto on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso "
                                  + "where (ingreso.bodega ="+b1+" or ingreso.bodega = "+b2+") and P_N like upper('"+d+"%') order by fechasistema");
@@ -292,6 +302,7 @@ public abstract class BDConsultas {
                 c.setSerie(rs.getString("no_serie"));
                 c.setCantInicial(rs.getInt("Cin"));
                 c.setPO(rs.getString("PO"));
+                c.setNota(rs.getString("notas"));
                 list.add(c);
             }
             cn.close();
