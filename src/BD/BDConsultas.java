@@ -36,9 +36,7 @@ public abstract class BDConsultas {
                                  + "bitacoraingreso.cantidad as \"cantidadbode\","
                                  + "ingreso.cantidad as \"cantidadin\","
                                  + "producto.descripcion from descarga inner join producto on descarga.codigo = producto.codigo join ingreso on ingreso.id_ingreso = descarga.id_ingreso join bitacoraingreso on descarga.id_ingreso = bitacoraingreso.id_ingreso where upper(descarga.PN) = upper('"+d+"') order by descarga.id_ingreso");
-
     }
-
     private static ArrayList<consultanp> consultarSQL(String sql1) {
         ArrayList<consultanp> list = new ArrayList<consultanp>();
         Connection cn = BD.getConnection();
@@ -141,8 +139,6 @@ public abstract class BDConsultas {
         }
         return list;
     }
-    
-    
     public static ArrayList<ConsultaFecha> ListarRangoFecha(String f, String a , int b1, int b2) {
 
         return consultaIngreSQLrango("select ingreso.codigo,"
@@ -157,7 +153,6 @@ public abstract class BDConsultas {
                                     + "ingreso.cantidad,"                
                                     + "DECODE(ingreso.bodega, 1, 'Bodega 1', 2, 'Bodega 2')as \"bodega\",ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema between to_date('" + f + "','dd/mm/yy') and to_date('"+ a +"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by fechasistema");
     }
-    
     private static ArrayList<ConsultaFecha> consultaIngreSQLrango(String sql) {
         ArrayList<ConsultaFecha> list = new ArrayList<ConsultaFecha>();
         Connection cn = BD.getConnection();
@@ -188,15 +183,9 @@ public abstract class BDConsultas {
         }
         return list;
     }
-    
-    
-    
-    
     public static ArrayList<Producto> ListarCodigo(String c) {
-        
         //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,sum(ingreso.cantidad)as \"cantidad\"  from producto inner join ingreso on producto.codigo = ingreso.codigo where producto.codigo like '"+c+"%' GROUP BY producto.codigo,producto.descripcion,producto.ubicacion");
         return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,unidad_medida.descripcion as umedida, sum(ingreso.cantidad) as \"cantidad\", sum(bitacoraingreso.cantidad) as \"cantidadingre\" from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida join INGRESO on producto.codigo = ingreso.codigo join BITACORAINGRESO on ingreso.id_ingreso = bitacoraingreso.id_ingreso where upper(ingreso.codigo) like upper('"+c+"%') group by INGRESO.CODIGO,producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,unidad_medida.descripcion,bitacoraingreso.cantidad");
-
     }
     
     
@@ -256,8 +245,6 @@ public abstract class BDConsultas {
 
     }
     
-    
-    
     public static ArrayList<consultanp> ListaringrePN(String d , int b1 , int b2) {
 
         return consultarinSQL("select ingreso.P_N,"
@@ -279,7 +266,6 @@ public abstract class BDConsultas {
 
     }
    
-
     private static ArrayList<consultanp> consultarinSQL(String sql1) {
         ArrayList<consultanp> list = new ArrayList<consultanp>();
         Connection cn = BD.getConnection();
@@ -313,10 +299,6 @@ public abstract class BDConsultas {
         return list;
     }
     
-    
-    
-    
-    
     public static ArrayList<Vencimientos> ListarVencimientos() {
 
         return consultaVencimientos("select ingreso.codigo,"
@@ -324,7 +306,6 @@ public abstract class BDConsultas {
                                     + "ingreso.fecha_ven,"
                                     + "ingreso.cantidad from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo where ingreso.fecha_ven between to_date(sysdate,'dd/mm/yy') and to_date(sysdate+30,'dd/mm/yy') and ingreso.cantidad >0");
     }
-    
     private static ArrayList<Vencimientos> consultaVencimientos(String sql2) {
         ArrayList<Vencimientos> list = new ArrayList<Vencimientos>();
         Connection cn = BD.getConnection();
@@ -347,7 +328,4 @@ public abstract class BDConsultas {
         }
         return list;
     }
-    
-    
-    
 }
