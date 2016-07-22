@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -118,7 +119,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad Bodega", "Cantidad Ingresada", "Notas", "Ingresado Por"
+                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad Bodega", "Cantidad Ingresada", "Proveedor", "Notas", "Ingresado Por"
             }
         ));
         jScrollPane1.setViewportView(tablaCon);
@@ -139,6 +140,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
 
         bodegaselect2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bodegaselect2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Bodega", "Bodeguita" }));
+        bodegaselect2.setFocusable(false);
         bodegaselect2.setName(""); // NOI18N
         bodegaselect2.setRequestFocusEnabled(false);
         bodegaselect2.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +276,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][11];
+        Object[][] dato = new Object[list.size()][12];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -286,14 +288,15 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
             dato[f][6] = a.getPO();
             dato[f][7] = a.getCantidad();
             dato[f][8] = a.getCantInicial();
-            dato[f][9] = a.getNota();
-            dato[f][10] = a.getIngrepor();
+            dato[f][9] = a.getProveedor();
+            dato[f][10] = a.getNota();
+            dato[f][11] = a.getIngrepor();
             f++;
         }
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O", "Cantidad Bodega","Cantidad de Ingreso","Notas","Ingresado por"
+                    "Codigo","Descripcion","Fecha de Ingreso","P/N","Trabajo","Lote","P.O","Cantidad Bodega","Cantidad de Ingreso","Proveedor","Notas","Ingresado por"
 
                 }) {
                     @Override
@@ -302,6 +305,21 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
                     }
 
                 });
+        
+         TableColumn columna1 = tablaCon.getColumn("Trabajo");
+            columna1.setPreferredWidth(5);
+          TableColumn columna2 = tablaCon.getColumn("Lote");
+            columna2.setPreferredWidth(5);   
+         TableColumn columna3 = tablaCon.getColumn("P/N");
+            columna3.setPreferredWidth(5);  
+         TableColumn columna4 = tablaCon.getColumn("Codigo");
+            columna4.setPreferredWidth(15);
+         TableColumn columna5 = tablaCon.getColumn("Fecha Ingreso");
+            columna5.setPreferredWidth(5);  
+         TableColumn columna6 = tablaCon.getColumn("P.O");
+            columna6.setPreferredWidth(5);   
+         TableColumn columna7 = tablaCon.getColumn("Descripcion");
+            columna7.setPreferredWidth(150);      
     }
 
     /**

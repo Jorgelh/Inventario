@@ -16,7 +16,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -65,7 +67,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CONSULTA POR P/N");
+        setTitle("CONSULTA POR INVOICE");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setForeground(new java.awt.Color(153, 204, 255));
@@ -90,7 +92,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad Bodega", "Cantidad Ingresada", "Notas", "Ingresado Por"
+                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad Bodega", "Cantidad Ingresada", "Proveedor", "Notas", "Ingresado Por"
             }
         ));
         jScrollPane1.setViewportView(tablaCon);
@@ -111,6 +113,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
         bodegaselect2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bodegaselect2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Bodega", "Bodeguita" }));
+        bodegaselect2.setFocusable(false);
         bodegaselect2.setName(""); // NOI18N
         bodegaselect2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +190,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select count(*) from ingreso  where  NO_INVOICE = '"+txtInvoice.getText()+"'");
+            ResultSet rs = stmt.executeQuery("select count(*) from ingreso  where  NO_INVOICE = '"+txtInvoice.getText().toUpperCase()+"'");
             rs.next();
             int codigo = rs.getInt("count(*)");
             if (codigo > 0) {
@@ -251,13 +254,13 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
         else{b1=1;b2=2;}
       
 
-        ArrayList<consultanp> result = BDConsultas.ListaringreInvoice(txtInvoice.getText(),b1,b2);
+        ArrayList<consultanp> result = BDConsultas.ListaringreInvoice(txtInvoice.getText().toUpperCase(),b1,b2);
         recagarTabla(result);
     }
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][11];
+        Object[][] dato = new Object[list.size()][12];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -269,8 +272,9 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
             dato[f][6] = a.getPO();
             dato[f][7] = a.getCantidad();
             dato[f][8] = a.getCantInicial();
-            dato[f][9] = a.getNota();
-            dato[f][10] = a.getIngrepor();
+            dato[f][9] = a.getProveedor();
+            dato[f][10] = a.getNota();
+            dato[f][11] = a.getIngrepor();
             
 
             f++;
@@ -278,7 +282,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O","Cantidad Bodega","Cantidad Ingresada","Notas","Ingresado por"
+                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O","Cantidad Bodega","Cantidad Ingresada","Proveedor","Notas","Ingresado por"
 
                 }) {
                     @Override
@@ -287,6 +291,28 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
                     }
 
                 });
+            TableColumn columna1 = tablaCon.getColumn("Codigo");
+            columna1.setPreferredWidth(15);
+            TableColumn columna2 = tablaCon.getColumn("Descripcion");
+            columna2.setPreferredWidth(100);
+            TableColumn columna3 = tablaCon.getColumn("Proveedor");
+            columna3.setPreferredWidth(50);
+            TableColumn columna4 = tablaCon.getColumn("Notas");
+            columna4.setPreferredWidth(30);
+            TableColumn columna5 = tablaCon.getColumn("P/N");
+            columna5.setPreferredWidth(7);
+            TableColumn columna6 = tablaCon.getColumn("Trabajo");
+            columna6.setPreferredWidth(5);
+            TableColumn columna7 = tablaCon.getColumn("Lote");
+            columna7.setPreferredWidth(5);
+            TableColumn columna8 = tablaCon.getColumn("P.O");
+            columna8.setPreferredWidth(5);
+            TableColumn columna9 = tablaCon.getColumn("Ingresado Por");
+            columna9.setPreferredWidth(10);
+            TableColumn columna10 = tablaCon.getColumn("Cantidad Bodega");
+            columna10.setPreferredWidth(15);
+            TableColumn columna11 = tablaCon.getColumn("Cantidad Ingresada");
+            columna11.setPreferredWidth(15);
     }
 
     /**

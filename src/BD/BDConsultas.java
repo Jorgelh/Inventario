@@ -149,6 +149,7 @@ public abstract class BDConsultas {
                                     + "ingreso.lote,"
                                     + "ingreso.po,"
                                     + "ingreso.notas,"
+                                    + "ingreso.proveedor,"
                                     + "bitacoraingreso.cantidad as \"cantiingreso\","
                                     + "ingreso.cantidad,"                
                                     + "DECODE(ingreso.bodega, 1, 'Bodega 1', 2, 'Bodega 2')as \"bodega\",ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema between to_date('" + f + "','dd/mm/yy') and to_date('"+ a +"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by fechasistema");
@@ -171,6 +172,7 @@ public abstract class BDConsultas {
                 c.setCantidadIngre(rs.getInt("cantiingreso"));
                 c.setCantidad(rs.getInt("cantidad"));
                 c.setIngrepor(rs.getString("ingresadopor"));
+                c.setProveedor(rs.getString("proveedor"));
                 c.setBodega(rs.getString("bodega"));
                 c.setPo(rs.getString("po"));
                 c.setNota(rs.getString("notas"));
@@ -238,6 +240,7 @@ public abstract class BDConsultas {
                                  + "ingreso.codigo,"
                                  + "ingreso.PO,"
                                  + "ingreso.notas,"
+                                 + "ingreso.proveedor,"
                                  + "producto.descripcion,"
                                  + "bitacoraingreso.cantidad as \"Cin\" "
                                  + "from ingreso inner join producto on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso "
@@ -259,6 +262,7 @@ public abstract class BDConsultas {
                                  + "ingreso.codigo,"
                                  + "ingreso.PO,"
                                  + "producto.descripcion,"
+                                 + "ingreso.proveedor,"
                                  + "ingreso.notas,"
                                  + "bitacoraingreso.cantidad as \"Cin\" "
                                  + "from ingreso inner join producto on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso "
@@ -289,6 +293,7 @@ public abstract class BDConsultas {
                 c.setCantInicial(rs.getInt("Cin"));
                 c.setPO(rs.getString("PO"));
                 c.setNota(rs.getString("notas"));
+                c.setProveedor(rs.getString("proveedor"));
                 list.add(c);
             }
             cn.close();

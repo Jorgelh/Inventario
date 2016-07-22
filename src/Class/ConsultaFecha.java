@@ -28,7 +28,15 @@ public class ConsultaFecha {
     public String ingrepor;
     public String bodega;
     public String po;
+    public String proveedor;
 
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
     public String getPo() {
         return po;
     }

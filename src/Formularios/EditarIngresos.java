@@ -145,11 +145,27 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
         }
     }
+    
+    
 
     public void FechasJdate() {
 
         Calendar c2 = new GregorianCalendar();
         txtfechaven.setCalendar(c2);
+    }
+    
+    
+    public void executeStore(){
+        try {
+            Connection cn = BD.getConnection();
+            Statement ps = cn.createStatement();
+            ps.executeUpdate("begin actualizar(Nid_ingreso=>"+id+",Ncantidad=>"+txtCantidad.getText()+"); commit; end;");
+            cn.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        
+    
     }
 
     /**
@@ -505,7 +521,6 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtingresadopor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtingresadopor.setForeground(new java.awt.Color(0, 102, 255));
 
-        txtCantidad.setEditable(false);
         txtCantidad.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtCantidad.setForeground(new java.awt.Color(255, 0, 0));
         txtCantidad.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -710,6 +725,11 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
     private void TxCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxCodigoActionPerformed
 
+        
+        
+        
+        
+        
         int Enviacodigo = Integer.parseInt(TxCodigo.getText());
 
         try {
@@ -729,7 +749,6 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 limpiarlabel();
                 limpiartabla15();
             }
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
         }
@@ -737,7 +756,8 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TxCodigoActionPerformed
 
     private void CosultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CosultaMouseClicked
-
+    
+       
         try {
             CargaP ca = BDconsultaVarias.buscarIngreso(Integer.parseInt(String.valueOf(Cosulta.getModel().getValueAt(Cosulta.getSelectedRow(), 0))));
             id = ca.getId_ingreso();
@@ -878,18 +898,26 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BeliminarActionPerformed
 
     private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
-
-        if (TxCodigo.getText().compareTo("") != 0
+        
+        
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs1 = stmt.executeQuery("select COUNT(id_ingreso) as \"desc\" from descarga where id_ingreso=" + id);
+            rs1.next();
+            int codigodes = rs1.getInt("desc");
+            if(codigodes == 0){
+                if (TxCodigo.getText().compareTo("") != 0
                 && txtCantidad.getText().compareTo("") != 0
                 && Precio.getText().compareTo("") != 0
                 && txtingresadopor.getText().compareTo("") != 0
                 && !ComboBode.getSelectedItem().toString().equalsIgnoreCase("")) {
 
-            if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
-                bodega = 1;
-            } else if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
-                bodega = 2;
-            }
+                if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
+                    bodega = 1;
+                } else if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
+                    bodega = 2;
+                }
 
             try {
                 CargaP c = new CargaP();
@@ -911,6 +939,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 BDconsultaVarias.actualizarIngreso(c);
                 JOptionPane.showMessageDialog(null, "Ingreso Actualizado...");
                 EditarTXT(false);
+                executeStore();
                 Beliminar.setEnabled(false);
                 Bguardar.setEnabled(false);
                 Cosulta.setEnabled(true);
@@ -924,8 +953,18 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
         } else {
             JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
+        }}else{JOptionPane.showMessageDialog(null, "El ingreso contiene descargas No se puede Modificar Consulte al Administrador");
+                    EditarTXT(false);
+                    Beliminar.setEnabled(false);
+                    Bguardar.setEnabled(false);
+                    Cosulta.setEnabled(true);
+                    NuevaC.setEnabled(true);
+                    Bcancelar.setEnabled(false);
+                    limpiar();
+            
+            }
+           } catch (Exception e) {
         }
-
 
     }//GEN-LAST:event_BguardarActionPerformed
 

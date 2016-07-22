@@ -133,6 +133,7 @@ public abstract class BDconsultaVarias {
                 + "notas=?,"
                 + "bodega=?"
                 + " where id_ingreso=" +c.getId_ingreso());
+        //ps= cnn.prepareStatement("begin actualizar(Nid_ingreso=>"+c.getId_ingreso()+",Ncantidad=>"+c.getCantidad()+"); commit; end;");
         ps.setString(1, c.getPN());
         ps.setString(2, c.getPO());
         ps.setInt(3, c.getCantidad());

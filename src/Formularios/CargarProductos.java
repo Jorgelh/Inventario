@@ -128,6 +128,8 @@ public class CargarProductos extends javax.swing.JInternalFrame {
 
     }
     
+    
+    
     public void FechasJdate() {
       
         Calendar c2 = new GregorianCalendar();
@@ -720,6 +722,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 c.setPrecio(Double.parseDouble(TxtPrecio.getText()));
                 DBCargaPro.insertarProductoNuevo(c);
                 JOptionPane.showMessageDialog(null, "Producto Cargado...");
+                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
             }

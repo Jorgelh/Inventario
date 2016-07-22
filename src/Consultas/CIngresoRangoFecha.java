@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.xml.bind.DatatypeConverter;
 //import oracle.net.aso.f;
 
@@ -37,6 +38,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
      */
     public CIngresoRangoFecha() {
         initComponents();
+        
     }
     
     public void limpiartabla() {
@@ -103,9 +105,10 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "P.O", "Cantidad Bodega", "Cantidad Ingreso", "Bodega", "Ingresado por", "Notas"
+                "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote", "P.O", "Cantidad Bodega", "Cantidad Ingreso", "Proveedor", "Ingresado por", "Notas"
             }
         ));
+        tablaFecha.setMinimumSize(new java.awt.Dimension(50, 0));
         jScrollPane1.setViewportView(tablaFecha);
 
         Nbusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/New.png"))); // NOI18N
@@ -190,7 +193,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
                             .addComponent(bodegaselect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Nbusqueda)
                 .addContainerGap())
@@ -323,15 +326,19 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
             dato[f][6] = a.getPo();
             dato[f][7] = a.getCantidad();
             dato[f][8] = a.getCantidadIngre();
-            dato[f][9] = a.getNota();
-            dato[f][10] = a.getBodega();
+            dato[f][9] = a.getProveedor();
+            dato[f][10] = a.getNota();
             dato[f][11] = a.getIngrepor();
             f++;
         }
-        tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
+        //tablaFecha.getColumnModel().getColumn(1).setPreferredWidth(5); 
+        tablaFecha.setModel(new javax.swing.table.DefaultTableModel
+        
+        (
+                
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","P.O", "Cantidad Bodega","Cantidad Ingreso","Notas","Bodega","Ingresado Por"
+                    "Codigo","Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","P.O","Cantidad Bodega","Cantidad Ingreso","Proveedor","Notas","Ingresado Por"
 
                 }) {
                     @Override
@@ -340,6 +347,31 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
                     }
 
                 });
+            TableColumn columna1 = tablaFecha.getColumn("Codigo");
+            columna1.setPreferredWidth(10);
+            TableColumn columna2 = tablaFecha.getColumn("Descripcion");
+            columna2.setPreferredWidth(200);
+            TableColumn columna3 = tablaFecha.getColumn("Fecha Ingreso");
+            columna3.setPreferredWidth(25);
+            TableColumn columna4 = tablaFecha.getColumn("P/N");
+            columna4.setPreferredWidth(5);
+            TableColumn columna5 = tablaFecha.getColumn("Trabajo");
+            columna5.setPreferredWidth(5);
+            TableColumn columna6 = tablaFecha.getColumn("Lote");
+            columna6.setPreferredWidth(5);
+             TableColumn columna7 = tablaFecha.getColumn("P.O");
+            columna7.setPreferredWidth(5);
+             TableColumn columna8 = tablaFecha.getColumn("Cantidad Bodega");
+            columna8.setPreferredWidth(35);
+             TableColumn columna9 = tablaFecha.getColumn("Cantidad Ingreso");
+            columna9.setPreferredWidth(35);
+             TableColumn columna10 = tablaFecha.getColumn("Proveedor");
+            columna10.setPreferredWidth(40);
+            TableColumn columna11 = tablaFecha.getColumn("Notas");
+            columna11.setPreferredWidth(120);
+            TableColumn columna12 = tablaFecha.getColumn("Ingresado Por");
+            columna12.setPreferredWidth(15);
+        
         txtFecha.setEnabled(false);
         txtfecha1.setEnabled(false);
     }

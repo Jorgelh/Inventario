@@ -27,7 +27,15 @@ public class consultanp {
     private String ingrepor;
     private int cantInicial;
     private int cantidadbodega;
+    private String proveedor;
 
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
     public int getCantidadbodega() {
         return cantidadbodega;
     }
