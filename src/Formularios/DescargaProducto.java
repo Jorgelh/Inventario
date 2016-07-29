@@ -41,8 +41,6 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         limpiartabla15();
         activartxt(false);
         BoDescargar.setEnabled(false);
-
-
     }
 
     public void llenarBalance() {

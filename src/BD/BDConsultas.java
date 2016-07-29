@@ -333,4 +333,57 @@ public abstract class BDConsultas {
         }
         return list;
     }
+    
+    
+    
+    public static ArrayList<consultanp> ListarIngreDescripcion(String d) {
+
+        return DescripcionLista("select producto.descripcion,"
+                                + "ingreso.codigo,"
+                                + "ingreso.FECHA_INGRESO,"
+                                + "ingreso.P_N,"
+                                + "ingreso.NO_TRABAJO,"
+                                + "ingreso.lote,"
+                                + "ingreso.po,"
+                                + "ingreso.cantidad,"
+                                + "bitacoraingreso.cantidad as \"cantidadbode\","
+                                + "ingreso.proveedor,"
+                                + "ingreso.notas,"                                                                                                                                                              
+                                + "ingreso.ingresadopor from ingreso inner join PRODUCTO on ingreso.CODIGO = producto.codigo join BITACORAINGRESO on ingreso.ID_INGRESO = BITACORAINGRESO.ID_INGRESO  where upper(producto.descripcion) like upper('"+d+"%')");
+    }
+    private static ArrayList<consultanp> DescripcionLista(String sql1) {
+        ArrayList<consultanp> list = new ArrayList<consultanp>();
+        Connection cn = BD.getConnection();
+        try {
+            consultanp c;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql1);
+            while (rs.next()) {
+                c = new consultanp();
+                c.setCodigo(rs.getInt("codigo"));
+                c.setNo_trabajo(rs.getString("no_trabajo"));
+                c.setLote(rs.getString("lote"));
+                c.setDescripcion(rs.getString("descripcion"));
+                c.setFechaingre(rs.getString("fecha_ingreso"));
+                c.setCantidad(rs.getInt("cantidad"));
+                c.setPN(rs.getString("P_N"));
+                c.setNota(rs.getString("notas"));
+                c.setPO(rs.getString("PO"));
+                c.setCantInicial(rs.getInt("cantidadbode"));
+                c.setProveedor(rs.getString("proveedor"));
+                list.add(c);
+            }
+            cn.close();
+        } catch (SQLException ex) {
+            System.err.println("Error Consulta Descripcion " + ex);
+           // return null;
+        }
+        return list;
+    }
+    
+    
+    
+    
+    
+    
 }
