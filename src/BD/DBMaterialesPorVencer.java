@@ -22,13 +22,15 @@ public abstract class DBMaterialesPorVencer {
     
     public static ArrayList<Vencimientos> ListarVencimientosproximos() {
 
-        return consultaVencimientos("select ingreso.codigo,"
+      /*  return consultaVencimientos("select ingreso.codigo,"
                                     + "producto.descripcion,"
                                     + "ingreso.fecha_ven,"
                                     + "ingreso.cantidad,"
                                     + "ingreso.fecha_ingreso,"
                                     + "ingreso.po,"
                                     + "ingreso.notas from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo where ingreso.fecha_ven between to_date(sysdate,'dd/mm/yy') and to_date(sysdate+30,'dd/mm/yy') and estado = 'A'");
+        */
+      return consultaVencimientos("select ingreso.codigo,producto.descripcion,ingreso.fecha_ven,ingreso.cantidad,ingreso.fecha_ingreso, ingreso.po,ingreso.notas from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo where ingreso.fecha_ven < to_date(sysdate+30,'dd/mm/yy') and ingreso.cantidad > 0");
     }
     
     private static ArrayList<Vencimientos> consultaVencimientos(String sql2) {
@@ -45,6 +47,7 @@ public abstract class DBMaterialesPorVencer {
                 c.setFechaVen(rs.getString("fecha_ven"));
                 c.setFechaIngreso(rs.getString("fecha_ingreso"));
                 c.setNotas(rs.getString("notas"));
+                c.setCantidad(rs.getInt("cantidad"));
                 c.setPo(rs.getString("po"));
                 list.add(c);
             }
@@ -81,6 +84,7 @@ public abstract class DBMaterialesPorVencer {
                 c.setDescripcion(rs.getString("descripcion"));
                 c.setFechaVen(rs.getString("fecha_ven"));
                 c.setFechaIngreso(rs.getString("fecha_ingreso"));
+                c.setCantidad(rs.getInt("cantidad"));
                 c.setNotas(rs.getString("notas"));
                 c.setPo(rs.getString("po"));
                 list.add(c);

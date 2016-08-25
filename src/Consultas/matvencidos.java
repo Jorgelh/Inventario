@@ -102,21 +102,22 @@ public class matvencidos extends javax.swing.JInternalFrame {
 
     private void actualizar(ArrayList<Vencimientos> list) {
 
-        Object[][] dato = new Object[list.size()][6];
+        Object[][] dato = new Object[list.size()][7];
         int f = 0;
         for (Vencimientos a : list) {
             dato[f][0] = a.getCodigo();
             dato[f][1] = a.getDescripcion();
             dato[f][2] = a.getFechaVen();
             dato[f][3] = a.getFechaIngreso();
-            dato[f][4] = a.getPo();
-            dato[f][5] = a.getNotas();
+            dato[f][4] = a.getCantidad();
+            dato[f][5] = a.getPo();
+            dato[f][6] = a.getNotas();
             f++;
         }
         tablavencidos.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion","Fecha Vencimiento","Fecha Ingreso","P.O","Notas" 
+                    "Codigo", "Descripcion","Fecha Vencimiento","Fecha Ingreso","Cantidad","P.O","Notas" 
 
                 }) {
                     @Override
