@@ -9,7 +9,7 @@ import BD.BD;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import Consultas.*;
-import com.sun.org.apache.bcel.internal.generic.CPInstruction;
+//import com.sun.org.apache.bcel.internal.generic.CPInstruction;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;

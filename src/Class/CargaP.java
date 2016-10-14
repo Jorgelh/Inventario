@@ -38,6 +38,17 @@ public class CargaP {
     private String descripcion;
     private String presentacion;
     private String preciotxt;
+    private String ubicacion;
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+    
+        
 
     public int getBodega() {
         return Bodega;

@@ -14,8 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-
 /**
  *
  * @author jluis
@@ -53,7 +51,17 @@ public abstract class BDDescargaProducto {
         
         Connection cn = BD.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select ingreso.id_ingreso,ingreso.fecha_ven,ingreso.P_N,ingreso.cantidad,ingreso.PO,ingreso.lote,ingreso.bodega,ingreso.notas,producto.descripcion,unidad_medida.descripcion as \"desc\" from ingreso inner join producto on producto.codigo = ingreso.codigo join unidad_medida on producto.id_medida = unidad_medida.id_medida and ingreso.id_ingreso="+idc);
+        ps = cn.prepareStatement("select ingreso.id_ingreso,"
+                + "ingreso.fecha_ven,"
+                + "ingreso.P_N,"
+                + "ingreso.cantidad,"
+                + "ingreso.PO,"
+                + "ingreso.lote,"
+                + "ingreso.bodega,"
+                + "ingreso.notas,"
+                + "producto.descripcion,"
+                + "decode(ingreso.bodega,1,producto.ubicacion,2,producto.ubicacion2) as \"ubicacion\","
+                + "unidad_medida.descripcion as \"desc\" from ingreso inner join producto on producto.codigo = ingreso.codigo join unidad_medida on producto.id_medida = unidad_medida.id_medida and ingreso.id_ingreso="+idc);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (c == null){
@@ -71,6 +79,7 @@ public abstract class BDDescargaProducto {
         c.setDescripcion(rs.getString("descripcion"));
         c.setNota(rs.getString("notas"));
         c.setPresentacion(rs.getString("desc"));
+        c.setUbicacion(rs.getString("ubicacion"));       
         }
         cn.close();
         ps.close();
