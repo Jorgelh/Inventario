@@ -10,7 +10,7 @@ import BD.BDDescargaProducto;
 import BD.DBCargaPro;
 import Class.CargaP;
 import Class.Descarga;
-import java.nio.charset.CodingErrorAction;
+//import java.nio.charset.CodingErrorAction;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -932,8 +932,6 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         activartxt(false);
         TxCodigo.setEnabled(true);
         BoDescargar.setEnabled(false);
-
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void TxCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxCodigoKeyTyped
