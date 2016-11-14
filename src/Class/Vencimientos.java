@@ -17,7 +17,16 @@ private String fechaVen;
 private String fechaIngreso;
 private String notas;
 private int Cantidad;
+private int Cantidadminima;
 private String po;
+
+    public int getCantidadminima() {
+        return Cantidadminima;
+    }
+
+    public void setCantidadminima(int Cantidadminima) {
+        this.Cantidadminima = Cantidadminima;
+    }
 
     public String getPo() {
         return po;

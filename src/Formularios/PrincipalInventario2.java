@@ -31,6 +31,13 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         menubar.setForeground(Color.GREEN);
         avencer();
+        
+        Agotados M = new Agotados();
+                jDesktopPane1.add(M);
+                Dimension desktopSize = jDesktopPane1.getSize();
+                Dimension FrameSize = M.getSize();
+                M.setLocation((850), (325));
+                M.show();
            
     }
 
@@ -89,6 +96,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         Vencimientos = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -518,6 +526,18 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
 
         jMenu2.add(Vencimientos);
 
+        jMenuItem18.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem18.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
+        jMenuItem18.setText("POR AGOTARSE");
+        jMenuItem18.setFocusTraversalPolicyProvider(true);
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem18);
+
         menubar.add(jMenu2);
 
         jMenu4.setForeground(new java.awt.Color(0, 51, 255));
@@ -890,6 +910,15 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         M.show();
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+       Agotados1 M = new Agotados1();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -958,6 +987,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
