@@ -75,6 +75,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         if(cantidadminima < Integer.parseInt(txtSumas.getText()))
         {
            CantidadMinima.setText(String.valueOf(cantidadminima));
+           CantidadMinima.setBackground(Color.GREEN);
         }else{    
             CantidadMinima.setText(String.valueOf(cantidadminima));
             CantidadMinima.setBackground(Color.RED);
