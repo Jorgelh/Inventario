@@ -32,12 +32,12 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         menubar.setForeground(Color.GREEN);
         avencer();
         
-        Agotados M = new Agotados();
+       /* Agotados M = new Agotados();
                 jDesktopPane1.add(M);
                 Dimension desktopSize = jDesktopPane1.getSize();
                 Dimension FrameSize = M.getSize();
                 M.setLocation((850), (325));
-                M.show();
+                M.show();*/
            
     }
 

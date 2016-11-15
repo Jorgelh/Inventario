@@ -10,6 +10,7 @@ import BD.BDDescargaProducto;
 import BD.DBCargaPro;
 import Class.CargaP;
 import Class.Descarga;
+import java.awt.Color;
 //import java.nio.charset.CodingErrorAction;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 public class DescargaProducto extends javax.swing.JInternalFrame {
 
     DefaultTableModel temp;
+    int cantidadminima;
     
 
     /**
@@ -42,6 +44,8 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         limpiartabla15();
         activartxt(false);
         BoDescargar.setEnabled(false);
+        CantidadMinima.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+
     }
 
     public void llenarBalance() {
@@ -52,11 +56,12 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             while (rs.next()) {
                 this.txtcantBodega.setText(String.valueOf(rs.getInt("sum(cantidad)")));
             }
-            ResultSet r = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 2");
+            //ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad),producto.cantidadminima from ingreso inner join producto on  ingreso.codigo = producto.codigo where codigo =" + TxCodigo.getText() + "and bodega = 2");
+            ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad),producto.cantidadminima from ingreso inner join producto on  ingreso.codigo = producto.codigo where ingreso.codigo = "+ TxCodigo.getText() +" and bodega = 2 GROUP BY (producto.CANTIDADMINIMA)");
             while (r.next()) {
-                this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(cantidad)")));
+                this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(ingreso.cantidad)")));
+                this.cantidadminima = (r.getInt("cantidadminima"));
             }
-
             rs.close();
             r.close();
             stmt.close();
@@ -67,6 +72,13 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         int bode = Integer.parseInt(txtcantBodega.getText());
         int bodegui = Integer.parseInt(txttotalBodeguita.getText());
         txtSumas.setText(String.valueOf(bode + bodegui));
+        if(cantidadminima < Integer.parseInt(txtSumas.getText()))
+        {
+           CantidadMinima.setText(String.valueOf(cantidadminima));
+        }else{    
+            CantidadMinima.setText(String.valueOf(cantidadminima));
+            CantidadMinima.setBackground(Color.RED);
+        }
 
     }
 
@@ -112,6 +124,8 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         serie.setText("");
         txtubicacion.setText("");
         notas.setText("");
+        CantidadMinima.setText("");
+        CantidadMinima.setBackground(Color.WHITE);
     }
 
     public void activartxt(boolean b) {
@@ -220,6 +234,8 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         txtSumas = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         unidadMedida = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        CantidadMinima = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Descargas de Producto");
@@ -549,7 +565,6 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
 
         notas.setEditable(false);
         notas.setColumns(20);
-        notas.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         notas.setForeground(new java.awt.Color(0, 0, 255));
         notas.setRows(5);
         jScrollPane2.setViewportView(notas);
@@ -714,6 +729,11 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         unidadMedida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         unidadMedida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel25.setText("Cantidad Minima");
+
+        CantidadMinima.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -726,7 +746,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                                 .addComponent(txtSumas, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -740,7 +760,13 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                                             .addComponent(txtcantBodega, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                                             .addComponent(txttotalBodeguita))))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CantidadMinima))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -760,7 +786,10 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(txtSumas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CantidadMinima, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -788,22 +817,23 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(TxCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(TxCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1061,6 +1091,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BoDescargar;
+    private javax.swing.JTextField CantidadMinima;
     private javax.swing.JTable Cosulta;
     private javax.swing.JLabel Descripcion;
     private javax.swing.JTextField LaDescrip;
@@ -1089,6 +1120,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
