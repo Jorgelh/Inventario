@@ -56,17 +56,29 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             while (rs.next()) {
                 this.txtcantBodega.setText(String.valueOf(rs.getInt("sum(cantidad)")));
             }
-            //ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad),producto.cantidadminima from ingreso inner join producto on  ingreso.codigo = producto.codigo where codigo =" + TxCodigo.getText() + "and bodega = 2");
-            ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad),producto.cantidadminima from ingreso inner join producto on  ingreso.codigo = producto.codigo where ingreso.codigo = "+ TxCodigo.getText() +" and bodega = 2 GROUP BY (producto.CANTIDADMINIMA)");
-            while (r.next()) {
-                this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(ingreso.cantidad)")));
-                this.cantidadminima = (r.getInt("cantidadminima"));
+            ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 2");
+            //ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad),producto.cantidadminima from ingreso inner join producto on  ingreso.codigo = producto.codigo where ingreso.codigo = "+ TxCodigo.getText() +" and bodega = 2 GROUP BY (producto.CANTIDADMINIMA)");
+            while (r.next()) { 
+                if (String.valueOf(r) == null)
+                {
+                 this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(ingreso.cantidad)")));
+                }else{
+                txttotalBodeguita.setText("0");
+                }
+              //  this.cantidadminima = (r.getInt("cantidadminima"));
+            }
+            ResultSet rd = stmt.executeQuery("select cantidadminima from producto where codigo = "+ TxCodigo.getText());
+            while (rd.next()) {
+                //this.txttotalBodeguita.setText(String.valueOf(rd.getInt("sum(ingreso.cantidad)")));
+                this.cantidadminima = (rd.getInt("cantidadminima"));
             }
             rs.close();
             r.close();
+            rd.close();
             stmt.close();
         } catch (SQLException error) {
             System.out.println("NO ERROR DE unidad medida" + error);
+            
         }
 
         int bode = Integer.parseInt(txtcantBodega.getText());
