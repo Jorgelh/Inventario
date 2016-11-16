@@ -61,9 +61,9 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             while (r.next()) { 
                 if (String.valueOf(r) == null)
                 {
-                 this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(ingreso.cantidad)")));
-                }else{
                 txttotalBodeguita.setText("0");
+                }else{
+                this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(ingreso.cantidad)")));
                 }
               //  this.cantidadminima = (r.getInt("cantidadminima"));
             }
