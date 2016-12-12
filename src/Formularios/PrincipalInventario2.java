@@ -89,6 +89,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         CONSULTAPN = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -455,10 +456,21 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         });
         jMenu9.add(jMenuItem9);
 
+        jMenuItem20.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem20.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem20.setText("CODIGO DETALLES");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem20);
+
         jMenuItem13.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem13.setForeground(new java.awt.Color(0, 51, 255));
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zoom.png"))); // NOI18N
         jMenuItem13.setText("RANGO DE FECHA");
+        jMenuItem13.setHideActionText(true);
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
@@ -919,6 +931,15 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         M.show();
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        CDescargasCodigo1 M = new CDescargasCodigo1();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -989,6 +1010,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

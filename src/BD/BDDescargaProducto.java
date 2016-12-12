@@ -88,7 +88,7 @@ public abstract class BDDescargaProducto {
     }
     
     public static ArrayList<Descarga> ListarProductoDescargado(int c , int b1, int b2) {
-
+//llena tabla de consulta de descargas por codigo
         return consultarSQL("select descarga.documento,"
                 + "descarga.pn,"
                 + "descarga.lote,"
@@ -96,6 +96,7 @@ public abstract class BDDescargaProducto {
                 + "descarga.fechades,"
                 + "descarga.cantidad,"
                 + "descarga.entregadoa,"
+                + "descarga.nota,"
                 + "ingreso.po,"
                 + "ingreso.bodega,"
                 + "ingreso.cantidad as \"cantidadbode\","
@@ -124,6 +125,7 @@ public abstract class BDDescargaProducto {
                 c.setPO(rs.getString("po"));
                 c.setCantidadbode(rs.getInt("cantidadbode"));
                 c.setCantidadin(rs.getInt("cantidadin"));
+                c.setNota(rs.getString("nota"));
                 list.add(c);
             }
             cn.close();
