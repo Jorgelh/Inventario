@@ -106,9 +106,15 @@ public abstract class BDConsultas {
         return list;
     }
     
+    public static ArrayList<ConsultaFecha> ListarIngresoCodigo(int f, int b1, int b2 ) {
+
+        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.ingresadopor,ingreso.notas,ingreso.po from Ingreso INNER JOIN PRODUCTO on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") and ingreso.codigo = "+f);
+
+    }
+    
     public static ArrayList<ConsultaFecha> ListarIngresoFecha(String f, int b1, int b2 ) {
 
-        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") and ingreso.fechasistema = '" + f +"'" );
+        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.ingresadopor,ingreso.notas from Ingreso INNER JOIN PRODUCTO on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") and ingreso.fecha_ingreso = '" + f +"'" );
 
     }
     
@@ -130,6 +136,8 @@ public abstract class BDConsultas {
                 c.setCantidadIngre(rs.getInt("cantiingre"));
                 c.setCantidad(rs.getInt("cantidad"));
                 c.setIngrepor(rs.getString("ingresadopor"));
+                c.setNota(rs.getString("notas"));
+                c.setPo(rs.getString("po"));
                 list.add(c);
             }
             cn.close();
