@@ -164,9 +164,20 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             ps.close();
         } catch (Exception e) {
         }
+           }
+ 
+    public void executeStorePrecio(){
+        try {
+            Connection cn = BD.getConnection();
+            Statement ps = cn.createStatement();
+            ps.executeUpdate("begin actualizarprecio(NCodigo=>"+TxCodigo.getText()+",NPrecio=>"+Precio.getText()+"); commit; end;");
+            cn.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+    }    
         
     
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -940,6 +951,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Ingreso Actualizado...");
                 EditarTXT(false);
                 executeStore();
+                executeStorePrecio();
                 Beliminar.setEnabled(false);
                 Bguardar.setEnabled(false);
                 Cosulta.setEnabled(true);
