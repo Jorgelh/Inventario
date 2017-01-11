@@ -48,6 +48,17 @@ public class CargarProductos extends javax.swing.JInternalFrame {
 
     }
     
+    public void executeStorePrecio(){
+        try {
+            Connection cn = BD.getConnection();
+            Statement ps = cn.createStatement();
+            ps.executeUpdate("begin actualizarprecio(NCodigo=>"+txtCodigo.getText()+",NPrecio=>"+TxtPrecio.getText()+"); commit; end;");
+            cn.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+    }
+    
     public  void obtenerdescripcion() {
         
         try {
@@ -722,7 +733,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 c.setPrecio(Double.parseDouble(TxtPrecio.getText()));
                 DBCargaPro.insertarProductoNuevo(c);
                 JOptionPane.showMessageDialog(null, "Producto Cargado...");
-                
+                executeStorePrecio();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
             }

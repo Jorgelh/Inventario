@@ -907,10 +907,10 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             rs1.next();
             int codigodes = rs1.getInt("desc");
             if(codigodes == 0){
-                if (TxCodigo.getText().compareTo("") != 0
-                && txtCantidad.getText().compareTo("") != 0
-                && Precio.getText().compareTo("") != 0
-                && txtingresadopor.getText().compareTo("") != 0
+                if (TxCodigo.getText().compareTo("")!= 0
+                && txtCantidad.getText().compareTo("")!= 0
+                && Precio.getText().compareTo("")!= 0
+                && txtingresadopor.getText().compareTo("")!= 0
                 && !ComboBode.getSelectedItem().toString().equalsIgnoreCase("")) {
 
                 if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
