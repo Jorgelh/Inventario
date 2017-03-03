@@ -32,7 +32,19 @@ public class Descarga {
    private String PO;
    private int cantidadin;
    private int cantidadbode;
+   private int Depto;
 
+    public int getDepto() {
+        return Depto;
+    }
+
+    public void setDepto(int Depto) {
+        this.Depto = Depto;
+    }
+   
+   
+     
+     
     public int getCantidadin() {
         return cantidadin;
     }
