@@ -100,6 +100,9 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        DWN = new javax.swing.JMenu();
+        jMenuItem19 = new javax.swing.JMenuItem();
+        jMenuItem22 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
 
@@ -162,7 +165,8 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
 
         jMenu1.setBorder(null);
         jMenu1.setForeground(new java.awt.Color(0, 51, 255));
-        jMenu1.setText("INGRESOS");
+        jMenu1.setText("  INGRESOS");
+        jMenu1.setActionCommand("   INGRESOS");
         jMenu1.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu1.setPreferredSize(new java.awt.Dimension(100, 30));
         jMenu1.setRequestFocusEnabled(false);
@@ -570,6 +574,38 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jMenu4.setPreferredSize(new java.awt.Dimension(110, 19));
         menubar.add(jMenu4);
 
+        DWN.setForeground(new java.awt.Color(0, 51, 255));
+        DWN.setText("  DRAWINGS");
+        DWN.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        DWN.setPreferredSize(new java.awt.Dimension(110, 19));
+        DWN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DWNActionPerformed(evt);
+            }
+        });
+
+        jMenuItem19.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem19.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem19.setText("P/N");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        DWN.add(jMenuItem19);
+
+        jMenuItem22.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem22.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem22.setText("Fotos y Drawings");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
+        DWN.add(jMenuItem22);
+
+        menubar.add(DWN);
+
         jMenu5.setForeground(new java.awt.Color(0, 51, 255));
         jMenu5.setText("       SALIR");
         jMenu5.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
@@ -963,6 +999,28 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
+    private void DWNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DWNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DWNActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        Drawings M = new Drawings();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+        Fotos M = new Fotos();
+        jDesktopPane1.add(M); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = M.getSize();
+        M.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        M.show();
+    }//GEN-LAST:event_jMenuItem22ActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1001,6 +1059,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem CARGAPRO;
     private javax.swing.JMenuItem CONSULTAPN;
     private javax.swing.JMenuItem DESCARGAPRO;
+    private javax.swing.JMenu DWN;
     private javax.swing.JMenuItem EDITARPRO;
     private javax.swing.JMenuItem INGRESO;
     private javax.swing.JMenuItem NUEVOPRO;
@@ -1032,9 +1091,11 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
+    private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

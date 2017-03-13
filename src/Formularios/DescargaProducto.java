@@ -177,7 +177,6 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     String Departamento;
     Departamento = Depto.getSelectedValue();
    
-    
     if(Departamento == "Chips"){ NoDepto = 1;} 
     else if(Departamento == "Transformadores"){ NoDepto = 2;}
     else if(Departamento == "Solder"){ NoDepto = 3;} 
@@ -207,6 +206,22 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             11 IT Mantenimiento = 11
             12 Gerencia General = 12
             13 Contabilidad = 13
+    
+           NUEVOS DEPTOS
+    
+            1 Chips = 1
+            2 Transformadores = 2
+            3 Solder = 3
+            4 Testing  = 4
+            5 Taller  = 5
+            //6 Direccion de Operaciones = 6 YA NO SE INCLUYE//
+            7 Ingenieria = 7
+            8 Potting = 8
+            9 Control de Calidad = 9
+            10 Bodega = 10
+            //11 IT Mantenimiento = 11 YA NO SE INCLUYE//
+            12 Gerencia General = 12
+            13 Gerencia Financiera Administrativa = 13
     */
     
     }
@@ -531,7 +546,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
 
         Depto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Departamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         Depto.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Chips", "Transformadores", "Solder ", "Potting", "Testing", "Taller", "Ingenieria", "Control de Calidad", "Bodega", "Gerencia General", "Gerencia Financiera Administrativa" };
+            String[] strings = { "Chips", "Transformadores", "Solder", "Potting", "Testing", "Taller", "Ingenieria", "Control de Calidad", "Bodega", "Gerencia General", "Gerencia Financiera Administrativa" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
