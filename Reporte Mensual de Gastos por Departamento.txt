@@ -1,0 +1,6 @@
+select descarga.codigo,producto.descripcion, decode(descarga.departamento, 1, 'Chips', 2 ,'Transdormadores',3, 'Solder',4,'Testing',5,'Taller',7,'Ingenieria',8,'Potting',9,'Control de Calidad',10,'Bodega',12,'Gerencia General',13,'Gerencia Financiera Administrativa') AS DEPARTAMENTO,
+DESCARGA.FECHADES,descarga.entregadoa,descarga.cantidad,ingreso.precio, DESCARGA.CANTIDAD*INGRESO.PRECIO AS TOTAL
+from DESCARGA INNER JOIN PRODUCTO on
+DESCARGA.CODIGO = PRODUCTO.CODIGO JOIN INGRESO ON DESCARGA.ID_INGRESO = INGRESO.ID_INGRESO where departamento is not null AND PRODUCTO.ID_PROCE = 2 AND 
+descarga.fechades between to_date('01/04/17','dd/mm/yy') and to_date('30/04/17','dd/mm/yy')
+order by DESCARGA.DEPARTAMENTO;
