@@ -197,9 +197,16 @@ public abstract class BDConsultas {
         //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,sum(ingreso.cantidad)as \"cantidad\"  from producto inner join ingreso on producto.codigo = ingreso.codigo where producto.codigo like '"+c+"%' GROUP BY producto.codigo,producto.descripcion,producto.ubicacion");
         return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,unidad_medida.descripcion as umedida, sum(ingreso.cantidad) as \"cantidad\", sum(bitacoraingreso.cantidad) as \"cantidadingre\" from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida join INGRESO on producto.codigo = ingreso.codigo join BITACORAINGRESO on ingreso.id_ingreso = bitacoraingreso.id_ingreso where upper(ingreso.codigo) like upper('"+c+"%') group by INGRESO.CODIGO,producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,unidad_medida.descripcion,bitacoraingreso.cantidad");
     }
+  
+   
     
     
-    
+    public static ArrayList<Producto> ListarProductoNombre(String f) {
+
+        //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,presentacion.descripcion as \"presentacion\",unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
+         //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,producto.cantidad,unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
+         return consultanombreSQL("select codigo,producto.descripcion,ubicacion,ubicacion2,unidad_medida.descripcion as umedida from producto inner join unidad_medida on producto.id_medida = unidad_medida.id_medida where upper(producto.descripcion) like upper('"+f+"%') ORDER BY producto.DESCRIPCION");
+    }
     public static ArrayList<Producto> ListarNombre(String f) {
 
         //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,presentacion.descripcion as \"presentacion\",unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
@@ -220,9 +227,8 @@ public abstract class BDConsultas {
                 c.setDescripcion(rs.getString("descripcion")); 
                 c.setUbicacion(rs.getString("ubicacion"));
                 c.setUbicacion2(rs.getString("ubicacion2"));
-                c.setCantidad(rs.getInt("CANTIDAD"));
                 c.setUmedida(rs.getString("umedida"));
-                c.setCantidadingre(rs.getInt("cantidadingre"));
+               
                 
                 list.add(c);
             }
@@ -233,6 +239,41 @@ public abstract class BDConsultas {
         }
         return list;
     }
+    
+    
+    
+     public static ArrayList<CargaP> ListarProductoNombreIngreso(int e) {
+    
+       return consultanombreIngresoSQL("select p_n,no_trabajo,no_invoice,fecha_ingreso,precio,po,cantidad from INGRESO where codigo="+e+"order by id_ingreso");
+    }
+    
+     private static ArrayList<CargaP> consultanombreIngresoSQL(String sql) {
+        ArrayList<CargaP> list = new ArrayList<CargaP>();
+        Connection cn = BD.getConnection();
+        try {
+            
+            CargaP c;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                c = new CargaP();
+                c.setPN(rs.getString("p_n"));
+                c.setNTrabajo(rs.getString("no_trabajo"));
+                c.setInvoce(rs.getString("no_invoice")); 
+                c.setReturnFechaIgre(rs.getString("fecha_ingreso"));
+                c.setPrecio(rs.getDouble("precio"));
+                c.setPO(rs.getString("po"));
+                c.setCantidad(rs.getInt("cantidad"));
+                list.add(c);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error Consulta producto por nombre " + e);
+            return null;
+        }
+        return list;
+    }
+    
     
     public static ArrayList<consultanp> ListaringreInvoice(String d , int b1 , int b2) {
 
