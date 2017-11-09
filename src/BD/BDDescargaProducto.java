@@ -23,7 +23,7 @@ public abstract class BDDescargaProducto {
     public static void insertarDescarga(Descarga ca)  throws SQLException{
         Connection cn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into descarga(id_descarga,id_ingreso,codigo,cantidad,entregadoa,nota,fechades,fechasistema,documento,serie,lote,PN,no_trabajo,departamento) values (DESCARGA1.nextval,?,?,?,?,?,?,sysdate,?,?,?,?,?,?)");
+        ps = cn.prepareStatement("insert into descarga(id_descarga,id_ingreso,codigo,cantidad,entregadoa,nota,fechades,fechasistema,documento,serie,lote,PN,no_trabajo,departamento,bodega) values (DESCARGA1.nextval,?,?,?,?,?,?,sysdate,?,?,?,?,?,?,?)");
         //ps.setInt(1, ca.getId_descarga());
         ps.setInt(1, ca.getId_ingreso());
         ps.setInt(2, ca.getCodigo());
@@ -37,6 +37,7 @@ public abstract class BDDescargaProducto {
         ps.setString(10, ca.getPn());
         ps.setString(11, ca.getTrabajo());
         ps.setInt(12, ca.getDepto());
+        ps.setInt(13, ca.getBodega());
         ps.execute();
         cn.close();
         ps.close();            
@@ -56,6 +57,7 @@ public abstract class BDDescargaProducto {
                 + "ingreso.fecha_ven,"
                 + "ingreso.P_N,"
                 + "ingreso.cantidad,"
+                + "ingreso.cantidad2,"
                 + "ingreso.PO,"
                 + "ingreso.lote,"
                 + "ingreso.bodega,"
@@ -80,7 +82,8 @@ public abstract class BDDescargaProducto {
         c.setDescripcion(rs.getString("descripcion"));
         c.setNota(rs.getString("notas"));
         c.setPresentacion(rs.getString("desc"));
-        c.setUbicacion(rs.getString("ubicacion"));       
+        c.setUbicacion(rs.getString("ubicacion")); 
+        c.setCantidad2(rs.getInt("cantidad2"));
         }
         cn.close();
         ps.close();

@@ -50,7 +50,7 @@ public abstract class BDProducto {
     }
 
     public static ArrayList<Producto> ListarProductos(int p) {
-        return consultarSQL("select codigo,descripcion,ubicacion,ubicacion2 from producto where fam_id=" + p);
+        return consultarSQL("select codigo,descripcion,ubicacion,ubicacion2 from producto where fam_id=" + p+"ORDER BY descripcion");
     }
 
     private static ArrayList<Producto> consultarSQL(String sql) {

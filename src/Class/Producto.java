@@ -179,7 +179,35 @@ public class Producto {
     private String presentacion;
     private String Umedida;
     private int cantidadingre;
+    private int cantidadbodega;
+    private int cantidadbodegita;
 
+    public long getNota1() {
+        return Nota1;
+    }
+
+    public void setNota1(long Nota1) {
+        this.Nota1 = Nota1;
+    }
+
+    public int getCantidadbodega() {
+        return cantidadbodega;
+    }
+
+    public void setCantidadbodega(int cantidadbodega) {
+        this.cantidadbodega = cantidadbodega;
+    }
+
+    public int getCantidadbodegita() {
+        return cantidadbodegita;
+    }
+
+    public void setCantidadbodegita(int cantidadbodegita) {
+        this.cantidadbodegita = cantidadbodegita;
+    }
+    
+    
+    
     public int getCantidadingre() {
         return cantidadingre;
     }

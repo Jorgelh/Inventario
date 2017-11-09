@@ -33,7 +33,7 @@ public class Descarga {
    private int cantidadin;
    private int cantidadbode;
    private int Depto;
-
+   
     public int getDepto() {
         return Depto;
     }

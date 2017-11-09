@@ -717,7 +717,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 CargaP c = new CargaP();
                 c.setCodigo(Integer.parseInt(txtCodigo.getText()));
                 c.setBodeda(bodega);
-                c.setCantidad(Integer.parseInt(txtCantidad.getText()));
+                if(ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")){
+                c.setCantidad(Integer.parseInt(txtCantidad.getText()));}
+                else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}
                 c.setFechaIngre(txtfecha.getDate());
                 c.setFechaVencimiento(txtfechavenci.getDate());
                 c.setIngresadoPor(Integer.parseInt(txtEmpleado.getText()));

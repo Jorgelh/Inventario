@@ -52,14 +52,14 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             while (rs.next()) {
                 this.txtcantBodega.setText(String.valueOf(rs.getInt("sum(cantidad)")));
             }
-            ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 2");
+            ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad2) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 2");
             //ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad),producto.cantidadminima from ingreso inner join producto on  ingreso.codigo = producto.codigo where ingreso.codigo = "+ TxCodigo.getText() +" and bodega = 2 GROUP BY (producto.CANTIDADMINIMA)");
             while (r.next()) { 
                 if (String.valueOf(r) == null)
                 {
                 txttotalBodeguita.setText("0");
                 }else{
-                this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(ingreso.cantidad)")));
+                this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(ingreso.cantidad2)")));
                 }
               //  this.cantidadminima = (r.getInt("cantidadminima"));
             }
@@ -568,8 +568,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNoingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtNoingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -796,11 +795,11 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "No. Ingreso", "P.O", "Fecha Ingreso", "No. Invoice", "P/N"
+                "No. Ingreso", "P.O", "Fecha Ingreso", "No. Invoice", "P/N", "Precio"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1030,6 +1029,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                     d.setLote(trabajo.getText());
                     d.setTrabajo(lote.getText());
                     d.setDepto(NoDepto);
+                    if(txtbodega.getText().toString().equalsIgnoreCase("Bodega")){d.setBodega(1);}else{d.setBodega(2);}
                     BDDescargaProducto.insertarDescarga(d);
                     JOptionPane.showMessageDialog(null, "Descarga Realizada...");
                     BoDescargar.setEnabled(false);
@@ -1066,9 +1066,12 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             LaLote.setText(ca.getLote());
             LaPN.setText(ca.getPN());
             LaPO.setText(ca.getPO());
-            laCantidad.setText(String.valueOf(ca.getCantidad()));
             txtNoingreso.setText(String.valueOf(ca.getId_ingreso()));
-            if(ca.getBodeda()==1){txtbodega.setText("Bodega");} else{txtbodega.setText("Bodeguita");}
+            if(ca.getBodeda()==1){txtbodega.setText("Bodega");
+            laCantidad.setText(String.valueOf(ca.getCantidad()));
+            } 
+            else{txtbodega.setText("Bodeguita");
+            laCantidad.setText(String.valueOf(ca.getCantidad2()));}
             txtubicacion.setText(ca.getUbicacion());
             notas.setText(ca.getNota());
             

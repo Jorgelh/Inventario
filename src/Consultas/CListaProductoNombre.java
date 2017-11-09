@@ -45,21 +45,23 @@ public class CListaProductoNombre extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<Producto> list) {
 
-        Object[][] dato = new Object[list.size()][5];
+        Object[][] dato = new Object[list.size()][7];
         int f = 0;
         for (Producto a : list) {
             dato[f][0] = a.getCodigo();
             dato[f][1] = a.getDescripcion();
-            dato[f][2] = a.getUbicacion();
-            dato[f][3] = a.getUbicacion2();
-            dato[f][4] = a.getUmedida();
+            dato[f][2] = a.getCantidadbodega();
+            dato[f][3] = a.getCantidadbodegita();
+            dato[f][4] = a.getUbicacion();
+            dato[f][5] = a.getUbicacion2();
+            dato[f][6] = a.getUmedida();
 
             f++;
         }
         tablanomingre.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Ubicacion Bodega", "Ubicacion Bodeguita","Unidad de Medida"
+                    "Codigo", "Descripcion","Cantidad Bodega","Cantidad Bodeguita", "Ubicacion Bodega", "Ubicacion Bodeguita","Unidad de Medida"
                 }) {
                     @Override
                     public boolean isCellEditable(int row, int column) {

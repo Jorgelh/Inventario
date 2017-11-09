@@ -40,8 +40,8 @@ public abstract class DBCargaPro {
                 + "PO,cantidad,fecha_ven,precio,"
                 + "lote,no_trabajo,no_invoice,no_documento,"
                 + "no_serie,ingresadopor,proveedor,notas,"
-                + "bodega,fechasistema,estado) "
-                + "values (ingreso1.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,'A')");
+                + "bodega,fechasistema,estado,cantidad2) "
+                + "values (ingreso1.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,'A',?)");
        // ps.setInt(1,c.getId_ingreso());
         ps.setInt(1,c.getCodigo());
         ps.setString(2,c.getPN());
@@ -59,6 +59,7 @@ public abstract class DBCargaPro {
         ps.setString(14, c.getProveedor());
         ps.setString(15, c.getNota());
         ps.setInt(16, c.getBodeda());
+        ps.setInt(17, c.getCantidad2());
         //ps.setString(18, c.getEstado());
         ps.execute();
         cnn.close();
@@ -74,7 +75,7 @@ public abstract class DBCargaPro {
 
     public static ArrayList<CargaP> ListarProductoIngresado(int c) {
 
-        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote,precio from ingreso where codigo=" + c + "and cantidad > 0 and estado = 'A'" );
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote,precio from ingreso where codigo=" + c + "and (cantidad > 0 or cantidad2 > 0) and estado = 'A'" );
 
     }
 
@@ -89,7 +90,7 @@ public abstract class DBCargaPro {
                 c = new CargaP();
                 c.setId_ingreso(rs.getInt("id_ingreso"));
                 c.setPN(rs.getString("P_N"));
-                    c.setReturnFecha(rs.getString("fecha_ingreso"));
+                c.setReturnFecha(rs.getString("fecha_ingreso"));
                 c.setPO(rs.getString("PO"));
                 c.setCantidad(rs.getInt("cantidad"));
                 c.setInvoce(rs.getString("no_invoice"));

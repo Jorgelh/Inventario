@@ -205,7 +205,9 @@ public abstract class BDConsultas {
 
         //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,presentacion.descripcion as \"presentacion\",unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
          //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,producto.cantidad,unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
-         return consultanombreSQL("select codigo,producto.descripcion,ubicacion,ubicacion2,unidad_medida.descripcion as umedida from producto inner join unidad_medida on producto.id_medida = unidad_medida.id_medida where upper(producto.descripcion) like upper('"+f+"%') ORDER BY producto.DESCRIPCION");
+         //return consultanombreSQL("select codigo,producto.descripcion,ubicacion,ubicacion2,unidad_medida.descripcion as umedida from producto inner join unidad_medida on producto.id_medida = unidad_medida.id_medida where upper(producto.descripcion) like upper('"+f+"%') ORDER BY producto.DESCRIPCION");
+         
+         return consultanombreSQL("SELECT PRODUCTO.codigo,producto.descripcion,PRODUCTO.ubicacion,PRODUCTO.ubicacion2,unidad_medida.descripcion as umedida,SUM(INGRESO.CANTIDAD),SUM(INGRESO.CANTIDAD2)from producto inner join unidad_medida on producto.id_medida = unidad_medida.id_medida JOIN INGRESO ON producto.CODIGO = INGRESO.CODIGO where upper(producto.descripcion) like upper('"+f+"%')  GROUP BY(PRODUCTO.codigo,producto.descripcion,PRODUCTO.ubicacion,PRODUCTO.ubicacion2,unidad_medida.descripcion) ORDER BY producto.DESCRIPCION");
     }
     public static ArrayList<Producto> ListarNombre(String f) {
 
@@ -228,6 +230,8 @@ public abstract class BDConsultas {
                 c.setUbicacion(rs.getString("ubicacion"));
                 c.setUbicacion2(rs.getString("ubicacion2"));
                 c.setUmedida(rs.getString("umedida"));
+                c.setCantidadbodega(rs.getInt("SUM(INGRESO.CANTIDAD)"));
+                c.setCantidadbodegita(rs.getInt("SUM(INGRESO.CANTIDAD2)"));
                
                 
                 list.add(c);

@@ -21,6 +21,7 @@ public class CargaP {
     private Date fechaIngre;
     private String PO;
     private int cantidad;
+    private int cantidad2;
     private Date fechaVencimiento;
     private double precio;
     private String Lote;
@@ -40,6 +41,15 @@ public class CargaP {
     private String preciotxt;
     private String ubicacion;
 
+    public int getCantidad2() {
+        return cantidad2;
+    }
+
+    public void setCantidad2(int cantidad2) {
+        this.cantidad2 = cantidad2;
+    }
+
+    
     public String getUbicacion() {
         return ubicacion;
     }
