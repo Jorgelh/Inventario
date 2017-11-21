@@ -48,11 +48,11 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 1");
+            ResultSet rs = stmt.executeQuery("select sum(cantidad) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 1 and estado = 'A'");
             while (rs.next()) {
                 this.txtcantBodega.setText(String.valueOf(rs.getInt("sum(cantidad)")));
             }
-            ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad2) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 2");
+            ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad2) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 2 and estado = 'A'");
             //ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad),producto.cantidadminima from ingreso inner join producto on  ingreso.codigo = producto.codigo where ingreso.codigo = "+ TxCodigo.getText() +" and bodega = 2 GROUP BY (producto.CANTIDADMINIMA)");
             while (r.next()) { 
                 if (String.valueOf(r) == null)
@@ -982,7 +982,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from ingreso where codigo=" + TxCodigo.getText() + "and cantidad > 0");
+            ResultSet rs = stmt.executeQuery("select COUNT(codigo) from ingreso where codigo=" + TxCodigo.getText() + "and (cantidad > 0 or cantidad2 > 0)");
             rs.next();
             int codigo = rs.getInt("count(codigo)");
             if (codigo > 0) {

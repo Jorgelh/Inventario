@@ -934,7 +934,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 CargaP c = new CargaP();
                 c.setId_ingreso(id);
                 c.setBodeda(bodega);
-                c.setCantidad(Integer.parseInt(txtCantidad.getText()));
+                if(ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")){c.setCantidad(Integer.parseInt(txtCantidad.getText()));}else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}
                 c.setFechaVencimiento(txtfechaven.getDate());
                 c.setIngresadoPor(Integer.parseInt(txtingresadopor.getText()));
                 c.setInvoce(txtInvoice.getText());

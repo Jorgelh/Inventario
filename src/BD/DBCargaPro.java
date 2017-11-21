@@ -75,7 +75,7 @@ public abstract class DBCargaPro {
 
     public static ArrayList<CargaP> ListarProductoIngresado(int c) {
 
-        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote,precio from ingreso where codigo=" + c + "and (cantidad > 0 or cantidad2 > 0) and estado = 'A'" );
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,decode(ingreso.bodega,1,cantidad,2,cantidad2) as  \"cantidad\" ,no_invoice,fecha_ven,lote,precio from ingreso where codigo=" + c + "and (cantidad > 0 or cantidad2 > 0) and estado = 'A'" );
 
     }
 

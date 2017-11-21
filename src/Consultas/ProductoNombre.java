@@ -17,12 +17,12 @@ import javax.swing.table.TableColumn;
  *
  * @author Jorge Luis
  */
-public class CListaProductoNombre extends javax.swing.JInternalFrame {
+public class ProductoNombre extends javax.swing.JInternalFrame {
     int codigo;
     /**
      * Creates new form CNombre
      */
-    public CListaProductoNombre() {
+    public ProductoNombre() {
         initComponents();
         actualizarTablaNombre();
         
@@ -39,7 +39,7 @@ public class CListaProductoNombre extends javax.swing.JInternalFrame {
     
     private void actualizarTablaNombre() {
 
-        ArrayList<Producto> result = BDConsultas.ListarProductoNombre(nombre.getText());
+        ArrayList<Producto> result = BDConsultas.ProductoNombre(nombre.getText());
         recagarTabla(result);
     }
 
@@ -81,49 +81,7 @@ public class CListaProductoNombre extends javax.swing.JInternalFrame {
     }
     
     
-    private void actualizarTablaNombreIngreso() {
-
-        ArrayList<CargaP>result = BDConsultas.ListarProductoNombreIngreso(codigo);
-        recagarTablaIngreso(result);
-    }
-
-    private void recagarTablaIngreso(ArrayList<CargaP> list) {
-
-        Object[][] dato = new Object[list.size()][7];
-        int f = 0;
-        for (CargaP a : list) {
-            dato[f][0] = a.getPN();
-            dato[f][1] = a.getNTrabajo();
-            dato[f][2] = a.getInvoce();
-            dato[f][3] = a.getReturnFechaIgre();
-            dato[f][4] = a.getPrecio();
-            dato[f][5] = a.getPO();
-            dato[f][6] = a.getCantidad();
-            f++;
-        }
-        TablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
-                dato,
-                new String[]{
-                    "P/N", "No. Trabajo", "No. Invoice","Fecha Ingreso","Precio","P.O.","Cantidad"
-                }) {
-                    @Override
-                    public boolean isCellEditable(int row, int column) {
-                        return false;
-                    }
-                });
-                /*TableColumn columna1 = TablaIngresos.getColumn("P/N");
-                columna1.setPreferredWidth(10);
-                TableColumn columna2 = TablaIngresos.getColumn("No. Trabajo");
-                columna2.setPreferredWidth(150);
-                TableColumn columna3 = TablaIngresos.getColumn("No. Invoice");
-                columna3.setPreferredWidth(10);
-                TableColumn columna4 = TablaIngresos.getColumn("Fecha Ingreso");
-                columna4.setPreferredWidth(10);
-                TableColumn columna5 = TablaIngresos.getColumn("Precio");
-                columna5.setPreferredWidth(10);
-                TableColumn columna6 = TablaIngresos.getColumn("Cantidad");
-                columna6.setPreferredWidth(10);*/
-    }
+    
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -135,9 +93,6 @@ public class CListaProductoNombre extends javax.swing.JInternalFrame {
         tablanomingre = new javax.swing.JTable();
         nombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        TablaIngresos = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,19 +143,6 @@ public class CListaProductoNombre extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Nombre:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setText("Ingresos");
-
-        TablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "P/N", "No. Trabajo", "No Invoice", "Fecha de Ingreso", "Precio", "P.O.", "Cantidad"
-            }
-        ));
-        jScrollPane3.setViewportView(TablaIngresos);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -215,15 +157,8 @@ public class CListaProductoNombre extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 314, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3)))
+                        .addGap(0, 314, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(532, 532, 532)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,12 +168,8 @@ public class CListaProductoNombre extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -265,14 +196,7 @@ public class CListaProductoNombre extends javax.swing.JInternalFrame {
 
     private void tablanomingreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablanomingreMouseClicked
         
-       try {
-           
-            //CargaP c = BDConsultas.ListarProductoNombreIngreso(Integer.parseInt(String.valueOf(tablanomingre.getModel().getValueAt(tablanomingre.getSelectedRow(),0))));
-            codigo = (Integer.parseInt(String.valueOf(tablanomingre.getModel().getValueAt(tablanomingre.getSelectedRow(),0))));
-            actualizarTablaNombreIngreso();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error"+e);
-        }
+      
     
     }//GEN-LAST:event_tablanomingreMouseClicked
 
@@ -293,14 +217,18 @@ public class CListaProductoNombre extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CListaProductoNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductoNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CListaProductoNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductoNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CListaProductoNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductoNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CListaProductoNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductoNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -309,19 +237,16 @@ public class CListaProductoNombre extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CListaProductoNombre().setVisible(true);
+                new ProductoNombre().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaIngresos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField nombre;
     private javax.swing.JTable tablanomingre;

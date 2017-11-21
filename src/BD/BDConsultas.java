@@ -207,7 +207,15 @@ public abstract class BDConsultas {
          //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,producto.cantidad,unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
          //return consultanombreSQL("select codigo,producto.descripcion,ubicacion,ubicacion2,unidad_medida.descripcion as umedida from producto inner join unidad_medida on producto.id_medida = unidad_medida.id_medida where upper(producto.descripcion) like upper('"+f+"%') ORDER BY producto.DESCRIPCION");
          
-         return consultanombreSQL("SELECT PRODUCTO.codigo,producto.descripcion,PRODUCTO.ubicacion,PRODUCTO.ubicacion2,unidad_medida.descripcion as umedida,SUM(INGRESO.CANTIDAD),SUM(INGRESO.CANTIDAD2)from producto inner join unidad_medida on producto.id_medida = unidad_medida.id_medida JOIN INGRESO ON producto.CODIGO = INGRESO.CODIGO where upper(producto.descripcion) like upper('"+f+"%')  GROUP BY(PRODUCTO.codigo,producto.descripcion,PRODUCTO.ubicacion,PRODUCTO.ubicacion2,unidad_medida.descripcion) ORDER BY producto.DESCRIPCION");
+         return consultanombreSQL("SELECT PRODUCTO.codigo,producto.descripcion,PRODUCTO.ubicacion,PRODUCTO.ubicacion2,unidad_medida.descripcion as umedida,SUM(INGRESO.CANTIDAD),SUM(INGRESO.CANTIDAD2)from producto inner join unidad_medida on producto.id_medida = unidad_medida.id_medida LEFT JOIN INGRESO ON producto.CODIGO = INGRESO.CODIGO where upper(producto.descripcion) like upper('"+f+"%') and ingreso.estado = 'A'  GROUP BY(PRODUCTO.codigo,producto.descripcion,PRODUCTO.ubicacion,PRODUCTO.ubicacion2,unidad_medida.descripcion) ORDER BY producto.DESCRIPCION");
+    }
+    public static ArrayList<Producto> ProductoNombre(String f) {
+
+        //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,presentacion.descripcion as \"presentacion\",unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
+         //return consultanombreSQL("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,producto.cantidad,unidad_medida.descripcion as \"umedida\"     from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida where  upper(producto.descripcion) like upper('"+f+"%')");
+         //return consultanombreSQL("select codigo,producto.descripcion,ubicacion,ubicacion2,unidad_medida.descripcion as umedida from producto inner join unidad_medida on producto.id_medida = unidad_medida.id_medida where upper(producto.descripcion) like upper('"+f+"%') ORDER BY producto.DESCRIPCION");
+         
+         return consultanombreSQL("SELECT PRODUCTO.codigo,producto.descripcion,PRODUCTO.ubicacion,PRODUCTO.ubicacion2,unidad_medida.descripcion as umedida,SUM(INGRESO.CANTIDAD),SUM(INGRESO.CANTIDAD2)from producto inner join unidad_medida on producto.id_medida = unidad_medida.id_medida LEFT JOIN INGRESO ON producto.CODIGO = INGRESO.CODIGO where upper(producto.descripcion) like upper('"+f+"%')   GROUP BY(PRODUCTO.codigo,producto.descripcion,PRODUCTO.ubicacion,PRODUCTO.ubicacion2,unidad_medida.descripcion) ORDER BY producto.DESCRIPCION");
     }
     public static ArrayList<Producto> ListarNombre(String f) {
 
@@ -248,7 +256,7 @@ public abstract class BDConsultas {
     
      public static ArrayList<CargaP> ListarProductoNombreIngreso(int e) {
     
-       return consultanombreIngresoSQL("select p_n,no_trabajo,no_invoice,fecha_ingreso,precio,po,cantidad from INGRESO where codigo="+e+"order by id_ingreso");
+       return consultanombreIngresoSQL("select p_n,no_trabajo,no_invoice,fecha_ingreso,precio,po,decode(bodega,1,cantidad,2,cantidad2) as \"cantidad\" from INGRESO where codigo="+e+"order by id_ingreso");
     }
     
      private static ArrayList<CargaP> consultanombreIngresoSQL(String sql) {

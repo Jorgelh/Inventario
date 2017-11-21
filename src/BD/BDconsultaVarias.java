@@ -31,23 +31,7 @@ public abstract class BDconsultaVarias {
         
         Connection cn = BD.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select id_ingreso,fecha_ven,"
-                + "                      fecha_ingreso,"
-                + "                      precio,"
-                +"                       no_trabajo,"
-                +"                       no_invoice,"
-                +"                       no_documento,"
-                +"                       no_serie,"
-                +"                       ingresadopor,"
-                +"                       proveedor,"
-                + "                      P_N,"
-                + "                      cantidad,"
-                + "                      PO,"
-                + "                      lote,"
-                + "                      bodega,"
-                + "                      notas "
-                + "                      from "
-                + "                      ingreso  where id_ingreso="+idc+"and estado = 'A'");
+        ps = cn.prepareStatement("select id_ingreso,fecha_ven,fecha_ingreso,precio,no_trabajo,no_invoice,no_documento,no_serie,ingresadopor,proveedor,P_N,decode(bodega,1,cantidad,2,cantidad2) as \"cantidad\",PO,lote,bodega,notas from ingreso  where id_ingreso="+idc+"and estado = 'A'");
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (c == null){
@@ -83,7 +67,7 @@ public abstract class BDconsultaVarias {
     
     public static ArrayList<CargaP> ListarProductoIngresadoEdit(int c) {
 
-        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote from ingreso where codigo=" + c + "and estado = 'A'" );
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,decode(bodega,1,cantidad,2,cantidad2) as \"cantidad\",no_invoice,fecha_ven,lote from ingreso where codigo=" + c + "and estado = 'A'" );
 
     }
 
@@ -131,7 +115,8 @@ public abstract class BDconsultaVarias {
                 + "ingresadopor=?,"
                 + "proveedor=?,"
                 + "notas=?,"
-                + "bodega=?"
+                + "bodega=?,"
+                + "cantidad2=?"
                 + " where id_ingreso=" +c.getId_ingreso());
         //ps= cnn.prepareStatement("begin actualizar(Nid_ingreso=>"+c.getId_ingreso()+",Ncantidad=>"+c.getCantidad()+"); commit; end;");
         ps.setString(1, c.getPN());
@@ -149,6 +134,7 @@ public abstract class BDconsultaVarias {
         ps.setString(12, c.getProveedor());
         ps.setString(13, c.getNota());
         ps.setInt(14, c.getBodeda());
+        ps.setInt(15, c.getCantidad2());
         int rowsUpdated = ps.executeUpdate();
         cnn.close();
         ps.close();
