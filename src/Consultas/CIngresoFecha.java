@@ -10,6 +10,7 @@ import Class.*;
 import com.toedter.calendar.JDateChooser;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -271,7 +272,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
                 txtFecha.setDate(null);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Editar Error" + e);
         }
         }
@@ -345,7 +346,7 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
 
     private void recargarIngreFecha(ArrayList<ConsultaFecha> list) {
 
-        Object[][] dato = new Object[list.size()][8];
+        Object[][] dato = new Object[list.size()][9];
         int f = 0;
         for (ConsultaFecha a : list) {
             dato[f][0] = a.getCodigo();
@@ -355,14 +356,15 @@ public class CIngresoFecha extends javax.swing.JInternalFrame {
             dato[f][4] = a.getTrabajo();
             dato[f][5] = a.getLote();
             dato[f][6] = a.getCantidad();
-            dato[f][7] = a.getIngrepor();
+            dato[f][7] = a.getCantidad2();
+            dato[f][8] = a.getIngrepor();
            
             f++;
         }
         tablaFecha.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","Cantidad Bodega", "Ingresado Por"
+                    "Codigo", "Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","Cantidad Bodega","Cantidad Bodega2","Ingresado Por"
 
                 }) {
                     @Override

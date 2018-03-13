@@ -16,6 +16,7 @@ public class ConsultaFecha {
     public int Codigo;
     public String Descripcion;
     public int Cantidad;
+    public int Cantidad2;
     public String PN;
     public String EntregadoA;
     public String Nota;
@@ -29,7 +30,36 @@ public class ConsultaFecha {
     public String bodega;
     public String po;
     public String proveedor;
+    public String precio;
+    public String invoice;
 
+    public String getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(String invoice) {
+        this.invoice = invoice;
+    }
+    
+    
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
+
+    public int getCantidad2() {
+        return Cantidad2;
+    }
+
+    public void setCantidad2(int Cantidad2) {
+        this.Cantidad2 = Cantidad2;
+    }
+
+    
     public String getProveedor() {
         return proveedor;
     }

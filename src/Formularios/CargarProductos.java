@@ -37,7 +37,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     
 
     /**
-     * Creates new form CargarProductos
      */
     public CargarProductos() {
 
@@ -52,7 +51,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         try {
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
-            ps.executeUpdate("begin actualizarprecio(NCodigo=>"+txtCodigo.getText()+",NPrecio=>"+TxtPrecio.getText()+"); commit; end;");
+            ps.executeUpdate("begin actualizarprecio(NCodigo=>"+txtCodigo.getText()+",NPrecio=>"+TxtPrecio.getText()+",NBodega=>"+bodega+"); commit; end;");
             cn.close();
             ps.close();
         } catch (Exception e) {
@@ -67,7 +66,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             ResultSet rs = stmt.executeQuery("select descripcion from producto where codigo=" + txtCodigo.getText());
             rs.next();
             descripcion.setText(rs.getString("descripcion"));
-            txtfechavenci.setDate(null);
+//            Fecha1.setDate(null);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
         }
@@ -81,7 +80,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
 
         txtCantidad.setEnabled(b);
         txtEmpleado.setEnabled(b);
-        txtfecha.setEnabled(b);
+        Fecha.setEnabled(b);
         txtfechavenci.setEnabled(b);
         txtInvoice.setEnabled(b);
         txtJob.setEnabled(b);
@@ -132,7 +131,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         //SimpleDateFormat("dd-MM-yy");
         //Date date = new Date();
         Date date = null;   
-        txtfecha.setDate(date);
+        Fecha.setDate(date);
         txtfechavenci.setDate(date);
         descripcion.setText("");
         ComboBoxBodega.setSelectedItem("Seleccionar....");
@@ -144,8 +143,8 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     public void FechasJdate() {
       
         Calendar c2 = new GregorianCalendar();
-        txtfecha.setCalendar(c2);
-}
+        Fecha.setCalendar(c2);
+    }
 
     public void setTxtCodigo(JTextField txtCodigo) {
         this.txtCodigo = txtCodigo;
@@ -172,8 +171,8 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         TxtProveedor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         TxtPrecio = new javax.swing.JTextField();
-        txtfecha = new com.toedter.calendar.JDateChooser();
         txtNoDoc = new javax.swing.JTextField();
+        Fecha = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -185,9 +184,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         txtPO = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtfechavenci = new com.toedter.calendar.JDateChooser();
         ComboBoxBodega = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
+        txtfechavenci = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         txtEmpleado = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -280,8 +279,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        txtfecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         txtNoDoc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNoDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,7 +305,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                     .addComponent(txtSerie)
                     .addComponent(TxtProveedor)
                     .addComponent(TxtPrecio)
-                    .addComponent(txtfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNoDoc)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -316,18 +313,18 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel11)
                             .addComponent(jLabel13)
-                            .addComponent(jLabel6))
-                        .addGap(0, 75, Short.MAX_VALUE))
-                    .addComponent(txtNoDoc))
+                            .addComponent(jLabel6)
+                            .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(4, 4, 4)
+                .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addGap(7, 7, 7)
                 .addComponent(txtNoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -418,13 +415,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Fecha Vencimiento");
 
-        txtfechavenci.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtfechavenci.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                txtfechavenciMouseExited(evt);
-            }
-        });
-
         ComboBoxBodega.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
         ComboBoxBodega.addItemListener(new java.awt.event.ItemListener() {
@@ -441,6 +431,8 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setText("Bodega");
 
+        txtfechavenci.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -452,7 +444,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                     .addComponent(txtLote, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtPO)
                     .addComponent(txtJob)
-                    .addComponent(txtfechavenci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ComboBoxBodega, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -462,7 +453,8 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel17))
-                        .addGap(0, 57, Short.MAX_VALUE)))
+                        .addGap(0, 57, Short.MAX_VALUE))
+                    .addComponent(txtfechavenci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -488,7 +480,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtfechavenci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ComboBoxBodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -654,7 +646,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 12, Short.MAX_VALUE))))
+                        .addGap(0, 4, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -685,7 +677,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -720,7 +712,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 if(ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")){
                 c.setCantidad(Integer.parseInt(txtCantidad.getText()));}
                 else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}
-                c.setFechaIngre(txtfecha.getDate());
+                c.setFechaIngre(Fecha.getDate());
                 c.setFechaVencimiento(txtfechavenci.getDate());
                 c.setIngresadoPor(Integer.parseInt(txtEmpleado.getText()));
                 c.setInvoce(txtInvoice.getText());
@@ -931,7 +923,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
 
     private void txtPOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPOActionPerformed
        
-        txtfechavenci.requestFocus();
+        Fecha.requestFocus();
         
     }//GEN-LAST:event_txtPOActionPerformed
 
@@ -1024,6 +1016,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JButton BagregarProdu;
     private javax.swing.JButton Bcancelar;
     private javax.swing.JComboBox<String> ComboBoxBodega;
+    private com.toedter.calendar.JDateChooser Fecha;
     private javax.swing.JTextField TxtPrecio;
     private javax.swing.JTextField TxtProveedor;
     private javax.swing.JTextField descripcion;
@@ -1062,7 +1055,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtPO;
     private javax.swing.JTextField txtParte;
     private javax.swing.JTextField txtSerie;
-    private com.toedter.calendar.JDateChooser txtfecha;
     private com.toedter.calendar.JDateChooser txtfechavenci;
     // End of variables declaration//GEN-END:variables
 

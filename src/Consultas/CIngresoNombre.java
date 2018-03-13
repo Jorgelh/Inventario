@@ -52,7 +52,7 @@ public class CIngresoNombre extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha Ingreso", "P/N", "Trabajo", "Lote", "P.O", "Cantidad Ingreso", "Cantidad Bodega", "Proveedor", "Notas"
+                "Codigo", "Descripcion", "Fecha Ingreso", "P/N", "Trabajo", "Lote", "P.O", "Cantidad Bodega", "Cantidad Bodeguita", "Cantidad Ingresada", "Proveedor", "Notas"
             }
         ));
         jScrollPane1.setViewportView(TablaNombre);
@@ -72,14 +72,15 @@ public class CIngresoNombre extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(271, 271, 271)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(Desc, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(271, 271, 271)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(Desc, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -123,7 +124,7 @@ public class CIngresoNombre extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][11];
+        Object[][] dato = new Object[list.size()][12];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -134,9 +135,10 @@ public class CIngresoNombre extends javax.swing.JInternalFrame {
             dato[f][5] = a.getLote();
             dato[f][6] = a.getPO();
             dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getCantInicial();
-            dato[f][9] = a.getProveedor();
-            dato[f][10] = a.getNota();
+            dato[f][8] = a.getCantidad2();
+            dato[f][9] = a.getCantInicial();
+            dato[f][10] = a.getProveedor();
+            dato[f][11] = a.getNota();
             
 
             f++;
@@ -144,7 +146,7 @@ public class CIngresoNombre extends javax.swing.JInternalFrame {
         TablaNombre.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O","Cantidad Bodega","Cantidad Ingresada","Proveedor","Notas"
+                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O","Cantidad Bodega","Cantidad Bodeguita","Cantidad Ingresada","Proveedor","Notas"
 
                 }) {
                     @Override

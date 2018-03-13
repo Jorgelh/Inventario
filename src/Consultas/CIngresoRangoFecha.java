@@ -313,7 +313,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
 
     private void recargarIngreFecha(ArrayList<ConsultaFecha> list) {
 
-        Object[][] dato = new Object[list.size()][12];
+        Object[][] dato = new Object[list.size()][15];
         if (list.size() > 0){
         int f = 0;
         for (ConsultaFecha a : list) {
@@ -324,11 +324,14 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
             dato[f][4] = a.getTrabajo();
             dato[f][5] = a.getLote();
             dato[f][6] = a.getPo();
-            dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getCantidadIngre();
-            dato[f][9] = a.getProveedor();
-            dato[f][10] = a.getNota();
-            dato[f][11] = a.getIngrepor();
+            dato[f][7] = a.getPrecio();
+            dato[f][8] = a.getCantidad();
+            dato[f][9] = a.getCantidad2();
+            dato[f][10] = a.getCantidadIngre();
+            dato[f][11] = a.getProveedor();
+            dato[f][12] = a.getInvoice();
+            dato[f][13] = a.getNota();
+            dato[f][14] = a.getIngrepor();
             f++;
         }
         //tablaFecha.getColumnModel().getColumn(1).setPreferredWidth(5); 
@@ -338,7 +341,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
                 
                 dato,
                 new String[]{
-                    "Codigo","Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","P.O","Cantidad Bodega","Cantidad Ingreso","Proveedor","Notas","Ingresado Por"
+                    "Codigo","Descripcion","Fecha Ingreso","P/N","Trabajo","Lote","P.O","Precio","Cantidad Bodega","Cantidad Bodega2","Cantidad Ingreso","Proveedor","Factura","Notas","Ingresado Por"
 
                 }) {
                     @Override

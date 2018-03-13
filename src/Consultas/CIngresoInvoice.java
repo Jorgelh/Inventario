@@ -92,7 +92,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Cantidad Bodega", "Cantidad Ingresada", "Proveedor", "Notas", "Ingresado Por"
+                "Codigo", "Descripcion", "Fecha de Entrega", "P/N", "Trabajo", "Lote ", "P.O", "Precio", "Cantidad Bodega", "Cantidad Ingresada", "Proveedor", "Notas", "Ingresado Por"
             }
         ));
         jScrollPane1.setViewportView(tablaCon);
@@ -260,7 +260,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][12];
+        Object[][] dato = new Object[list.size()][15];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -270,11 +270,14 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
             dato[f][4] = a.getNo_trabajo();
             dato[f][5] = a.getLote();
             dato[f][6] = a.getPO();
-            dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getCantInicial();
-            dato[f][9] = a.getProveedor();
-            dato[f][10] = a.getNota();
-            dato[f][11] = a.getIngrepor();
+            dato[f][7] = a.getPrecio();
+            dato[f][8] = a.getCantidad();
+            dato[f][9] = a.getCantidad2();
+            dato[f][10] = a.getCantInicial();
+            dato[f][11] = a.getProveedor();
+            dato[f][12] = a.getInvoice();
+            dato[f][13] = a.getNota();
+            dato[f][14] = a.getIngrepor();
             
 
             f++;
@@ -282,7 +285,7 @@ public class CIngresoInvoice extends javax.swing.JInternalFrame {
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O","Cantidad Bodega","Cantidad Ingresada","Proveedor","Notas","Ingresado por"
+                    "Codigo", "Descripcion", "Fecha de Ingreso", "P/N", "Trabajo", "Lote","P.O","Precio","Cantidad Bodega","Cantidad Bodega2","Cantidad Ingresada","Proveedor","Factura","Notas","Ingresado por"
 
                 }) {
                     @Override

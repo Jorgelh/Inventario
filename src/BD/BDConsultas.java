@@ -108,13 +108,13 @@ public abstract class BDConsultas {
     
     public static ArrayList<ConsultaFecha> ListarIngresoCodigo(int f, int b1, int b2 ) {
 
-        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.ingresadopor,ingreso.notas,ingreso.po from Ingreso INNER JOIN PRODUCTO on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") and ingreso.codigo = "+f);
+        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.cantidad2,ingreso.ingresadopor,ingreso.notas,ingreso.po from Ingreso INNER JOIN PRODUCTO on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") and ingreso.codigo = "+f);
 
     }
     
     public static ArrayList<ConsultaFecha> ListarIngresoFecha(String f, int b1, int b2 ) {
 
-        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.ingresadopor,ingreso.notas from Ingreso INNER JOIN PRODUCTO on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") and ingreso.fecha_ingreso = '" + f +"'" );
+        return consultaIngreSQL("select ingreso.codigo,producto.descripcion,ingreso.fecha_ingreso,ingreso.P_N,ingreso.no_trabajo,ingreso.lote,bitacoraingreso.cantidad as \"cantiingre\",ingreso.cantidad,ingreso.cantidad2,ingreso.ingresadopor,ingreso.notas,ingreso.po from Ingreso INNER JOIN PRODUCTO on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") and ingreso.fecha_ingreso = '" + f +"'" );
 
     }
     
@@ -135,6 +135,7 @@ public abstract class BDConsultas {
                 c.setLote(rs.getString("lote"));
                 c.setCantidadIngre(rs.getInt("cantiingre"));
                 c.setCantidad(rs.getInt("cantidad"));
+                c.setCantidad2(rs.getInt("cantidad2"));
                 c.setIngrepor(rs.getString("ingresadopor"));
                 c.setNota(rs.getString("notas"));
                 c.setPo(rs.getString("po"));
@@ -156,11 +157,13 @@ public abstract class BDConsultas {
                                     + "ingreso.no_trabajo,"
                                     + "ingreso.lote,"
                                     + "ingreso.po,"
+                                    + "ingreso.precio,"
                                     + "ingreso.notas,"
+                                    + "ingreso.no_invoice,"
                                     + "ingreso.proveedor,"
                                     + "bitacoraingreso.cantidad as \"cantiingreso\","
                                     + "ingreso.cantidad,"                
-                                    + "DECODE(ingreso.bodega, 1, 'Bodega 1', 2, 'Bodega 2')as \"bodega\",ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fechasistema between to_date('" + f + "','dd/mm/yy') and to_date('"+ a +"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by fechasistema");
+                                    + "DECODE(ingreso.bodega, 1, 'Bodega 1', 2, 'Bodega 2')as \"bodega\",ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fecha_ingreso between to_date('" + f + "','dd/mm/yy') and to_date('"+ a +"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by FECHA_INGRESO");
     }
     private static ArrayList<ConsultaFecha> consultaIngreSQLrango(String sql) {
         ArrayList<ConsultaFecha> list = new ArrayList<ConsultaFecha>();
@@ -183,7 +186,9 @@ public abstract class BDConsultas {
                 c.setProveedor(rs.getString("proveedor"));
                 c.setBodega(rs.getString("bodega"));
                 c.setPo(rs.getString("po"));
+                c.setPrecio(rs.getString("precio"));
                 c.setNota(rs.getString("notas"));
+                c.setInvoice(rs.getString("no_invoice"));
                 list.add(c);
             }
             cn.close();
@@ -293,6 +298,7 @@ public abstract class BDConsultas {
                                  + "ingreso.no_trabajo,"
                                  + "ingreso.lote,"
                                  + "ingreso.cantidad,"
+                                 + "ingreso.cantidad2,"
                                  + "ingreso.ingresadopor,"
                                  + "ingreso.notas,"
                                  + "ingreso.fecha_ingreso,"
@@ -300,8 +306,10 @@ public abstract class BDConsultas {
                                  + "ingreso.no_serie,"
                                  + "ingreso.codigo,"
                                  + "ingreso.PO,"
+                                 + "ingreso.precio,"
                                  + "ingreso.notas,"
                                  + "ingreso.proveedor,"
+                                 + "ingreso.no_invoice,"
                                  + "producto.descripcion,"
                                  + "bitacoraingreso.cantidad as \"Cin\" "
                                  + "from ingreso inner join producto on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso "
@@ -315,6 +323,7 @@ public abstract class BDConsultas {
                                  + "ingreso.no_trabajo,"
                                  + "ingreso.lote,"
                                  + "ingreso.cantidad,"
+                                 + "ingreso.cantidad2,"
                                  + "ingreso.ingresadopor,"
                                  + "ingreso.notas,"
                                  + "ingreso.fecha_ingreso,"
@@ -322,8 +331,10 @@ public abstract class BDConsultas {
                                  + "ingreso.no_serie,"
                                  + "ingreso.codigo,"
                                  + "ingreso.PO,"
+                                 + "ingreso.precio,"
                                  + "producto.descripcion,"
                                  + "ingreso.proveedor,"
+                                 + "ingreso.no_invoice,"
                                  + "ingreso.notas,"
                                  + "bitacoraingreso.cantidad as \"Cin\" "
                                  + "from ingreso inner join producto on ingreso.codigo = producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso "
@@ -353,13 +364,16 @@ public abstract class BDConsultas {
                 c.setSerie(rs.getString("no_serie"));
                 c.setCantInicial(rs.getInt("Cin"));
                 c.setPO(rs.getString("PO"));
+                c.setPrecio(rs.getString("precio"));
                 c.setNota(rs.getString("notas"));
                 c.setProveedor(rs.getString("proveedor"));
+                c.setInvoice(rs.getString("no_invoice"));
+                c.setCantidad2(rs.getInt("cantidad2"));
                 list.add(c);
             }
             cn.close();
         } catch (SQLException ex) {
-            System.err.println("Error Consulta PN " + ex);
+            System.err.println("Error Consulta por Invoice" + ex);
            // return null;
         }
         return list;
@@ -410,6 +424,7 @@ public abstract class BDConsultas {
                                 + "ingreso.lote,"
                                 + "ingreso.po,"
                                 + "ingreso.cantidad,"
+                                + "ingreso.cantidad2,"
                                 + "bitacoraingreso.cantidad as \"cantidadbode\","
                                 + "ingreso.proveedor,"
                                 + "ingreso.notas,"                                                                                                                                                              
@@ -430,6 +445,7 @@ public abstract class BDConsultas {
                 c.setDescripcion(rs.getString("descripcion"));
                 c.setFechaingre(rs.getString("fecha_ingreso"));
                 c.setCantidad(rs.getInt("cantidad"));
+                c.setCantidad2(rs.getInt("cantidad2"));
                 c.setPN(rs.getString("P_N"));
                 c.setNota(rs.getString("notas"));
                 c.setPO(rs.getString("PO"));

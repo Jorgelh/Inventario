@@ -276,7 +276,7 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<consultanp> list) {
 
-        Object[][] dato = new Object[list.size()][12];
+        Object[][] dato = new Object[list.size()][13];
         int f = 0;
         for (consultanp a : list) {
             dato[f][0] = a.getCodigo();
@@ -287,16 +287,17 @@ public class CIngresoPN extends javax.swing.JInternalFrame {
             dato[f][5] = a.getLote();
             dato[f][6] = a.getPO();
             dato[f][7] = a.getCantidad();
-            dato[f][8] = a.getCantInicial();
-            dato[f][9] = a.getProveedor();
-            dato[f][10] = a.getNota();
-            dato[f][11] = a.getIngrepor();
+            dato[f][8] = a.getCantidad2();
+            dato[f][9] = a.getCantInicial();
+            dato[f][10] = a.getProveedor();
+            dato[f][11] = a.getNota();
+            dato[f][12] = a.getIngrepor();
             f++;
         }
         tablaCon.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "Codigo","Descripcion","Fecha de Ingreso","P/N","Trabajo","Lote","P.O","Cantidad Bodega","Cantidad de Ingreso","Proveedor","Notas","Ingresado por"
+                    "Codigo","Descripcion","Fecha de Ingreso","P/N","Trabajo","Lote","P.O","Cantidad Bodega","Cantidad Bodega2","Cantidad de Ingreso","Proveedor","Notas","Ingresado por"
 
                 }) {
                     @Override

@@ -18,6 +18,7 @@ public class consultanp {
     private String fechaingre;
     private String fechades;
     private int    cantidad;
+    private int    cantidad2;
     private String entregadoa;
     private String PO;
     private String PN;
@@ -28,6 +29,35 @@ public class consultanp {
     private int cantInicial;
     private int cantidadbodega;
     private String proveedor;
+    private String precio;
+    private String invoice;
+
+    public String getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(String invoice) {
+        this.invoice = invoice;
+    }
+    
+    
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
+    
+    
+    public int getCantidad2() {
+        return cantidad2;
+    }
+
+    public void setCantidad2(int cantidad2) {
+        this.cantidad2 = cantidad2;
+    }
+    
 
     public String getProveedor() {
         return proveedor;
