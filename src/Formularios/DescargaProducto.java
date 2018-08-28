@@ -16,8 +16,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,6 +33,12 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     DefaultTableModel temp;
     int cantidadminima;
     int NoDepto;
+    int conta;
+    String fecha;
+    Double precio = 0.00;
+    Double precioanterior = 0.00;
+    int id;
+    int cantidadtotal;
     /**
      * Creates new form DescargaProducto
      */
@@ -226,7 +234,93 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     
     }
     
+    public void Ultimoprecio(){
     
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where idkardex =(select MAX(idkardex) from kardex where codigo = "+TxCodigo.getText()+") and codigo = "+TxCodigo.getText());
+            while (rs.next()) {
+                Double precio = rs.getDouble(1);
+                precioanterior = precio;
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException error) {
+            System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO");
+        }
+    
+    }
+    /*public void test(){
+        Ultimoprecio();
+        ultimoidingreso();
+            System.out.print("ID = "+id+"\n");
+            System.out.print("CODIGO = "+Integer.parseInt(TxCodigo.getText())+"\n");
+            System.out.print("NO DOC = "+documento.getText()+"\n");
+            System.out.print("cantidad = "+Integer.parseInt(txtcantidad.getText())+"\n");
+            System.out.print("PRECIO = "+precio+"\n");
+            System.out.print("CANTIDAD saldo = "+txtSumas.getText()+"\n");
+            System.out.print("NUEVO PRECIO = "+precioanterior+"\n");
+    
+    
+    }
+    */
+    public void ProcedimientoKardex(){
+        
+        
+    try {
+            
+            Connection cn = BD.getConnection();
+            Statement ps = cn.createStatement();
+            ps.executeUpdate("begin actualizarkardexdescarga(IDKardex=>"+id+",NCodigo=>"+Integer.parseInt(TxCodigo.getText())+",NDocumento=>'"+documento.getText()+"',Fecha=>'"+fecha+"',Ncantidad=>"+Integer.parseInt(txtcantidad.getText())+",Nprecio=>"+precioanterior+",CantidadSaldo=>"+cantidadtotal+",precioSaldo=>"+precioanterior+",idIngreso=>"+Integer.parseInt(txtNoingreso.getText())+"); commit; end;");
+            cn.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.print(e+" ERROR DE LOS DATOS DE PROCEDIMIENTO");
+        }
+    }
+    public void fechaingresokardex(){
+    Date date = fechaEntrega.getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        fecha = sdf.format(date);
+    }
+    
+    
+    public void ultimoidingreso(){
+    try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select max(idkardex) from kardex where tipo = 2");
+            while (rs.next()) {
+                int lastID = rs.getInt(1);
+                id = lastID+1;
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException error) {
+            System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO ID DE INGRESO ");
+        }
+    }
+    
+    
+     public void sumaingresos(){
+    try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select sum(cantidad) as cantidad from ingreso where codigo = "+TxCodigo.getText()+" and conta = 1");
+            while (rs.next()) {
+                int cantidad = rs.getInt(1);
+                cantidadtotal = cantidad;
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException error) {
+            System.out.print(error);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1015,6 +1109,10 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             int B = Integer.parseInt(laCantidad.getText());
             if (B >= A) {
                 obtenerDepto();
+                fechaingresokardex();
+                sumaingresos();
+                ultimoidingreso();
+                Ultimoprecio();
                 try {
                     Descarga d = new Descarga();
                     d.setCantidad(Integer.parseInt(txtcantidad.getText()));
@@ -1029,17 +1127,20 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                     d.setLote(trabajo.getText());
                     d.setTrabajo(lote.getText());
                     d.setDepto(NoDepto);
+                    d.setConta(conta);
                     if(txtbodega.getText().toString().equalsIgnoreCase("Bodega")){d.setBodega(1);}else{d.setBodega(2);}
                     BDDescargaProducto.insertarDescarga(d);
                     JOptionPane.showMessageDialog(null, "Descarga Realizada...");
                     BoDescargar.setEnabled(false);
+                    if(conta == 1){
+                    ProcedimientoKardex();}
                     limpiartabla15();
                     limpiarlabel();
                     activartxt(false);
                     TxCodigo.setEnabled(true);
                 } catch (Exception e) {
 
-                    JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMAaa"+e);
+                    JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA  "+e);
                 }
             }
             else{ JOptionPane.showMessageDialog(null, "NO POSER LA CANTIDAD NECESARIA PARA REALIZAR LA DESCARGA");}
@@ -1066,6 +1167,8 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             LaLote.setText(ca.getLote());
             LaPN.setText(ca.getPN());
             LaPO.setText(ca.getPO());
+            conta=ca.getConta();
+            precio = ca.getPrecio();
             txtNoingreso.setText(String.valueOf(ca.getId_ingreso()));
             if(ca.getBodeda()==1){txtbodega.setText("Bodega");
             laCantidad.setText(String.valueOf(ca.getCantidad()));

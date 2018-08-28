@@ -40,6 +40,17 @@ public class CargaP {
     private String presentacion;
     private String preciotxt;
     private String ubicacion;
+    private int conta;
+
+    public int getConta() {
+        return conta;
+    }
+
+    public void setConta(int conta) {
+        this.conta = conta;
+    }
+    
+    
 
     public int getCantidad2() {
         return cantidad2;

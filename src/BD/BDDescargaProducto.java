@@ -23,7 +23,7 @@ public abstract class BDDescargaProducto {
     public static void insertarDescarga(Descarga ca)  throws SQLException{
         Connection cn = BD.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into descarga(id_descarga,id_ingreso,codigo,cantidad,entregadoa,nota,fechades,fechasistema,documento,serie,lote,PN,no_trabajo,departamento,bodega) values (DESCARGA1.nextval,?,?,?,?,?,?,sysdate,?,?,?,?,?,?,?)");
+        ps = cn.prepareStatement("insert into descarga(id_descarga,id_ingreso,codigo,cantidad,entregadoa,nota,fechades,fechasistema,documento,serie,lote,PN,no_trabajo,departamento,bodega,conta) values (DESCARGA1.nextval,?,?,?,?,?,?,sysdate,?,?,?,?,?,?,?,?)");
         //ps.setInt(1, ca.getId_descarga());
         ps.setInt(1, ca.getId_ingreso());
         ps.setInt(2, ca.getCodigo());
@@ -38,6 +38,7 @@ public abstract class BDDescargaProducto {
         ps.setString(11, ca.getTrabajo());
         ps.setInt(12, ca.getDepto());
         ps.setInt(13, ca.getBodega());
+        ps.setInt(14, ca.getConta());
         ps.execute();
         cn.close();
         ps.close();            
@@ -61,7 +62,9 @@ public abstract class BDDescargaProducto {
                 + "ingreso.PO,"
                 + "ingreso.lote,"
                 + "ingreso.bodega,"
+                + "ingreso.conta,"
                 + "ingreso.notas,"
+                + "ingreso.precio,"
                 + "producto.descripcion,"
                 + "decode(ingreso.bodega,1,producto.ubicacion,2,producto.ubicacion2) as \"ubicacion\","
                 + "unidad_medida.descripcion as \"desc\" from ingreso inner join producto on producto.codigo = ingreso.codigo join unidad_medida on producto.id_medida = unidad_medida.id_medida and ingreso.id_ingreso="+idc);
@@ -84,6 +87,9 @@ public abstract class BDDescargaProducto {
         c.setPresentacion(rs.getString("desc"));
         c.setUbicacion(rs.getString("ubicacion")); 
         c.setCantidad2(rs.getInt("cantidad2"));
+        c.setConta(rs.getInt("conta"));
+        c.setPrecio(rs.getDouble("precio"));
+        
         }
         cn.close();
         ps.close();
@@ -104,8 +110,9 @@ public abstract class BDDescargaProducto {
                 + "ingreso.po,"
                 + "ingreso.bodega,"
                 + "ingreso.cantidad as \"cantidadbode\","
-                + "bitacoraingreso.cantidad as \"cantidadin\""
-                + "from descarga inner join ingreso on descarga.id_ingreso = ingreso.id_ingreso join bitacoraingreso on bitacoraingreso.id_ingreso = descarga.id_ingreso where (ingreso.bodega = "+b1+" or ingreso.bodega = "+b2+" ) and descarga.codigo=" + c + "");
+                + "bitacoraingreso.cantidad as \"cantidadin\","
+                + "ingreso.no_invoice,"
+                + "ingreso.precio from descarga inner join ingreso on descarga.id_ingreso = ingreso.id_ingreso join bitacoraingreso on bitacoraingreso.id_ingreso = descarga.id_ingreso where (ingreso.bodega = "+b1+" or ingreso.bodega = "+b2+" ) and descarga.codigo=" + c + "");
 
     }
     
@@ -130,6 +137,8 @@ public abstract class BDDescargaProducto {
                 c.setCantidadbode(rs.getInt("cantidadbode"));
                 c.setCantidadin(rs.getInt("cantidadin"));
                 c.setNota(rs.getString("nota"));
+                c.setInvoice(rs.getString("no_invoice"));
+                c.setPrecio(rs.getString("precio"));
                 list.add(c);
             }
             cn.close();
@@ -155,7 +164,7 @@ public abstract class BDDescargaProducto {
                 + "descarga.cantidad,"
                 + "ingreso.cantidad as \"cantidadbode\","
                 + "bitacoraingreso.cantidad as \"cantidadin\","
-                + "producto.descripcion from descarga inner join producto on descarga.codigo = producto.codigo join ingreso on ingreso.id_ingreso = descarga.id_ingreso join bitacoraingreso on descarga.id_ingreso = bitacoraingreso.id_ingreso where descarga.fechades between to_date('"+f+"','dd/mm/yy') and to_date('"+a+"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by descarga.codigo");
+                + "producto.descripcion from descarga inner join producto on descarga.codigo = producto.codigo join ingreso on ingreso.id_ingreso = descarga.id_ingreso join bitacoraingreso on descarga.id_ingreso = bitacoraingreso.id_ingreso where descarga.fechades between to_date('"+f+"','dd/mm/yy') and to_date('"+a+"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by producto.descripcion");
     }
     
     private static ArrayList<Descarga> consultaDescSQLrango(String sql) {

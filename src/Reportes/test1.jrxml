@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="20"/>
+	<queryString>
+		<![CDATA[SELECT * from kardex where codigo = 10110010]]>
+	</queryString>
+	<field name="IDKARDEX" class="java.math.BigDecimal"/>
+	<field name="CODIGO" class="java.math.BigDecimal"/>
+	<field name="TIPO" class="java.math.BigDecimal"/>
+	<field name="DOCUMENTO" class="java.lang.String"/>
+	<field name="FECHA" class="java.sql.Timestamp"/>
+	<field name="CANTIDADIN" class="java.math.BigDecimal"/>
+	<field name="VALORIN" class="java.math.BigDecimal"/>
+	<field name="TOTALIN" class="java.math.BigDecimal"/>
+	<field name="CANTIDADOUT" class="java.math.BigDecimal"/>
+	<field name="VALOROUT" class="java.math.BigDecimal"/>
+	<field name="TOTALOUT" class="java.math.BigDecimal"/>
+	<field name="CANTIDADSALDO" class="java.math.BigDecimal"/>
+	<field name="VALORSALDO" class="java.math.BigDecimal"/>
+	<field name="TOTALSALDO" class="java.math.BigDecimal"/>
+	<field name="FAM" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODIGO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TIPO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DOCUMENTO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FECHA}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

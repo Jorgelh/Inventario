@@ -35,6 +35,7 @@ public abstract class BDConsultas {
                                  + "ingreso.PO,"
                                  + "bitacoraingreso.cantidad as \"cantidadbode\","
                                  + "ingreso.cantidad as \"cantidadin\","
+                                 + "ingreso.cantidad2,"
                                  + "producto.descripcion from descarga inner join producto on descarga.codigo = producto.codigo join ingreso on ingreso.id_ingreso = descarga.id_ingreso join bitacoraingreso on descarga.id_ingreso = bitacoraingreso.id_ingreso where upper(descarga.PN) = upper('"+d+"') order by descarga.id_ingreso");
     }
     private static ArrayList<consultanp> consultarSQL(String sql1) {
@@ -60,6 +61,7 @@ public abstract class BDConsultas {
                 c.setPO(rs.getString("PO"));
                 c.setCantInicial(rs.getInt("cantidadbode"));
                 c.setCantidadbodega(rs.getInt("cantidadin"));
+                c.setCantidad2(rs.getInt("cantidad2"));
                 list.add(c);
             }
             cn.close();
@@ -69,11 +71,6 @@ public abstract class BDConsultas {
         }
         return list;
     }
-    
-    
-    
-    
-    
 
     public static ArrayList<ConsultaFecha> ListarFecha(String t, int b1 , int b2) {
 
@@ -163,7 +160,7 @@ public abstract class BDConsultas {
                                     + "ingreso.proveedor,"
                                     + "bitacoraingreso.cantidad as \"cantiingreso\","
                                     + "ingreso.cantidad,"                
-                                    + "DECODE(ingreso.bodega, 1, 'Bodega 1', 2, 'Bodega 2')as \"bodega\",ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fecha_ingreso between to_date('" + f + "','dd/mm/yy') and to_date('"+ a +"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by FECHA_INGRESO");
+                                    + "DECODE(ingreso.bodega, 1, 'Bodega 1', 2, 'Bodega 2')as \"bodega\",ingreso.ingresadopor from Ingreso INNER JOIN PRODUCTO on ingreso.codigo=producto.codigo join bitacoraingreso on ingreso.id_ingreso = bitacoraingreso.id_ingreso where ingreso.fecha_ingreso between to_date('" + f + "','dd/mm/yy') and to_date('"+ a +"','dd/mm/yy') AND (ingreso.bodega ="+ b1 +" or ingreso.bodega = "+ b2 +") order by producto.descripcion");
     }
     private static ArrayList<ConsultaFecha> consultaIngreSQLrango(String sql) {
         ArrayList<ConsultaFecha> list = new ArrayList<ConsultaFecha>();

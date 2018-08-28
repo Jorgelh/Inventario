@@ -33,7 +33,32 @@ public class Descarga {
    private int cantidadin;
    private int cantidadbode;
    private int Depto;
+   private String invoice;
+   private String precio;
+   private int conta;
+
+    public int getConta() {
+        return conta;
+    }
+
+    public void setConta(int conta) {
+        this.conta = conta;
+    }
    
+   
+
+    public String getInvoice() {
+        return invoice;
+    }
+    public void setInvoice(String invoice) {
+        this.invoice = invoice;
+    }
+    public String getPrecio() {
+        return precio;
+    }
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
     public int getDepto() {
         return Depto;
     }
@@ -41,10 +66,6 @@ public class Descarga {
     public void setDepto(int Depto) {
         this.Depto = Depto;
     }
-   
-   
-     
-     
     public int getCantidadin() {
         return cantidadin;
     }
