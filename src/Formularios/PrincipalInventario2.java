@@ -65,6 +65,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         CARGAPRO = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         CARGAPRO1 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenu13 = new javax.swing.JMenu();
         EDITARPRO = new javax.swing.JMenuItem();
         INGRESO = new javax.swing.JMenuItem();
@@ -221,6 +222,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
             }
         });
         jMenu7.add(CARGAPRO1);
+        jMenu7.add(jSeparator3);
 
         jMenu13.setForeground(new java.awt.Color(0, 51, 255));
         jMenu13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit2.png"))); // NOI18N
@@ -1315,6 +1317,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private Formularios.MProcedencia mProcedencia1;
     private Formularios.MProcedencia mProcedencia2;
     private javax.swing.JMenuBar menubar;
