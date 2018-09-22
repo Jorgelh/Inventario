@@ -9,7 +9,6 @@ import TrabajosClases.Classp;
 import TrabajosClases.consultas;
 import TrabajosClases.trabajos;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *

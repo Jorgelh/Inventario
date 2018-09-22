@@ -141,18 +141,18 @@ public class insertartrabajo {
         Connection con = BD.getConnection();
         PreparedStatement ps = null;
         {     
-        ps = con.prepareStatement("insert into trabajos values(idtrabajo.nextval,?,?,?,?,?,?,?,1,?,?,?,?)");
+        ps = con.prepareStatement("insert into trabajos values(idtrabajo.nextval,?,?,?,?,null,?,?,1,?,?,?,?)");
         ps.setString(1, t.getPn());
         ps.setString(2, t.getJob());
         ps.setInt(3, t.getEstandarint());
         ps.setDate(4, new java.sql.Date(t.getFecharecibido().getTime()));
-        ps.setDate(5, new java.sql.Date(t.getFechaentrega().getTime()));
-        ps.setDate(6, new java.sql.Date(t.getFechavencimiento().getTime()));
-        ps.setInt(7, t.getLote());
-        ps.setInt(8, t.getEntregado());
-        ps.setString(9, t.getNota());
-        ps.setInt(10, t.getDepto());
-        ps.setInt(11, t.getCantidad());
+        //ps.setDate(5, new java.sql.Date(t.getFechaentrega().getTime()));
+        ps.setDate(5, new java.sql.Date(t.getFechavencimiento().getTime()));
+        ps.setInt(6, t.getLote());
+        ps.setInt(7, t.getEntregado());
+        ps.setString(8, t.getNota());
+        ps.setInt(9, t.getDepto());
+        ps.setInt(10, t.getCantidad());
         ps.executeUpdate();
         }
         con.close();

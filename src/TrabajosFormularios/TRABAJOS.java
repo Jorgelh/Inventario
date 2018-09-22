@@ -125,6 +125,8 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
             }
         });
 
+        fechaentrega.setEnabled(false);
+
         fechavencimiento.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -340,7 +342,7 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,7 +372,7 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
       
         
-         if(fechaentrega.getDate() != null && fecharecibido.getDate() != null && fechavencimiento.getDate() != null 
+         if( fecharecibido.getDate() != null && fechavencimiento.getDate() != null 
             && !estandar.getSelectedItem().toString().equalsIgnoreCase("SELECCCIONAR...") && pn.getText().compareTo("") != 0 && job.getText().compareTo("") != 0 && 
                  lote.getText().compareTo("") != 0 && entregado.getText().compareTo("") != 0 && !departamento.getSelectedItem().toString().equalsIgnoreCase("SELECCCIONAR...")) 
                  {
@@ -390,7 +392,7 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
             else if(estandar.getSelectedItem().toString().equalsIgnoreCase("SAMPLE")){noestandar = 8;}
             m.setEstandarint(noestandar);
             m.setFecharecibido(fecharecibido.getDate());
-            m.setFechaentrega(fechaentrega.getDate());
+            //m.setFechaentrega(null);
             m.setFechavencimiento(fechavencimiento.getDate());
             m.setLote(i+1);
             if(departamento.getSelectedItem().toString().equalsIgnoreCase("CHIPS")){depto = 1;}

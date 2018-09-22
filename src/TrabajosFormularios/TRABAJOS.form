@@ -63,7 +63,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel3" pref="0" max="32767" attributes="0"/>
+                      <Component id="jPanel3" pref="344" max="32767" attributes="0"/>
                       <Component id="jPanel2" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -210,6 +210,9 @@
             <Component class="com.toedter.calendar.JDateChooser" name="fecharecibido">
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="fechaentrega">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="fechavencimiento">
               <Events>

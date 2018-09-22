@@ -108,11 +108,11 @@ public class PNUtilizadoEnProducto extends javax.swing.JInternalFrame{
                         .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addContainerGap(20, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 317, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -216,9 +216,9 @@ public class PNUtilizadoEnProducto extends javax.swing.JInternalFrame{
              }
              });
               TableColumn columna1 = TablaProductos.getColumn("CODIGO");
-            columna1.setPreferredWidth(4);
+            columna1.setPreferredWidth(0);
             TableColumn columna2 = TablaProductos.getColumn("DESCRIPCION");
-            columna2.setPreferredWidth(500);
+            columna2.setPreferredWidth(600);
     }
     private void listarpn(){
         ArrayList<Classp> result = consultas.Listarpn(codigo);
