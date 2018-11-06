@@ -5,7 +5,7 @@
  */
 package TrabajosFormularios;
 
-import Formularios.PrincipalInventario2;
+import Formularios.PrincipalInventario;
 import TrabajosClases.Classp;
 import TrabajosClases.consultas;
 import TrabajosClases.insertartrabajo;
@@ -284,8 +284,8 @@ public class MaterialesTrabajos extends javax.swing.JInternalFrame {
        
                
         Eliminar DP = new Eliminar();
-        PrincipalInventario2.jDesktopPane1.add(DP); 
-        Dimension desktopSize = PrincipalInventario2.jDesktopPane1.getSize();
+        PrincipalInventario.jDesktopPane1.add(DP); 
+        Dimension desktopSize = PrincipalInventario.jDesktopPane1.getSize();
         Dimension FrameSize = DP.getSize();
         DP.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
         DP.show();

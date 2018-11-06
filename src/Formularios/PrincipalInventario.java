@@ -22,12 +22,12 @@ import javax.swing.JOptionPane;
  *
  * @author Jorge Luis
  */
-public class PrincipalInventario2 extends javax.swing.JFrame {
+public class PrincipalInventario extends javax.swing.JFrame {
 
     /**
      * Creates new form PrincipalInventario
      */
-    public PrincipalInventario2() {
+    public PrincipalInventario() {
       Color b=new Color(0,150,255);
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -114,6 +114,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         jMenuItem28 = new javax.swing.JMenuItem();
         jMenuItem29 = new javax.swing.JMenuItem();
         jMenuItem30 = new javax.swing.JMenuItem();
+        jMenuItem33 = new javax.swing.JMenuItem();
         DWN = new javax.swing.JMenu();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
@@ -703,6 +704,16 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem30);
 
+        jMenuItem33.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem33.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem33.setText("EDITAR NOTAS DE TRABAJOS");
+        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem33ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem33);
+
         menubar.add(jMenu4);
 
         DWN.setForeground(new java.awt.Color(0, 51, 255));
@@ -1266,6 +1277,15 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
         DP.show();
     }//GEN-LAST:event_jMenuItem32ActionPerformed
 
+    private void jMenuItem33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem33ActionPerformed
+        EditarNotaTrabajos DP = new EditarNotaTrabajos();
+        jDesktopPane1.add(DP); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = DP.getSize();
+        DP.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        DP.show();
+    }//GEN-LAST:event_jMenuItem33ActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1281,21 +1301,23 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalInventario2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalInventario2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalInventario2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalInventario2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrincipalInventario2().setVisible(true);
+                new PrincipalInventario().setVisible(true);
             }
         });
     }
@@ -1353,6 +1375,7 @@ public class PrincipalInventario2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem32;
+    private javax.swing.JMenuItem jMenuItem33;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

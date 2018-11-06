@@ -82,6 +82,11 @@ public class consultas {
                 + "TO_CHAR(FECHAVENCIMIENTO, 'DD/MM/YYYY') as fechavencimiento,TO_CHAR(fecharecibido, 'DD/MM/YYYY') as fecharecibido,TO_CHAR(fechaentrega, 'DD/MM/YYYY') as fechaentrega ,idtrabajo,cantidad,notas from TRABAJOS WHERE fechaentrega is null and UPPER(pn) LIKE UPPER('"+b+"%') AND UPPER(JOB) LIKE UPPER('"+c+"%') ORDER BY FECHARECIBIDO");
     }
     
+    public static ArrayList<trabajos> ListarTrabajotodo(String b,String c) {
+        return SQLtrabajos("select pn,job,decode(ESTANDAR,1,'FUJI',2,'INGENIERIA',3,'MIL-PRF-27',4,'MIL-STD-981',5,'MIL-STD-981 PRE-CAP',6,'MIL-STD-981 URGENTE',7,'MIL-STD-981-X RAY',8,'SAMPLE') as estandar,lote,"
+                + "TO_CHAR(FECHAVENCIMIENTO, 'DD/MM/YYYY') as fechavencimiento,TO_CHAR(fecharecibido, 'DD/MM/YYYY') as fecharecibido,TO_CHAR(fechaentrega, 'DD/MM/YYYY') as fechaentrega ,idtrabajo,cantidad,notas from TRABAJOS WHERE  UPPER(pn) LIKE UPPER('"+b+"%') AND UPPER(JOB) LIKE UPPER('"+c+"%') ORDER BY FECHARECIBIDO");
+    }
+    
     
     private static ArrayList<trabajos> SQLtrabajos(String sql1){
     ArrayList<trabajos> list = new ArrayList<trabajos>();

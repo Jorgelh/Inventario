@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="968" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\PROYECTOS\\Inventario\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select k.codigo,p.descripcion, u.descripcion as unidad from kardex k inner join producto p on p.codigo = k.codigo join unidad_medida u on p.id_medida = u.id_medida
+where k.fecha between to_date('01/7/18','dd/mm/yy') and to_date('15/7/18','dd/mm/yy')GROUP BY k.codigo,p.descripcion,u.descripcion]]>
+	</queryString>
+	<field name="CODIGO" class="java.math.BigDecimal"/>
+	<field name="DESCRIPCION" class="java.lang.String"/>
+	<field name="UNIDAD" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="439" y="0" width="216" height="39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="24"/>
+				</textElement>
+				<text><![CDATA[KARDEX]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="12" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="272" splitType="Stretch">
+			<rectangle>
+				<reportElement x="814" y="116" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="740" y="116" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="666" y="116" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="518" y="116" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="444" y="116" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="592" y="116" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="222" y="116" width="74" height="20"/>
+			</rectangle>
+			<textField>
+				<reportElement x="110" y="20" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODIGO}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="81" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Compañia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="110" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion Producto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ELETTRONICI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad de Medida:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="40" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DESCRIPCION}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="60" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{UNIDAD}.toString()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="110" y="20" width="151" height="1"/>
+			</line>
+			<line>
+				<reportElement x="110" y="39" width="151" height="1"/>
+			</line>
+			<line>
+				<reportElement x="110" y="59" width="151" height="1"/>
+			</line>
+			<line>
+				<reportElement x="110" y="79" width="151" height="1"/>
+			</line>
+			<rectangle>
+				<reportElement x="74" y="96" width="74" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="666" y="116" width="72" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="96" width="74" height="40"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="666" y="96" width="222" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="222" y="116" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="116" width="74" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="518" y="116" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[VALOR UNIT]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="296" y="116" width="74" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="814" y="116" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[VAL TOTAL]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="222" y="96" width="222" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="74" y="106" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[TIPO DCTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="116" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[VALOR UNIT]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="148" y="96" width="74" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="370" y="116" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[VAL TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="738" y="96" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[SALDO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="444" y="96" width="222" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="292" y="96" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ENTRADAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="516" y="96" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[SALIDAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="116" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[VALOR UNIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="116" width="72" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="592" y="116" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[VAL TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="106" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="106" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No, Dcto]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="199" width="968" height="36"/>
+				<subreportParameter name="CODIGO">
+					<subreportParameterExpression><![CDATA[$F{CODIGO}.toString()]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA["SubReport.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="147" width="968" height="39"/>
+				<subreportParameter name="CODIGO">
+					<subreportParameterExpression><![CDATA[$F{CODIGO}.toString()]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA["ReporteSaldoInicial.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
