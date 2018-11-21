@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReport" language="groovy" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="1008" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="225"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="CODIGO" class="java.lang.String"/>
+	<parameter name="FECHAIN" class="java.lang.String"/>
+	<parameter name="FECHAFIN" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select idkardex,codigo,DECODE(tipo,1,'INGRESO',2,'DESCARGA') AS tipo,documento,fecha,
 COALESCE(cantidadin,0) as cantidadin,
@@ -13,7 +15,7 @@ COALESCE(cantidadout,0) as cantidadout,
 COALESCE(valorout,0) as valorout,
 COALESCE(totalout,0) as totalout,
 cantidadsaldo,valorsaldo,totalsaldo 
-from kardex where fecha between to_date('01/03/18','dd/mm/yy') and to_date('30/03/18','dd/mm/yy') 
+from kardex where fecha between to_date($P{FECHAIN},'dd/mm/yy') and to_date($P{FACHAFIN},'dd/mm/yy') 
 and codigo = $P{CODIGO}  ORDER BY codigo,fecha]]>
 	</queryString>
 	<field name="IDKARDEX" class="java.math.BigDecimal"/>
@@ -127,7 +129,7 @@ and codigo = $P{CODIGO}  ORDER BY codigo,fecha]]>
 			<textField>
 				<reportElement x="741" y="0" width="73" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{TOTALSALDO}.toString()]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VALORSALDO}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="814" y="0" width="74" height="20"/>

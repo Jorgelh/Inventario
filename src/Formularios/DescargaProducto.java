@@ -39,6 +39,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     Double precioanterior = 0.00;
     int id;
     int cantidadtotal;
+    int ididentificador;
     /**
      * Creates new form DescargaProducto
      */
@@ -273,13 +274,33 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
-            ps.executeUpdate("begin actualizarkardexdescarga(IDKardex=>"+id+",NCodigo=>"+Integer.parseInt(TxCodigo.getText())+",NDocumento=>'"+documento.getText()+"',Fecha=>'"+fecha+"',Ncantidad=>"+Integer.parseInt(txtcantidad.getText())+",Nprecio=>"+precioanterior+",CantidadSaldo=>"+cantidadtotal+",precioSaldo=>"+precioanterior+",idIngreso=>"+Integer.parseInt(txtNoingreso.getText())+"); commit; end;");
+            ps.executeUpdate("begin actualizarkardexdescarga(IDKardex=>"+id+",NCodigo=>"+Integer.parseInt(TxCodigo.getText())+",NDocumento=>'"+documento.getText()+"',Fecha=>'"+fecha+"',Ncantidad=>"+Integer.parseInt(txtcantidad.getText())+",Nprecio=>"+precioanterior+",CantidadSaldo=>"+cantidadtotal+",precioSaldo=>"+precioanterior+",idIngreso=>"+Integer.parseInt(txtNoingreso.getText())+",ididen=>"+ididentificador+"); commit; end;");
             cn.close();
             ps.close();
         } catch (Exception e) {
             System.out.print(e+" ERROR DE LOS DATOS DE PROCEDIMIENTO");
         }
     }
+    
+    
+    public void ididentificador(){
+    try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select max(id) from kardex");
+            while (rs.next()) {
+                int lastID = rs.getInt(1);
+                ididentificador = lastID+1;
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException error) {
+            System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX ");
+        }
+    }
+    
+    
     public void fechaingresokardex(){
     Date date = fechaEntrega.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
@@ -1110,6 +1131,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             if (B >= A) {
                 obtenerDepto();
                 fechaingresokardex();
+                ididentificador();
                 sumaingresos();
                 ultimoidingreso();
                 Ultimoprecio();

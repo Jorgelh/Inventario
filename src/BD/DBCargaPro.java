@@ -41,7 +41,7 @@ public abstract class DBCargaPro {
                 + "lote,no_trabajo,no_invoice,no_documento,"
                 + "no_serie,ingresadopor,proveedor,notas,"
                 + "bodega,fechasistema,estado,cantidad2,conta) "
-                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,'A',?,0)");
+                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,0)");
         ps.setInt(1,c.getId_ingreso());
         ps.setInt(2,c.getCodigo());
         ps.setString(3,c.getPN());
@@ -59,8 +59,9 @@ public abstract class DBCargaPro {
         ps.setString(15, c.getProveedor());
         ps.setString(16, c.getNota());
         ps.setInt(17, c.getBodeda());
-        ps.setInt(18, c.getCantidad2());
-        //ps.setString(18, c.getEstado());
+        ps.setString(18, c.getEstado());
+        ps.setInt(19, c.getCantidad2());
+       
         ps.execute();
         cnn.close();
         ps.close();
@@ -77,7 +78,7 @@ public abstract class DBCargaPro {
                 + "lote,no_trabajo,no_invoice,no_documento,"
                 + "no_serie,ingresadopor,proveedor,notas,"
                 + "bodega,fechasistema,estado,cantidad2,conta) "
-                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,'A',?,1)");
+                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,1)");
        // ps.setInt(1,c.getId_ingreso());
         ps.setInt(1,c.getId_ingreso());
         ps.setInt(2,c.getCodigo());
@@ -96,7 +97,8 @@ public abstract class DBCargaPro {
         ps.setString(15, c.getProveedor());
         ps.setString(16, c.getNota());
         ps.setInt(17, c.getBodeda());
-        ps.setInt(18, c.getCantidad2());
+        ps.setString(18, c.getEstado());
+        ps.setInt(19, c.getCantidad2());
         //ps.setString(18, c.getEstado());
         ps.execute();
         cnn.close();
@@ -107,14 +109,14 @@ public abstract class DBCargaPro {
     
     public static ArrayList<CargaP> ListarProductoIngresadoporBodega(int c , int b1, int b2) {
 
-        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote from ingreso where (ingreso.bodega = "+b1+" or ingreso.bodega = "+b2+" ) and codigo=" + c + "and  estado = 'A'" );
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote from ingreso where (ingreso.bodega = "+b1+" or ingreso.bodega = "+b2+" ) and codigo=" + c + "and  estado = 'A' order by id_ingreso" );
 
     }
     
 
     public static ArrayList<CargaP> ListarProductoIngresado(int c) {
 
-        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,decode(ingreso.bodega,1,cantidad,2,cantidad2) as  \"cantidad\" ,no_invoice,fecha_ven,lote,precio from ingreso where codigo=" + c + "and (cantidad > 0 or cantidad2 > 0) and estado = 'A'" );
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,decode(ingreso.bodega,1,cantidad,2,cantidad2) as  \"cantidad\" ,no_invoice,fecha_ven,lote,precio from ingreso where codigo=" + c + "and (cantidad > 0 or cantidad2 > 0) and estado = 'A' order by id_ingreso" );
 
     }
 
@@ -145,6 +147,4 @@ public abstract class DBCargaPro {
         }
         return list;
     }
-   
-
 }

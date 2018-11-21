@@ -41,6 +41,17 @@ public class CargaP {
     private String preciotxt;
     private String ubicacion;
     private int conta;
+    private int idendtificador;
+
+    public int getIdendtificador() {
+        return idendtificador;
+    }
+
+    public void setIdendtificador(int idendtificador) {
+        this.idendtificador = idendtificador;
+    }
+    
+    
 
     public int getConta() {
         return conta;

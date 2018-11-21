@@ -36,6 +36,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
     int Enviacodigo;
     int bodega;
     int id_ingreso;
+    int ididentificador;
     int cantidaddeingreso = 0;
     Double nuevoprecio = 0.00;
     Double precioanterior = 0.00;
@@ -70,7 +71,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where idkardex =(select MAX(idkardex) from kardex where codigo = "+txtCodigo.getText()+") and codigo = "+txtCodigo.getText());
+            ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where id =(select MAX(id) from kardex where codigo = "+txtCodigo.getText()+") and codigo = "+txtCodigo.getText());
             while (rs.next()) {
                 Double precio = rs.getDouble(1);
                 precioanterior = precio;
@@ -95,7 +96,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             System.out.print("NUEVO PRECIO = "+nuevoprecio+"\n");*/
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
-            ps.executeUpdate("begin actualizarkardex(IDKardex=>"+id_ingreso+",NCodigo=>"+Integer.parseInt(txtCodigo.getText())+",NDocumento=>'"+txtNoDoc.getText()+"',Fecha_ingreso=>'"+fecha1+"',Ncantidad=>"+Integer.parseInt(txtCantidad.getText())+",Nprecio=>"+Double.parseDouble(TxtPrecio.getText())+",CantidadSaldo=>"+cantidaddeingreso+",precioSaldo=>"+nuevoprecio+"); commit; end;");
+            ps.executeUpdate("begin actualizarkardex(IDKardex=>"+id_ingreso+",NCodigo=>"+Integer.parseInt(txtCodigo.getText())+",NDocumento=>'"+txtNoDoc.getText()+"',Fecha_ingreso=>'"+fecha1+"',Ncantidad=>"+Integer.parseInt(txtCantidad.getText())+",Nprecio=>"+Double.parseDouble(TxtPrecio.getText())+",CantidadSaldo=>"+cantidaddeingreso+",precioSaldo=>"+nuevoprecio+",Ididen=>"+ididentificador+"); commit; end;");
             cn.close();
             ps.close();
         } catch (Exception e) {
@@ -137,7 +138,22 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         }
     }
     
-    
+    public void ididentificador(){
+    try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select max(id) from kardex");
+            while (rs.next()) {
+                int lastID = rs.getInt(1);
+                ididentificador = lastID+1;
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException error) {
+            System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX ");
+        }
+    }
     
     
     
@@ -175,6 +191,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         ComboBoxBodega.setEnabled(b);
         BagregarProdu.setEnabled(b);
         Bcancelar.setEnabled(b);
+      
 
     }
 
@@ -297,6 +314,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         tablaIngreso = new javax.swing.JTable();
         descripcion = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
+        transito = new javax.swing.JCheckBox();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -686,29 +704,30 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(obligatorio5))
-                        .addComponent(jLabel14)
-                        .addComponent(txtEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                        .addComponent(txtNota)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addGap(44, 44, 44)
-                            .addComponent(jLabel15)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(obligatorio2)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(obligatorio2))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Bcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BagregarProdu))))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(obligatorio5))
+                            .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Bcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BagregarProdu)))
+                            .addComponent(jLabel14)
+                            .addComponent(txtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -724,17 +743,17 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
                     .addComponent(obligatorio2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BagregarProdu, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(Bcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(45, 45, 45)
                 .addComponent(jLabel16)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -775,6 +794,9 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel19.setText("Campos Obligarorios = (*)");
 
+        transito.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        transito.setText("EN TRANSITO");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -786,23 +808,24 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(26, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(transito)
+                            .addComponent(jLabel19)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel19))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 4, Short.MAX_VALUE))))
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -813,13 +836,15 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                     .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(transito)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(16, 16, 16)
                 .addComponent(jLabel19)
                 .addContainerGap())
@@ -865,6 +890,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             ultimoidingreso();
             Ultimoprecio();
             sumaingresos();
+            ididentificador();
              nuevoprecio =((Double.parseDouble(TxtPrecio.getText())*Integer.parseInt(txtCantidad.getText()))+(cantidaddeingreso*precioanterior))/(Integer.parseInt(txtCantidad.getText())+(cantidaddeingreso));   
             //if(precio != 0){nuevoprecio = Double.parseDouble(TxtPrecio.getText());}else{nuevoprecio = precio;}
             try {
@@ -875,6 +901,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 if(ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")){
                 c.setCantidad(Integer.parseInt(txtCantidad.getText()));}
                 else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}
+                if(transito.isSelected()){c.setEstado("B");}else{c.setEstado("A");}
                 c.setFechaIngre(Fecha.getDate());
                 c.setFechaVencimiento(txtfechavenci.getDate());
                 c.setIngresadoPor(Integer.parseInt(txtEmpleado.getText()));
@@ -896,11 +923,10 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 obligatorio4.setForeground(Color.BLACK);
                 obligatorio5.setForeground(Color.BLACK);
                 JOptionPane.showMessageDialog(null, "Producto Cargado...");
-                
                 executeStorePrecio();
                 ProcedimientoKardex();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+                JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
             }
             actulizartabla();
             limpiartxt();
@@ -914,7 +940,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             obligatorio4.setForeground(Color.red);
             obligatorio5.setForeground(Color.red);
         }
-
     }//GEN-LAST:event_BagregarProduActionPerformed
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
@@ -1229,6 +1254,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
     private javax.swing.JLabel obligatorio4;
     private javax.swing.JLabel obligatorio5;
     private javax.swing.JTable tablaIngreso;
+    private javax.swing.JCheckBox transito;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtEmpleado;

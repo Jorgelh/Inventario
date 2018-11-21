@@ -335,6 +335,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
         Precio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Precio.setForeground(new java.awt.Color(0, 102, 255));
+        Precio.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Job");
@@ -531,9 +532,11 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
         txtingresadopor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtingresadopor.setForeground(new java.awt.Color(0, 102, 255));
+        txtingresadopor.setEnabled(false);
 
         txtCantidad.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtCantidad.setForeground(new java.awt.Color(255, 0, 0));
+        txtCantidad.setEnabled(false);
         txtCantidad.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 txtCantidadComponentAdded(evt);
@@ -880,7 +883,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
     private void BeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeliminarActionPerformed
 
-        if (JOptionPane.showConfirmDialog(null, new Object[]{"Seguro que desea Eliminar el registro?"}, "VENTANA", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
+      /*  if (JOptionPane.showConfirmDialog(null, new Object[]{"Seguro que desea Eliminar el registro?"}, "VENTANA", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
 
             Connection cnn = BD.getConnection();
             PreparedStatement ps = null;
@@ -905,7 +908,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         } else {
             System.out.println("No");
         }
-
+*/
     }//GEN-LAST:event_BeliminarActionPerformed
 
     private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
