@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReport" language="groovy" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="1008" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.9090909090909096"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="CODIGO" class="java.lang.String"/>
@@ -15,8 +15,8 @@ COALESCE(cantidadout,0) as cantidadout,
 COALESCE(valorout,0) as valorout,
 COALESCE(totalout,0) as totalout,
 cantidadsaldo,valorsaldo,totalsaldo 
-from kardex where fecha between to_date($P{FECHAIN},'dd/mm/yy') and to_date($P{FACHAFIN},'dd/mm/yy') 
-and codigo = $P{CODIGO}  ORDER BY codigo,fecha]]>
+from kardex where fecha between to_date($P{FECHAIN},'dd/mm/yy') and to_date($P{FECHAFIN},'dd/mm/yy') 
+and codigo = $P{CODIGO}  ORDER BY codigo,id]]>
 	</queryString>
 	<field name="IDKARDEX" class="java.math.BigDecimal"/>
 	<field name="CODIGO" class="java.math.BigDecimal"/>
@@ -88,7 +88,9 @@ and codigo = $P{CODIGO}  ORDER BY codigo,fecha]]>
 			</textField>
 			<textField>
 				<reportElement x="74" y="0" width="74" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{TIPO}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>

@@ -42,6 +42,16 @@ public class CargaP {
     private String ubicacion;
     private int conta;
     private int idendtificador;
+    private int present;
+
+    public int getPresent() {
+        return present;
+    }
+
+    public void setPresent(int present) {
+        this.present = present;
+    }
+
 
     public int getIdendtificador() {
         return idendtificador;

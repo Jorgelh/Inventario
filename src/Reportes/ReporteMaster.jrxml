@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="968" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0000000000000016"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.zoom" value="2.593742460100008"/>
+	<property name="ireport.x" value="67"/>
+	<property name="ireport.y" value="192"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["E:\\PROYECTOS\\Inventario\\src\\Reportes\\"]]></defaultValueExpression>
 	</parameter>
@@ -83,7 +83,9 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 			</rectangle>
 			<textField>
 				<reportElement x="110" y="20" width="100" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODIGO}.toString()]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -108,25 +110,31 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 				<text><![CDATA[Descripcion Producto:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="110" y="0" width="100" height="20"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[ELETTRONICI]]></text>
+				<reportElement x="110" y="-1" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[ ELETTRONICI]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="60" width="100" height="20"/>
+				<reportElement x="0" y="60" width="110" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Unidad de Medida:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="110" y="40" width="605" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="110" y="39" width="778" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{DESCRIPCION}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="110" y="60" width="100" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{UNIDAD}.toString()]]></textFieldExpression>
 			</textField>
 			<line>
@@ -145,8 +153,10 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 				<reportElement x="74" y="96" width="74" height="40"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="666" y="116" width="72" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="668" y="116" width="72" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[CANTIDAD]]></text>
 			</staticText>
 			<rectangle>
@@ -157,7 +167,9 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 			</rectangle>
 			<staticText>
 				<reportElement x="222" y="116" width="74" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[CANTIDAD]]></text>
 			</staticText>
 			<rectangle>
@@ -165,7 +177,9 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 			</rectangle>
 			<staticText>
 				<reportElement x="518" y="116" width="74" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[VALOR UNIT]]></text>
 			</staticText>
 			<rectangle>
@@ -173,7 +187,9 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 			</rectangle>
 			<staticText>
 				<reportElement x="814" y="116" width="74" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[VAL TOTAL]]></text>
 			</staticText>
 			<rectangle>
@@ -181,26 +197,32 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 			</rectangle>
 			<staticText>
 				<reportElement x="74" y="106" width="74" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[TIPO DCTO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="296" y="116" width="74" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[VALOR UNIT]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="148" y="96" width="74" height="40"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="370" y="116" width="74" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="370" y="117" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[VAL TOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="738" y="96" width="74" height="20"/>
+				<reportElement x="738" y="96" width="76" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true" isUnderline="true"/>
+					<font fontName="Arial" size="10" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[SALDO]]></text>
 			</staticText>
@@ -208,42 +230,52 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 				<reportElement x="444" y="96" width="222" height="20"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="292" y="96" width="100" height="20"/>
+				<reportElement x="307" y="96" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true" isUnderline="true"/>
+					<font fontName="Arial" size="10" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[ENTRADAS]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="516" y="96" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true" isUnderline="true"/>
+					<font fontName="Arial" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[SALIDAS]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="740" y="116" width="74" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[VALOR UNIT]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="446" y="116" width="72" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[CANTIDAD]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="592" y="116" width="74" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[VAL TOTAL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="4" y="106" width="70" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[FECHA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="148" y="106" width="74" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
 				<text><![CDATA[No, Dcto]]></text>
 			</staticText>
 			<subreport>

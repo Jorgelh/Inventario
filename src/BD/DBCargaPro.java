@@ -77,8 +77,8 @@ public abstract class DBCargaPro {
                 + "PO,cantidad,fecha_ven,precio,"
                 + "lote,no_trabajo,no_invoice,no_documento,"
                 + "no_serie,ingresadopor,proveedor,notas,"
-                + "bodega,fechasistema,estado,cantidad2,conta) "
-                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,1)");
+                + "bodega,fechasistema,estado,cantidad2,conta,presentacion) "
+                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,1,?)");
        // ps.setInt(1,c.getId_ingreso());
         ps.setInt(1,c.getId_ingreso());
         ps.setInt(2,c.getCodigo());
@@ -99,6 +99,7 @@ public abstract class DBCargaPro {
         ps.setInt(17, c.getBodeda());
         ps.setString(18, c.getEstado());
         ps.setInt(19, c.getCantidad2());
+        ps.setInt(20, c.getPresent());
         //ps.setString(18, c.getEstado());
         ps.execute();
         cnn.close();

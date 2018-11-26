@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FECHA1" class="java.lang.String"/>
+	<parameter name="FECHA2" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\PROYECTOS\\Inventario\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select k.codigo,p.descripcion,cantidadsaldo,totalsaldo from kardex k inner join producto p on k.codigo = p.codigo where id in(select max(id) from kardex where fecha between to_date($P{FECHA1},'dd/mm/yy') and to_date($P{FECHA2},'dd/mm/yy') GROUP BY codigo)]]>
+	</queryString>
+	<field name="CODIGO" class="java.math.BigDecimal"/>
+	<field name="DESCRIPCION" class="java.lang.String"/>
+	<field name="CANTIDADSALDO" class="java.math.BigDecimal"/>
+	<field name="TOTALSALDO" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="58" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement x="80" y="1" width="315" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="395" y="1" width="80" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="475" y="1" width="80" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="1" width="80" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="1" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="1" width="315" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="1" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CANTIDAD SAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="1" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[VALOR SALDO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement x="475" y="1" width="80" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="395" y="1" width="80" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="80" y="1" width="315" height="20"/>
+			</rectangle>
+			<textField>
+				<reportElement x="80" y="1" width="315" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DESCRIPCION}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="1" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CANTIDADSALDO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="1" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TOTALSALDO}.toString()]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="1" width="80" height="20"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="1" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODIGO}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="2" width="555" height="25"/>
+				<subreportParameter name="FECHAIN">
+					<subreportParameterExpression><![CDATA[$P{FECHA1}.toString()]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FECHAOUT">
+					<subreportParameterExpression><![CDATA[$P{FECHA2}.toString()]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "SumaTotalMes.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

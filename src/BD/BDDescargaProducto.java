@@ -65,6 +65,7 @@ public abstract class BDDescargaProducto {
                 + "ingreso.conta,"
                 + "ingreso.notas,"
                 + "ingreso.precio,"
+                + "ingreso.presentacion,"
                 + "producto.descripcion,"
                 + "decode(ingreso.bodega,1,producto.ubicacion,2,producto.ubicacion2) as \"ubicacion\","
                 + "unidad_medida.descripcion as \"desc\" from ingreso inner join producto on producto.codigo = ingreso.codigo join unidad_medida on producto.id_medida = unidad_medida.id_medida and ingreso.id_ingreso="+idc);
@@ -89,6 +90,7 @@ public abstract class BDDescargaProducto {
         c.setCantidad2(rs.getInt("cantidad2"));
         c.setConta(rs.getInt("conta"));
         c.setPrecio(rs.getDouble("precio"));
+        c.setPresent(rs.getInt("presentacion"));
         
         }
         cn.close();

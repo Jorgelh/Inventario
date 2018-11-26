@@ -40,6 +40,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     int id;
     int cantidadtotal;
     int ididentificador;
+    int presentacion;
     /**
      * Creates new form DescargaProducto
      */
@@ -237,6 +238,9 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     
     public void Ultimoprecio(){
     
+        
+        if(presentacion == 0){
+        
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -251,7 +255,23 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         } catch (SQLException error) {
             System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO");
         }
-    
+        }else{
+            
+            try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where idkardex =(select MAX(idkardex) from kardex where codigo = "+TxCodigo.getText()+") and codigo = "+TxCodigo.getText()+" and presentacion ="+presentacion);
+            while (rs.next()) {
+                Double precio = rs.getDouble(1);
+                precioanterior = precio;
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException error) {
+            System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO");
+        }
+        }
     }
     /*public void test(){
         Ultimoprecio();
@@ -274,7 +294,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
-            ps.executeUpdate("begin actualizarkardexdescarga(IDKardex=>"+id+",NCodigo=>"+Integer.parseInt(TxCodigo.getText())+",NDocumento=>'"+documento.getText()+"',Fecha=>'"+fecha+"',Ncantidad=>"+Integer.parseInt(txtcantidad.getText())+",Nprecio=>"+precioanterior+",CantidadSaldo=>"+cantidadtotal+",precioSaldo=>"+precioanterior+",idIngreso=>"+Integer.parseInt(txtNoingreso.getText())+",ididen=>"+ididentificador+"); commit; end;");
+            ps.executeUpdate("begin actualizarkardexdescarga(IDKardex=>"+id+",NCodigo=>"+Integer.parseInt(TxCodigo.getText())+",NDocumento=>'"+documento.getText()+"',Fecha=>'"+fecha+"',Ncantidad=>"+Integer.parseInt(txtcantidad.getText())+",Nprecio=>"+precioanterior+",CantidadSaldo=>"+cantidadtotal+",precioSaldo=>"+precioanterior+",idIngreso=>"+Integer.parseInt(txtNoingreso.getText())+",ididen=>"+ididentificador+",presentacion=>"+presentacion+"); commit; end;");
             cn.close();
             ps.close();
         } catch (Exception e) {
@@ -327,6 +347,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     
     
      public void sumaingresos(){
+         if(presentacion == 0){
     try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -341,7 +362,27 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         } catch (SQLException error) {
             System.out.print(error);
         }
-    }
+        }else{
+         
+             try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select sum(cantidad) as cantidad from ingreso where codigo = "+TxCodigo.getText()+" and conta = 1 and presentacion ="+presentacion);
+            while (rs.next()) {
+                int cantidad = rs.getInt(1);
+                cantidadtotal = cantidad;
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException error) {
+            System.out.print(error);
+        }
+         
+         
+         }
+        
+     }         
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1172,8 +1213,6 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         else {JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");}
         
         
-        
-        
     }//GEN-LAST:event_BoDescargarActionPerformed
 
     private void CosultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CosultaMouseClicked
@@ -1191,6 +1230,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             LaPO.setText(ca.getPO());
             conta=ca.getConta();
             precio = ca.getPrecio();
+            presentacion= ca.getPresent();
             txtNoingreso.setText(String.valueOf(ca.getId_ingreso()));
             if(ca.getBodeda()==1){txtbodega.setText("Bodega");
             laCantidad.setText(String.valueOf(ca.getCantidad()));
