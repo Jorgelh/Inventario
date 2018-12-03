@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReport" language="groovy" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="1008" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="0.9090909090909096"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CODIGO" class="java.lang.String"/>
+	<parameter name="FECHAIN" class="java.lang.String"/>
+	<parameter name="FECHAFIN" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select idkardex,codigo,DECODE(tipo,1,'INGRESO',2,'DESCARGA') AS tipo,documento,fecha,
+COALESCE(cantidadin,0) as cantidadin,
+COALESCE(valorin,0) as valorin,
+COALESCE(totalin,0) as totalin,
+COALESCE(cantidadout,0) as cantidadout,
+COALESCE(valorout,0) as valorout,
+COALESCE(totalout,0) as totalout,
+cantidadsaldo,valorsaldo,totalsaldo 
+from kardex where fecha between to_date($P{FECHAIN},'dd/mm/yy') and to_date($P{FECHAFIN},'dd/mm/yy') 
+and codigo = $P{CODIGO}  ORDER BY codigo,id]]>
+	</queryString>
+	<field name="IDKARDEX" class="java.math.BigDecimal"/>
+	<field name="CODIGO" class="java.math.BigDecimal"/>
+	<field name="TIPO" class="java.lang.String"/>
+	<field name="DOCUMENTO" class="java.lang.String"/>
+	<field name="FECHA" class="java.sql.Timestamp"/>
+	<field name="CANTIDADIN" class="java.math.BigDecimal"/>
+	<field name="VALORIN" class="java.math.BigDecimal"/>
+	<field name="TOTALIN" class="java.math.BigDecimal"/>
+	<field name="CANTIDADOUT" class="java.math.BigDecimal"/>
+	<field name="VALOROUT" class="java.math.BigDecimal"/>
+	<field name="TOTALOUT" class="java.math.BigDecimal"/>
+	<field name="CANTIDADSALDO" class="java.math.BigDecimal"/>
+	<field name="VALORSALDO" class="java.math.BigDecimal"/>
+	<field name="TOTALSALDO" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="814" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="740" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="666" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="592" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="518" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="444" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="370" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="296" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="222" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="148" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="74" y="0" width="74" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="74" height="20"/>
+			</rectangle>
+			<textField>
+				<reportElement x="4" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[DateFormat.getDateInstance(DateFormat.SHORT).format($F{FECHA})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="72" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DOCUMENTO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="0" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TIPO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="298" y="0" width="72" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VALORIN}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="71" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TOTALIN}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="448" y="0" width="73" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CANTIDADOUT}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="518" y="0" width="71" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VALOROUT}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="0" width="72" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CANTIDADIN}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="592" y="0" width="71" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TOTALOUT}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="668" y="0" width="73" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CANTIDADSALDO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="741" y="0" width="73" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VALORSALDO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="814" y="0" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TOTALSALDO}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -9,7 +9,7 @@
 		<defaultValueExpression><![CDATA["E:\\PROYECTOS\\Inventario\\src\\Reportes\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select k.codigo,p.descripcion,cantidadsaldo,totalsaldo from kardex k inner join producto p on k.codigo = p.codigo where id in(select max(id) from kardex where fecha between to_date($P{FECHA1},'dd/mm/yy') and to_date($P{FECHA2},'dd/mm/yy') GROUP BY codigo)]]>
+		<![CDATA[select k.codigo,p.descripcion,cantidadsaldo,totalsaldo from kardex k inner join producto p on k.codigo = p.codigo where id in(select max(id) from kardex where fecha between to_date($P{FECHA1},'dd/mm/yy') and to_date($P{FECHA2},'dd/mm/yy') and k.cantidadsaldo > 0 GROUP BY codigo)]]>
 	</queryString>
 	<field name="CODIGO" class="java.math.BigDecimal"/>
 	<field name="DESCRIPCION" class="java.lang.String"/>

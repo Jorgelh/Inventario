@@ -12,31 +12,44 @@ import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import BD.BD;
-import static BD.BD.getConnection;
 import BD.Conexion;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.security.Principal;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JRLineBox;
+import net.sf.jasperreports.engine.JRParagraph;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
+import net.sf.jasperreports.engine.type.RotationEnum;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
  *
  * @author jluis
  */
 public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
+	protected RotationEnum rotationValue;
+	protected String markup;
+        protected JRLineBox lineBox;
+	protected JRParagraph paragraph;
+	protected String fontName;
+	protected Boolean isBold;
+	protected Boolean isItalic;
+	protected Boolean isUnderline;
+	protected Boolean isStrikeThrough;
+	protected Float fontsize;
+	protected String pdfFontName;
+	protected String pdfEncoding;
+	protected Boolean isPdfEmbedded;
 
+
+    
     /**
      * Creates new form ReportesDetalladosMES
      */
@@ -45,41 +58,57 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
         
     }
 
-     public void Imprimir(){
-        try{
-            Conexion con= new Conexion();
-            Connection conexion = con.getConnection();
-            String archivo = "ReporteMaster.jrxml";
-            System.err.println("Shit  : "+archivo);
-            if(archivo == null){
-                JOptionPane.showMessageDialog(null,"Error al cargar reporte",
-                        "Generar Reporte",JOptionPane.ERROR_MESSAGE);
-            } JasperReport masterReport= null;
+     public void reporteTotalMensual(){
+         Conexion con= new Conexion();
+         Connection conexion= con.getConnection();
+       
+       
+       SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+            Date fec1 = inicio.getDate();
+            Date fec2 = fin.getDate();
+            String fe1 = formato.format(fec1);
+            String fe2 = formato.format(fec2);
             try {
-                masterReport=JasperCompileManager.compileReport(archivo);
-            } catch (JRException e) {
-                JOptionPane.showMessageDialog(null,"Error al compilar reporte:: "+e,
-                        "Generar Reporte",JOptionPane.ERROR_MESSAGE);
-            } Map parametros= new HashMap();
-            parametros.put("FECHAINICIO", inicio);
-            parametros.put("FECHAFIN", fin);
-            JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametros,conexion);
-            JasperViewer jviewer= new JasperViewer(jasperPrint,false);
-            jviewer.setVisible(true);
-        }catch (Exception ex){
-            JOptionPane.showMessageDialog(null,"Un mensaje de error que puedes personalizar si quieres",
-                "Generar Reporte",JOptionPane.ERROR_MESSAGE);
+            
+            String rutaReporte=System.getProperty("user.dir")+"/src/Reportes/SaldoMensual.jasper";
+            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile(rutaReporte);
+            Map parametros= new HashMap();
+            parametros.put("FECHA1", fe1);
+            parametros.put("FECHA2", fe2);
+            JasperPrint print = JasperFillManager.fillReport(jasperReport,parametros, conexion);
+            JasperViewer view = new JasperViewer(print,false);
+            view.setVisible(true);
+            
+        } catch (Exception e) {
+            System.err.println("Error al generar el reporte -> "+e.getMessage());
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
+     public void reporteMensualDetallado(){
+     
+         Conexion con= new Conexion();
+         Connection conexion= con.getConnection();
+       SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+            Date fec1 = inicio.getDate();
+            Date fec2 = fin.getDate();
+            String fe1 = formato.format(fec1);
+            String fe2 = formato.format(fec2);
+            try {
+                       
+            String rutaReporte=System.getProperty("user.dir")+"/src/Reportes/ReporteMaster.jasper";
+            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile(rutaReporte);
+            Map parametros= new HashMap();
+            parametros.put("FECHAINICIO", fe1);
+            parametros.put("FECHAFIN", fe2);
+            JasperPrint print = JasperFillManager.fillReport(jasperReport,parametros, conexion);
+            JasperViewer view = new JasperViewer(print,false);
+            view.setVisible(true);
+            
+        } catch (Exception e) {
+            System.err.println("Error al generar el reporte -> "+e.getMessage());
+        }
+     
+     }
     
     
     /**
@@ -99,7 +128,6 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
 
         setBackground(java.awt.Color.lightGray);
         setClosable(true);
@@ -135,13 +163,6 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("AL");
 
-        jButton3.setText("test");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,18 +186,14 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(219, 219, 219)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(47, 47, 47))
+                .addGap(47, 233, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton3))
-                .addGap(45, 45, 45)
+                .addComponent(jLabel1)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -218,7 +235,11 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
                 Date f2 = formato.parse(fe2);
 
                 if (f1.before(f2)) {
-                  
+                 
+                    reporteTotalMensual();
+                    
+                    
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "LA PRIMERA FECHA NO PUEDE SER MAYOR A LA SEGUNDA FECHA");
                 }
@@ -244,9 +265,11 @@ if (inicio.getDate() != null && fin.getDate() != null) {
             try {
                 Date f1 = formato.parse(fe1);
                 Date f2 = formato.parse(fe2);
-
+               
                 if (f1.before(f2)) {
-                    Imprimir();
+                       
+                    reporteMensualDetallado();
+                        
                 } else {
                     JOptionPane.showMessageDialog(null, "LA PRIMERA FECHA NO PUEDE SER MAYOR A LA SEGUNDA FECHA");
                 }
@@ -259,38 +282,6 @@ if (inicio.getDate() != null && fin.getDate() != null) {
            
     } 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-       
-      /* Conexion con= new Conexion();
-        Connection conexion = con.getConnection();
-        try {
-       
-            Map<String,Object> parameters = new HashMap<String,Object>();
-            parameters.put("FECHAINICIO",new String(inicio.toString()));
-            parameters.put("FECHAFIN",new String(fin.toString()));
-            InputStream reportStream = new FileInputStream("E:\\PROYECTOS\\Inventario\\src\\Reportes\\ReporteMaster.jrxml");
-            
-            JasperReport report = JasperCompileManager.compileReport(reportStream);
-            JasperPrint jasperPrint = new JasperPrint();
-            
-            JasperFillManager.fillReportToFile(report, "ReporteMaster.jrprint", (Map<String,Object>)parameters,new JREmptyDataSource());
-            reportStream.close();
-            
-            List listJasper = new ArrayList();
-            listJasper.add(JRLoader.loadObjectFromFile("ReporteMaster.jrprint"));
-            JRPdfExporter exp = new JRPdfExporter();
-            exp.setParameter(JRExporterParameter.JASPER_PRINT_LIST, listJasper);
-            exp.setParameter(JRPdfExporterParameter.IS_CREATING_BATCH_MODE_BOOKMARKS, Boolean.TRUE);
-            exp.setParameter(JRExporterParameter.OUTPUT_FILE_NAME,"reporte.pdf");
-            exp.exportReport();
-      
-        } catch (Exception e) {
-            System.err.println("Error al generar el reporte -> "+e.getMessage());
-        }
-*/
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,7 +323,6 @@ if (inicio.getDate() != null && fin.getDate() != null) {
     private com.toedter.calendar.JDateChooser inicio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

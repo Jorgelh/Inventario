@@ -845,7 +845,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         jLabel19.setText("Campos Obligarorios = (*)");
 
         transito.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        transito.setText("EN TRANSITO");
+        transito.setText("EN INSPECCION");
 
         Bcancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Bcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N

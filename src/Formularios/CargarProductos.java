@@ -642,7 +642,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         descripcion.setForeground(new java.awt.Color(0, 102, 255));
 
         transito.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        transito.setText("EN TRANSITO");
+        transito.setText("EN INSPECCION");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
