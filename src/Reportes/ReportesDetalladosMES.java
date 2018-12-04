@@ -14,18 +14,11 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 import BD.Conexion;
-import java.security.Principal;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JRLineBox;
 import net.sf.jasperreports.engine.JRParagraph;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.type.RotationEnum;
 import net.sf.jasperreports.engine.util.JRLoader;
 
@@ -69,9 +62,9 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
             String fe1 = formato.format(fec1);
             String fe2 = formato.format(fec2);
             try {
-            
-            String rutaReporte=System.getProperty("user.dir")+"/src/Reportes/SaldoMensual.jasper";
-            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile(rutaReporte);
+           /* String rutaReporte=System.getProperty("user.dir")+"/Reportes/SaldoMensual.jasper";
+            direccion.setText(rutaReporte);*/
+            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile("SaldoMensual.jasper");
             Map parametros= new HashMap();
             parametros.put("FECHA1", fe1);
             parametros.put("FECHA2", fe2);
@@ -81,6 +74,7 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
             
         } catch (Exception e) {
             System.err.println("Error al generar el reporte -> "+e.getMessage());
+            error.setText(e.getMessage());
         }
     }
      
@@ -94,9 +88,9 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
             String fe1 = formato.format(fec1);
             String fe2 = formato.format(fec2);
             try {
-                       
-            String rutaReporte=System.getProperty("user.dir")+"/src/Reportes/ReporteMaster.jasper";
-            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile(rutaReporte);
+            /*String rutaReporte=System.getProperty("user.dir")+"/Reportes/ReporteMaster.jasper";
+            direccion.setText(rutaReporte);*/
+            JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile("ReporteMaster.jasper");
             Map parametros= new HashMap();
             parametros.put("FECHAINICIO", fe1);
             parametros.put("FECHAFIN", fe2);
@@ -106,6 +100,7 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
             
         } catch (Exception e) {
             System.err.println("Error al generar el reporte -> "+e.getMessage());
+            error.setText(e.getMessage());
         }
      
      }
@@ -128,6 +123,8 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        direccion = new javax.swing.JLabel();
+        error = new javax.swing.JLabel();
 
         setBackground(java.awt.Color.lightGray);
         setClosable(true);
@@ -167,16 +164,6 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fin, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -184,9 +171,26 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
                     .addComponent(jButton1))
                 .addGap(190, 190, 190))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(219, 219, 219)
-                .addComponent(jLabel1)
-                .addGap(47, 233, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fin, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(direccion))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(error)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +208,11 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(error)
+                .addGap(18, 18, 18)
+                .addComponent(direccion)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,7 +223,7 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -319,6 +327,8 @@ if (inicio.getDate() != null && fin.getDate() != null) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel direccion;
+    private javax.swing.JLabel error;
     private com.toedter.calendar.JDateChooser fin;
     private com.toedter.calendar.JDateChooser inicio;
     private javax.swing.JButton jButton1;
