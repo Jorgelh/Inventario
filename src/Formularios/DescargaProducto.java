@@ -1164,6 +1164,8 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
 
     private void BoDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoDescargarActionPerformed
         obtenerDepto();
+        
+        if(presentacion == 0){
         if (txtcantidad.getText().compareTo("") != 0 && txtentregado.getText().compareTo("") != 0 && NoDepto > 0) 
         {
 
@@ -1211,6 +1213,67 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             
         }
         else {JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");}
+        }
+        
+        
+        else{///else de verificar si tiene contable o no
+            
+            if (txtcantidad.getText().compareTo("") != 0 && txtentregado.getText().compareTo("") != 0 && NoDepto > 0 && presentacion !=0) 
+        {
+
+            int A = Integer.parseInt(txtcantidad.getText());
+            int B = Integer.parseInt(laCantidad.getText());
+            if (B >= A) {
+                obtenerDepto();
+                fechaingresokardex();
+                ididentificador();
+                sumaingresos();
+                ultimoidingreso();
+                Ultimoprecio();
+                try {
+                    Descarga d = new Descarga();
+                    d.setCantidad(Integer.parseInt(txtcantidad.getText()));
+                    d.setEntregadoA(Integer.parseInt(txtentregado.getText()));
+                    d.setId_ingreso(Integer.parseInt(txtNoingreso.getText()));
+                    d.setNota(txtNota.getText());
+                    d.setCodigo(Integer.parseInt(TxCodigo.getText()));
+                    d.setFecha(fechaEntrega.getDate());
+                    d.setDocumento(documento.getText());
+                    d.setSerie(serie.getText());
+                    d.setPn(pn1.getText());
+                    d.setLote(trabajo.getText());
+                    d.setTrabajo(lote.getText());
+                    d.setDepto(NoDepto);
+                    d.setConta(conta);
+                    if(txtbodega.getText().toString().equalsIgnoreCase("Bodega")){d.setBodega(1);}else{d.setBodega(2);}
+                    BDDescargaProducto.insertarDescarga(d);
+                    JOptionPane.showMessageDialog(null, "Descarga Realizada...");
+                    BoDescargar.setEnabled(false);
+                    if(conta == 1){
+                    ProcedimientoKardex();}
+                    limpiartabla15();
+                    limpiarlabel();
+                    activartxt(false);
+                    TxCodigo.setEnabled(true);
+                } catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA  "+e);
+                }
+            }
+            else{ JOptionPane.showMessageDialog(null, "NO POSER LA CANTIDAD NECESARIA PARA REALIZAR LA DESCARGA");}
+            
+            
+        }
+        else {JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");}
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         
         
     }//GEN-LAST:event_BoDescargarActionPerformed

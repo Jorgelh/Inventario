@@ -19,6 +19,7 @@ public class CargaP {
     private int codigo;
     private String PN;
     private Date fechaIngre;
+    private Date fechapoliza;
     private String PO;
     private int cantidad;
     private int cantidad2;
@@ -43,6 +44,14 @@ public class CargaP {
     private int conta;
     private int idendtificador;
     private int present;
+
+    public Date getFechapoliza() {
+        return fechapoliza;
+    }
+
+    public void setFechapoliza(Date fechapoliza) {
+        this.fechapoliza = fechapoliza;
+    }
 
     public int getPresent() {
         return present;

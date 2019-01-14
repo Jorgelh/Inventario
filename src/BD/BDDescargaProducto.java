@@ -91,7 +91,6 @@ public abstract class BDDescargaProducto {
         c.setConta(rs.getInt("conta"));
         c.setPrecio(rs.getDouble("precio"));
         c.setPresent(rs.getInt("presentacion"));
-        
         }
         cn.close();
         ps.close();
