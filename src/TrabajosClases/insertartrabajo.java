@@ -15,7 +15,7 @@ import java.util.Date;
  * @author jluis
  */
 public class insertartrabajo {
-    
+    public int id;
     public String pn;
     public String job;
     public String estandar;
@@ -28,7 +28,44 @@ public class insertartrabajo {
     public int entregado;
     public String nota;
     public int depto;
+    public String deptostring;
     public int cantidad;
+    public String Sfecharecibido;
+    public String Sfechavencimiento;
+
+    public String getSfecharecibido() {
+        return Sfecharecibido;
+    }
+
+    public void setSfecharecibido(String Sfecharecibido) {
+        this.Sfecharecibido = Sfecharecibido;
+    }
+
+    public String getSfechavencimiento() {
+        return Sfechavencimiento;
+    }
+
+    public void setSfechavencimiento(String Sfechavencimiento) {
+        this.Sfechavencimiento = Sfechavencimiento;
+    }
+    
+    
+    
+    public String getDeptostring() {
+        return deptostring;
+    }
+
+    public void setDeptostring(String deptostring) {
+        this.deptostring = deptostring;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getCantidad() {
         return cantidad;
@@ -145,15 +182,39 @@ public class insertartrabajo {
         ps.setString(1, t.getPn());
         ps.setString(2, t.getJob());
         ps.setInt(3, t.getEstandarint());
-        ps.setDate(4, new java.sql.Date(t.getFecharecibido().getTime()));
+        ps.setString(4,t.getSfecharecibido());
         //ps.setDate(5, new java.sql.Date(t.getFechaentrega().getTime()));
-        ps.setDate(5, new java.sql.Date(t.getFechavencimiento().getTime()));
+        ps.setString(5, t.getSfechavencimiento());
         ps.setInt(6, t.getLote());
         ps.setInt(7, t.getEntregado());
         ps.setString(8, t.getNota());
         ps.setInt(9, t.getDepto());
         ps.setInt(10, t.getCantidad());
         ps.executeUpdate();
+        }
+        con.close();
+        ps.close(); 
+    }    
+    
+    
+    public static void InsertarTrabajoNew(insertartrabajo t) throws SQLException{
+        Connection con = BD.getConnection();
+        PreparedStatement ps = null;
+        {     
+        ps = con.prepareStatement("insert into trabajonew values(?,?,?,?,?,null,?,?,1,?,?,?,?)");
+        ps.setInt(1,t.getId());
+        ps.setString(2, t.getPn());
+        ps.setString(3, t.getJob());
+        ps.setInt(4, t.getEstandarint());
+        ps.setDate(5, new java.sql.Date(t.getFecharecibido().getTime()));
+        //ps.setDate(5, new java.sql.Date(t.getFechaentrega().getTime()));
+        ps.setDate(6, new java.sql.Date(t.getFechavencimiento().getTime()));
+        ps.setInt(7, t.getLote());
+        ps.setInt(8, t.getEntregado());
+        ps.setString(9, t.getNota());
+        ps.setInt(10, t.getDepto());
+        ps.setInt(11, t.getCantidad());
+    ps.executeUpdate();
         }
         con.close();
         ps.close(); 

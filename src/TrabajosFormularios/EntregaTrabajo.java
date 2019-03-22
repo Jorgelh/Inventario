@@ -37,7 +37,7 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
         try {
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
-            ps.executeUpdate("update trabajos set fechaentrega = '"+fecha+"' where idtrabajo ="+idtrabajo);
+            ps.executeUpdate("update trabajos set fechaentrega = '"+fecha+"',ENTREGADOPOR = '"+CODIGO.getText()+"' where idtrabajo ="+idtrabajo);
             cn.close();
             ps.close();
         } catch (Exception e) {
@@ -82,6 +82,8 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         fechaentrega = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        CODIGO = new javax.swing.JTextField();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -167,7 +169,7 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(pntabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -189,6 +191,12 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("FECHA DE ENTREGA");
 
+        fechaentrega.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fechaentregaMouseClicked(evt);
+            }
+        });
+
         jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save2.png"))); // NOI18N
         jButton1.setText("GUARDAR");
@@ -198,19 +206,27 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText("ENTREGADO POR");
+
+        CODIGO.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fechaentrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(0, 125, Short.MAX_VALUE))
-                    .addComponent(fechaentrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(CODIGO))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -220,9 +236,13 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(fechaentrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(CODIGO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -246,7 +266,6 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,7 +289,7 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -307,13 +326,13 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
         lote.setText(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),3)));
         cantidad.setText(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),4)));
         idtrabajo = (Integer.parseInt(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),8))));
-        
+        CODIGO.requestFocus();
         
     }//GEN-LAST:event_TrabajosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        if(pntabla.getText().compareTo("") != 0 && jobtabla.getText().compareTo("") !=0 && idtrabajo !=0){
-        if(fechaentrega.getDate() != null){
+        if(fechaentrega.getDate() != null && CODIGO.getText().compareTo("") != 0){
         Date date = fechaentrega.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         fecha = sdf.format(date);
@@ -325,6 +344,11 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
         }else{JOptionPane.showMessageDialog(null, "SELECCIONE TRABAJO A ENTREGAR");}
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void fechaentregaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fechaentregaMouseClicked
+       CODIGO.requestFocus();
+       
+    }//GEN-LAST:event_fechaentregaMouseClicked
     
     private void listartrabajos(){
         ArrayList<trabajos> result = consultas.ListarTrabajonull(pn.getText().toUpperCase(),JOB.getText().toUpperCase());
@@ -418,6 +442,7 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField CODIGO;
     private javax.swing.JTextField JOB;
     private javax.swing.JTable Trabajos;
     private javax.swing.JTextField cantidad;
@@ -430,6 +455,7 @@ public class EntregaTrabajo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

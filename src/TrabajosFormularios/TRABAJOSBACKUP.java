@@ -5,12 +5,7 @@
  */
 package TrabajosFormularios;
 
-import BD.BD;
 import TrabajosClases.insertartrabajo;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -18,21 +13,19 @@ import javax.swing.JOptionPane;
  *
  * @author jluis
  */
-public class TRABAJOS extends javax.swing.JInternalFrame {
+public class TRABAJOSBACKUP extends javax.swing.JInternalFrame {
 
     
     int noestandar = 0;
     int depto = 0;
-    int id;
     
     
     /**
      * Creates new form TRABAJOS
      */
-    public TRABAJOS() {
+    public TRABAJOSBACKUP() {
         initComponents();
         pn.requestFocus();
-        
     }
 
     public void limpiar()
@@ -51,24 +44,6 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
         entregado.setText("");
         nota.setText("");
         pn.requestFocus();
-    }
-    
-    
-    public void ultimoidingreso(){
-    try {
-            Connection con = BD.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select max(idtrabajo) from trabajonew");
-            while (rs.next()) {
-                int lastID = rs.getInt(1);
-                id = lastID+1;
-            }
-            rs.close();
-            stmt.close();
-            con.close();
-        } catch (SQLException error) {
-            System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO ID DE INGRESO ");
-        }
     }
     
     /**
@@ -143,7 +118,7 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
             }
         });
 
-        estandar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "FUJI", "INGENIERIA", "MIL-PRF-27", "MIL-STD-981", "MIL-STD-981 PRE-CAP", "MIL-STD-981 URGENTE", "MIL-STD-981-X RAY", "SAMPLE" }));
+        estandar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "FUJI", "INGENIERIA", "MIL-PRF-27", "MIL-STD-981", "MIL-STD-981  PRE-CAP", "MIL-STD-981  URGENTE", "MIL-STD-981-X RAY", "SAMPLE" }));
         estandar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 estandarActionPerformed(evt);
@@ -249,7 +224,6 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("LOTE");
 
-        lote.setEnabled(false);
         lote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loteActionPerformed(evt);
@@ -269,7 +243,6 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("ENTREGADO POR");
 
-        entregado.setEnabled(false);
         entregado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 entregadoActionPerformed(evt);
@@ -369,7 +342,7 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 364, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -400,40 +373,39 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
       
         
          if( fecharecibido.getDate() != null && fechavencimiento.getDate() != null 
-            && !estandar.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...") && pn.getText().compareTo("") != 0 && job.getText().compareTo("") != 0 && 
-                 !departamento.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")) 
+            && !estandar.getSelectedItem().toString().equalsIgnoreCase("SELECCCIONAR...") && pn.getText().compareTo("") != 0 && job.getText().compareTo("") != 0 && 
+                 lote.getText().compareTo("") != 0 && entregado.getText().compareTo("") != 0 && !departamento.getSelectedItem().toString().equalsIgnoreCase("SELECCCIONAR...")) 
                  {
-               ultimoidingreso();      
-                 
+                     
+             for(int i=0; Integer.parseInt(lote.getText())>i;i++){        
         try {
             insertartrabajo m = new insertartrabajo();
-            m.setId(id);
             m.setPn(pn.getText().toUpperCase());
             m.setJob(job.getText().toUpperCase());
             if(estandar.getSelectedItem().toString().equalsIgnoreCase("FUJI")){noestandar = 1;}
             else if(estandar.getSelectedItem().toString().equalsIgnoreCase("INGENIERIA")){noestandar = 2;}
             else if(estandar.getSelectedItem().toString().equalsIgnoreCase("MIL-PRF-27")){noestandar = 3;}
             else if(estandar.getSelectedItem().toString().equalsIgnoreCase("MIL-STD-981")){noestandar = 4;}
-            else if(estandar.getSelectedItem().toString().equalsIgnoreCase("MIL-STD-981 PRE-CAP")){noestandar = 5;}
-            else if(estandar.getSelectedItem().toString().equalsIgnoreCase("MIL-STD-981 URGENTE")){noestandar = 6;}
+            else if(estandar.getSelectedItem().toString().equalsIgnoreCase("MIL-STD-981  PRE-CAP")){noestandar = 5;}
+            else if(estandar.getSelectedItem().toString().equalsIgnoreCase("MIL-STD-981  URGENTE")){noestandar = 6;}
             else if(estandar.getSelectedItem().toString().equalsIgnoreCase("MIL-STD-981-X RAY")){noestandar = 7;}
             else if(estandar.getSelectedItem().toString().equalsIgnoreCase("SAMPLE")){noestandar = 8;}
             m.setEstandarint(noestandar);
             m.setFecharecibido(fecharecibido.getDate());
             //m.setFechaentrega(null);
             m.setFechavencimiento(fechavencimiento.getDate());
+            m.setLote(i+1);
             if(departamento.getSelectedItem().toString().equalsIgnoreCase("CHIPS")){depto = 1;}
             else if(departamento.getSelectedItem().toString().equalsIgnoreCase("TRANSFORMADORES")){depto = 2;}
             m.setDepto(depto);
-            //m.setEntregado(Integer.parseInt(entregado.getText()));
-            m.setEntregado(0);
+            m.setEntregado(Integer.parseInt(entregado.getText()));
             m.setNota(nota.getText());
             m.setCantidad(Integer.parseInt(CANTIDAD.getText()));
-            insertartrabajo.InsertarTrabajoNew(m);
+            insertartrabajo.InsertarTrabajo(m);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR"+e);
         }
-             
+             }
              JOptionPane.showMessageDialog(null, "TRABAJO AGREGADO...");
              limpiar();
              }else{JOptionPane.showMessageDialog(null, "LLene Los Campos necesario");}
@@ -477,12 +449,12 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_fechavencimientoAncestorAdded
 
     private void fechavencimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fechavencimientoMouseClicked
-                  CANTIDAD.requestFocus();
+                
 
     }//GEN-LAST:event_fechavencimientoMouseClicked
 
     private void loteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteActionPerformed
-                      
+                        CANTIDAD.requestFocus();
     }//GEN-LAST:event_loteActionPerformed
 
     private void entregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entregadoActionPerformed
@@ -490,11 +462,11 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_entregadoActionPerformed
 
     private void departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoActionPerformed
-            guardar.requestFocus();
+            entregado.requestFocus();
     }//GEN-LAST:event_departamentoActionPerformed
 
     private void CANTIDADActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CANTIDADActionPerformed
-       guardar.requestFocus();
+       departamento.requestFocus();
     }//GEN-LAST:event_CANTIDADActionPerformed
 
     /**
@@ -514,20 +486,21 @@ public class TRABAJOS extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TRABAJOS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TRABAJOSBACKUP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TRABAJOS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TRABAJOSBACKUP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TRABAJOS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TRABAJOSBACKUP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TRABAJOS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TRABAJOSBACKUP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TRABAJOS().setVisible(true);
+                new TRABAJOSBACKUP().setVisible(true);
             }
         });
     }

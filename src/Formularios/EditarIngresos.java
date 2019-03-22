@@ -976,11 +976,10 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                     NuevaC.setEnabled(true);
                     Bcancelar.setEnabled(false);
                     limpiar();
-            
             }
-           } catch (Exception e) {
+           } catch (Exception e) {JOptionPane.showMessageDialog(null, "ERROR"+e);
         }
-
+  
     }//GEN-LAST:event_BguardarActionPerformed
 
     private void ComboBodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBodeActionPerformed
