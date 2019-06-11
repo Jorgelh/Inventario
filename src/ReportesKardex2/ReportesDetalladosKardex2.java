@@ -130,7 +130,7 @@ public class ReportesDetalladosKardex2 extends javax.swing.JInternalFrame {
         setBackground(java.awt.Color.lightGray);
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("REPORTE DE INVENTARIO KARDEX");
+        setTitle("REPORTE DE INVENTARIO KARDEX DECRETO 2989");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 

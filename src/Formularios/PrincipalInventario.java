@@ -1315,8 +1315,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem30ActionPerformed
 
     private void jMenuItem31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem31ActionPerformed
-        //ReporteBodega DP = new ReporteBodega();
-        ReportesDetalladosMES DP = new ReportesDetalladosMES();
+        ReporteBodega DP = new ReporteBodega();
         jDesktopPane1.add(DP); 
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = DP.getSize();
