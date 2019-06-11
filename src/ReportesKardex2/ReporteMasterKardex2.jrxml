@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="968" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.1000000000000048"/>
+	<property name="ireport.zoom" value="1.1000000000000032"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["E:\\PROYECTOS\\Inventario\\src\\Reportes\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["E:\\PROYECTOS\\Inventario\\src\\ReportesKardex2\\"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="FECHAINICIO" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -13,7 +13,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select k.codigo,k.codigoint,p.descripcion, u.descripcion as unidad from kardex k inner join producto p on p.codigo = k.codigoint join unidad_medida u on p.id_medida = u.id_medida
+		<![CDATA[select k.codigo,k.codigoint,p.descripcion, u.descripcion as unidad from kardexout k inner join producto p on p.codigo = k.codigoint join unidad_medida u on p.id_medida = u.id_medida
 where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFIN},'dd/mm/yy')GROUP BY k.codigo,p.descripcion,u.descripcion,k.codigoint]]>
 	</queryString>
 	<field name="CODIGO" class="java.lang.String"/>
@@ -279,20 +279,6 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 				</textElement>
 				<text><![CDATA[No, Dcto]]></text>
 			</staticText>
-			<subreport>
-				<reportElement x="0" y="159" width="884" height="48"/>
-				<subreportParameter name="FECHAFIN">
-					<subreportParameterExpression><![CDATA[$P{FECHAFIN}.toString()]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="CODIGO">
-					<subreportParameterExpression><![CDATA[$F{CODIGOINT}.toString()]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="FECHAIN">
-					<subreportParameterExpression><![CDATA[$P{FECHAINICIO}.toString()]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA["SubReport.jasper"]]></subreportExpression>
-			</subreport>
 			<staticText>
 				<reportElement x="666" y="138" width="74" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -309,7 +295,7 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 				<text><![CDATA[0]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="1" y="137" width="884" height="22"/>
+				<reportElement x="0" y="137" width="888" height="22"/>
 				<subreportParameter name="CODIGO">
 					<subreportParameterExpression><![CDATA[$F{CODIGOINT}.toString()]]></subreportParameterExpression>
 				</subreportParameter>
@@ -317,9 +303,26 @@ where k.fecha between to_date($P{FECHAINICIO},'dd/mm/yy') and to_date($P{FECHAFI
 					<subreportParameterExpression><![CDATA[$P{FECHAINICIO}.toString()]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA["SubReporteSaldo.jasper"]]></subreportExpression>
+				<subreportExpression class="java.lang.String"><![CDATA["SubReporteSaldoKardex2.jasper"]]></subreportExpression>
 			</subreport>
+			<elementGroup>
+				<subreport>
+					<reportElement x="0" y="159" width="888" height="48"/>
+					<subreportParameter name="FECHAFIN">
+						<subreportParameterExpression><![CDATA[$P{FECHAFIN}.toString()]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="CODIGO">
+						<subreportParameterExpression><![CDATA[$F{CODIGOINT}.toString()]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FECHAIN">
+						<subreportParameterExpression><![CDATA[$P{FECHAINICIO}.toString()]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.lang.String"><![CDATA["SubReportKardex2.jasper"]]></subreportExpression>
+				</subreport>
+			</elementGroup>
 		</band>
+		<band height="50"/>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>

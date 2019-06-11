@@ -28,6 +28,8 @@ public class TRABAJOS2 extends javax.swing.JInternalFrame {
     int id;
     int lotecanti;
     int lotecantidiv;
+    int idcontrol;
+    
     
     
     /**
@@ -55,6 +57,12 @@ public class TRABAJOS2 extends javax.swing.JInternalFrame {
         entregado.setText("");
         nota.setText("");
         pn.requestFocus();
+   
+     noestandar = 0;
+     depto = 0;
+     id = 0;
+     lotecanti = 0;
+     lotecantidiv = 0;
     }
     
     public void actualizarTrabajo(){   
@@ -349,6 +357,11 @@ public class TRABAJOS2 extends javax.swing.JInternalFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("P/N");
 
+        BPN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BPNActionPerformed(evt);
+            }
+        });
         BPN.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 BPNKeyPressed(evt);
@@ -447,10 +460,11 @@ public class TRABAJOS2 extends javax.swing.JInternalFrame {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
       
-        
+        if(idcontrol == id){
          if( fecharecibi.getText().compareTo("")!=0 && fechavencimien.getText().compareTo("")!=0 
             && estandar.getText().compareTo("")!=0 && pn.getText().compareTo("") != 0 && job.getText().compareTo("") != 0 && 
-                 lote.getText().compareTo("") != 0 && departamento.getText().compareTo("")!=0) 
+                 lote.getText().compareTo("") != 0 && departamento.getText().compareTo("")!=0 && cantidad.getText().compareTo("")!=0
+                 ) 
                  {
          
              for(int i=0; Integer.parseInt(lote.getText())>i;i++){        
@@ -488,8 +502,8 @@ public class TRABAJOS2 extends javax.swing.JInternalFrame {
              actualizarTrabajo();
              listartrabajos();
              limpiar();
-             }else{JOptionPane.showMessageDialog(null, "LLene Los Campos necesario");}
-        
+             }else {JOptionPane.showMessageDialog(null, "LLene Los Campos necesario");}
+        }else {JOptionPane.showMessageDialog(null, "Seleccionar el P/N");}
     }//GEN-LAST:event_guardarActionPerformed
 
     private void pnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnKeyReleased
@@ -538,6 +552,7 @@ public class TRABAJOS2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cantidadActionPerformed
 
     private void trabajoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trabajoMouseClicked
+            
             lote.requestFocus();
             id = (Integer.parseInt(String.valueOf(trabajo.getModel().getValueAt(trabajo.getSelectedRow(),4))));
         try {
@@ -551,10 +566,12 @@ public class TRABAJOS2 extends javax.swing.JInternalFrame {
                fechavencimien.setText(p.getSfechavencimiento());
                lotecanti = p.getCantidad();
                departamento.setText(p.getDeptostring());
+               idcontrol = p.getId();
                
         } catch (Exception e) {
             System.out.println("Error de Seleccion:"+e);
         }
+        System.out.println("resul "+idcontrol+" == "+id+"");
     }//GEN-LAST:event_trabajoMouseClicked
 
     private void BPNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BPNKeyReleased
@@ -576,6 +593,10 @@ public class TRABAJOS2 extends javax.swing.JInternalFrame {
     private void BPNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BPNKeyPressed
 
     }//GEN-LAST:event_BPNKeyPressed
+
+    private void BPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BPNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BPNActionPerformed
 
     
      private void listartrabajos(){

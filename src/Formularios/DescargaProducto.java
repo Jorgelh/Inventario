@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,6 +42,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     int cantidadtotal;
     int ididentificador;
     int presentacion;
+
     /**
      * Creates new form DescargaProducto
      */
@@ -64,16 +66,15 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             }
             ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad2) from ingreso where codigo =" + TxCodigo.getText() + "and bodega = 2 and estado = 'A'");
             //ResultSet r = stmt.executeQuery("select sum(ingreso.cantidad),producto.cantidadminima from ingreso inner join producto on  ingreso.codigo = producto.codigo where ingreso.codigo = "+ TxCodigo.getText() +" and bodega = 2 GROUP BY (producto.CANTIDADMINIMA)");
-            while (r.next()) { 
-                if (String.valueOf(r) == null)
-                {
-                txttotalBodeguita.setText("0");
-                }else{
-                this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(ingreso.cantidad2)")));
+            while (r.next()) {
+                if (String.valueOf(r) == null) {
+                    txttotalBodeguita.setText("0");
+                } else {
+                    this.txttotalBodeguita.setText(String.valueOf(r.getInt("sum(ingreso.cantidad2)")));
                 }
-              //  this.cantidadminima = (r.getInt("cantidadminima"));
+                //  this.cantidadminima = (r.getInt("cantidadminima"));
             }
-            ResultSet rd = stmt.executeQuery("select cantidadminima from producto where codigo = "+ TxCodigo.getText());
+            ResultSet rd = stmt.executeQuery("select cantidadminima from producto where codigo = " + TxCodigo.getText());
             while (rd.next()) {
                 //this.txttotalBodeguita.setText(String.valueOf(rd.getInt("sum(ingreso.cantidad)")));
                 this.cantidadminima = (rd.getInt("cantidadminima"));
@@ -84,17 +85,16 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             stmt.close();
         } catch (SQLException error) {
             System.out.println("NO ERROR DE unidad medida" + error);
-            
+
         }
 
         int bode = Integer.parseInt(txtcantBodega.getText());
         int bodegui = Integer.parseInt(txttotalBodeguita.getText());
         txtSumas.setText(String.valueOf(bode + bodegui));
-        if(cantidadminima < Integer.parseInt(txtSumas.getText()))
-        {
-           CantidadMinima.setText(String.valueOf(cantidadminima));
-           CantidadMinima.setBackground(Color.GREEN);
-        }else{    
+        if (cantidadminima < Integer.parseInt(txtSumas.getText())) {
+            CantidadMinima.setText(String.valueOf(cantidadminima));
+            CantidadMinima.setBackground(Color.GREEN);
+        } else {
             CantidadMinima.setText(String.valueOf(cantidadminima));
             CantidadMinima.setBackground(Color.RED);
         }
@@ -117,7 +117,10 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     }
 
     public void limpiarlabel() {
-
+        conta = 0;
+        cantidadtotal = 0;
+        ididentificador = 0;
+        presentacion = 0;
         LaDescrip.setText("");
         LaFechaVen.setText("");
         LaLote.setText("");
@@ -161,15 +164,15 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         Depto.setEnabled(b);
 
     }
-    
+
     public void FechasJdate() {
-      
+
         Calendar c2 = new GregorianCalendar();
         fechaEntrega.setCalendar(c2);
-}
+    }
 
-    public  void obtenerdescripcion() {
-        
+    public void obtenerdescripcion() {
+
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -178,31 +181,42 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             LaDescrip.setText(rs.getString("descripcion"));
             unidadMedida.setText(rs.getString("descmedida"));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
         }
     }
-    
-    public void obtenerDepto(){
-    
-    String Departamento;
-    Departamento = Depto.getSelectedValue();
-   
-    if(Departamento == "Chips"){ NoDepto = 1;} 
-    else if(Departamento == "Transformadores"){ NoDepto = 2;}
-    else if(Departamento == "Solder"){ NoDepto = 3;} 
-    else if(Departamento == "Testing"){ NoDepto = 4;} 
-    else if(Departamento == "Taller"){ NoDepto = 5;}
-    //else if(Departamento == "Direccion de Operaciones"){ NoDepto = 6;} 
-    else if(Departamento == "Ingenieria"){ NoDepto = 7;}
-    else if(Departamento == "Potting"){ NoDepto = 8;}
-    else if(Departamento == "Control de Calidad"){ NoDepto = 9;} 
-    else if(Departamento == "Bodega"){ NoDepto = 10;} 
-    //else if(Departamento == "IT Mantenimiento"){ NoDepto = 11;}
-    else if(Departamento == "Gerencia General"){ NoDepto = 12;} 
-    else if(Departamento == "Gerencia Financiera Administrativa"){ NoDepto = 13;}    
-    
-    
-    /*
+
+    public void obtenerDepto() {
+
+        String Departamento;
+        Departamento = Depto.getSelectedValue();
+
+        if (Departamento == "Chips") {
+            NoDepto = 1;
+        } else if (Departamento == "Transformadores") {
+            NoDepto = 2;
+        } else if (Departamento == "Solder") {
+            NoDepto = 3;
+        } else if (Departamento == "Testing") {
+            NoDepto = 4;
+        } else if (Departamento == "Taller") {
+            NoDepto = 5;
+        } //else if(Departamento == "Direccion de Operaciones"){ NoDepto = 6;} 
+        else if (Departamento == "Ingenieria") {
+            NoDepto = 7;
+        } else if (Departamento == "Potting") {
+            NoDepto = 8;
+        } else if (Departamento == "Control de Calidad") {
+            NoDepto = 9;
+        } else if (Departamento == "Bodega") {
+            NoDepto = 10;
+        } //else if(Departamento == "IT Mantenimiento"){ NoDepto = 11;}
+        else if (Departamento == "Gerencia General") {
+            NoDepto = 12;
+        } else if (Departamento == "Gerencia Financiera Administrativa") {
+            NoDepto = 13;
+        }
+
+        /*
             1 Chips = 1
             2 Transformadores = 2
             3 Solder Dip Strip y Potting = 3
@@ -232,47 +246,82 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             //11 IT Mantenimiento = 11 YA NO SE INCLUYE//
             12 Gerencia General = 12
             13 Gerencia Financiera Administrativa = 13
-    */
-    
+         */
     }
-    
-    public void Ultimoprecio(){
-    
-        
-        if(presentacion == 0){
-        
-        try {
-            Connection con = BD.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where idkardex =(select MAX(idkardex) from kardex where codigo = "+TxCodigo.getText()+") and codigo = "+TxCodigo.getText());
-            while (rs.next()) {
-                Double precio = rs.getDouble(1);
-                precioanterior = precio;
-            }
-            rs.close();
-            stmt.close();
-            con.close();
-        } catch (SQLException error) {
-            System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO");
-        }
-        }else{
-            
+
+    public void Ultimoprecio() {
+
+        if (presentacion == 0) {
+
             try {
-            Connection con = BD.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where idkardex =(select MAX(idkardex) from kardex where codigo = "+TxCodigo.getText()+") and codigo = "+TxCodigo.getText()+" and presentacion ="+presentacion);
-            while (rs.next()) {
-                Double precio = rs.getDouble(1);
-                precioanterior = precio;
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where idkardex =(select MAX(idkardex) from kardex where codigoint = " + TxCodigo.getText() + ") and codigoint = " + TxCodigo.getText());
+                while (rs.next()) {
+                    Double precio = rs.getDouble(1);
+                    precioanterior = precio;
+                }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException error) {
+                System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO");
             }
-            rs.close();
-            stmt.close();
-            con.close();
-        } catch (SQLException error) {
-            System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO");
-        }
+        } else {
+
+            try {
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where idkardex =(select MAX(idkardex) from kardex where codigoint = " + TxCodigo.getText() + ") and codigoint = " + TxCodigo.getText() + " and presentacion =" + presentacion);
+                while (rs.next()) {
+                    Double precio = rs.getDouble(1);
+                    precioanterior = precio;
+                }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException error) {
+                System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO");
+            }
         }
     }
+    
+    
+      public void UltimoprecioKardexOut() {
+
+        if (presentacion == 0) {
+            try {
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select valorsaldo from kardexout where idkardex =(select MAX(idkardex) from kardexout where codigoint = " + TxCodigo.getText() + ") and codigoint = " + TxCodigo.getText());
+                while (rs.next()) {
+                    Double precio = rs.getDouble(1);
+                    precioanterior = precio;
+                }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException error) {
+                System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO KARDEXOUT");
+            }
+        } else {
+            try {
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select valorsaldo from kardexout where idkardex =(select MAX(idkardex) from kardexout where codigoint = " + TxCodigo.getText() + ") and codigoint = " + TxCodigo.getText() + " and presentacion =" + presentacion);
+                while (rs.next()) {
+                    Double precio = rs.getDouble(1);
+                    precioanterior = precio;
+                }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException error) {
+                System.out.print(error + "ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO KARDEXOUT");
+            }
+        }
+    }
+
     /*public void test(){
         Ultimoprecio();
         ultimoidingreso();
@@ -286,103 +335,157 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     
     
     }
-    */
-    public void ProcedimientoKardex(){
-        
-        
-    try {
-            
+     */
+    public void ProcedimientoKardex() {
+        ididentificador();
+        ultimoidingreso();
+        Ultimoprecio();
+       
+        try {
+
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
-            ps.executeUpdate("begin actualizarkardexdescarga(IDKardex=>"+id+",NCodigo=>"+Integer.parseInt(TxCodigo.getText())+",NDocumento=>'"+documento.getText()+"',Fecha=>'"+fecha+"',Ncantidad=>"+Integer.parseInt(txtcantidad.getText())+",Nprecio=>"+precioanterior+",CantidadSaldo=>"+cantidadtotal+",precioSaldo=>"+precioanterior+",idIngreso=>"+Integer.parseInt(txtNoingreso.getText())+",ididen=>"+ididentificador+",presentacion=>"+presentacion+"); commit; end;");
+            if(presentacion == 0){
+            ps.executeUpdate("begin actualizarkardexdescarga(IDKardex=>" + id + ",NCodigo=>'" + TxCodigo.getText() + "',NDocumento=>'" + documento.getText() + "',Fecha=>'" + fecha + "',Ncantidad=>" + Integer.parseInt(txtcantidad.getText()) + ",Nprecio=>" + precioanterior + ",CantidadSaldo=>" + cantidadtotal + ",precioSaldo=>" + precioanterior + ",idIngreso=>" + Integer.parseInt(txtNoingreso.getText()) + ",ididen=>" + ididentificador + ",presentacion=>" + presentacion + ",codigoint=>" + Integer.parseInt(TxCodigo.getText())+"); commit; end;");}
+            else{ps.executeUpdate("begin actualizarkardexdescarga(IDKardex=>" + id + ",NCodigo=>'"+ TxCodigo.getText()+"-"+presentacion+"',NDocumento=>'" + documento.getText() + "',Fecha=>'" + fecha + "',Ncantidad=>" + Integer.parseInt(txtcantidad.getText()) + ",Nprecio=>" + precioanterior + ",CantidadSaldo=>" + cantidadtotal + ",precioSaldo=>" + precioanterior + ",idIngreso=>" + Integer.parseInt(txtNoingreso.getText()) + ",ididen=>" + ididentificador + ",presentacion=>" + presentacion + ",codigoint=>" + Integer.parseInt(TxCodigo.getText())+"); commit; end;");}
             cn.close();
             ps.close();
         } catch (Exception e) {
-            System.out.print(e+" ERROR DE LOS DATOS DE PROCEDIMIENTO");
+            System.out.print(e + " ERROR DE LOS DATOS DE PROCEDIMIENTO");
         }
     }
     
+    public void ProcedimientoKardexOut() {
+        
+        
+        ididentificadorKardexOut();
+        ultimoidingresoKardexOut();
+        UltimoprecioKardexOut();
+        System.out.println("precio "+precioanterior);
+        System.out.println("cantidad "+cantidadtotal);
+        try {
+
+            Connection cn = BD.getConnection();
+            Statement ps = cn.createStatement();
+            if(presentacion==0){
+            ps.executeUpdate("begin actualizarkardexoutdescarga(IDKardex=>" + id + ",NCodigo=>'" + TxCodigo.getText()+"',NDocumento=>'" + documento.getText() + "',Fecha=>'" + fecha + "',Ncantidad=>" + Integer.parseInt(txtcantidad.getText()) + ",Nprecio=>" + precioanterior + ",CantidadSaldo=>" + cantidadtotal + ",precioSaldo=>" + precioanterior + ",idIngreso=>" + Integer.parseInt(txtNoingreso.getText()) + ",ididen=>" + ididentificador + ",presentacion=>" + presentacion + ",codigoint=>"+Integer.parseInt(TxCodigo.getText())+"); commit; end;");
+            }else
+            {ps.executeUpdate("begin actualizarkardexoutdescarga(IDKardex=>" + id + ",NCodigo=>'" + TxCodigo.getText()+"-"+presentacion+ "',NDocumento=>'" + documento.getText() + "',Fecha=>'" + fecha + "',Ncantidad=>" + Integer.parseInt(txtcantidad.getText()) + ",Nprecio=>" + precioanterior + ",CantidadSaldo=>" + cantidadtotal + ",precioSaldo=>" + precioanterior + ",idIngreso=>" + Integer.parseInt(txtNoingreso.getText()) + ",ididen=>" + ididentificador + ",presentacion=>" + presentacion + ",codigoint=>"+Integer.parseInt(TxCodigo.getText())+"); commit; end;");}    
+            cn.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.print(e + "ERROR DE LOS DATOS DE PROCEDIMIENTO");
+        }
+    }
     
-    public void ididentificador(){
-    try {
+    public void ididentificador() {
+        try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select max(id) from kardex");
             while (rs.next()) {
                 int lastID = rs.getInt(1);
-                ididentificador = lastID+1;
+                ididentificador = lastID + 1;
             }
             rs.close();
             stmt.close();
             con.close();
         } catch (SQLException error) {
-            System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX ");
+            System.out.print(error + "ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX");
         }
-    }
-    
-    
-    public void fechaingresokardex(){
-    Date date = fechaEntrega.getDate();
+    }//ok
+
+    public void ididentificadorKardexOut() {
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select max(id) from kardexout");
+            while (rs.next()) {
+                int lastID = rs.getInt(1);
+                ididentificador = lastID + 1;
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+            }catch (SQLException error) {
+            System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX ");}
+    }//ok
+
+    public void fechaingresokardex() {
+        Date date = fechaEntrega.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         fecha = sdf.format(date);
     }
-    
-    
-    public void ultimoidingreso(){
-    try {
+
+    public void ultimoidingreso() {
+        try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select max(idkardex) from kardex where tipo = 2");
+            ResultSet rs = stmt.executeQuery("select max(idkardex) from kardex");
             while (rs.next()) {
                 int lastID = rs.getInt(1);
-                id = lastID+1;
+                id = lastID + 1;
             }
             rs.close();
             stmt.close();
             con.close();
         } catch (SQLException error) {
-            System.out.print(error+" ERROR QUE OBTIENE EL ULTIMO ID DE INGRESO ");
+            System.out.print(error + "ERROR QUE OBTIENE EL ULTIMO ID DE INGRESO");
         }
-    }
-    
-    
-     public void sumaingresos(){
-         if(presentacion == 0){
-    try {
+    } //OK
+
+    public void ultimoidingresoKardexOut() {
+        try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select sum(cantidad) as cantidad from ingreso where codigo = "+TxCodigo.getText()+" and conta = 1");
+            ResultSet rs = stmt.executeQuery("select max(idkardex) from kardexout");
             while (rs.next()) {
-                int cantidad = rs.getInt(1);
-                cantidadtotal = cantidad;
+                int lastID = rs.getInt(1);
+                id = lastID + 1;
             }
             rs.close();
             stmt.close();
             con.close();
         } catch (SQLException error) {
-            System.out.print(error);
+            System.out.print(error + "ERROR QUE OBTIENE EL ULTIMO ID DE INGRESO");
         }
-        }else{
-         
-             try {
-            Connection con = BD.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select sum(cantidad) as cantidad from ingreso where codigo = "+TxCodigo.getText()+" and conta = 1 and presentacion ="+presentacion);
-            while (rs.next()) {
-                int cantidad = rs.getInt(1);
-                cantidadtotal = cantidad;
+    } //OK
+
+    public void sumaingresos() {
+        if (presentacion == 0) {
+            try {
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select sum(cantidad) as cantidad from ingreso where codigo = " + TxCodigo.getText() + " and conta =" + conta);
+                while (rs.next()) {
+                    int cantidad = rs.getInt(1);
+                    cantidadtotal = cantidad;
+                }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException error) {
+                System.out.print(error);
             }
-            rs.close();
-            stmt.close();
-            con.close();
-        } catch (SQLException error) {
-            System.out.print(error);
+        } else {
+            try {
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select sum(cantidad) as cantidad from ingreso where codigo = " + TxCodigo.getText() + " and conta = " + conta + " and presentacion =" + presentacion);
+                while (rs.next()) {
+                    int cantidad = rs.getInt(1);
+                    cantidadtotal = cantidad;
+                }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException error) {
+                System.out.print(error);
+            }
         }
-         
-         
-         }
-        
-     }         
+
+    }  //OK
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -740,9 +843,9 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BoDescargar))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BoDescargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -1114,7 +1217,7 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1157,125 +1260,114 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
         }
 
     }//GEN-LAST:event_TxCodigoActionPerformed
 
     private void BoDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoDescargarActionPerformed
         obtenerDepto();
-        
-        if(presentacion == 0){
-        if (txtcantidad.getText().compareTo("") != 0 && txtentregado.getText().compareTo("") != 0 && NoDepto > 0) 
-        {
 
-            int A = Integer.parseInt(txtcantidad.getText());
-            int B = Integer.parseInt(laCantidad.getText());
-            if (B >= A) {
-                obtenerDepto();
-                fechaingresokardex();
-                ididentificador();
-                sumaingresos();
-                ultimoidingreso();
-                Ultimoprecio();
-                try {
-                    Descarga d = new Descarga();
-                    d.setCantidad(Integer.parseInt(txtcantidad.getText()));
-                    d.setEntregadoA(Integer.parseInt(txtentregado.getText()));
-                    d.setId_ingreso(Integer.parseInt(txtNoingreso.getText()));
-                    d.setNota(txtNota.getText());
-                    d.setCodigo(Integer.parseInt(TxCodigo.getText()));
-                    d.setFecha(fechaEntrega.getDate());
-                    d.setDocumento(documento.getText());
-                    d.setSerie(serie.getText());
-                    d.setPn(pn1.getText());
-                    d.setLote(trabajo.getText());
-                    d.setTrabajo(lote.getText());
-                    d.setDepto(NoDepto);
-                    d.setConta(conta);
-                    if(txtbodega.getText().toString().equalsIgnoreCase("Bodega")){d.setBodega(1);}else{d.setBodega(2);}
-                    BDDescargaProducto.insertarDescarga(d);
-                    JOptionPane.showMessageDialog(null, "Descarga Realizada...");
-                    BoDescargar.setEnabled(false);
-                    if(conta == 1){
-                    ProcedimientoKardex();}
-                    limpiartabla15();
-                    limpiarlabel();
-                    activartxt(false);
-                    TxCodigo.setEnabled(true);
-                } catch (Exception e) {
+        if (presentacion == 0) {
+            if (txtcantidad.getText().compareTo("") != 0 && txtentregado.getText().compareTo("") != 0 && NoDepto > 0) {
 
-                    JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA  "+e);
+                int A = Integer.parseInt(txtcantidad.getText());
+                int B = Integer.parseInt(laCantidad.getText());
+                if (B >= A) {
+                    obtenerDepto();
+                    fechaingresokardex();
+                    sumaingresos();
+                    try {
+                        Descarga d = new Descarga();
+                        d.setCantidad(Integer.parseInt(txtcantidad.getText()));
+                        d.setEntregadoA(Integer.parseInt(txtentregado.getText()));
+                        d.setId_ingreso(Integer.parseInt(txtNoingreso.getText()));
+                        d.setNota(txtNota.getText());
+                        d.setCodigo(Integer.parseInt(TxCodigo.getText()));
+                        d.setFecha(fechaEntrega.getDate());
+                        d.setDocumento(documento.getText());
+                        d.setSerie(serie.getText());
+                        d.setPn(pn1.getText());
+                        d.setLote(trabajo.getText());
+                        d.setTrabajo(lote.getText());
+                        d.setDepto(NoDepto);
+                        d.setConta(conta);
+                        if (txtbodega.getText().toString().equalsIgnoreCase("Bodega")) {
+                            d.setBodega(1);
+                        } else {
+                            d.setBodega(2);
+                        }
+                        BDDescargaProducto.insertarDescarga(d);
+                        JOptionPane.showMessageDialog(null, "Descarga Realizada...");
+                        BoDescargar.setEnabled(false);
+                        if (conta == 1) {
+                            ProcedimientoKardex();
+                        }else if(conta == 2){ProcedimientoKardexOut();} 
+                        limpiartabla15();
+                        limpiarlabel();
+                        activartxt(false);
+                        TxCodigo.setEnabled(true);
+                    } catch (Exception e) {
+
+                        JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA  " + e);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "NO EXISTE LA CANTIDAD NECESARIA PARA REALIZAR LA DESCARGA");
                 }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
             }
-            else{ JOptionPane.showMessageDialog(null, "NO POSER LA CANTIDAD NECESARIA PARA REALIZAR LA DESCARGA");}
-            
-            
-        }
-        else {JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");}
-        }
-        
-        
-        else{///else de verificar si tiene contable o no
-            
-            if (txtcantidad.getText().compareTo("") != 0 && txtentregado.getText().compareTo("") != 0 && NoDepto > 0 && presentacion !=0) 
-        {
+        } else {///else de verificar si tiene contable o no
 
-            int A = Integer.parseInt(txtcantidad.getText());
-            int B = Integer.parseInt(laCantidad.getText());
-            if (B >= A) {
-                obtenerDepto();
-                fechaingresokardex();
-                ididentificador();
-                sumaingresos();
-                ultimoidingreso();
-                Ultimoprecio();
-                try {
-                    Descarga d = new Descarga();
-                    d.setCantidad(Integer.parseInt(txtcantidad.getText()));
-                    d.setEntregadoA(Integer.parseInt(txtentregado.getText()));
-                    d.setId_ingreso(Integer.parseInt(txtNoingreso.getText()));
-                    d.setNota(txtNota.getText());
-                    d.setCodigo(Integer.parseInt(TxCodigo.getText()));
-                    d.setFecha(fechaEntrega.getDate());
-                    d.setDocumento(documento.getText());
-                    d.setSerie(serie.getText());
-                    d.setPn(pn1.getText());
-                    d.setLote(trabajo.getText());
-                    d.setTrabajo(lote.getText());
-                    d.setDepto(NoDepto);
-                    d.setConta(conta);
-                    if(txtbodega.getText().toString().equalsIgnoreCase("Bodega")){d.setBodega(1);}else{d.setBodega(2);}
-                    BDDescargaProducto.insertarDescarga(d);
-                    JOptionPane.showMessageDialog(null, "Descarga Realizada...");
-                    BoDescargar.setEnabled(false);
-                    if(conta == 1){
-                    ProcedimientoKardex();}
-                    limpiartabla15();
-                    limpiarlabel();
-                    activartxt(false);
-                    TxCodigo.setEnabled(true);
-                } catch (Exception e) {
+            if (txtcantidad.getText().compareTo("") != 0 && txtentregado.getText().compareTo("") != 0 && NoDepto > 0 && presentacion != 0) {
 
-                    JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA  "+e);
+                int A = Integer.parseInt(txtcantidad.getText());
+                int B = Integer.parseInt(laCantidad.getText());
+                if (B >= A) {
+                    obtenerDepto();
+                    fechaingresokardex();
+                    sumaingresos();
+                    try {
+                        Descarga d = new Descarga();
+                        d.setCantidad(Integer.parseInt(txtcantidad.getText()));
+                        d.setEntregadoA(Integer.parseInt(txtentregado.getText()));
+                        d.setId_ingreso(Integer.parseInt(txtNoingreso.getText()));
+                        d.setNota(txtNota.getText());
+                        d.setCodigo(Integer.parseInt(TxCodigo.getText()));
+                        d.setFecha(fechaEntrega.getDate());
+                        d.setDocumento(documento.getText());
+                        d.setSerie(serie.getText());
+                        d.setPn(pn1.getText());
+                        d.setLote(trabajo.getText());
+                        d.setTrabajo(lote.getText());
+                        d.setDepto(NoDepto);
+                        d.setConta(conta);
+                        if (txtbodega.getText().toString().equalsIgnoreCase("Bodega")) {
+                            d.setBodega(1);
+                        } else {
+                            d.setBodega(2);
+                        }
+                        BDDescargaProducto.insertarDescarga(d);
+                        JOptionPane.showMessageDialog(null, "Descarga Realizada...");
+                        BoDescargar.setEnabled(false);
+                        if (conta == 1) {
+                            ProcedimientoKardex();
+                        }else if(conta == 2){ProcedimientoKardexOut();}
+                        limpiartabla15();
+                        limpiarlabel();
+                        activartxt(false);
+                        TxCodigo.setEnabled(true);
+                    }catch (Exception e){
+                        JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "NO EXISTE LA CANTIDAD NECESARIA PARA REALIZAR LA DESCARGA");
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
             }
-            else{ JOptionPane.showMessageDialog(null, "NO POSER LA CANTIDAD NECESARIA PARA REALIZAR LA DESCARGA");}
-            
-            
         }
-        else {JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");}
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }//GEN-LAST:event_BoDescargarActionPerformed
 
     private void CosultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CosultaMouseClicked
@@ -1291,25 +1383,22 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
             LaLote.setText(ca.getLote());
             LaPN.setText(ca.getPN());
             LaPO.setText(ca.getPO());
-            conta=ca.getConta();
+            conta = ca.getConta();
             precio = ca.getPrecio();
-            presentacion= ca.getPresent();
+            presentacion = ca.getPresent();
             txtNoingreso.setText(String.valueOf(ca.getId_ingreso()));
-            if(ca.getBodeda()==1){txtbodega.setText("Bodega");
-            laCantidad.setText(String.valueOf(ca.getCantidad()));
-            } 
-            else{txtbodega.setText("Bodeguita");
-            laCantidad.setText(String.valueOf(ca.getCantidad2()));}
+            if (ca.getBodeda() == 1) {
+                txtbodega.setText("Bodega");
+                laCantidad.setText(String.valueOf(ca.getCantidad()));
+            } else {
+                txtbodega.setText("Bodeguita");
+                laCantidad.setText(String.valueOf(ca.getCantidad2()));
+            }
             txtubicacion.setText(ca.getUbicacion());
             notas.setText(ca.getNota());
-            
-
         } catch (Exception e) {
-
             System.out.println("ERROR REPORTE AL ADMINISTRADOR DE SISTEMA" + e);
         }
-
-
     }//GEN-LAST:event_CosultaMouseClicked
 
     private void txtNoingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoingresoActionPerformed
@@ -1324,12 +1413,10 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void TxCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxCodigoKeyTyped
-
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
             evt.consume();
         }
-
     }//GEN-LAST:event_TxCodigoKeyTyped
 
     private void txtcantBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcantBodegaActionPerformed
@@ -1338,33 +1425,33 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
 
     private void txtcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcantidadActionPerformed
 
-          BoDescargar.requestFocus();
-      
+        BoDescargar.requestFocus();
+
     }//GEN-LAST:event_txtcantidadActionPerformed
 
     private void CosultaMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CosultaMouseDragged
-       
-        
+
+
     }//GEN-LAST:event_CosultaMouseDragged
 
     private void txtentregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtentregadoActionPerformed
 
         txtNota.requestFocus();
-        
+
     }//GEN-LAST:event_txtentregadoActionPerformed
 
     private void txtNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNotaActionPerformed
-      
+
         Depto.requestFocus();
-        
+
     }//GEN-LAST:event_txtNotaActionPerformed
 
     private void documentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documentoActionPerformed
-       serie.requestFocus();
+        serie.requestFocus();
     }//GEN-LAST:event_documentoActionPerformed
 
     private void serieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serieActionPerformed
-       pn1.requestFocus();
+        pn1.requestFocus();
     }//GEN-LAST:event_serieActionPerformed
 
     private void trabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trabajoActionPerformed
@@ -1373,17 +1460,17 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_trabajoActionPerformed
 
     private void loteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteActionPerformed
-       txtentregado.requestFocus();
+        txtentregado.requestFocus();
     }//GEN-LAST:event_loteActionPerformed
 
     private void pn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pn1ActionPerformed
 
-       trabajo.requestFocus();
-        
+        trabajo.requestFocus();
+
     }//GEN-LAST:event_pn1ActionPerformed
 
     private void DeptoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeptoMouseClicked
-     txtcantidad.requestFocus();
+        txtcantidad.requestFocus();
     }//GEN-LAST:event_DeptoMouseClicked
 
     private void actualizarTablaconsulta() {
@@ -1408,13 +1495,13 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
         Cosulta.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "No. Ingreso","P.O","Fecha Ingreso","No. Invoice","P/N","Precio"
+                    "No. Ingreso", "P.O", "Fecha Ingreso", "No. Invoice", "P/N", "Precio"
                 }) {
-                    @Override
-                    public boolean isCellEditable(int row, int column){
-                        return false;
-                    }
-                });
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
     }
 
     /**
@@ -1519,5 +1606,4 @@ public class DescargaProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtubicacion;
     private javax.swing.JLabel unidadMedida;
     // End of variables declaration//GEN-END:variables
-
 }

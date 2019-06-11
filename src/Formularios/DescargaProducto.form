@@ -99,7 +99,7 @@
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -169,9 +169,9 @@
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton2" min="-2" pref="108" max="-2" attributes="0"/>
-                                  <Component id="BoDescargar" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="BoDescargar" max="32767" attributes="0"/>
+                                  <Component id="jButton2" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="20" max="32767" attributes="0"/>
                           </Group>

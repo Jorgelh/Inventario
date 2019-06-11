@@ -48,7 +48,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -62,23 +62,25 @@
                                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="jScrollPane2" min="-2" pref="399" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="transito" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtCodigo" min="-2" pref="194" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="descripcion" min="-2" pref="714" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="transito" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtCodigo" min="-2" pref="194" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="descripcion" min="-2" pref="673" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -88,14 +90,14 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="descripcion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCodigo" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Component id="transito" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -108,7 +110,7 @@
                       </Group>
                       <Component id="jPanel4" alignment="1" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -220,7 +222,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSerieActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSerieKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="TxtProveedor">
@@ -231,7 +232,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtProveedorActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtProveedorKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
@@ -250,7 +250,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtPrecioActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtPrecioKeyPressed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtPrecioKeyTyped"/>
               </Events>
             </Component>
@@ -262,8 +261,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNoDocActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNoDocKeyPressed"/>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNoDocKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="obligatorio">
@@ -313,7 +310,6 @@
                           <Component id="txtLote" alignment="1" max="32767" attributes="0"/>
                           <Component id="txtPO" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtJob" alignment="0" max="32767" attributes="0"/>
-                          <Component id="ComboBoxBodega" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtfechavenci" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtEmpleado" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
@@ -327,11 +323,6 @@
                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="obligatorio5" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="obligatorio3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="112" max="32767" attributes="0"/>
@@ -360,24 +351,19 @@
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtPO" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtEmpleado" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="obligatorio5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtfechavenci" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="obligatorio3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="ComboBoxBodega" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                          <Component id="obligatorio5" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtEmpleado" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -400,7 +386,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtParteActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtParteKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
@@ -419,7 +404,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtJobActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtJobKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
@@ -438,7 +422,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLoteActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtLoteKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -457,7 +440,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPOActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPOKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -468,48 +450,11 @@
                 <Property name="text" type="java.lang.String" value="Fecha Vencimiento"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="ComboBoxBodega">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="Seleccionar...."/>
-                    <StringItem index="1" value="Bodega"/>
-                    <StringItem index="2" value="Bodeguita"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="ComboBoxBodegaItemStateChanged"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboBoxBodegaActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel17">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Bodega"/>
-              </Properties>
-            </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtfechavenci">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="12" style="0"/>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="obligatorio3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="8" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="(*)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
@@ -558,27 +503,8 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="obligatorio2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtCantidad" min="-2" pref="176" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="BagregarProdu" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Bcancelar" min="-2" pref="144" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -586,11 +512,32 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="Bcancelar" min="-2" pref="144" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="BagregarProdu" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="176" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="obligatorio2" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -604,29 +551,33 @@
                       <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Combpresentacion" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                          <Component id="obligatorio2" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtCantidad" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="BagregarProdu" min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="Bcancelar" min="-2" pref="46" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="txtCantidad" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                      <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="94" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="BagregarProdu" min="-2" pref="46" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="Bcancelar" min="-2" pref="46" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="obligatorio2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -685,7 +636,7 @@
             <Component class="javax.swing.JComboBox" name="Combpresentacion">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="11">
+                  <StringArray count="10">
                     <StringItem index="0" value="Seleccionar..."/>
                     <StringItem index="1" value="5 Galones"/>
                     <StringItem index="2" value="1 Galon"/>
@@ -696,7 +647,6 @@
                     <StringItem index="7" value="6 Onzas"/>
                     <StringItem index="8" value="4 Onzas"/>
                     <StringItem index="9" value="2 Onzas"/>
-                    <StringItem index="10" value=" "/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -757,7 +707,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodigoActionPerformed"/>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoKeyPressed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoKeyTyped"/>
           </Events>
         </Component>
@@ -853,7 +802,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Decreto 2989"/>
+            <Property name="text" type="java.lang.String" value="DECRETO 2989"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transitoActionPerformed"/>
@@ -909,7 +858,7 @@
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtInvoice" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="13" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -955,7 +904,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtInvoiceActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtInvoiceKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel21">

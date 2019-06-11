@@ -6,10 +6,8 @@
 package Formularios;
 
 import BD.BD;
-import BD.BDProducto;
 import BD.DBCargaPro;
 import Class.CargaP;
-import Class.Producto;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,20 +16,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import java.awt.Toolkit;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author jluis
  */
-public class CargarProductosContables extends javax.swing.JInternalFrame {
+public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame {
 
     int Enviacodigo;
     int bodega;
@@ -47,7 +42,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
 
     /**
      */
-    public CargarProductosContables() {
+    public CargarProductosContablesKardex2() {
 
         initComponents();
         limpiartxt();
@@ -66,14 +61,14 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         }
     }
 
-    public void Ultimoprecio() {
+    public void UltimoprecioKardex() {
 
         if (presentacion == 0) {
 
             try {
                 Connection con = BD.getConnection();
                 Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where id =(select MAX(id) from kardex where codigo = " + txtCodigo.getText() + ") and codigo = " + txtCodigo.getText());
+                ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where id =(select MAX(id) from kardex where codigo = '" + txtCodigo.getText() + "') and codigo = '" + txtCodigo.getText() + "'");
                 while (rs.next()) {
                     Double precio = rs.getDouble(1);
                     precioanterior = precio;
@@ -89,7 +84,44 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             try {
                 Connection con = BD.getConnection();
                 Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where id =(select MAX(id) from kardex where codigo = " + txtCodigo.getText() + ") and codigo = " + txtCodigo.getText() + " and presentacion =" + presentacion);
+                ResultSet rs = stmt.executeQuery("select valorsaldo from kardex where id =(select MAX(id) from kardex where codigo = '" + txtCodigo.getText() + '-' + presentacion + "') and presentacion =" + presentacion);
+                while (rs.next()) {
+                    Double precio = rs.getDouble(1);
+                    precioanterior = precio;
+                }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException error) {
+                System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO");
+            }
+        }
+    }
+
+    public void UltimoprecioKardexOut() {
+
+        if (presentacion == 0) {
+
+            try {
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select valorsaldo from kardexout where id =(select MAX(id) from kardexout where codigo = '" + txtCodigo.getText() + "') and codigo = '" + txtCodigo.getText() + "'");
+                while (rs.next()) {
+                    Double precio = rs.getDouble(1);
+                    precioanterior = precio;
+                }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException error) {
+                System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO PRECIO DE INGRESO");
+            }
+        } else {
+
+            try {
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select valorsaldo from kardexout where id =(select MAX(id) from kardexout where codigo = '" + txtCodigo.getText() + '-' + presentacion + "') and presentacion =" + presentacion);
                 while (rs.next()) {
                     Double precio = rs.getDouble(1);
                     precioanterior = precio;
@@ -105,17 +137,10 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
 
     public void ProcedimientoKardex() {
         try {
-            /*System.out.print("ID = "+id_ingreso+"\n");
-            System.out.print("CODIGO = "+Integer.parseInt(txtCodigo.getText())+"\n");
-            System.out.print("NO DOC = "+txtNoDoc.getText()+"\n");
-            System.out.print("cantidad = "+Integer.parseInt(txtCantidad.getText())+"\n");
-            System.out.print("PRECIO = "+Double.parseDouble(TxtPrecio.getText())+"\n");
-            System.out.print("CANTIDAD saldo = "+cantidaddeingreso+"\n");
-            System.out.print("NUEVO PRECIO = "+nuevoprecio+"\n");*/
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
             ps.executeUpdate("begin actualizarkardex(IDKardex=>" + idkardex + ","
-                    + "NCodigo=>" + Integer.parseInt(txtCodigo.getText()) + ","
+                    + "NCodigo=>'" + txtCodigo.getText() + "',"
                     + "NDocumento=>'" + txtNoDoc.getText() + "',"
                     + "Fecha_ingreso=>'" + fecha1 + "',"
                     + "Ncantidad=>" + Integer.parseInt(txtCantidad.getText()) + ","
@@ -123,7 +148,78 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                     + "CantidadSaldo=>" + cantidaddeingreso + ","
                     + "precioSaldo=>" + nuevoprecio + ","
                     + "Ididen=>" + ididentificador + ","
-                    + "Presentacion=>" + presentacion + "); commit; end;");
+                    + "Presentacion=>" + presentacion + ","
+                    + "CodigoInt=>"+txtCodigo.getText()+"); commit; end;");
+            cn.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.print(e + " ERROR DE LOS DATOS DE PROCEDIMIENTO");
+        }
+    }
+
+    public void ProcedimientoKardex2() {
+        try {
+            String codigo;
+            codigo = txtCodigo.getText() + '-' + presentacion;
+            Connection cn = BD.getConnection();
+            Statement ps = cn.createStatement();
+            ps.executeUpdate("begin actualizarkardex(IDKardex=>" + idkardex + ","
+                    + "NCodigo=>'" + codigo + "',"
+                    + "NDocumento=>'" + txtNoDoc.getText() + "',"
+                    + "Fecha_ingreso=>'" + fecha1 + "',"
+                    + "Ncantidad=>" + Integer.parseInt(txtCantidad.getText()) + ","
+                    + "Nprecio=>" + Double.parseDouble(TxtPrecio.getText()) + ","
+                    + "CantidadSaldo=>" + cantidaddeingreso + ","
+                    + "precioSaldo=>" + nuevoprecio + ","
+                    + "Ididen=>" + ididentificador + ","
+                    + "Presentacion=>" + presentacion + ","
+                    + "CodigoInt=>" + txtCodigo.getText() + "); commit; end;");
+            cn.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.print(e + " ERROR DE LOS DATOS DE PROCEDIMIENTO");
+        }
+    }
+
+    public void ProcedimientoKardexOut() {
+        try {
+            Connection cn = BD.getConnection();
+            Statement ps = cn.createStatement();
+            ps.executeUpdate("begin actualizarkardexout(IDKardex=>" + idkardex + ","
+                    + "NCodigo=>'" + txtCodigo.getText() + "',"
+                    + "NDocumento=>'" + txtNoDoc.getText() + "',"
+                    + "Fecha_ingreso=>'" + fecha1 + "',"
+                    + "Ncantidad=>" + Integer.parseInt(txtCantidad.getText()) + ","
+                    + "Nprecio=>" + Double.parseDouble(TxtPrecio.getText()) + ","
+                    + "CantidadSaldo=>" + cantidaddeingreso + ","
+                    + "precioSaldo=>" + nuevoprecio + ","
+                    + "Ididen=>" + ididentificador + ","
+                    + "Presentacion=>" + presentacion + ","
+                    + "CodigoInt=>" + txtCodigo.getText() + "); commit; end;");
+            cn.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.print(e + " ERROR DE LOS DATOS DE PROCEDIMIENTO");
+        }
+    }
+
+    public void ProcedimientoKardexOut2() {
+        try {
+            String codigo;
+            codigo = txtCodigo.getText() + '-' + presentacion;
+            Connection cn = BD.getConnection();
+            Statement ps = cn.createStatement();
+            ps.executeUpdate("begin actualizarkardexout(IDKardex=>" + idkardex + ","
+                    + "NCodigo=>'" + codigo + "',"
+                    + "NDocumento=>'" + txtNoDoc.getText() + "',"
+                    + "Fecha_ingreso=>'" + fecha1 + "',"
+                    + "Ncantidad=>" + Integer.parseInt(txtCantidad.getText()) + ","
+                    + "Nprecio=>" + Double.parseDouble(TxtPrecio.getText()) + ","
+                    + "CantidadSaldo=>" + cantidaddeingreso + ","
+                    + "precioSaldo=>" + nuevoprecio + ","
+                    + "Ididen=>" + ididentificador + ","
+                    + "Presentacion=>" + presentacion + ","
+                    + "CodigoInt=>" + txtCodigo.getText() + "); commit; end;");
             cn.close();
             ps.close();
         } catch (Exception e) {
@@ -154,7 +250,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             try {
                 Connection con = BD.getConnection();
                 Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("select sum(cantidad) as cantidad from ingreso where codigo = " + txtCodigo.getText() + " and conta = 1");
+                ResultSet rs = stmt.executeQuery("select sum(cantidad) as cantidad from ingreso where codigo = " + txtCodigo.getText() + " and conta = 1 and presentacion = 0");
                 while (rs.next()) {
                     int cantidad = rs.getInt(1);
                     cantidaddeingreso = cantidad;
@@ -183,10 +279,46 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 System.out.print(error);
             }
         }
-
     }
+       
+    public void sumaingresosKardexOut() {
 
-    public void ididentificador() {
+        if (presentacion == 0) {
+            try {
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select sum(cantidad) as cantidad from ingreso where codigo = " + txtCodigo.getText() + " and conta = 2 and presentacion = 0");
+                while (rs.next()) {
+                    int cantidad = rs.getInt(1);
+                    cantidaddeingreso = cantidad;
+                }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException error) {
+                System.out.print(error);
+            }
+
+        } else {
+
+            try {
+                Connection con = BD.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select sum(cantidad) as cantidad from ingreso where codigo = " + txtCodigo.getText() + " and conta = 2 and presentacion = " + presentacion);
+                while (rs.next()) {
+                    int cantidad = rs.getInt(1);
+                    cantidaddeingreso = cantidad;
+                }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException error) {
+                System.out.print(error);
+            }
+        }
+    }
+    
+    public void ididentificadorKardex() {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -202,12 +334,46 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX ");
         }
     }
-    
+
+     public void ididentificadorKardexOut() {
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select max(id) from kardexout");
+            while (rs.next()) {
+                int lastID = rs.getInt(1);
+                ididentificador = lastID + 1;
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException error) {
+            System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX ");
+        }
+    }
+     
     public void id_kardex() {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select max(idkardex) from kardex");
+            while (rs.next()) {
+                int lastID = rs.getInt(1);
+                idkardex = lastID + 1;
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException error) {
+            System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX ");
+        }
+    }
+    
+     public void id_kardexOut() {
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select max(idkardex) from kardexout");
             while (rs.next()) {
                 int lastID = rs.getInt(1);
                 idkardex = lastID + 1;
@@ -251,7 +417,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         txtSerie.setEnabled(b);
         TxtProveedor.setEnabled(b);
         TxtPrecio.setEnabled(b);
-        ComboBoxBodega.setEnabled(b);
         BagregarProdu.setEnabled(b);
         Bcancelar.setEnabled(b);
         Combpresentacion.setEnabled(b);
@@ -287,11 +452,18 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         txtSerie.setText("");
         TxtProveedor.setText("");
         TxtPrecio.setText("0.00");
+        precioanterior = 0.00;
+        nuevoprecio = 0.00;
         Date date = null;
         txtfechavenci.setDate(date);
         descripcion.setText("");
-        ComboBoxBodega.setSelectedItem("Seleccionar....");
         Combpresentacion.setSelectedItem("Seleccionar...");
+        obligatorio.setForeground(Color.BLACK);
+        obligatorio1.setForeground(Color.BLACK);
+        obligatorio2.setForeground(Color.BLACK);
+        obligatorio4.setForeground(Color.BLACK);
+        obligatorio5.setForeground(Color.BLACK);
+        obligatorio7.setForeground(Color.BLACK);
 
     }
 
@@ -300,6 +472,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         Fecha.setDate(date);
         fechapoliza.setDate(date);
         txtInvoice.setText("");
+        limpiartxt();
     }
 
     public void FechasJdate() {
@@ -317,6 +490,105 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
 
     public void setTxtCodigo(JTextField txtCodigo) {
         this.txtCodigo = txtCodigo;
+    }
+
+    public void CargarKardex1() {
+        fechaingresokardex();
+        actulizartabla();
+        ultimoidingreso();
+        UltimoprecioKardex();//hacer #2
+        sumaingresos();//hacer #2
+        id_kardex();//hacer #2
+        ididentificadorKardex();//hacer #2
+        nuevoprecio = ((Double.parseDouble(TxtPrecio.getText()) * Integer.parseInt(txtCantidad.getText())) + (cantidaddeingreso * precioanterior)) / (Integer.parseInt(txtCantidad.getText()) + (cantidaddeingreso));
+        try {
+            CargaP c = new CargaP();
+            c.setCodigo(Integer.parseInt(txtCodigo.getText()));
+            c.setId_ingreso(id_ingreso);
+            c.setBodeda(1);
+            c.setCantidad(Integer.parseInt(txtCantidad.getText()));
+            c.setEstado("A");
+            c.setFechaIngre(Fecha.getDate());
+            c.setFechapoliza(fechapoliza.getDate());
+            c.setFechaVencimiento(txtfechavenci.getDate());
+            c.setIngresadoPor(Integer.parseInt(txtEmpleado.getText()));
+            c.setInvoce(txtInvoice.getText());
+            c.setLote(txtLote.getText());
+            c.setNTrabajo(txtJob.getText());
+            c.setNoDocumento(txtNoDoc.getText());
+            c.setNoserie(txtSerie.getText());
+            c.setNota(txtNota.getText());
+            c.setPO(txtPO.getText());
+            c.setPN(txtParte.getText());
+            c.setProveedor(TxtProveedor.getText());
+            c.setPrecio(Double.parseDouble(TxtPrecio.getText()));
+            c.setPresent(presentacion);
+            c.setConta(1);
+            DBCargaPro.insertarProductoNuevoContable(c);
+            JOptionPane.showMessageDialog(null, "Producto Cargado...");
+            executeStorePrecio();
+            if (presentacion == 0) {
+                ProcedimientoKardex();
+            } else {
+                ProcedimientoKardex2();
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+        actulizartabla();
+        limpiartxt();
+        activarTxt(false);
+    }
+
+    public void CargarKardex2() {
+
+        fechaingresokardex();
+        actulizartabla();
+        ultimoidingreso();
+        UltimoprecioKardexOut();
+        sumaingresosKardexOut();
+        id_kardexOut();
+        ididentificadorKardexOut();
+        nuevoprecio = ((Double.parseDouble(TxtPrecio.getText()) * Integer.parseInt(txtCantidad.getText())) + (cantidaddeingreso * precioanterior)) / (Integer.parseInt(txtCantidad.getText()) + (cantidaddeingreso));
+        try {
+            CargaP c = new CargaP();
+            c.setCodigo(Integer.parseInt(txtCodigo.getText()));
+            c.setId_ingreso(id_ingreso);
+            c.setBodeda(1);
+            c.setCantidad(Integer.parseInt(txtCantidad.getText()));
+            c.setEstado("A");
+            c.setFechaIngre(Fecha.getDate());
+            c.setFechapoliza(fechapoliza.getDate());
+            c.setFechaVencimiento(txtfechavenci.getDate());
+            c.setIngresadoPor(Integer.parseInt(txtEmpleado.getText()));
+            c.setInvoce(txtInvoice.getText());
+            c.setLote(txtLote.getText());
+            c.setNTrabajo(txtJob.getText());
+            c.setNoDocumento(txtNoDoc.getText());
+            c.setNoserie(txtSerie.getText());
+            c.setNota(txtNota.getText());
+            c.setPO(txtPO.getText());
+            c.setPN(txtParte.getText());
+            c.setProveedor(TxtProveedor.getText());
+            c.setPrecio(Double.parseDouble(TxtPrecio.getText()));
+            c.setPresent(presentacion);
+            c.setConta(2);
+            DBCargaPro.insertarProductoNuevoContable(c);
+            JOptionPane.showMessageDialog(null, "Producto Cargado...");
+            executeStorePrecio();
+            if (presentacion == 0) {
+                ProcedimientoKardexOut();
+            } else {
+                ProcedimientoKardexOut2();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+        actulizartabla();
+        limpiartxt();
+        activarTxt(false);
+
     }
 
     /**
@@ -351,10 +623,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         txtPO = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        ComboBoxBodega = new javax.swing.JComboBox<>();
-        jLabel17 = new javax.swing.JLabel();
         txtfechavenci = new com.toedter.calendar.JDateChooser();
-        obligatorio3 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         obligatorio5 = new javax.swing.JLabel();
         txtEmpleado = new javax.swing.JTextField();
@@ -410,21 +679,11 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 txtSerieActionPerformed(evt);
             }
         });
-        txtSerie.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSerieKeyPressed(evt);
-            }
-        });
 
         TxtProveedor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         TxtProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtProveedorActionPerformed(evt);
-            }
-        });
-        TxtProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtProveedorKeyPressed(evt);
             }
         });
 
@@ -438,9 +697,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             }
         });
         TxtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtPrecioKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TxtPrecioKeyTyped(evt);
             }
@@ -450,14 +706,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         txtNoDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNoDocActionPerformed(evt);
-            }
-        });
-        txtNoDoc.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNoDocKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNoDocKeyTyped(evt);
             }
         });
 
@@ -529,11 +777,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 txtParteActionPerformed(evt);
             }
         });
-        txtParte.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtParteKeyPressed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Job");
@@ -542,11 +785,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         txtJob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtJobActionPerformed(evt);
-            }
-        });
-        txtJob.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtJobKeyPressed(evt);
             }
         });
 
@@ -559,11 +797,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 txtLoteActionPerformed(evt);
             }
         });
-        txtLote.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtLoteKeyPressed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("P.O");
@@ -574,35 +807,11 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 txtPOActionPerformed(evt);
             }
         });
-        txtPO.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPOKeyPressed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Fecha Vencimiento");
 
-        ComboBoxBodega.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ComboBoxBodega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar....", "Bodega", "Bodeguita" }));
-        ComboBoxBodega.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                ComboBoxBodegaItemStateChanged(evt);
-            }
-        });
-        ComboBoxBodega.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBoxBodegaActionPerformed(evt);
-            }
-        });
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel17.setText("Bodega");
-
         txtfechavenci.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        obligatorio3.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        obligatorio3.setText("(*)");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Ingresado Por");
@@ -633,7 +842,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                     .addComponent(txtLote, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtPO)
                     .addComponent(txtJob)
-                    .addComponent(ComboBoxBodega, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtfechavenci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtEmpleado)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -646,11 +854,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(obligatorio5))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(obligatorio3)))
+                                .addComponent(obligatorio5)))
                         .addGap(0, 112, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -673,22 +877,17 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(obligatorio5))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtfechavenci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(obligatorio3)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ComboBoxBodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(obligatorio5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -719,7 +918,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel20.setText("Presentacion");
 
-        Combpresentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "5 Galones", "1 Galon", "1/4 Galon", "1 Libra", "2 Libras", "8 Onzas", "6 Onzas", "4 Onzas", "2 Onzas", " " }));
+        Combpresentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "5 Galones", "1 Galon", "1/4 Galon", "1 Libra", "2 Libras", "8 Onzas", "6 Onzas", "4 Onzas", "2 Onzas" }));
         Combpresentacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CombpresentacionActionPerformed(evt);
@@ -754,32 +953,33 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(obligatorio2))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel16)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BagregarProdu)
-                            .addComponent(Bcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel20))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Combpresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel14))
+                        .addComponent(jLabel20))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Bcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addGap(18, 18, 18)
+                                .addComponent(BagregarProdu))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel14))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(obligatorio2)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -789,27 +989,29 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Combpresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(13, 13, 13)
                 .addComponent(jLabel14)
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(obligatorio2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel16)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(BagregarProdu, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Bcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel16)
+                                .addContainerGap(94, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(BagregarProdu, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Bcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(obligatorio2)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         txtCodigo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -819,9 +1021,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             }
         });
         txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCodigoKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoKeyTyped(evt);
             }
@@ -850,7 +1049,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
 
         transito.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         transito.setForeground(new java.awt.Color(0, 0, 255));
-        transito.setText("Decreto 2989");
+        transito.setText("DECRETO 2989");
         transito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 transitoActionPerformed(evt);
@@ -872,11 +1071,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         txtInvoice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtInvoiceActionPerformed(evt);
-            }
-        });
-        txtInvoice.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtInvoiceKeyPressed(evt);
             }
         });
 
@@ -930,7 +1124,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -938,7 +1132,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -951,31 +1145,32 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 12, Short.MAX_VALUE))
+                        .addGap(0, 14, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(transito)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(transito))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(transito)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -986,7 +1181,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel19)
                 .addContainerGap())
         );
@@ -1009,82 +1204,20 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
 
     private void BagregarProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BagregarProduActionPerformed
 
-        if (txtCodigo.getText().compareTo("") != 0
-                && txtCantidad.getText().compareTo("") != 0
-                && txtEmpleado.getText().compareTo("") != 0
-                && TxtPrecio.getText().compareTo("0.00") != 0.00
-                && TxtPrecio.getText().compareTo("") != 0
-                //&& txtLote.getText().compareTo("") != 0
-                && txtNoDoc.getText().compareTo("") != 0
-                && fechapoliza.getDate() != null
-                //&& txtNota.getText().compareTo("") != 0 
-                //&& txtPO.getText().compareTo("") != 0
-                //&& txtParte.getText().compareTo("") != 0 
-                //&& txtSerie.getText().compareTo("") != 0 
-                && !ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Seleccionar....")) {
+        if (txtCodigo.getText().compareTo("") != 0 && txtCantidad.getText().compareTo("") != 0 && txtEmpleado.getText().compareTo("") != 0
+                && TxtPrecio.getText().compareTo("0.00") != 0.00 && TxtPrecio.getText().compareTo("") != 0
+                && txtNoDoc.getText().compareTo("") != 0 && fechapoliza.getDate() != null) {
 
-            fechaingresokardex();
-            actulizartabla();
-            ultimoidingreso();
-            Ultimoprecio();
-            sumaingresos();
-            id_kardex();
-            ididentificador();
-            nuevoprecio = ((Double.parseDouble(TxtPrecio.getText()) * Integer.parseInt(txtCantidad.getText())) + (cantidaddeingreso * precioanterior)) / (Integer.parseInt(txtCantidad.getText()) + (cantidaddeingreso));
-            //if(precio != 0){nuevoprecio = Double.parseDouble(TxtPrecio.getText());}else{nuevoprecio = precio;}
-            try {
-                CargaP c = new CargaP();
-                c.setCodigo(Integer.parseInt(txtCodigo.getText()));
-                c.setId_ingreso(id_ingreso);
-                c.setBodeda(bodega);
-                if (ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
-                    c.setCantidad(Integer.parseInt(txtCantidad.getText()));
-                } else {
-                    c.setCantidad2(Integer.parseInt(txtCantidad.getText()));
-                }
-                if (transito.isSelected()) {
-                    c.setEstado("B");
-                } else {
-                    c.setEstado("A");
-                }
-                c.setFechaIngre(Fecha.getDate());
-                c.setFechapoliza(fechapoliza.getDate());
-                c.setFechaVencimiento(txtfechavenci.getDate());
-                c.setIngresadoPor(Integer.parseInt(txtEmpleado.getText()));
-                c.setInvoce(txtInvoice.getText());
-                c.setLote(txtLote.getText());
-                c.setNTrabajo(txtJob.getText());
-                c.setNoDocumento(txtNoDoc.getText());
-                c.setNoserie(txtSerie.getText());
-                c.setNota(txtNota.getText());
-                c.setPO(txtPO.getText());
-                c.setPN(txtParte.getText());
-                c.setProveedor(TxtProveedor.getText());
-                c.setPrecio(Double.parseDouble(TxtPrecio.getText()));
-                c.setPresent(presentacion);
-                DBCargaPro.insertarProductoNuevoContable(c);
-                obligatorio.setForeground(Color.BLACK);
-                obligatorio1.setForeground(Color.BLACK);
-                obligatorio2.setForeground(Color.BLACK);
-                obligatorio3.setForeground(Color.BLACK);
-                obligatorio4.setForeground(Color.BLACK);
-                obligatorio5.setForeground(Color.BLACK);
-                obligatorio7.setForeground(Color.BLACK);
-                JOptionPane.showMessageDialog(null, "Producto Cargado...");
-                executeStorePrecio();
-                ProcedimientoKardex();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+            if (transito.isSelected()) {
+                CargarKardex2();
+            } else {
+                CargarKardex1();
             }
-            actulizartabla();
-            limpiartxt();
-            activarTxt(false);
         } else {
             JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
             obligatorio.setForeground(Color.red);
             obligatorio1.setForeground(Color.red);
             obligatorio2.setForeground(Color.red);
-            obligatorio3.setForeground(Color.red);
             obligatorio4.setForeground(Color.red);
             obligatorio5.setForeground(Color.red);
             obligatorio7.setForeground(Color.red);
@@ -1096,16 +1229,12 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         BagregarProdu.requestFocus();
 
     }//GEN-LAST:event_txtCantidadActionPerformed
-
     private void txtFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMouseClicked
 
-
     }//GEN-LAST:event_txtFechaMouseClicked
-
     private void txtNoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoDocActionPerformed
         txtSerie.requestFocus();
     }//GEN-LAST:event_txtNoDocActionPerformed
-
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
 
         Enviacodigo = Integer.parseInt(txtCodigo.getText());
@@ -1119,29 +1248,16 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             if (codigo == 1) {
                 activarTxt(true);
                 actulizartabla();
-                //FechasJdate();
                 obtenerdescripcion();
                 txtNoDoc.requestFocus();
-
             } else {
                 JOptionPane.showMessageDialog(null, "Producto " + txtCodigo.getText() + " No Existe");
                 limpiartxt();
             }
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
         }
     }//GEN-LAST:event_txtCodigoActionPerformed
-
-    private void ComboBoxBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxBodegaActionPerformed
-
-        if (ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
-            bodega = 1;
-        } else if (ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
-            bodega = 2;
-        }
-    }//GEN-LAST:event_ComboBoxBodegaActionPerformed
-
     private void BcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BcancelarActionPerformed
         limpiartxt();
         limpiartabla15();
@@ -1149,142 +1265,67 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         limpiarcancelar();
         txtCodigo.requestFocus();
     }//GEN-LAST:event_BcancelarActionPerformed
-
-    private void txtNoDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoDocKeyTyped
-
-        char c = evt.getKeyChar();
-        if ((c < '0' || c > '9') && (c < '.' || c > '.')) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtNoDocKeyTyped
-
     private void TxtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPrecioActionPerformed
         txtParte.requestFocus();
     }//GEN-LAST:event_TxtPrecioActionPerformed
-
     private void TxtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPrecioKeyTyped
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && (c < '.' || c > '.')) {
             evt.consume();
         }
     }//GEN-LAST:event_TxtPrecioKeyTyped
-
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCodigoKeyTyped
-
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCantidadKeyTyped
-
-    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
-
-
-    }//GEN-LAST:event_txtCodigoKeyPressed
-
-    private void txtNoDocKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoDocKeyPressed
-
-
-    }//GEN-LAST:event_txtNoDocKeyPressed
-
-    private void txtInvoiceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInvoiceKeyPressed
-
-
-    }//GEN-LAST:event_txtInvoiceKeyPressed
-
-    private void txtSerieKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSerieKeyPressed
-
-
-    }//GEN-LAST:event_txtSerieKeyPressed
-
-    private void TxtProveedorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtProveedorKeyPressed
-
-
-    }//GEN-LAST:event_TxtProveedorKeyPressed
-
-    private void TxtPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPrecioKeyPressed
-
-
-    }//GEN-LAST:event_TxtPrecioKeyPressed
-
-    private void txtParteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtParteKeyPressed
-
-
-    }//GEN-LAST:event_txtParteKeyPressed
-
-    private void txtJobKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJobKeyPressed
-
-
-    }//GEN-LAST:event_txtJobKeyPressed
-
-    private void txtLoteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoteKeyPressed
-
-
-    }//GEN-LAST:event_txtLoteKeyPressed
-
-    private void txtPOKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPOKeyPressed
-
-    }//GEN-LAST:event_txtPOKeyPressed
-
     private void txtInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInvoiceActionPerformed
         txtSerie.requestFocus();
     }//GEN-LAST:event_txtInvoiceActionPerformed
-
     private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
 
         TxtProveedor.requestFocus();
 
     }//GEN-LAST:event_txtSerieActionPerformed
-
     private void TxtProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtProveedorActionPerformed
 
         TxtPrecio.requestFocus();
 
     }//GEN-LAST:event_TxtProveedorActionPerformed
-
     private void txtParteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParteActionPerformed
 
         txtJob.requestFocus();
 
     }//GEN-LAST:event_txtParteActionPerformed
-
     private void txtJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJobActionPerformed
 
         txtLote.requestFocus();
 
     }//GEN-LAST:event_txtJobActionPerformed
-
     private void txtLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoteActionPerformed
 
         txtPO.requestFocus();
     }//GEN-LAST:event_txtLoteActionPerformed
-
     private void txtPOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPOActionPerformed
 
-        Fecha.requestFocus();
+        txtEmpleado.requestFocus();
 
     }//GEN-LAST:event_txtPOActionPerformed
-
     private void txtfechavenciMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtfechavenciMouseExited
-        ComboBoxBodega.requestFocus();
+       
     }//GEN-LAST:event_txtfechavenciMouseExited
-
-    private void ComboBoxBodegaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxBodegaItemStateChanged
-        txtEmpleado.requestFocus();
-    }//GEN-LAST:event_ComboBoxBodegaItemStateChanged
-
     private void txtEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpleadoActionPerformed
 
-        txtNota.requestFocus();
+        txtCantidad.requestFocus();
 
     }//GEN-LAST:event_txtEmpleadoActionPerformed
-
     private void CombpresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CombpresentacionActionPerformed
 
         if (Combpresentacion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")) {
@@ -1310,23 +1351,18 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_CombpresentacionActionPerformed
-
     private void transitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transitoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_transitoActionPerformed
-
     private void txtEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpleadoKeyTyped
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
             evt.consume();
         }
     }//GEN-LAST:event_txtEmpleadoKeyTyped
-
     private void actulizartabla() {
-
         ArrayList<CargaP> result = DBCargaPro.ListarProductoIngresado(Integer.parseInt(txtCodigo.getText()));
         recargarTabla(result);
-
     }
 
     private void recargarTabla(ArrayList<CargaP> list) {
@@ -1371,21 +1407,23 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CargarProductosContables.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CargarProductosContablesKardex2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CargarProductosContables.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CargarProductosContablesKardex2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CargarProductosContables.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CargarProductosContablesKardex2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CargarProductosContables.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CargarProductosContablesKardex2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CargarProductosContables().setVisible(true);
+                new CargarProductosContablesKardex2().setVisible(true);
             }
         });
     }
@@ -1393,7 +1431,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BagregarProdu;
     private javax.swing.JButton Bcancelar;
-    private javax.swing.JComboBox<String> ComboBoxBodega;
     private javax.swing.JComboBox<String> Combpresentacion;
     private com.toedter.calendar.JDateChooser Fecha;
     private javax.swing.JTextField TxtPrecio;
@@ -1408,7 +1445,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1431,7 +1467,6 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
     private javax.swing.JLabel obligatorio;
     private javax.swing.JLabel obligatorio1;
     private javax.swing.JLabel obligatorio2;
-    private javax.swing.JLabel obligatorio3;
     private javax.swing.JLabel obligatorio4;
     private javax.swing.JLabel obligatorio5;
     private javax.swing.JLabel obligatorio7;

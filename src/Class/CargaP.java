@@ -44,6 +44,17 @@ public class CargaP {
     private int conta;
     private int idendtificador;
     private int present;
+    private int procedencia;
+
+    public int getProcedencia() {
+        return procedencia;
+    }
+
+    public void setProcedencia(int procedencia) {
+        this.procedencia = procedencia;
+    }
+    
+    
 
     public Date getFechapoliza() {
         return fechapoliza;

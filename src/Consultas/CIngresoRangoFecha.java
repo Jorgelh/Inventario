@@ -296,7 +296,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         
         Date date2 = txtfecha1.getDate();
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yy");
-        
+        String fecha1 = sd.format(date2);
         int b1;
         int b2;
               
@@ -305,7 +305,7 @@ public class CIngresoRangoFecha extends javax.swing.JInternalFrame {
         else{b1=1;b2=2;}
         
         
-        String fecha1 = sd.format(date2);
+        
 
         ArrayList<ConsultaFecha> result = BDConsultas.ListarRangoFecha(fecha,fecha1,b1,b2);
         recargarIngreFecha(result);

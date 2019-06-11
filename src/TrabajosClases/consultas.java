@@ -262,7 +262,7 @@ public static ArrayList<Classp> ListarProductosPO(int c) {
         Connection cnn = BD.getConnection();
         PreparedStatement ps = null;
         //ps = cnn.prepareStatement("select cProNombre,nProvCodigo,nProCantidad,nProPrecioCompra,nProPrecioVenta,nProUtilidad,cProDescripcion,nCatCodigo,cProMarca,cProEstado from producto where nProCodigo=?");
-        ps = cnn.prepareStatement("select PN,JOB,decode(ESTANDAR,1,'FUJI',2,'INGENIERIA',3,'MIL-PRF-27',4,'MIL-STD-981',5,'MIL-STD-981 PRE-CAP',6,'MIL-STD-981 URGENTE',7,'MIL-STD-981-X RAY',8,'SAMPLE') as \"ESTANDAR\",to_char(FECHARECIBIDO,'dd/mm/yy') as FECHARECIBIDO,to_char(FECHAVENCIMIENTO,'dd/mm/yy') as FECHAVENCIMIENTO,CANTIDAD,decode(DEPARTAMENTO,1,'CHIPS',2,'TRANSFORMADORES') as \"DEPARTAMENTO\" from trabajonew where estado = 1 and idtrabajo =?");
+        ps = cnn.prepareStatement("select idtrabajo,PN,JOB,decode(ESTANDAR,1,'FUJI',2,'INGENIERIA',3,'MIL-PRF-27',4,'MIL-STD-981',5,'MIL-STD-981 PRE-CAP',6,'MIL-STD-981 URGENTE',7,'MIL-STD-981-X RAY',8,'SAMPLE') as \"ESTANDAR\",to_char(FECHARECIBIDO,'dd/mm/yy') as FECHARECIBIDO,to_char(FECHAVENCIMIENTO,'dd/mm/yy') as FECHAVENCIMIENTO,CANTIDAD,decode(DEPARTAMENTO,1,'CHIPS',2,'TRANSFORMADORES') as \"DEPARTAMENTO\" from trabajonew where estado = 1 and idtrabajo =?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
@@ -277,6 +277,7 @@ public static ArrayList<Classp> ListarProductosPO(int c) {
             p.setSfechavencimiento(rs.getString("FECHAVENCIMIENTO"));
             p.setCantidad(rs.getInt("CANTIDAD"));
             p.setDeptostring(rs.getString("DEPARTAMENTO"));
+            p.setId(rs.getInt("idtrabajo"));
             }
         cnn.close();
         ps.close();

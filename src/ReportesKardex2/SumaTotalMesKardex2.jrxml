@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SumaTotalMes" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FECHAIN" class="java.lang.String"/>
+	<parameter name="FECHAOUT" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT SUM(totalsaldo) FROM KARDEXOUT WHERE ID IN(select max(id) from kardexout where fecha between to_date($P{FECHAIN},'dd/mm/yy') and to_date($P{FECHAOUT},'dd/mm/yy') GROUP BY codigo)]]>
+	</queryString>
+	<field name="SUM(TOTALSALDO)" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<rectangle>
+				<reportElement x="475" y="1" width="80" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="375" y="1" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DEL MES ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="475" y="1" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SUM(TOTALSALDO)}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

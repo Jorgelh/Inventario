@@ -36,6 +36,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     DefaultTableModel temp;
     int bodega;
     int id;
+    int procedencia;
 
     /**
      * Creates new form DescargaProducto
@@ -129,6 +130,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         txtproveedor.setEditable(b);
         ComboBode.setEnabled(b);
         txtfechaven.setEnabled(b);
+        txtCantidad.setEnabled(b);
 
     }
 
@@ -137,9 +139,10 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select descripcion from producto where codigo=" + TxCodigo.getText());
+            ResultSet rs = stmt.executeQuery("select descripcion,id_proce from producto where codigo=" + TxCodigo.getText());
             rs.next();
             LaDescrip.setText(rs.getString("descripcion"));
+            procedencia = rs.getInt("id_proce");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
@@ -178,7 +181,128 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     }    
         
     
+    public void editcondescargas(){
+       
+           
+                if (TxCodigo.getText().compareTo("")!= 0
+                && txtCantidad.getText().compareTo("")!= 0
+                && Precio.getText().compareTo("")!= 0
+                && txtingresadopor.getText().compareTo("")!= 0
+                && !ComboBode.getSelectedItem().toString().equalsIgnoreCase("")) {
 
+                if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
+                    bodega = 1;
+                } else if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")){
+                    bodega = 2;
+                }
+
+            try {
+                CargaP c = new CargaP();
+                c.setId_ingreso(id);
+                c.setBodeda(bodega);
+                if(ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")){c.setCantidad(Integer.parseInt(txtCantidad.getText()));}else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}
+                c.setFechaVencimiento(txtfechaven.getDate());
+                c.setIngresadoPor(Integer.parseInt(txtingresadopor.getText()));
+                c.setInvoce(txtInvoice.getText());
+                c.setLote(txtlote.getText());
+                c.setNTrabajo(txtjob.getText());
+                c.setNoDocumento(txtDoc.getText());
+                c.setNoserie(txtSerie.getText());
+                c.setNota(txtnotas.getText());
+                c.setPO(txtpo.getText());
+                c.setPN(txtPN.getText());
+                c.setProveedor(txtproveedor.getText());
+                c.setPrecio(Double.parseDouble(Precio.getText()));
+                BDconsultaVarias.actualizarIngreso(c);
+                JOptionPane.showMessageDialog(null, "Ingreso Actualizado...");
+                EditarTXT(false);
+                executeStore();
+                executeStorePrecio();
+                Beliminar.setEnabled(false);
+                Bguardar.setEnabled(false);
+                Cosulta.setEnabled(true);
+                NuevaC.setEnabled(true);
+                Bcancelar.setEnabled(false);
+                limpiar();
+                actualizarTablaconsulta();
+            } catch (SQLException a) {
+                JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + a);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
+        }
+    }
+    
+    
+    public void noeditcondescargas(){
+        try {
+            Connection con = BD.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs1 = stmt.executeQuery("select COUNT(id_ingreso) as \"desc\" from descarga where id_ingreso=" + id);
+            rs1.next();
+            int codigodes = rs1.getInt("desc");
+            if(codigodes == 0){
+                if (TxCodigo.getText().compareTo("")!= 0
+                && txtCantidad.getText().compareTo("")!= 0
+                && Precio.getText().compareTo("")!= 0
+                && txtingresadopor.getText().compareTo("")!= 0
+                && !ComboBode.getSelectedItem().toString().equalsIgnoreCase("")) {
+                if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
+                    bodega = 1;
+                } else if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
+                    bodega = 2;
+                }
+
+            try {
+                CargaP c = new CargaP();
+                c.setId_ingreso(id);
+                c.setBodeda(bodega);
+                if(ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")){c.setCantidad(Integer.parseInt(txtCantidad.getText()));}else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}
+                c.setFechaVencimiento(txtfechaven.getDate());
+                c.setIngresadoPor(Integer.parseInt(txtingresadopor.getText()));
+                c.setInvoce(txtInvoice.getText());
+                c.setLote(txtlote.getText());
+                c.setNTrabajo(txtjob.getText());
+                c.setNoDocumento(txtDoc.getText());
+                c.setNoserie(txtSerie.getText());
+                c.setNota(txtnotas.getText());
+                c.setPO(txtpo.getText());
+                c.setPN(txtPN.getText());
+                c.setProveedor(txtproveedor.getText());
+                c.setPrecio(Double.parseDouble(Precio.getText()));
+                BDconsultaVarias.actualizarIngreso(c);
+                JOptionPane.showMessageDialog(null, "Ingreso Actualizado...");
+                EditarTXT(false);
+                executeStore();
+                executeStorePrecio();
+                Beliminar.setEnabled(false);
+                Bguardar.setEnabled(false);
+                Cosulta.setEnabled(true);
+                NuevaC.setEnabled(true);
+                Bcancelar.setEnabled(false);
+                limpiar();
+                actualizarTablaconsulta();
+            } catch (SQLException a) {
+                JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + a);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
+        }}else{JOptionPane.showMessageDialog(null, "El ingreso contiene descargas No se puede Modificar Consulte al Administrador");
+                    EditarTXT(false);
+                    Beliminar.setEnabled(false);
+                    Bguardar.setEnabled(false);
+                    Cosulta.setEnabled(true);
+                    NuevaC.setEnabled(true);
+                    Bcancelar.setEnabled(false);
+                    limpiar();
+            }
+           } catch (Exception e) {JOptionPane.showMessageDialog(null, "ERROR"+e);
+        }
+    
+    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -536,7 +660,6 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
         txtCantidad.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtCantidad.setForeground(new java.awt.Color(255, 0, 0));
-        txtCantidad.setEnabled(false);
         txtCantidad.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 txtCantidadComponentAdded(evt);
@@ -739,11 +862,6 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
     private void TxCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxCodigoActionPerformed
 
-        
-        
-        
-        
-        
         int Enviacodigo = Integer.parseInt(TxCodigo.getText());
 
         try {
@@ -833,6 +951,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         TxCodigo.setEnabled(true);
         TxCodigo.requestFocus();
         Beditar.setEnabled(false);
+        procedencia = 0;
 
 
     }//GEN-LAST:event_NuevaCActionPerformed
@@ -846,6 +965,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         Cosulta.setEnabled(false);
         NuevaC.setEnabled(false);
         Bcancelar.setEnabled(true);
+        if(procedencia == 3){txtCantidad.setEnabled(true);Precio.setEnabled(true);}else{txtCantidad.setEnabled(false);Precio.setEnabled(false);}
 
     }//GEN-LAST:event_BeditarActionPerformed
 
@@ -914,71 +1034,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
         
         
-        try {
-            Connection con = BD.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs1 = stmt.executeQuery("select COUNT(id_ingreso) as \"desc\" from descarga where id_ingreso=" + id);
-            rs1.next();
-            int codigodes = rs1.getInt("desc");
-            if(codigodes == 0){
-                if (TxCodigo.getText().compareTo("")!= 0
-                && txtCantidad.getText().compareTo("")!= 0
-                && Precio.getText().compareTo("")!= 0
-                && txtingresadopor.getText().compareTo("")!= 0
-                && !ComboBode.getSelectedItem().toString().equalsIgnoreCase("")) {
-
-                if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
-                    bodega = 1;
-                } else if (ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")) {
-                    bodega = 2;
-                }
-
-            try {
-                CargaP c = new CargaP();
-                c.setId_ingreso(id);
-                c.setBodeda(bodega);
-                if(ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")){c.setCantidad(Integer.parseInt(txtCantidad.getText()));}else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}
-                c.setFechaVencimiento(txtfechaven.getDate());
-                c.setIngresadoPor(Integer.parseInt(txtingresadopor.getText()));
-                c.setInvoce(txtInvoice.getText());
-                c.setLote(txtlote.getText());
-                c.setNTrabajo(txtjob.getText());
-                c.setNoDocumento(txtDoc.getText());
-                c.setNoserie(txtSerie.getText());
-                c.setNota(txtnotas.getText());
-                c.setPO(txtpo.getText());
-                c.setPN(txtPN.getText());
-                c.setProveedor(txtproveedor.getText());
-                c.setPrecio(Double.parseDouble(Precio.getText()));
-                BDconsultaVarias.actualizarIngreso(c);
-                JOptionPane.showMessageDialog(null, "Ingreso Actualizado...");
-                EditarTXT(false);
-                executeStore();
-                executeStorePrecio();
-                Beliminar.setEnabled(false);
-                Bguardar.setEnabled(false);
-                Cosulta.setEnabled(true);
-                NuevaC.setEnabled(true);
-                Bcancelar.setEnabled(false);
-                limpiar();
-                actualizarTablaconsulta();
-            } catch (SQLException a) {
-                JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + a);
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
-        }}else{JOptionPane.showMessageDialog(null, "El ingreso contiene descargas No se puede Modificar Consulte al Administrador");
-                    EditarTXT(false);
-                    Beliminar.setEnabled(false);
-                    Bguardar.setEnabled(false);
-                    Cosulta.setEnabled(true);
-                    NuevaC.setEnabled(true);
-                    Bcancelar.setEnabled(false);
-                    limpiar();
-            }
-           } catch (Exception e) {JOptionPane.showMessageDialog(null, "ERROR"+e);
-        }
+        
   
     }//GEN-LAST:event_BguardarActionPerformed
 

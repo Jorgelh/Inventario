@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReporteSaldo" language="groovy" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="1008" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReporteSaldoKardex2" language="groovy" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="1008" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.210000000000002"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="401"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="CODIGO" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -10,7 +10,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select cantidadsaldo,valorsaldo,totalsaldo from kardex where id = (select max(id) from kardex where to_date(fecha,'dd/mm/yy')<to_date($P{FECHAIN},'dd/mm/yy') and codigoint = $P{CODIGO})]]>
+		<![CDATA[select cantidadsaldo,valorsaldo,totalsaldo from kardexout where id = (select max(id) from kardexout where to_date(fecha,'dd/mm/yy')<to_date($P{FECHAIN},'dd/mm/yy') and codigoint = $P{CODIGO})]]>
 	</queryString>
 	<field name="CANTIDADSALDO" class="java.math.BigDecimal"/>
 	<field name="VALORSALDO" class="java.math.BigDecimal"/>

@@ -6,10 +6,10 @@
 	<parameter name="FECHA1" class="java.lang.String"/>
 	<parameter name="FECHA2" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["E:\\PROYECTOS\\Inventario\\src\\Reportes\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["E:\\PROYECTOS\\Inventario\\src\\ReportesKardex2\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select k.codigo,p.descripcion,cantidadsaldo,totalsaldo from kardex k inner join producto p on k.codigoint = p.codigo where id in(select max(id) from kardex where fecha between to_date($P{FECHA1},'dd/mm/yy') and to_date($P{FECHA2},'dd/mm/yy') and k.cantidadsaldo > 0 GROUP BY codigo)]]>
+		<![CDATA[select k.codigo,p.descripcion,cantidadsaldo,totalsaldo from kardexout k inner join producto p on k.codigoint = p.codigo where id in(select max(id) from kardexout where fecha between to_date($P{FECHA1},'dd/mm/yy') and to_date($P{FECHA2},'dd/mm/yy') and k.cantidadsaldo > 0 GROUP BY codigo)]]>
 	</queryString>
 	<field name="CODIGO" class="java.lang.String"/>
 	<field name="DESCRIPCION" class="java.lang.String"/>
@@ -110,7 +110,7 @@
 					<subreportParameterExpression><![CDATA[$P{FECHA2}.toString()]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA["SumaTotalMes.jasper"]]></subreportExpression>
+				<subreportExpression class="java.lang.String"><![CDATA["SumaTotalMesKardex2.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</summary>
