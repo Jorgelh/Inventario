@@ -72,6 +72,8 @@ public abstract class BDDescargaProducto {
                 + "ingreso.precio,"
                 + "ingreso.presentacion,"
                 + "producto.descripcion,"
+                + "ingreso.no_trabajo,"
+                + "ingreso.proveedor,"
                 + "decode(ingreso.bodega,1,producto.ubicacion,2,producto.ubicacion2) as \"ubicacion\","
                 + "unidad_medida.descripcion as \"desc\" from ingreso inner join producto on producto.codigo = ingreso.codigo join unidad_medida on producto.id_medida = unidad_medida.id_medida and ingreso.id_ingreso="+idc);
         ResultSet rs = ps.executeQuery();
@@ -96,6 +98,8 @@ public abstract class BDDescargaProducto {
         c.setConta(rs.getInt("conta"));
         c.setPrecio(rs.getDouble("precio"));
         c.setPresent(rs.getInt("presentacion"));
+        c.setNTrabajo(rs.getString("no_trabajo"));
+        c.setProveedor(rs.getString("proveedor"));
         }
         cn.close();
         ps.close();

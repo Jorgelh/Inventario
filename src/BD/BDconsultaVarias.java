@@ -67,7 +67,7 @@ public abstract class BDconsultaVarias {
     
     public static ArrayList<CargaP> ListarProductoIngresadoEdit(int c) {
 
-        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,decode(bodega,1,cantidad,2,cantidad2) as \"cantidad\",no_invoice,fecha_ven,lote from ingreso where codigo=" + c + "and estado = 'A'" );
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,decode(bodega,1,cantidad,2,cantidad2) as \"cantidad\",no_invoice,fecha_ven,lote from ingreso where codigo=" + c + "and estado = 'A' order by id_ingreso" );
 
     }
 

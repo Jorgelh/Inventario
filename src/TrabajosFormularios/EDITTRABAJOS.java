@@ -123,7 +123,7 @@ public class EDITTRABAJOS extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("INGRESO DE TRABAJOS");
+        setTitle("EDITAR CANTIDAD DE LOTE ANTES DE CREAR LOTES");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -142,7 +142,6 @@ public class EDITTRABAJOS extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("FECHA VENCIMIENTO DE TRABAJO");
 
-        job.setEditable(false);
         job.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jobActionPerformed(evt);
@@ -460,11 +459,11 @@ public class EDITTRABAJOS extends javax.swing.JInternalFrame {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
       
-        if(cantidad.getText().compareTo("")!=0){
+        if(cantidad.getText().compareTo("")!=0 && job.getText().compareTo("")!=0){
         try {
              Connection cn = BD.getConnection();
              Statement ps = cn.createStatement();
-             ResultSet rs = ps.executeQuery("UPDATE TRABAJONEW SET CANTIDAD = "+cantidad.getText()+" WHERE IDTRABAJO="+id);
+             ResultSet rs = ps.executeQuery("UPDATE TRABAJONEW SET CANTIDAD = "+cantidad.getText()+",job = '"+job.getText()+"' WHERE IDTRABAJO="+id);
              ps.close();
              rs.close();
              JOptionPane.showMessageDialog(null, "CANTIDAD ACTUALIZADA");

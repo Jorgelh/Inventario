@@ -87,11 +87,11 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         txtInvoice.setEnabled(b);
         txtJob.setEnabled(b);
         txtLote.setEnabled(b);
-        txtNoDoc.setEnabled(b);
+        //txtNoDoc.setEnabled(b);
         txtNota.setEnabled(b);
         txtPO.setEnabled(b);
         txtParte.setEnabled(b);
-        txtSerie.setEnabled(b);
+        //txtSerie.setEnabled(b);
         TxtProveedor.setEnabled(b);
         TxtPrecio.setEnabled(b);
         ComboBoxBodega.setEnabled(b);
@@ -123,11 +123,11 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         txtInvoice.setText("");
         txtJob.setText("");
         txtLote.setText("");
-        txtNoDoc.setText("");
+        //txtNoDoc.setText("");
         txtNota.setText("");
         txtPO.setText("");
         txtParte.setText("");
-        txtSerie.setText("");
+        //txtSerie.setText("");
         TxtProveedor.setText("");
         TxtPrecio.setText("0.00");
         //SimpleDateFormat("dd-MM-yy");
@@ -180,15 +180,11 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtInvoice = new javax.swing.JTextField();
-        txtSerie = new javax.swing.JTextField();
         TxtProveedor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         TxtPrecio = new javax.swing.JTextField();
-        txtNoDoc = new javax.swing.JTextField();
         Fecha = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -235,12 +231,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("No. Invoice");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setText("No. Documento");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setText("No. Serie");
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("Proveedor");
 
@@ -253,18 +243,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         txtInvoice.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtInvoiceKeyPressed(evt);
-            }
-        });
-
-        txtSerie.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtSerie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSerieActionPerformed(evt);
-            }
-        });
-        txtSerie.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSerieKeyPressed(evt);
             }
         });
 
@@ -298,21 +276,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        txtNoDoc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtNoDoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNoDocActionPerformed(evt);
-            }
-        });
-        txtNoDoc.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNoDocKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNoDocKeyTyped(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -321,16 +284,12 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtInvoice)
-                    .addComponent(txtSerie)
                     .addComponent(TxtProveedor)
                     .addComponent(TxtPrecio)
-                    .addComponent(txtNoDoc)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
                             .addComponent(jLabel3)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel11)
                             .addComponent(jLabel13)
                             .addComponent(jLabel6)
                             .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -343,27 +302,19 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addGap(7, 7, 7)
-                .addComponent(txtNoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -642,7 +593,8 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         descripcion.setForeground(new java.awt.Color(0, 102, 255));
 
         transito.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        transito.setEnabled(false);
+        transito.setForeground(new java.awt.Color(0, 0, 255));
+        transito.setText("DECRETO 2989");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -682,7 +634,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                     .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -742,7 +694,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 if(ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")){
                 c.setCantidad(Integer.parseInt(txtCantidad.getText()));}
                 else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}
-                //if(transito.isSelected()){c.setEstado("B");}else{c.setEstado("A");}
                 c.setEstado("A");
                 c.setFechaIngre(Fecha.getDate());
                 c.setFechaVencimiento(txtfechavenci.getDate());
@@ -750,13 +701,14 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 c.setInvoce(txtInvoice.getText());
                 c.setLote(txtLote.getText());
                 c.setNTrabajo(txtJob.getText());
-                c.setNoDocumento(txtNoDoc.getText());
-                c.setNoserie(txtSerie.getText());
+                //c.setNoDocumento(txtNoDoc.getText());
+                //c.setNoserie(txtSerie.getText());
                 c.setNota(txtNota.getText());
                 c.setPO(txtPO.getText());
                 c.setPN(txtParte.getText());
                 c.setProveedor(TxtProveedor.getText());
                 c.setPrecio(Double.parseDouble(TxtPrecio.getText()));
+                if(transito.isSelected()){c.setConta(0);}else{c.setConta(3);}
                 DBCargaPro.insertarProductoNuevo(c);
                 JOptionPane.showMessageDialog(null, "Producto Cargado...");
                 executeStorePrecio();
@@ -783,10 +735,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_txtFechaMouseClicked
 
-    private void txtNoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoDocActionPerformed
-       txtInvoice.requestFocus();
-    }//GEN-LAST:event_txtNoDocActionPerformed
-
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
 
         Enviacodigo = Integer.parseInt(txtCodigo.getText());
@@ -802,7 +750,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 actulizartabla();
                 FechasJdate();
                 obtenerdescripcion();
-                txtNoDoc.requestFocus();
+                txtInvoice.requestFocus();
 
             } else {
                 JOptionPane.showMessageDialog(null, "Producto " + txtCodigo.getText() + " No Existe");
@@ -830,15 +778,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         txtCodigo.requestFocus();
 
     }//GEN-LAST:event_BcancelarActionPerformed
-
-    private void txtNoDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoDocKeyTyped
-
-        char c = evt.getKeyChar();
-        if ((c < '0' || c > '9') && (c < '.' || c > '.')) {
-            evt.consume();
-        }
-
-    }//GEN-LAST:event_txtNoDocKeyTyped
 
     private void TxtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPrecioActionPerformed
               txtParte.requestFocus();
@@ -871,22 +810,11 @@ public class CargarProductos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_txtCodigoKeyPressed
 
-    private void txtNoDocKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoDocKeyPressed
-        
-        
-    }//GEN-LAST:event_txtNoDocKeyPressed
-
     private void txtInvoiceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInvoiceKeyPressed
     
         
         
     }//GEN-LAST:event_txtInvoiceKeyPressed
-
-    private void txtSerieKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSerieKeyPressed
-        
-        
-        
-    }//GEN-LAST:event_txtSerieKeyPressed
 
     private void TxtProveedorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtProveedorKeyPressed
       
@@ -921,14 +849,8 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPOKeyPressed
 
     private void txtInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInvoiceActionPerformed
-        txtSerie.requestFocus();
-    }//GEN-LAST:event_txtInvoiceActionPerformed
-
-    private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
-       
         TxtProveedor.requestFocus();
-        
-    }//GEN-LAST:event_txtSerieActionPerformed
+    }//GEN-LAST:event_txtInvoiceActionPerformed
 
     private void TxtProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtProveedorActionPerformed
         
@@ -1053,8 +975,6 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TxtProveedor;
     private javax.swing.JTextField descripcion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1083,11 +1003,9 @@ public class CargarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtInvoice;
     private javax.swing.JTextField txtJob;
     private javax.swing.JTextField txtLote;
-    private javax.swing.JTextField txtNoDoc;
     private javax.swing.JTextField txtNota;
     private javax.swing.JTextField txtPO;
     private javax.swing.JTextField txtParte;
-    private javax.swing.JTextField txtSerie;
     private com.toedter.calendar.JDateChooser txtfechavenci;
     // End of variables declaration//GEN-END:variables
 

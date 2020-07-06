@@ -4,7 +4,7 @@
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="INGRESO DE TRABAJOS"/>
+    <Property name="title" type="java.lang.String" value="EDITAR CANTIDAD DE LOTE ANTES DE CREAR LOTES"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -217,9 +217,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="job">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jobActionPerformed"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jobKeyReleased"/>

@@ -22,6 +22,15 @@ public class trabajos {
     private int id_trabajo;
     private int cantidad;
     private String nota;
+    private int entregado;
+
+    public int getEntregado() {
+        return entregado;
+    }
+
+    public void setEntregado(int entregado) {
+        this.entregado = entregado;
+    }
 
     public String getNota() {
         return nota;
@@ -31,7 +40,6 @@ public class trabajos {
         this.nota = nota;
     }
  
-    
     public int getCantidad() {
         return cantidad;
     }

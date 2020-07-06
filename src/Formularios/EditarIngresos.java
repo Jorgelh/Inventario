@@ -143,7 +143,6 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             rs.next();
             LaDescrip.setText(rs.getString("descripcion"));
             procedencia = rs.getInt("id_proce");
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
         }
@@ -784,7 +783,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 .addComponent(TxCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(NuevaC)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Beditar)
@@ -796,8 +795,8 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 .addComponent(Beliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 33, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -841,7 +840,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                     .addComponent(Bcancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Bguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Beliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1032,10 +1031,9 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BeliminarActionPerformed
 
     private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
+    
+        editcondescargas();
         
-        
-        
-  
     }//GEN-LAST:event_BguardarActionPerformed
 
     private void ComboBodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBodeActionPerformed
@@ -1055,19 +1053,19 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
 
     private void recagarTabla(ArrayList<CargaP> list) {
 
-        Object[][] dato = new Object[list.size()][3];
+        Object[][] dato = new Object[list.size()][4];
         int f = 0;
         for (CargaP a : list) {
             dato[f][0] = a.getId_ingreso();
             dato[f][1] = a.getPO();
             dato[f][2] = a.getInvoce();
-
+            dato[f][3] = a.getReturnFecha();
             f++;
         }
         Cosulta.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                    "No. Ingreso", "P.O", "No. Invoice"
+                    "No. Ingreso", "P.O", "No. Invoice","Fecha Ingreso"
 
                 }) {
             @Override

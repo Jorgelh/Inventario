@@ -38,10 +38,9 @@ public abstract class DBCargaPro {
         ps = cnn.prepareStatement("insert into ingreso" 
                 + "(id_ingreso,codigo,P_N,fecha_ingreso,"
                 + "PO,cantidad,fecha_ven,precio,"
-                + "lote,no_trabajo,no_invoice,no_documento,"
-                + "no_serie,ingresadopor,proveedor,notas,"
+                + "lote,no_trabajo,no_invoice,ingresadopor,proveedor,notas,"
                 + "bodega,fechasistema,estado,cantidad2,conta) "
-                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,0)");
+                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?)");
         ps.setInt(1,c.getId_ingreso());
         ps.setInt(2,c.getCodigo());
         ps.setString(3,c.getPN());
@@ -53,15 +52,15 @@ public abstract class DBCargaPro {
         ps.setString(9, c.getLote());
         ps.setString(10, c.getNTrabajo());
         ps.setString(11, c.getInvoce());
-        ps.setString(12, c.getNoDocumento());
-        ps.setString(13, c.getNoserie());
-        ps.setInt(14,c.getIngresadoPor());
-        ps.setString(15, c.getProveedor());
-        ps.setString(16, c.getNota());
-        ps.setInt(17, c.getBodeda());
-        ps.setString(18, c.getEstado());
-        ps.setInt(19, c.getCantidad2());
-       
+        //ps.setString(12, c.getNoDocumento());
+        //ps.setString(13, c.getNoserie());
+        ps.setInt(12,c.getIngresadoPor());
+        ps.setString(13, c.getProveedor());
+        ps.setString(14, c.getNota());
+        ps.setInt(15, c.getBodeda());
+        ps.setString(16, c.getEstado());
+        ps.setInt(17, c.getCantidad2());
+        ps.setInt(18, c.getConta());
         ps.execute();
         cnn.close();
         ps.close();
@@ -75,10 +74,9 @@ public abstract class DBCargaPro {
         ps = cnn.prepareStatement("insert into ingreso" 
                 + "(id_ingreso,codigo,P_N,fecha_ingreso,"
                 + "PO,cantidad,fecha_ven,precio,"
-                + "lote,no_trabajo,no_invoice,no_documento,"
-                + "no_serie,ingresadopor,proveedor,notas,"
+                + "lote,no_trabajo,no_invoice,ingresadopor,proveedor,notas,"
                 + "bodega,fechasistema,estado,cantidad2,conta,presentacion,fechapoliza) "
-                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?,?)");
+                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?,?)");
        // ps.setInt(1,c.getId_ingreso());
         ps.setInt(1,c.getId_ingreso());
         ps.setInt(2,c.getCodigo());
@@ -91,17 +89,17 @@ public abstract class DBCargaPro {
         ps.setString(9, c.getLote());
         ps.setString(10, c.getNTrabajo());
         ps.setString(11, c.getInvoce());
-        ps.setString(12, c.getNoDocumento());
-        ps.setString(13, c.getNoserie());
-        ps.setInt(14,c.getIngresadoPor());
-        ps.setString(15, c.getProveedor());
-        ps.setString(16, c.getNota());
-        ps.setInt(17, c.getBodeda());
-        ps.setString(18, c.getEstado());
-        ps.setInt(19, c.getCantidad2());
-        ps.setInt(20, c.getConta());
-        ps.setInt(21, c.getPresent());
-        ps.setDate(22, new java.sql.Date(c.getFechapoliza().getTime()));
+        //ps.setString(12, c.getNoDocumento());
+       // ps.setString(13, c.getNoserie());
+        ps.setInt(12,c.getIngresadoPor());
+        ps.setString(13, c.getProveedor());
+        ps.setString(14, c.getNota());
+        ps.setInt(15, c.getBodeda());
+        ps.setString(16, c.getEstado());
+        ps.setInt(17, c.getCantidad2());
+        ps.setInt(18, c.getConta());
+        ps.setInt(19, c.getPresent());
+        ps.setDate(20, new java.sql.Date(c.getFechapoliza().getTime()));
         //ps.setString(18, c.getEstado());
         ps.execute();
         cnn.close();

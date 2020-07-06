@@ -21,25 +21,24 @@ import javax.swing.JOptionPane;
  *
  * @author jluis
  */
-public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
+public class TrabajosEntregados extends javax.swing.JInternalFrame {
     int idtrabajo;
     String fecha;
     /**
      * Creates new form EntregaTrabajo
      */
-    public EditarNotaTrabajos() {
+    public TrabajosEntregados() {
         initComponents();
-        nota.setLineWrap(true);
+        notas.setLineWrap(true);
         listartrabajos();
-       
     }
     
     
-   public void actualizarNota(){
+   public void actualizarFecha(){
         try {
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
-            ps.executeUpdate("update trabajos set notas = '"+nota.getText()+"',cantidad = "+cantidad.getText()+" where idtrabajo ="+idtrabajo);
+            ps.executeUpdate("update trabajos set fechaentrega = '"+fecha+"',ENTREGADOPOR = '"+entregadopor.getText()+"' where idtrabajo ="+idtrabajo);
             cn.close();
             ps.close();
         } catch (Exception e) {
@@ -51,7 +50,9 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
     lote.setText("");
     cantidad.setText("");
     jobtabla.setText("");
-    nota.setText("");
+    fechaentrega.setText("");
+    notas.setText("");
+    entregadopor.setText("");
    
    }
  
@@ -80,14 +81,17 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
         lote = new javax.swing.JTextField();
         jobtabla = new javax.swing.JTextField();
         pntabla = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        fechaentrega = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        entregadopor = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        nota = new javax.swing.JTextArea();
+        notas = new javax.swing.JTextArea();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EDITAR NOTAS Y CANTIDAD EN LOTES");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -141,11 +145,28 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("CANTIDAD");
 
+        cantidad.setEditable(false);
+        cantidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cantidad.setForeground(new java.awt.Color(0, 51, 255));
+
         lote.setEditable(false);
+        lote.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lote.setForeground(new java.awt.Color(0, 51, 255));
 
         jobtabla.setEditable(false);
+        jobtabla.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jobtabla.setForeground(new java.awt.Color(0, 51, 255));
 
         pntabla.setEditable(false);
+        pntabla.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        pntabla.setForeground(new java.awt.Color(0, 51, 255));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("FECHA DE ENTREGA");
+
+        fechaentrega.setEditable(false);
+        fechaentrega.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        fechaentrega.setForeground(new java.awt.Color(0, 51, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -154,81 +175,99 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lote, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(pntabla))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(pntabla, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lote))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(jobtabla, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jobtabla, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cantidad)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fechaentrega)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(pntabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jobtabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(lote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(fechaentrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save2.png"))); // NOI18N
-        jButton1.setText("GUARDAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText("ENTREGADO POR");
 
-        nota.setColumns(20);
-        nota.setRows(5);
-        jScrollPane2.setViewportView(nota);
+        entregadopor.setEditable(false);
+        entregadopor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        entregadopor.setForeground(new java.awt.Color(0, 51, 255));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText("NOTAS");
+
+        notas.setEditable(false);
+        notas.setColumns(20);
+        notas.setRows(5);
+        jScrollPane2.setViewportView(notas);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton1)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(entregadopor)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(entregadopor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -250,11 +289,12 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -274,7 +314,7 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,24 +350,15 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
         jobtabla.setText(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),1)));
         lote.setText(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),3)));
         cantidad.setText(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),4)));
-        idtrabajo = (Integer.parseInt(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),8))));
-        nota.setText(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(), 9)));
+        //idtrabajo = (Integer.parseInt(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),8))));
+        fechaentrega.setText(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),6)));
+        notas.setText(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),9)));
+        entregadopor.setText(String.valueOf(Trabajos.getModel().getValueAt(Trabajos.getSelectedRow(),8)));
+        
     }//GEN-LAST:event_TrabajosMouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       if(pntabla.getText().compareTo("") != 0 && jobtabla.getText().compareTo("") !=0 && idtrabajo !=0){
-        
-        nota.getText();
-        actualizarNota();
-        JOptionPane.showMessageDialog(null, "TRABAJO ACTUALIZADO");
-        limpiar();
-        listartrabajos();
-        }else{JOptionPane.showMessageDialog(null, "SELECCIONE TRABAJO A ENTREGAR");}
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
     
     private void listartrabajos(){
-        ArrayList<trabajos> result = consultas.ListarTrabajotodo(pn.getText().toUpperCase(),JOB.getText().toUpperCase());
+        ArrayList<trabajos> result = consultas.ListarTrabajoNOTnull(pn.getText().toUpperCase(),JOB.getText().toUpperCase());
         productos(result);
     }
     
@@ -345,14 +376,15 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
                   datos[i][5] = t.getFechareci();
                   datos[i][6] = t.getFechaentre();
                   datos[i][7] = t.getFechaVen();
-                  datos[i][8] = t.getId_trabajo();
+                  datos[i][8] = t.getEntregado();
+                  //datos[i][9] = t.getId_trabajo();
                   datos[i][9] = t.getNota();
                   i++;
               }    
              Trabajos.setModel(new javax.swing.table.DefaultTableModel(
                 datos,
                 new String[]{
-                "P/N","JOB","ESTANDAR","LOTE","CANTIDAD","FECHA RECIBIDO","FECHA ENTREGA","FECHA VENCIMIENTO","ID","NOTA"
+                "P/N","JOB","ESTANDAR","LOTE","CANTIDAD","FECHA RECIBIDO","FECHA ENTREGA","FECHA VENCIMIENTO","ENTREGADO","NOTA"
              })
              {  
                  @Override
@@ -399,13 +431,13 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditarNotaTrabajos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrabajosEntregados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditarNotaTrabajos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrabajosEntregados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditarNotaTrabajos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrabajosEntregados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditarNotaTrabajos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrabajosEntregados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -413,7 +445,7 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarNotaTrabajos().setVisible(true);
+                new TrabajosEntregados().setVisible(true);
             }
         });
     }
@@ -422,13 +454,17 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField JOB;
     private javax.swing.JTable Trabajos;
     private javax.swing.JTextField cantidad;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField entregadopor;
+    private javax.swing.JTextField fechaentrega;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -436,7 +472,7 @@ public class EditarNotaTrabajos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jobtabla;
     private javax.swing.JTextField lote;
-    private javax.swing.JTextArea nota;
+    private javax.swing.JTextArea notas;
     private javax.swing.JTextField pn;
     private javax.swing.JTextField pntabla;
     // End of variables declaration//GEN-END:variables

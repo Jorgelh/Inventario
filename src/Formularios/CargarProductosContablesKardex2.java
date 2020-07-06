@@ -141,7 +141,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
             Statement ps = cn.createStatement();
             ps.executeUpdate("begin actualizarkardex(IDKardex=>" + idkardex + ","
                     + "NCodigo=>'" + txtCodigo.getText() + "',"
-                    + "NDocumento=>'" + txtNoDoc.getText() + "',"
+                    + "NDocumento=>'0',"
                     + "Fecha_ingreso=>'" + fecha1 + "',"
                     + "Ncantidad=>" + Integer.parseInt(txtCantidad.getText()) + ","
                     + "Nprecio=>" + Double.parseDouble(TxtPrecio.getText()) + ","
@@ -165,7 +165,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
             Statement ps = cn.createStatement();
             ps.executeUpdate("begin actualizarkardex(IDKardex=>" + idkardex + ","
                     + "NCodigo=>'" + codigo + "',"
-                    + "NDocumento=>'" + txtNoDoc.getText() + "',"
+                    + "NDocumento=>'0',"
                     + "Fecha_ingreso=>'" + fecha1 + "',"
                     + "Ncantidad=>" + Integer.parseInt(txtCantidad.getText()) + ","
                     + "Nprecio=>" + Double.parseDouble(TxtPrecio.getText()) + ","
@@ -187,7 +187,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
             Statement ps = cn.createStatement();
             ps.executeUpdate("begin actualizarkardexout(IDKardex=>" + idkardex + ","
                     + "NCodigo=>'" + txtCodigo.getText() + "',"
-                    + "NDocumento=>'" + txtNoDoc.getText() + "',"
+                    + "NDocumento=>'0',"
                     + "Fecha_ingreso=>'" + fecha1 + "',"
                     + "Ncantidad=>" + Integer.parseInt(txtCantidad.getText()) + ","
                     + "Nprecio=>" + Double.parseDouble(TxtPrecio.getText()) + ","
@@ -211,7 +211,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
             Statement ps = cn.createStatement();
             ps.executeUpdate("begin actualizarkardexout(IDKardex=>" + idkardex + ","
                     + "NCodigo=>'" + codigo + "',"
-                    + "NDocumento=>'" + txtNoDoc.getText() + "',"
+                    + "NDocumento=>'0',"
                     + "Fecha_ingreso=>'" + fecha1 + "',"
                     + "Ncantidad=>" + Integer.parseInt(txtCantidad.getText()) + ","
                     + "Nprecio=>" + Double.parseDouble(TxtPrecio.getText()) + ","
@@ -410,11 +410,11 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         //txtInvoice.setEnabled(b);
         txtJob.setEnabled(b);
         txtLote.setEnabled(b);
-        txtNoDoc.setEnabled(b);
+        //txtNoDoc.setEnabled(b);
         txtNota.setEnabled(b);
         txtPO.setEnabled(b);
         txtParte.setEnabled(b);
-        txtSerie.setEnabled(b);
+        //txtSerie.setEnabled(b);
         TxtProveedor.setEnabled(b);
         TxtPrecio.setEnabled(b);
         BagregarProdu.setEnabled(b);
@@ -445,11 +445,11 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         txtEmpleado.setText("");
         txtJob.setText("");
         txtLote.setText("");
-        txtNoDoc.setText("");
+        //txtNoDoc.setText("");
         txtNota.setText("");
         txtPO.setText("");
         txtParte.setText("");
-        txtSerie.setText("");
+        //txtSerie.setText("");
         TxtProveedor.setText("");
         TxtPrecio.setText("0.00");
         precioanterior = 0.00;
@@ -459,7 +459,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         descripcion.setText("");
         Combpresentacion.setSelectedItem("Seleccionar...");
         obligatorio.setForeground(Color.BLACK);
-        obligatorio1.setForeground(Color.BLACK);
+        //obligatorio1.setForeground(Color.BLACK);
         obligatorio2.setForeground(Color.BLACK);
         obligatorio4.setForeground(Color.BLACK);
         obligatorio5.setForeground(Color.BLACK);
@@ -515,8 +515,8 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
             c.setInvoce(txtInvoice.getText());
             c.setLote(txtLote.getText());
             c.setNTrabajo(txtJob.getText());
-            c.setNoDocumento(txtNoDoc.getText());
-            c.setNoserie(txtSerie.getText());
+            //c.setNoDocumento(txtNoDoc.getText());
+           //c.setNoserie(txtSerie.getText());
             c.setNota(txtNota.getText());
             c.setPO(txtPO.getText());
             c.setPN(txtParte.getText());
@@ -565,8 +565,8 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
             c.setInvoce(txtInvoice.getText());
             c.setLote(txtLote.getText());
             c.setNTrabajo(txtJob.getText());
-            c.setNoDocumento(txtNoDoc.getText());
-            c.setNoserie(txtSerie.getText());
+           // c.setNoDocumento(txtNoDoc.getText());
+            //c.setNoserie(txtSerie.getText());
             c.setNota(txtNota.getText());
             c.setPO(txtPO.getText());
             c.setPN(txtParte.getText());
@@ -602,16 +602,11 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtSerie = new javax.swing.JTextField();
         TxtProveedor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         TxtPrecio = new javax.swing.JTextField();
-        txtNoDoc = new javax.swing.JTextField();
         obligatorio = new javax.swing.JLabel();
-        obligatorio1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -664,21 +659,8 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS DE INGRESO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14)))); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setText("No. Documento");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setText("No. Serie");
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("Proveedor");
-
-        txtSerie.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtSerie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSerieActionPerformed(evt);
-            }
-        });
 
         TxtProveedor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         TxtProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -702,65 +684,38 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
             }
         });
 
-        txtNoDoc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtNoDoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNoDocActionPerformed(evt);
-            }
-        });
-
         obligatorio.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
         obligatorio.setText("(*)");
-
-        obligatorio1.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        obligatorio1.setText("(*)");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtNoDoc)
-            .addComponent(txtSerie)
             .addComponent(TxtProveedor)
+            .addComponent(TxtPrecio)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(obligatorio1))
-                    .addComponent(jLabel11)
                     .addComponent(jLabel13)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(obligatorio)))
-                .addGap(0, 72, Short.MAX_VALUE))
-            .addComponent(TxtPrecio)
+                .addGap(0, 127, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(obligatorio1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(obligatorio)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(obligatorio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -1206,7 +1161,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
 
         if (txtCodigo.getText().compareTo("") != 0 && txtCantidad.getText().compareTo("") != 0 && txtEmpleado.getText().compareTo("") != 0
                 && TxtPrecio.getText().compareTo("0.00") != 0.00 && TxtPrecio.getText().compareTo("") != 0
-                && txtNoDoc.getText().compareTo("") != 0 && fechapoliza.getDate() != null) {
+                && fechapoliza.getDate() != null) {
 
             if (transito.isSelected()) {
                 CargarKardex2();
@@ -1216,7 +1171,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         } else {
             JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
             obligatorio.setForeground(Color.red);
-            obligatorio1.setForeground(Color.red);
+            //obligatorio1.setForeground(Color.red);
             obligatorio2.setForeground(Color.red);
             obligatorio4.setForeground(Color.red);
             obligatorio5.setForeground(Color.red);
@@ -1232,9 +1187,6 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
     private void txtFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMouseClicked
 
     }//GEN-LAST:event_txtFechaMouseClicked
-    private void txtNoDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoDocActionPerformed
-        txtSerie.requestFocus();
-    }//GEN-LAST:event_txtNoDocActionPerformed
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
 
         Enviacodigo = Integer.parseInt(txtCodigo.getText());
@@ -1249,7 +1201,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
                 activarTxt(true);
                 actulizartabla();
                 obtenerdescripcion();
-                txtNoDoc.requestFocus();
+                TxtProveedor.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(null, "Producto " + txtCodigo.getText() + " No Existe");
                 limpiartxt();
@@ -1287,13 +1239,8 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         }
     }//GEN-LAST:event_txtCantidadKeyTyped
     private void txtInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInvoiceActionPerformed
-        txtSerie.requestFocus();
-    }//GEN-LAST:event_txtInvoiceActionPerformed
-    private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
-
         TxtProveedor.requestFocus();
-
-    }//GEN-LAST:event_txtSerieActionPerformed
+    }//GEN-LAST:event_txtInvoiceActionPerformed
     private void TxtProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtProveedorActionPerformed
 
         TxtPrecio.requestFocus();
@@ -1438,8 +1385,6 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
     private javax.swing.JTextField descripcion;
     private com.toedter.calendar.JDateChooser fechapoliza;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1465,7 +1410,6 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel obligatorio;
-    private javax.swing.JLabel obligatorio1;
     private javax.swing.JLabel obligatorio2;
     private javax.swing.JLabel obligatorio4;
     private javax.swing.JLabel obligatorio5;
@@ -1478,11 +1422,9 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
     private javax.swing.JTextField txtInvoice;
     private javax.swing.JTextField txtJob;
     private javax.swing.JTextField txtLote;
-    private javax.swing.JTextField txtNoDoc;
     private javax.swing.JTextArea txtNota;
     private javax.swing.JTextField txtPO;
     private javax.swing.JTextField txtParte;
-    private javax.swing.JTextField txtSerie;
     private com.toedter.calendar.JDateChooser txtfechavenci;
     // End of variables declaration//GEN-END:variables
 

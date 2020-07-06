@@ -123,7 +123,7 @@ public class TRABAJOS2 extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("INGRESO DE TRABAJOS");
+        setTitle("CREAR LOTES DE TRABAJO");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 

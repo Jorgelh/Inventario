@@ -66,8 +66,8 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
             direccion.setText(rutaReporte);*/
             JasperReport jasperReport=(JasperReport)JRLoader.loadObjectFromFile("SaldoMensual.jasper");
             Map parametros= new HashMap();
-            parametros.put("FECHA1", fe1);
-            parametros.put("FECHA2", fe2);
+            parametros.put("FECHAINICIO", fe1);
+            parametros.put("FECHAFIN", fe2);
             JasperPrint print = JasperFillManager.fillReport(jasperReport,parametros, conexion);
             JasperViewer view = new JasperViewer(print,false);
             view.setVisible(true);
@@ -82,7 +82,7 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
      
          Conexion con= new Conexion();
          Connection conexion= con.getConnection();
-       SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
             Date fec1 = inicio.getDate();
             Date fec2 = fin.getDate();
             String fe1 = formato.format(fec1);
