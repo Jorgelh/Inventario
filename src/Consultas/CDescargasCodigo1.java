@@ -680,11 +680,11 @@ public class CDescargasCodigo1 extends javax.swing.JInternalFrame {
         try {
             Descarga ca = BDDescargasConsulta.buscarDescarga(Integer.parseInt(String.valueOf(Cosulta.getModel().getValueAt(Cosulta.getSelectedRow(), 0))));
             LaFechaDesc.setText(ca.getFechades());
-            LaLote.setText(ca.getLote());
+            LaLote.setText(ca.getTrabajo());
             LaPN.setText(ca.getPn());
             LaPO.setText(ca.getPO());
             documento.setText(ca.getDocumento());
-            trabajo.setText(ca.getTrabajo());
+            trabajo.setText(ca.getLote());
             laCantidad.setText(String.valueOf(ca.getCantidad()));
             txtnotas.setText(ca.getNota());
 
@@ -773,7 +773,7 @@ public class CDescargasCodigo1 extends javax.swing.JInternalFrame {
         Cosulta.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                  "ID","P/N", "LOTE", "CANTIDAD"
+                  "ID","P/N", "TRABAJO", "CANTIDAD"
 
                 }) {
             @Override

@@ -228,8 +228,8 @@ public class CDescargaPN extends javax.swing.JInternalFrame {
             dato[f][1] = a.getDescripcion();
             dato[f][2] = a.getFechades();
             dato[f][3] = a.getPN();
-            dato[f][4] = a.getNo_trabajo();
-            dato[f][5] = a.getLote();
+            dato[f][4] = a.getLote();
+            dato[f][5] = a.getNo_trabajo();
             dato[f][6] = a.getPO();
             dato[f][7] = a.getCantidad();
             dato[f][8] = a.getCantidadbodega();

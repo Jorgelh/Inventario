@@ -27,6 +27,24 @@ public class ListarReporte {
      private double valorout;
      private int cantidadsaldo;
      private double valortotal;
+     private int no;
+     private String Fecha;
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+    public String getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(String Fecha) {
+        this.Fecha = Fecha;
+    }
 
     public int getCodigo() {
         return codigo;
@@ -137,7 +155,30 @@ public class ListarReporte {
     
     
     
-    
+public static ArrayList<ListarReporte> ListarReporte(){
+        return consultarSQL("select no,fecha from costo GROUP BY (fecha,no) order by no");
+    }
+
+    private static ArrayList<ListarReporte> consultarSQL(String sql) {
+        ArrayList<ListarReporte> list = new ArrayList<ListarReporte>();
+        Connection cn = BD.getConnection();
+        try {
+            ListarReporte p;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                p = new ListarReporte();
+                p.setNo(rs.getInt("no"));
+                p.setFecha(rs.getString("fecha"));
+                list.add(p);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Consulta con Lista de reportes" + e);
+            return null;
+        }
+        return list;
+    }
     
     
     

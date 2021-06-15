@@ -10,7 +10,9 @@ import TrabajosFormularios.*;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import Consultas.*;
+import P.UpdateCantidadMinima;
 import Reportes.ReporteBodega;
+import Reportes.ReporteCostos;
 import Reportes.ReportesDetalladosMES;
 import ReportesKardex2.ReportesDetalladosKardex2;
 //import com.sun.org.apache.bcel.internal.generic.CPInstruction;
@@ -77,6 +79,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         unidadmedida = new javax.swing.JMenuItem();
         presentacion = new javax.swing.JMenuItem();
         PROCEDENCIA = new javax.swing.JMenuItem();
+        jMenuItem40 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         DESCARGAPRO = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -111,6 +114,7 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenuItem34 = new javax.swing.JMenuItem();
         jMenuItem38 = new javax.swing.JMenuItem();
         jMenuItem31 = new javax.swing.JMenuItem();
+        jMenuItem41 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu14 = new javax.swing.JMenu();
         jMenuItem25 = new javax.swing.JMenuItem();
@@ -315,6 +319,17 @@ public class PrincipalInventario extends javax.swing.JFrame {
         jMenu6.add(PROCEDENCIA);
 
         jMenu1.add(jMenu6);
+
+        jMenuItem40.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem40.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem40.setText("EDITAR CANTIDAD MINIMA");
+        jMenuItem40.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuItem40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem40ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem40);
 
         menubar.add(jMenu1);
 
@@ -668,6 +683,16 @@ public class PrincipalInventario extends javax.swing.JFrame {
             }
         });
         jMenu12.add(jMenuItem31);
+
+        jMenuItem41.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem41.setForeground(new java.awt.Color(0, 51, 255));
+        jMenuItem41.setText("REPORTE DE COSTO MENSUAL");
+        jMenuItem41.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem41ActionPerformed(evt);
+            }
+        });
+        jMenu12.add(jMenuItem41);
 
         jMenu2.add(jMenu12);
 
@@ -1416,6 +1441,24 @@ public class PrincipalInventario extends javax.swing.JFrame {
         DP.show();
     }//GEN-LAST:event_jMenuItem39ActionPerformed
 
+    private void jMenuItem40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem40ActionPerformed
+        UpdateCantidadMinima DP = new UpdateCantidadMinima();
+        jDesktopPane1.add(DP); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = DP.getSize();
+        DP.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        DP.show();
+    }//GEN-LAST:event_jMenuItem40ActionPerformed
+
+    private void jMenuItem41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem41ActionPerformed
+        ReporteCostos DP = new ReporteCostos();
+        jDesktopPane1.add(DP); 
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = DP.getSize();
+        DP.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        DP.show();
+    }//GEN-LAST:event_jMenuItem41ActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1515,6 +1558,8 @@ public class PrincipalInventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem38;
     private javax.swing.JMenuItem jMenuItem39;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem40;
+    private javax.swing.JMenuItem jMenuItem41;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

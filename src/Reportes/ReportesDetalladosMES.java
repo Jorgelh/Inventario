@@ -48,7 +48,6 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
      */
     public ReportesDetalladosMES() {
          initComponents();
-        
     }
 
      public void reporteTotalMensual(){
@@ -245,9 +244,7 @@ public class ReportesDetalladosMES extends javax.swing.JInternalFrame {
                 if (f1.before(f2)) {
                  
                     reporteTotalMensual();
-                    
-                    
-                    
+                
                 } else {
                     JOptionPane.showMessageDialog(null, "LA PRIMERA FECHA NO PUEDE SER MAYOR A LA SEGUNDA FECHA");
                 }

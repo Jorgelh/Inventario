@@ -149,8 +149,8 @@ public class CIngresoCodigo extends javax.swing.JInternalFrame {
                 limpiartabla15();
             }
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA 12" + e);
         }
         }
         else{JOptionPane.showMessageDialog(null,"Ingrese un codigo...");}

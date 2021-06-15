@@ -14,14 +14,20 @@ import javax.swing.JOptionPane;
  *
  * @author jluis
  */
-public abstract class BD {
+public  class BD {
      public static Connection getConnection() {
         Connection cn = null;
         try {
            Class.forName("oracle.jdbc.OracleDriver");
+           
            String url = "jdbc:oracle:thin:@192.168.0.2:1521:orcl";
            String user = "server";
            String password = "campana";
+           
+           /*String url = "jdbc:oracle:thin:@192.168.0.22:1521:xe";
+           String user = "server";
+           String password = "campana";*/
+           
           /*String url = "jdbc:oracle:thin:@7.185.83.15:1521:orcl";
           String user = "server";
             String password = "campana";*/
@@ -29,6 +35,7 @@ public abstract class BD {
             /*String url = "jdbc:oracle:thin:@localhost:1521:orcl";
             String user = "server"; 
             String password = "campana";*/
+            
             cn= DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {
             cn=null;

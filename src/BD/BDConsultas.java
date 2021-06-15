@@ -7,6 +7,7 @@ package BD;
 
 import Class.*;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -570,4 +571,73 @@ public abstract class BDConsultas {
         return list;
     }
 
+    
+    
+    public static ArrayList<Producto> ListarCantidadMinima(String f) {
+
+        //return consultaCantidadMin("select producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,unidad_medida.descripcion as umedida, sum(ingreso.cantidad) as \"cantidad\", sum(bitacoraingreso.cantidad) as \"cantidadingre\" from producto inner join presentacion on producto.id_presentacion = presentacion.id_presentacion join unidad_medida on producto.id_medida = unidad_medida.id_medida join INGRESO on producto.codigo = ingreso.codigo join BITACORAINGRESO on ingreso.id_ingreso = bitacoraingreso.id_ingreso where upper(producto.descripcion) like upper('" + f + "%') group by INGRESO.CODIGO,producto.codigo,producto.descripcion,producto.ubicacion,producto.ubicacion2,unidad_medida.descripcion,bitacoraingreso.cantidad");
+        return consultaCantidadMin("select Codigo,p.descripcion,cantidadminima,r.descripcion as PRESENTACION,u.descripcion as  MEDIDA,ubicacion,nota from producto p inner join unidad_medida u on p.id_medida = u.id_medida join presentacion r on p.id_presentacion = r.id_presentacion   where upper(p.descripcion) like upper('" + f + "%')");
+    }
+
+    private static ArrayList<Producto> consultaCantidadMin(String sql) {
+        ArrayList<Producto> list = new ArrayList<Producto>();
+        Connection cn = BD.getConnection();
+        try {
+            Producto c;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                c = new Producto();
+                c.setCodigo(rs.getInt("codigo"));
+                c.setDescripcion(rs.getString("descripcion"));
+                c.setCantidadminima(rs.getInt("cantidadminima"));
+                c.setPresentacion(rs.getString("presentacion"));
+                c.setUmedida(rs.getString("medida"));
+                c.setUbicacion(rs.getString("ubicacion"));
+                c.setNota(rs.getString("nota"));
+
+                list.add(c);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error Consulta producto por nombre " + e);
+            return null;
+        }
+        return list;
+    }
+    
+    
+    
+    public static Producto BuscarProductoMin(int id) throws SQLException {
+      return BuscarProductoMin(id, null);
+    }
+    public static Producto BuscarProductoMin(int id, Producto p) throws SQLException {
+        Connection cnn = BD.getConnection();
+        PreparedStatement ps = null;
+        ps = cnn.prepareStatement("select Codigo,p.descripcion,cantidadminima,r.descripcion as PRESENTACION,u.descripcion as  MEDIDA,ubicacion,nota from producto p inner join unidad_medida u on p.id_medida = u.id_medida join presentacion r on p.id_presentacion = r.id_presentacion   where  codigo = ?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            if (p == null){
+                p = new Producto(){
+                };
+            }
+            
+            p.setCodigo(rs.getInt("codigo"));
+            p.setDescripcion(rs.getString("descripcion"));
+            p.setCantidadminima(rs.getInt("cantidadminima"));
+            p.setPresentacion(rs.getString("presentacion"));
+            p.setUmedida(rs.getString("medida"));
+            p.setUbicacion(rs.getString("ubicacion"));
+            p.setNota(rs.getString("nota"));
+            
+            }
+        cnn.close();
+        ps.close();
+        return p;
+    }
+    
+    
+    
+    
 }

@@ -157,7 +157,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     }
     
     
-    public void executeStore(){
+    /*public void executeStore(){
         try {
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
@@ -166,7 +166,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             ps.close();
         } catch (Exception e) {
         }
-           }
+           }*/
  
     public void executeStorePrecio(){
         try {
@@ -215,7 +215,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 BDconsultaVarias.actualizarIngreso(c);
                 JOptionPane.showMessageDialog(null, "Ingreso Actualizado...");
                 EditarTXT(false);
-                executeStore();
+                //executeStore();
                 executeStorePrecio();
                 Beliminar.setEnabled(false);
                 Bguardar.setEnabled(false);
@@ -272,7 +272,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 BDconsultaVarias.actualizarIngreso(c);
                 JOptionPane.showMessageDialog(null, "Ingreso Actualizado...");
                 EditarTXT(false);
-                executeStore();
+                //executeStore();
                 executeStorePrecio();
                 Beliminar.setEnabled(false);
                 Bguardar.setEnabled(false);
@@ -964,7 +964,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         Cosulta.setEnabled(false);
         NuevaC.setEnabled(false);
         Bcancelar.setEnabled(true);
-        if(procedencia == 3){txtCantidad.setEnabled(true);Precio.setEnabled(true);}else{txtCantidad.setEnabled(false);Precio.setEnabled(false);}
+        if(procedencia == 3 || ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodeguita")){txtCantidad.setEnabled(true);Precio.setEnabled(true);}else{txtCantidad.setEnabled(false);Precio.setEnabled(false);}
 
     }//GEN-LAST:event_BeditarActionPerformed
 

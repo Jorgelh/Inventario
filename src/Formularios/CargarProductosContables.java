@@ -103,7 +103,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         }
     }
 
-    public void ProcedimientoKardex() {
+    public void ProcedimientoKardex(){
         try {
             /*System.out.print("ID = "+id_ingreso+"\n");
             System.out.print("CODIGO = "+Integer.parseInt(txtCodigo.getText())+"\n");
@@ -216,7 +216,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
             stmt.close();
             con.close();
         } catch (SQLException error) {
-            System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX ");
+            System.out.print(error + "ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX");
         }
     }
 

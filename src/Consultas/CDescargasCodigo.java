@@ -404,9 +404,9 @@ public class CDescargasCodigo extends javax.swing.JInternalFrame {
         for (Descarga a : list) {
             dato[f][0] = a.getDocumento();
             dato[f][1] = a.getPn();
-            dato[f][2] = a.getLote();
+            dato[f][2] = a.getTrabajo();
             dato[f][3] = a.getPO();
-            dato[f][4] = a.getTrabajo();
+            dato[f][4] = a.getLote();
             dato[f][5] = a.getFechades();
             dato[f][6] = a.getCantidad();
             dato[f][7] = a.getCantidadbode();

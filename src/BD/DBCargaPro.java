@@ -110,7 +110,7 @@ public abstract class DBCargaPro {
     
     public static ArrayList<CargaP> ListarProductoIngresadoporBodega(int c , int b1, int b2) {
 
-        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote from ingreso where (ingreso.bodega = "+b1+" or ingreso.bodega = "+b2+" ) and codigo=" + c + "and  estado = 'A' order by id_ingreso" );
+        return consultarSQL("select id_ingreso,p_n,fecha_ingreso,PO,cantidad,no_invoice,fecha_ven,lote,precio from ingreso where (ingreso.bodega = "+b1+" or ingreso.bodega = "+b2+" ) and codigo=" + c + "and  estado = 'A' order by id_ingreso" );
 
     }
     
