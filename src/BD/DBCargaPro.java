@@ -39,8 +39,8 @@ public abstract class DBCargaPro {
                 + "(id_ingreso,codigo,P_N,fecha_ingreso,"
                 + "PO,cantidad,fecha_ven,precio,"
                 + "lote,no_trabajo,no_invoice,ingresadopor,proveedor,notas,"
-                + "bodega,fechasistema,estado,cantidad2,conta) "
-                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?)");
+                + "bodega,fechasistema,estado,cantidad2,conta,bitacora) "
+                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?)");
         ps.setInt(1,c.getId_ingreso());
         ps.setInt(2,c.getCodigo());
         ps.setString(3,c.getPN());
@@ -61,6 +61,7 @@ public abstract class DBCargaPro {
         ps.setString(16, c.getEstado());
         ps.setInt(17, c.getCantidad2());
         ps.setInt(18, c.getConta());
+        ps.setInt(19, c.getBitacora());
         ps.execute();
         cnn.close();
         ps.close();
@@ -75,8 +76,8 @@ public abstract class DBCargaPro {
                 + "(id_ingreso,codigo,P_N,fecha_ingreso,"
                 + "PO,cantidad,fecha_ven,precio,"
                 + "lote,no_trabajo,no_invoice,ingresadopor,proveedor,notas,"
-                + "bodega,fechasistema,estado,cantidad2,conta,presentacion,fechapoliza) "
-                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?,?)");
+                + "bodega,fechasistema,estado,cantidad2,conta,presentacion,fechapoliza,bitacora) "
+                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?,?,?)");
        // ps.setInt(1,c.getId_ingreso());
         ps.setInt(1,c.getId_ingreso());
         ps.setInt(2,c.getCodigo());
@@ -100,7 +101,7 @@ public abstract class DBCargaPro {
         ps.setInt(18, c.getConta());
         ps.setInt(19, c.getPresent());
         ps.setDate(20, new java.sql.Date(c.getFechapoliza().getTime()));
-        //ps.setString(18, c.getEstado());
+        ps.setInt(21, c.getBitacora());
         ps.execute();
         cnn.close();
         ps.close();
@@ -148,4 +149,40 @@ public abstract class DBCargaPro {
         }
         return list;
     }
+    
+    
+    
+    
+  public static ArrayList<CargaP> ListarReserva(int c) {
+
+        return SQLreserva("select id_reserva,PN,NO_TRABAJO,PO,CANTIDAD from reserva where codigo=" + c + " and cantidad > 0  order by id_ingreso" );
+
+    }
+
+    private static ArrayList<CargaP> SQLreserva(String sql) {
+        ArrayList<CargaP> list = new ArrayList<CargaP>();
+        Connection cn = BD.getConnection();
+        try {
+            CargaP c;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                c = new CargaP();
+                c.setId_reserva(rs.getInt("id_reserva"));
+                c.setPN(rs.getString("PN"));
+                c.setCantidad(rs.getInt("cantidad"));
+                c.setNTrabajo(rs.getString("no_trabajo"));
+                c.setPO(rs.getString("PO"));
+                list.add(c);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error Consulta Ingreso Productos " + e);
+            return null;
+        }
+        return list;
+    }    
+    
+    
+    
 }

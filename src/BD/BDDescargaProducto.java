@@ -79,8 +79,7 @@ public abstract class BDDescargaProducto {
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (c == null){
-             c = new CargaP(){
-             };
+             c = new CargaP(){   };
         
         }
         c.setId_ingreso(rs.getInt("id_ingreso"));
@@ -211,7 +210,24 @@ public abstract class BDDescargaProducto {
     }
     
     
-    
+   
+public static void insertarReserva(Descarga ca)  throws SQLException{
+        Connection cn = BD.getConnection();
+        PreparedStatement ps = null;
+        ps = cn.prepareStatement("insert into reserva(id_reserva,id_ingreso,codigo,cantidad,fechades,fechasistema,no_trabajo,PN,estado,bodega,PO) values (IDRESERVA.nextval,?,?,?,?,sysdate,?,?,1,?,?)");
+
+        ps.setInt(1, ca.getId_ingreso());
+        ps.setInt(2, ca.getCodigo());
+        ps.setInt(3, ca.getCantidad());
+        ps.setDate(4, new java.sql.Date(ca.getFecha().getTime()));
+        ps.setString(5, ca.getTrabajo());
+        ps.setString(6, ca.getPn());
+        ps.setInt(7, ca.getBodega());
+        ps.setString(8, ca.getPO());
+        ps.execute();
+        cn.close();
+        ps.close();            
+    }
     
     
        

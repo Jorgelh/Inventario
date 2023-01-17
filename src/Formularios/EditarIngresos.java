@@ -37,6 +37,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     int bodega;
     int id;
     int procedencia;
+    int cantidad;
 
     /**
      * Creates new form DescargaProducto
@@ -157,7 +158,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     }
     
     
-    /*public void executeStore(){
+    public void ActualizarBitacora(){
         try {
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
@@ -166,7 +167,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             ps.close();
         } catch (Exception e) {
         }
-           }*/
+           }
  
     public void executeStorePrecio(){
         try {
@@ -199,7 +200,9 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 CargaP c = new CargaP();
                 c.setId_ingreso(id);
                 c.setBodeda(bodega);
-                if(ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega")){c.setCantidad(Integer.parseInt(txtCantidad.getText()));}else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}
+                if(ComboBode.getSelectedItem().toString().equalsIgnoreCase("Bodega"))
+                {c.setCantidad(Integer.parseInt(txtCantidad.getText()));}
+                else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}
                 c.setFechaVencimiento(txtfechaven.getDate());
                 c.setIngresadoPor(Integer.parseInt(txtingresadopor.getText()));
                 c.setInvoce(txtInvoice.getText());
@@ -215,7 +218,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
                 BDconsultaVarias.actualizarIngreso(c);
                 JOptionPane.showMessageDialog(null, "Ingreso Actualizado...");
                 EditarTXT(false);
-                //executeStore();
+                if(cantidad != Integer.parseInt(txtCantidad.getText())){ActualizarBitacora();}
                 executeStorePrecio();
                 Beliminar.setEnabled(false);
                 Bguardar.setEnabled(false);
@@ -904,6 +907,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
             txtnotas.setText(ca.getNota());
             txtingresadopor.setText(String.valueOf(ca.getIngresadoPor()));
             txtCantidad.setText(String.valueOf(ca.getCantidad()));
+            cantidad = ca.getCantidad();
             if (ca.getReturnFecha() == null) {
                 txtfechaven.setDate(null);
             } else {
@@ -976,6 +980,7 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
         Cosulta.setEnabled(true);
         NuevaC.setEnabled(true);
         Bcancelar.setEnabled(false);
+        cantidad = 0;
         limpiar();
 
 
@@ -1173,8 +1178,8 @@ public class EditarIngresos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtproveedor;
     // End of variables declaration//GEN-END:variables
 
-    private String toString(double precio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   // private String toString(double precio) {
+     //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    //}
 
 }

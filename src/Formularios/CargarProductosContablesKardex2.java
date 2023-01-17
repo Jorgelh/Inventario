@@ -34,6 +34,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
     int id_ingreso;
     int idkardex;
     int ididentificador;
+    int tipodeconta;
     int cantidaddeingreso = 0;
     Double nuevoprecio = 0.00;
     Double precioanterior = 0.00;
@@ -54,7 +55,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         try {
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
-            ps.executeUpdate("begin actualizarprecio(NCodigo=>" + txtCodigo.getText() + ",NPrecio=>" + TxtPrecio.getText() + ",NBodega=>" + bodega + "); commit; end;");
+            ps.executeUpdate("begin actualizarprecio(NCodigo=>" + txtCodigo.getText() + ",NPrecio=>" + nuevoprecio + ",NBodega=>" + bodega + "); commit; end;");
             cn.close();
             ps.close();
         } catch (Exception e) {
@@ -149,7 +150,8 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
                     + "precioSaldo=>" + nuevoprecio + ","
                     + "Ididen=>" + ididentificador + ","
                     + "Presentacion=>" + presentacion + ","
-                    + "CodigoInt=>"+txtCodigo.getText()+"); commit; end;");
+                    + "CodigoInt=>"+txtCodigo.getText()+","
+                    + "Tipodeconta=>"+tipodeconta+"); commit; end;");
             cn.close();
             ps.close();
         } catch (Exception e) {
@@ -157,7 +159,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         }
     }
 
-    public void ProcedimientoKardex2() {
+    public void ProcedimientoKardex2() {      
         try {
             String codigo;
             codigo = txtCodigo.getText() + '-' + presentacion;
@@ -173,7 +175,8 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
                     + "precioSaldo=>" + nuevoprecio + ","
                     + "Ididen=>" + ididentificador + ","
                     + "Presentacion=>" + presentacion + ","
-                    + "CodigoInt=>" + txtCodigo.getText() + "); commit; end;");
+                    + "CodigoInt=>" + txtCodigo.getText() +","
+                    + "Tipoconta=>"+tipodeconta+"); commit; end;");
             cn.close();
             ps.close();
         } catch (Exception e) {
@@ -181,7 +184,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         }
     }
 
-    public void ProcedimientoKardexOut() {
+    /*public void ProcedimientoKardexOut() { //SE UTILIZABA PARA INSERTAR EN KARDEXOUT
         try {
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
@@ -225,7 +228,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         } catch (Exception e) {
             System.out.print(e + " ERROR DE LOS DATOS DE PROCEDIMIENTO");
         }
-    }
+    }*/
 
     public void ultimoidingreso() {
         try {
@@ -281,7 +284,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         }
     }
        
-    public void sumaingresosKardexOut() {
+    /*public void sumaingresosKardexOut() {
 
         if (presentacion == 0) {
             try {
@@ -316,7 +319,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
                 System.out.print(error);
             }
         }
-    }
+    }*/
     
     public void ididentificadorKardex() {
         try {
@@ -335,7 +338,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         }
     }
 
-     public void ididentificadorKardexOut() {
+    /* public void ididentificadorKardexOut() {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -350,7 +353,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         } catch (SQLException error) {
             System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX ");
         }
-    }
+    }*/
      
     public void id_kardex() {
         try {
@@ -369,7 +372,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         }
     }
     
-     public void id_kardexOut() {
+   /*  public void id_kardexOut() {
         try {
             Connection con = BD.getConnection();
             Statement stmt = con.createStatement();
@@ -384,7 +387,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         } catch (SQLException error) {
             System.out.print(error + " ERROR QUE OBTIENE EL ULTIMO ID DE KARDEX ");
         }
-    }
+    }*/
 
     public void obtenerdescripcion() {
 
@@ -507,6 +510,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
             c.setId_ingreso(id_ingreso);
             c.setBodeda(1);
             c.setCantidad(Integer.parseInt(txtCantidad.getText()));
+            c.setBitacora(Integer.parseInt(txtCantidad.getText()));
             c.setEstado("A");
             c.setFechaIngre(Fecha.getDate());
             c.setFechapoliza(fechapoliza.getDate());
@@ -524,6 +528,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
             c.setPrecio(Double.parseDouble(TxtPrecio.getText()));
             c.setPresent(presentacion);
             c.setConta(1);
+            if (transito.isSelected()) {tipodeconta=2;} else {tipodeconta=1;}
             DBCargaPro.insertarProductoNuevoContable(c);
             JOptionPane.showMessageDialog(null, "Producto Cargado...");
             executeStorePrecio();
@@ -541,7 +546,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         activarTxt(false);
     }
 
-    public void CargarKardex2() {
+   /* public void CargarKardex2() {
 
         fechaingresokardex();
         actulizartabla();
@@ -589,7 +594,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         limpiartxt();
         activarTxt(false);
 
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1162,12 +1167,7 @@ public class CargarProductosContablesKardex2 extends javax.swing.JInternalFrame 
         if (txtCodigo.getText().compareTo("") != 0 && txtCantidad.getText().compareTo("") != 0 && txtEmpleado.getText().compareTo("") != 0
                 && TxtPrecio.getText().compareTo("0.00") != 0.00 && TxtPrecio.getText().compareTo("") != 0
                 && fechapoliza.getDate() != null) {
-
-            if (transito.isSelected()) {
-                CargarKardex2();
-            } else {
-                CargarKardex1();
-            }
+            CargarKardex1();
         } else {
             JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
             obligatorio.setForeground(Color.red);

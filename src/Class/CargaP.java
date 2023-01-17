@@ -14,7 +14,7 @@ import java.util.Date;
  * @author jluis
  */
 public class CargaP {
-  
+    private int bitacora;
     private int id_ingreso;
     private int codigo;
     private String PN;
@@ -45,6 +45,31 @@ public class CargaP {
     private int idendtificador;
     private int present;
     private int procedencia;
+    private int tipoconta;
+    private int id_reserva;
+
+    public int getBitacora() {
+        return bitacora;
+    }
+
+    public void setBitacora(int bitacora) {
+        this.bitacora = bitacora;
+    }
+    public int getId_reserva() {
+        return id_reserva;
+    }
+
+    public void setId_reserva(int id_reserva) {
+        this.id_reserva = id_reserva;
+    }
+
+    public int getTipoconta() {
+        return tipoconta;
+    }
+
+    public void setTipoconta(int tipoconta) {
+        this.tipoconta = tipoconta;
+    }
 
     public int getProcedencia() {
         return procedencia;

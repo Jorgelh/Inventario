@@ -691,6 +691,7 @@ public class CargarProductos extends javax.swing.JInternalFrame {
                 c.setId_ingreso(id_ingreso);
                 c.setCodigo(Integer.parseInt(txtCodigo.getText()));
                 c.setBodeda(bodega);
+                c.setBitacora(Integer.parseInt(txtCantidad.getText()));
                 if(ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")){
                 c.setCantidad(Integer.parseInt(txtCantidad.getText()));}
                 else{c.setCantidad2(Integer.parseInt(txtCantidad.getText()));}

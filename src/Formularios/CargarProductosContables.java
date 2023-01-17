@@ -59,7 +59,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
         try {
             Connection cn = BD.getConnection();
             Statement ps = cn.createStatement();
-            ps.executeUpdate("begin actualizarprecio(NCodigo=>" + txtCodigo.getText() + ",NPrecio=>" + TxtPrecio.getText() + ",NBodega=>" + bodega + "); commit; end;");
+            ps.executeUpdate("begin actualizarprecio(NCodigo=>" + txtCodigo.getText() + ",NPrecio=>" + nuevoprecio + ",NBodega=>" + bodega + "); commit; end;");
             cn.close();
             ps.close();
         } catch (Exception e) {
@@ -979,6 +979,7 @@ public class CargarProductosContables extends javax.swing.JInternalFrame {
                 c.setCodigo(Integer.parseInt(txtCodigo.getText()));
                 c.setId_ingreso(id_ingreso);
                 c.setBodeda(bodega);
+                c.setBitacora(Integer.parseInt(txtCantidad.getText()));
                 if (ComboBoxBodega.getSelectedItem().toString().equalsIgnoreCase("Bodega")) {
                     c.setCantidad(Integer.parseInt(txtCantidad.getText()));
                 } else {

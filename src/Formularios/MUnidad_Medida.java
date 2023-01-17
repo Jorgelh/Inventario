@@ -280,7 +280,7 @@ public class MUnidad_Medida extends javax.swing.JInternalFrame {
 
     private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
   
-        if(accion.equalsIgnoreCase("Guardar")){
+       if(accion.equalsIgnoreCase("Guardar")){
       
        if (txtId.getText().compareTo("")!=0 && txtDescripcion.getText().compareTo("")!=0){
            try {
